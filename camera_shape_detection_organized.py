@@ -33,7 +33,7 @@ def shapeDetector(thresh_image, image):
     print("overall shapes: ", count)
     return(image)
 
-def frame_content(cam):
+def frameContent(cam):
     ret,image = cam.read()
 
     if not ret:
@@ -60,7 +60,7 @@ def frame_content(cam):
 cam = cv2.VideoCapture(0)
 
 while(1):
-    frame_content(cam)
+    frameContent(cam)
 
     if cv2.waitKey(5) == ord('q'):
         break
