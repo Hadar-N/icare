@@ -1,46 +1,54 @@
 import pygame
 import utils.consts as consts
+from utils.helpers import getRandomColor
 import numpy as np
 from random import randint
 import math
 
-class Contour(pygame.sprite.Sprite):
-    def __init__(self, img, bounding, color):
+class ContourPolygon(pygame.sprite.Sprite):
+    def __init__(self, dots, bounding):
         super().__init__()
-        self.color = color
-        self.setShape(img, bounding)
+        self.color = [getRandomColor(), getRandomColor(), getRandomColor()]
+        self.setShape(dots, bounding)
         self.internal_sprites = pygame.sprite.Group()
-        self.internal_sprites.add(self.newInternalSprite())
 
-    def updateShape(self, img, bounding):
-        self.setShape(img, bounding)
-        #TODO: change sprite location/rempove it and add new?
+        sp = self.newInternalSprite()
+        if sp:
+            self.internal_sprites.add(sp)
+
+    def isSpriteBigEnoughToHaveInternal(self):
+        w,h = consts.FISH_SIZE
+        return self.rect.height > h and self.rect.width > w
+
+    def updateShape(self, dots, bounding):
+        self.setShape(dots, bounding)
         return self
     
     def newInternalSprite(self):
+        if not self.isSpriteBigEnoughToHaveInternal():
+            return None
+
         sprite = InternalSprite(consts.FISH_SIZE)
-        sprite.rect.x, sprite.rect.y = self.randomizeInternalLocation(sprite)
+        placement = self.randomizeInternalLocation(sprite)
+        if (placement):
+            sprite.rect.x, sprite.rect.y = placement
+        else:
+            return None
 
         return sprite
 
-    def setShape(self, img, bounding):
-        parent_image = (pygame.transform.flip(pygame.surfarray.make_surface(np.rot90(img)), True, False)).subsurface(bounding)
-        self.mask = pygame.mask.from_threshold(parent_image, self.color, threshold=(1, 1, 1))
-        self.image = self.mask.to_surface()
-        self.image.set_colorkey((0,0,0))
-        self.rect = self.image.get_rect()
-        # self_opmask = self.mask
+    def setShape(self, dots, bounding):
+        self.image = pygame.Surface((bounding[consts.BOUND_LEGEND["WIDTH"]], bounding[consts.BOUND_LEGEND["HEIGHT"]]), pygame.SRCALPHA)
+        x = bounding[consts.BOUND_LEGEND["X"]]
+        y = bounding[consts.BOUND_LEGEND["Y"]]
+        points = [(point[0][0] - x, point[0][1] - y) for point in dots]
+        self.rect = pygame.draw.polygon(self.image, self.color, points)
+        self.mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
         pygame.mask.Mask.invert(self.mask)
-        self.opmask_surf = self.mask.to_surface()
 
-        # color the contours
-        for x in range(int(bounding[consts.BOUND_LEGEND["WIDTH"]])):
-            for y in range(int(bounding[consts.BOUND_LEGEND["HEIGHT"]])):
-                if self.image.get_at((x,y))[0] != 0:
-                    self.image.set_at((x,y),self.color)
-        
-        self.rect.x = bounding[consts.BOUND_LEGEND["X"]]
-        self.rect.y = bounding[consts.BOUND_LEGEND["Y"]]
+        self.dots = dots
+        self.rect.x = x
+        self.rect.y = y
         self.rect.height = bounding[consts.BOUND_LEGEND["HEIGHT"]]
         self.rect.width = bounding[consts.BOUND_LEGEND["WIDTH"]]
 
@@ -49,26 +57,30 @@ class Contour(pygame.sprite.Sprite):
             random_x = randint(0, int(math.floor(self.rect.width - sprite.rect.height)))
             random_y = randint(0, int(math.floor(self.rect.height - sprite.rect.width)))
             return (random_x, random_y)
-        #TODO: check range and if not ok then don't add parent sprite!@!!!!1
 
         x,y = random_location()
 
-        # while self.mask.overlap(sprite.mask, (x, y)):
+        count = consts.MAX_PLACEMENT_ATTAMPTS
+        while self.mask.overlap(sprite.mask, (x, y)) and count > 0:
         # # while self.opmask_surf.get_at((x,y))[0] != 0:
-            # x,y = random_location()
+            x,y = random_location()
+            count-=1
 
-        return (x,y)
+        return (x,y) if count > 0 else None
+        # return (x,y)
 
     def update(self):
         if pygame.mouse.get_pos():
-            
             for sp in self.internal_sprites:
+
                 dot = self.mask.overlap(sp.mask, (sp.rect.x, sp.rect.y))
-                if dot:
+                isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > self.rect.width or sp.rect.y + sp.rect.height > self.rect.height
+                if dot or isOutOfBounds:
                     sp.flipDirection()
 
             self.internal_sprites.update()
             self.internal_sprites.draw(self.image)
+
 
 class InternalSprite(pygame.sprite.Sprite):
     def __init__(self, size):
