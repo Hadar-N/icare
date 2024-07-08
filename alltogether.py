@@ -3,34 +3,59 @@ import pygame
 import numpy as np
 import utils.consts as consts
 from shapecontour import ContourPolygon
+from screeninfo import get_monitors
+# from shapely.geometry import Polygon
+from utils.helpers import getRandomColor
+import os
 # import tkinter
+# os.environ['SDL_VIDEO_FULLSCREEN_DISPLAY'] = '1'
+
+def get_secondary_monitor():
+    monitors = get_monitors()
+    if len(monitors) > 1:
+        return monitors[1]  # Return the second monitor
+    return None
 
 cam = cv2.VideoCapture(0)
 ret,image = cam.read()
-# image = cv2.imread(consts.IMAGE_PATH)
-
-# root = tkinter.Tk()
-# WIN_WIDTH = root.winfo_screenwidth() - 50
-# WIN_HEIGHT = root.winfo_screenheight() - 50
 
 if not ret:
     print("Error: Failed to capture image")
 
 img_h, img_w, _ = image.shape
-image_resize_proportion = (consts.WINDOW_WIDTH/2)/img_w
-window_height = int(img_h*image_resize_proportion)
-# window_height = WIN_HEIGHT
 
 # Initialize Pygame data
 pygame.init()
-window_size = (int(consts.WINDOW_WIDTH/2), window_height)
+# 
 clock = pygame.time.Clock()
-window = pygame.display.set_mode(window_size, pygame.RESIZABLE)
+
+window_width = consts.WINDOW_WIDTH/2
+window_height = 0
+
+secondary_monitor = get_secondary_monitor()
+if secondary_monitor:
+    window_height = secondary_monitor.height
+    image_resize_proportion = window_height/img_h
+    window_width = int(img_w*image_resize_proportion)
+    screen_x = secondary_monitor.x
+    screen_y = secondary_monitor.y
+
+    os.environ['SDL_VIDEO_WINDOW_POS'] = f"{screen_x},{screen_y}"
+else:
+    print("Secondary monitor not found")
+    
+    image_resize_proportion = window_width/img_w
+    window_height = int(img_h*image_resize_proportion)
+    screen_x = 0
+    screen_y = 0
+
+window_size = (int(window_width), window_height)
+window = pygame.display.set_mode(window_size,pygame.FULLSCREEN)
+
 curr_group = pygame.sprite.Group()
 
 #TODO: fix internal black contours
-#TODO: change sprite location/remove it and add new if changes effect it
-#TODO: ?? check collision instead of coordinates when comparing contours (old/new)
+#TODO: change inner sprite location/remove it and add new if changes effect it
 
 def getRandomColor() : return int(np.random.choice(range(256)))
 
@@ -45,54 +70,28 @@ def findInImg(img, arr, curr_group):
         if i == max_elm or cnt_area < consts.MIN_CONTOUR_POINTS:
             continue
 
-        bounding = cv2.boundingRect(contour)
+        temp_sprite = ContourPolygon(contour)
+        prev_spr = isSpriteExistInGroup(curr_group, temp_sprite)
+        sim_spr = isSpriteExistInGroup(surfaces, temp_sprite)
 
-        prev_cont = isContourExistInGroup(curr_group, bounding, cnt_area)
-        sim_cont = isContourExistInGroup(surfaces, bounding, cnt_area)
+        if not sim_spr:
+            surfaces.add(temp_sprite if not prev_spr else prev_spr.updateShape(contour))
 
-        if not sim_cont:
-            surfaces.add(ContourPolygon(contour, bounding) if not prev_cont else prev_cont.updateShape(contour, bounding))
     
     curr_group.empty()
     curr_group.add(surfaces.sprites())
     surfaces.empty()
 
-def isContourExistInGroup(s_group, contour, c_area):
-    relevant = next((item for item in s_group.sprites() if isSameContours(item, contour, c_area)), None)
-    if (relevant):
-        return relevant
+def isSpriteExistInGroup(s_group, s_temp):
+
+    for s_i in s_group.sprites():
+        if s_temp.rect.colliderect(s_i.rect):
+            intersection_area = s_i.mask.overlap_area(s_temp.mask, (s_temp.rect.x - s_i.rect.x, s_temp.rect.y - s_i.rect.y))
+            perc = max(intersection_area / s_i.area, intersection_area / s_temp.area)
+            if(perc > consts.SAME_CONTOUR_THRESHOLD):
+                return s_i
     
-    return False
-
-# def isSameContours(s_item, c_bound, c_area):
-#     cnt_area
-#     # location_same = abs(s_item.rect.x - c_bound[consts.BOUND_LEGEND["X"]]) < consts.COMPARISON_VALUE and abs(s_item.rect.y - c_bound[consts.BOUND_LEGEND["Y"]]) < consts.COMPARISON_VALUE
-#     # size_same = abs(s_item.rect.height - c_bound[consts.BOUND_LEGEND["HEIGHT"]]) < consts.COMPARISON_VALUE*2 and abs(s_item.rect.width - c_bound[consts.BOUND_LEGEND["WIDTH"]]) < consts.COMPARISON_VALUE*2
-#     return location_same and size_same
-
-
-def isSameContours(s_item, cnt, c_area):
-    # for sprite in sprite_group:
-        polygon_contour = s_item.dots
-        print(polygon_contour)
-        
-        # Convert to numpy array format compatible with OpenCV
-        # polygon_contour = np.array(polygon_points).reshape((-1, 1, 2)).astype(np.int32)
-        polygon_area = cv2.contourArea(polygon_contour)
-        print(polygon_area)
-
-        print(cv2.isContourConvex(cv2.convexHull(polygon_contour)))
-        print(cv2.isContourConvex(cv2.convexHull(cnt)))
-
-        # Calculate intersection area
-        intersection = cv2.intersectConvexConvex(cnt, polygon_contour)
-        intersection_area = cv2.contourArea(intersection)
-                
-        # Check if the areas are similar
-        if intersection_area / c_area > consts.SAME_CONTOUR_THRESHOLD and intersection_area / polygon_area > consts.SAME_CONTOUR_THRESHOLD:
-            return s_item
-    
-    # return None
+    return None
 
 
 def analyzeImg(image):
@@ -112,6 +111,27 @@ def analyzeImg(image):
 
     return contours, hierarchy
 
+def findBoard(cont):
+    rects = []
+    i=0
+    for contour in contours:
+        cnt_area = cv2.contourArea(contour)
+        # if i == 0 or len(contour) < MIN_CONTOUR_POINTS or (hirar[HIRAR_LEGEND["NEXT"]] == -1 and hirar[HIRAR_LEGEND["PREV"]] == -1):
+        if i == 0 or cnt_area > consts.MIN_CONTOUR_POINTS:
+            i+=1
+            epsilon = 0.05 * cv2.arcLength(contour, True)
+            approx = cv2.approxPolyDP(contour, epsilon, True)
+            if len(approx) == 4:
+                cv2.drawContours(image, contour, -1, (0,0,255), 3)
+                rects.append(approx)
+
+    return rects
+
+# image = cv2.resize(image, (window_width,window_height))
+# contours, hierarchy = analyzeImg(image)
+# rects = findBoard(contours)
+# print(rects)
+
 # Main loop
 running = True
 while running:
@@ -120,18 +140,18 @@ while running:
 
     # Draw the shapes on the frame
     _,image = cam.read()
-    image = cv2.resize(image, (int(consts.WINDOW_WIDTH/2),window_height))
+    image = cv2.resize(image, (window_width,window_height))
     
+    contours, hierarchy = analyzeImg(image)
     copy = image.copy()
 
-    contours, hierarchy = analyzeImg(image)
     findInImg(copy, list(zip(contours, hierarchy[0])), curr_group)
     curr_group.update()
     curr_group.draw(window)
 
     # image = np.rot90(image)
     # frame_surface = pygame.surfarray.make_surface(image)
-    # window.blit(pygame.transform.flip(frame_surface, True, False), (consts.WINDOW_WIDTH/2, 0))
+    # window.blit(pygame.transform.flip(frame_surface, True, False), (0, 0))
 
     # Update the Pygame display
     pygame.display.update()

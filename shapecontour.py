@@ -1,3 +1,4 @@
+import cv2
 import pygame
 import utils.consts as consts
 from utils.helpers import getRandomColor
@@ -6,10 +7,10 @@ from random import randint
 import math
 
 class ContourPolygon(pygame.sprite.Sprite):
-    def __init__(self, dots, bounding):
+    def __init__(self, contour):
         super().__init__()
         self.color = [getRandomColor(), getRandomColor(), getRandomColor()]
-        self.setShape(dots, bounding)
+        self.setShape(contour)
         self.internal_sprites = pygame.sprite.Group()
 
         sp = self.newInternalSprite()
@@ -20,8 +21,8 @@ class ContourPolygon(pygame.sprite.Sprite):
         w,h = consts.FISH_SIZE
         return self.rect.height > h and self.rect.width > w
 
-    def updateShape(self, dots, bounding):
-        self.setShape(dots, bounding)
+    def updateShape(self, contour):
+        self.setShape(contour)
         return self
     
     def newInternalSprite(self):
@@ -37,16 +38,19 @@ class ContourPolygon(pygame.sprite.Sprite):
 
         return sprite
 
-    def setShape(self, dots, bounding):
+    def setShape(self, contour):
+        bounding = cv2.boundingRect(contour)
         self.image = pygame.Surface((bounding[consts.BOUND_LEGEND["WIDTH"]], bounding[consts.BOUND_LEGEND["HEIGHT"]]), pygame.SRCALPHA)
         x = bounding[consts.BOUND_LEGEND["X"]]
         y = bounding[consts.BOUND_LEGEND["Y"]]
-        points = [(point[0][0] - x, point[0][1] - y) for point in dots]
+        points = [(point[0][0] - x, point[0][1] - y) for point in contour]
         self.rect = pygame.draw.polygon(self.image, self.color, points)
         self.mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
-        pygame.mask.Mask.invert(self.mask)
+        self.inv_mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
+        pygame.mask.Mask.invert(self.inv_mask)
 
-        self.dots = dots
+        self.contour = contour
+        self.area = cv2.contourArea(contour)
         self.rect.x = x
         self.rect.y = y
         self.rect.height = bounding[consts.BOUND_LEGEND["HEIGHT"]]
@@ -61,7 +65,7 @@ class ContourPolygon(pygame.sprite.Sprite):
         x,y = random_location()
 
         count = consts.MAX_PLACEMENT_ATTAMPTS
-        while self.mask.overlap(sprite.mask, (x, y)) and count > 0:
+        while self.inv_mask.overlap(sprite.mask, (x, y)) and count > 0:
         # # while self.opmask_surf.get_at((x,y))[0] != 0:
             x,y = random_location()
             count-=1
@@ -73,7 +77,7 @@ class ContourPolygon(pygame.sprite.Sprite):
         if pygame.mouse.get_pos():
             for sp in self.internal_sprites:
 
-                dot = self.mask.overlap(sp.mask, (sp.rect.x, sp.rect.y))
+                dot = self.inv_mask.overlap(sp.mask, (sp.rect.x, sp.rect.y))
                 isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > self.rect.width or sp.rect.y + sp.rect.height > self.rect.height
                 if dot or isOutOfBounds:
                     sp.flipDirection()
