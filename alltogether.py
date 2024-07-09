@@ -3,7 +3,7 @@ import pygame
 import numpy as np
 import utils.consts as consts
 from shapecontour import ContourPolygon
-from utils.helpers import screenSetup
+from utils.helpers import screenSetup, getTransformationMatrix
 
 cam = cv2.VideoCapture(0)
 ret,image = cam.read()
@@ -15,15 +15,13 @@ if not ret:
 pygame.init()
 clock = pygame.time.Clock()
 
-window_size, img_resize, output_resize_proportion = screenSetup(image)
-window = pygame.display.set_mode(window_size,pygame.FULLSCREEN)
+window_size, img_resize, output_resize_proportion, window_flags = screenSetup(image)
+window = pygame.display.set_mode(window_size, window_flags)
 
 curr_group = pygame.sprite.Group()
 
 #TODO: fix internal black contours
 #TODO: change inner sprite location/remove it and add new if changes effect it
-
-def getRandomColor() : return int(np.random.choice(range(256)))
 
 def findInImg(arr, curr_group):
     surfaces = pygame.sprite.Group()
@@ -42,7 +40,6 @@ def findInImg(arr, curr_group):
 
         if not sim_spr:
             surfaces.add(temp_sprite if not prev_spr else prev_spr.updateShape(contour))
-
     
     curr_group.empty()
     curr_group.add(surfaces.sprites())
@@ -59,7 +56,6 @@ def isSpriteExistInGroup(s_group, s_temp):
     
     return None
 
-
 def analyzeImg(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Converting to gray image
     blurred_img = cv2.GaussianBlur(gray_image,consts.BLUR_SIZE, 0)
@@ -70,35 +66,15 @@ def analyzeImg(image):
 
     return contours, hierarchy
 
-def findBoard(conts):
-    rects = []
-    i=0
-    for contour in conts:
-        cnt_area = cv2.contourArea(contour)
-        if i == 0 or cnt_area > consts.MIN_CONTOUR_POINTS:
-            i+=1
-            epsilon = 0.05 * cv2.arcLength(contour, True)
-            approx = cv2.approxPolyDP(contour, epsilon, True)
-            if len(approx) == 4:
-                # cv2.drawContours(image, contour, -1, (0,0,255), 3)
-                rects.append((cnt_area, approx, contour))
 
-    if len(rects) == 0:
-        #TODO: write actual conts[0] boundaries
-        return (cv2.contourArea(conts[0]), conts[0], conts[0])
-    if len(rects) == 1: return rects[0]
-    else:
-        #TODO: choose the most logical option instead of the biggest one
-        return max(rects, key=lambda r: r[0])
+image = cv2.resize(image, img_resize)
+contours, _ = analyzeImg(image)
+matrix = getTransformationMatrix(contours, img_resize)
 
-# image = cv2.resize(image, (window_width,window_height))
-# contours, hierarchy = analyzeImg(image)
-# cnt_area, cnt_approx, cnt_contour = findBoard(contours)
 # cv2.drawContours(image, cnt_contour, -1, (255,0,0), 3)
-
-#TODO: transform perspective
+    
+#TODO: Problem: photo proportion vs projector proportion => shift in image
 #TODO: inner shapes only (on board)
-#TODO: check shift to the side
 
 # Main loop
 running = True
@@ -107,8 +83,8 @@ while running:
     window.fill((150, 150, 150))
 
     # Draw the shapes on the frame
-    _,image = cam.read()
-    image = cv2.resize(image, img_resize)
+    _,image = cam.read()    
+    image = cv2.warpPerspective(cv2.resize(image, img_resize) , matrix, img_resize ,flags=cv2.INTER_LINEAR)
     
     contours, hierarchy = analyzeImg(image)
 
