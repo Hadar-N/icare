@@ -7,8 +7,9 @@ from random import randint
 import math
 
 class ContourPolygon(pygame.sprite.Sprite):
-    def __init__(self, contour):
+    def __init__(self, contour, resize_proportion):
         super().__init__()
+        self.resize_proportion = resize_proportion
         self.color = [getRandomColor(), getRandomColor(), getRandomColor()]
         self.setShape(contour)
         self.internal_sprites = pygame.sprite.Group()
@@ -38,12 +39,15 @@ class ContourPolygon(pygame.sprite.Sprite):
 
         return sprite
 
-    def setShape(self, contour):
-        bounding = cv2.boundingRect(contour)
+    def setShape(self, contour): 
+        # bounding = cv2.boundingRect(contour)
+        bounding = list(map(lambda x: int(x * self.resize_proportion), cv2.boundingRect(contour)))
+        # print(cv2.boundingRect(contour) ,  bounding)
         self.image = pygame.Surface((bounding[consts.BOUND_LEGEND["WIDTH"]], bounding[consts.BOUND_LEGEND["HEIGHT"]]), pygame.SRCALPHA)
         x = bounding[consts.BOUND_LEGEND["X"]]
         y = bounding[consts.BOUND_LEGEND["Y"]]
-        points = [(point[0][0] - x, point[0][1] - y) for point in contour]
+        # points = [(point[0][0] - x, point[0][1] - y) for point in contour]
+        points = [(int(point[0][0] * self.resize_proportion) - x, int(point[0][1] * self.resize_proportion) - y) for point in contour]
         self.rect = pygame.draw.polygon(self.image, self.color, points)
         self.mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
         self.inv_mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
@@ -94,7 +98,8 @@ class InternalSprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         self.DIRECTION_TIME_BEFORE_CHANGE = randint(100,250)
-        self.speed = randint(2,8)/2
+        # self.speed = randint(2,8)/2
+        self.speed = 4
         self.direction = randint(0, 360)
         self.dir_time = self.DIRECTION_TIME_BEFORE_CHANGE
         self.color = consts.FISH_COLOR
