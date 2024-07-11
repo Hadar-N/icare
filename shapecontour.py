@@ -2,7 +2,6 @@ import cv2
 import pygame
 import utils.consts as consts
 from utils.helpers import getRandomColor
-import numpy as np
 from random import randint
 import math
 
@@ -40,14 +39,12 @@ class ContourPolygon(pygame.sprite.Sprite):
         return sprite
 
     def setShape(self, contour): 
-        # bounding = cv2.boundingRect(contour)
         bounding = list(map(lambda x: int(x * self.resize_proportion), cv2.boundingRect(contour)))
-        # print(cv2.boundingRect(contour) ,  bounding)
-        self.image = pygame.Surface((bounding[consts.BOUND_LEGEND["WIDTH"]], bounding[consts.BOUND_LEGEND["HEIGHT"]]), pygame.SRCALPHA)
         x = bounding[consts.BOUND_LEGEND["X"]]
         y = bounding[consts.BOUND_LEGEND["Y"]]
-        # points = [(point[0][0] - x, point[0][1] - y) for point in contour]
         points = [(int(point[0][0] * self.resize_proportion) - x, int(point[0][1] * self.resize_proportion) - y) for point in contour]
+
+        self.image = pygame.Surface((bounding[consts.BOUND_LEGEND["WIDTH"]], bounding[consts.BOUND_LEGEND["HEIGHT"]]), pygame.SRCALPHA)
         self.rect = pygame.draw.polygon(self.image, self.color, points)
         self.mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
         self.inv_mask = pygame.mask.from_threshold(self.image, self.color, threshold=(1, 1, 1))
