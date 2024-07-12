@@ -3,7 +3,7 @@ import pygame
 import numpy as np
 import utils.consts as consts
 from shapecontour import ContourPolygon
-from utils.helpers import screenSetup, getTransformationMatrix
+from utils.helpers import screenSetup, getTransformationMatrix, originImageResize, calcResizeProportion
 
 # image = cv2.imread(consts.IMAGE_PATH)
 cam = cv2.VideoCapture(0)
@@ -16,8 +16,9 @@ if not ret:
 pygame.init()
 clock = pygame.time.Clock()
 
-window_size, img_resize, output_resize_proportion, window_flags = screenSetup(image)
-print(window_size, img_resize, output_resize_proportion, window_flags)
+img_resize = originImageResize(image)
+window_size, window_flags = screenSetup(img_resize)
+resize_proportion, proportional_image_resize = calcResizeProportion(img_resize, window_size)
 window = pygame.display.set_mode(window_size, window_flags)
 
 curr_group = pygame.sprite.Group()
@@ -33,13 +34,12 @@ def findInImg(arr, curr_group):
     # Iterating through each contour to retrieve coordinates of each shape
     for i, zp in enumerate(reversed(arr)):
         (contour, hirar) = zp
-        # print(f"contour no. {i}'s hirar: ", hirar, " & bounding: ", cv2.boundingRect(contour))
         cnt_area = cv2.contourArea(contour)
         # if i == 0 or len(contour) < MIN_CONTOUR_POINTS or (hirar[HIRAR_LEGEND["NEXT"]] == -1 and hirar[HIRAR_LEGEND["PREV"]] == -1):
         if i == max_elm or cnt_area < consts.MIN_CONTOUR_POINTS:
             continue
 
-        temp_sprite = ContourPolygon(contour, output_resize_proportion)
+        temp_sprite = ContourPolygon(contour, 1)
         prev_spr = isSpriteExistInGroup(curr_group, temp_sprite)
         sim_spr = isSpriteExistInGroup(surfaces, temp_sprite)
 
@@ -74,16 +74,9 @@ def analyzeImg(image):
     return contours, hierarchy
 
 
-image = cv2.resize(image, img_resize)
 contours, _ = analyzeImg(image)
-inp, new, matrix = getTransformationMatrix(contours, img_resize, window_size)
-print(inp, new, matrix)
-# findInImg(list(zip(contours, hierarchy[0])), curr_group)
-# curr_group.update()
-# curr_group.draw(window)
+matrix = getTransformationMatrix(contours, img_resize, window_size)
 
-# cv2.drawContours(image, inp, -1, (255,0,0), 3)
-# cv2.drawContours(image, new, -1, (0,255,0), 3)
 # Main loop
 running = True
 while running:
@@ -92,7 +85,7 @@ while running:
 
     # Draw the shapes on the frame
     _,image = cam.read()
-    image = cv2.warpPerspective(cv2.resize(image, img_resize) , matrix, img_resize ,flags=cv2.INTER_LINEAR)
+    image = cv2.warpPerspective(image, matrix, window_size ,flags=cv2.INTER_LINEAR)
     
     contours, hierarchy = analyzeImg(image)
 
