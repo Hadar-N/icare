@@ -85,8 +85,8 @@ def analyzeImg(image):
 
 def analyzepictures(reference_blurred, current_image):
     # reference_blurred = cv2.GaussianBlur(reference_blurred, consts.BLUR_SIZE, 0)
-    gray_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
-    current_blurred = cv2.GaussianBlur(gray_image, consts.BLUR_SIZE, 0)
+    # gray_image = cv2.cvtColor(current_image, cv2.COLOR_BGR2GRAY)
+    current_blurred = cv2.GaussianBlur(current_image, consts.BLUR_SIZE, 0)
 
     # Compute absolute difference between the current image and the reference image
     difference = cv2.absdiff(current_blurred, reference_blurred)
@@ -106,7 +106,16 @@ reference_image = cv2.warpPerspective(image, matrix, window_size ,flags=cv2.INTE
 # gray_reference = cv2.cvtColor(reference_image, cv2.COLOR_BGR2GRAY)
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
-internals = pygame.sprite.Group()
+# internals = pygame.sprite.Group()
+SP = InternalSprite(consts.FISH_SIZE)
+internals = pygame.sprite.GroupSingle(SP)
+
+def createInternal(mask):
+    # image = pygame.image.load("utils\\location.png").convert_alpha()
+    # image = pygame.transform.scale(image, consts.FISH_SIZE)
+
+    return image
+
 
 # Main loop
 running = True
@@ -125,6 +134,9 @@ while running:
     # findInImg(list(zip(contours, hierarchy[0])), curr_group)
     # big_mask.draw(window)
 
+    SP.rect.x= 50
+    SP.rect.y= 50
+
     mask = analyzepictures(reference_blur, image)
     # area = cv2.countNonZero(mask)
     mask = pygame.transform.flip(pygame.surfarray.make_surface(np.rot90(mask)), True, False)
@@ -132,6 +144,10 @@ while running:
     olist = mmask.outline()
     # print(15, len(olist))
     if len(olist) > 2: pygame.draw.polygon(window,(200,150,150),olist,0)
+
+    dot = mmask.overlap(SP.mask, (SP.rect.x, SP.rect.y))
+    print("dot", dot)
+    internals.draw(window)
     
 
     # window.blit(mask., (0,0))
