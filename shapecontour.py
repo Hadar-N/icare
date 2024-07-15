@@ -5,17 +5,102 @@ from utils.helpers import getRandomColor
 from random import randint
 import math
 
+class BigMask(pygame.sprite.Sprite):
+    def __init__(self, bounding, resize_proportion):
+        super().__init__()
+        self.resize_proportion = resize_proportion
+        self.color= (0,0,255)
+        self.image = pygame.Surface((bounding[0], bounding[1]), pygame.SRCALPHA)
+        self.rect = self.image.get_rect()
+        self.area= 0
+        self.fish_area = consts.FISH_SIZE[0]*consts.FISH_SIZE[1]
+        self.internal_sprites = pygame.sprite.Group()
+
+    def decideHowManyKids(self):
+        if not hasattr(self, 'internal_sprites'):
+            self.internal_sprites = pygame.sprite.Group()
+        
+        internal_amount = len(self.internal_sprites.sprites())
+        # wanted_amount = int((self.area / self.fish_area) / consts.AREA_FOR_FISH)
+        wanted_amount = 1
+        
+        if internal_amount < wanted_amount:
+            for i in range(internal_amount, wanted_amount):
+                sp = self.CreateFishSprite()
+                if sp:
+                    self.internal_sprites.add(sp)
+    
+    def isSpriteBigEnoughToHaveInternal(self):
+        return self.area > self.fish_area * consts.AREA_FOR_FISH
+    
+    def CreateFishSprite(self):
+        if not self.isSpriteBigEnoughToHaveInternal():
+            return None
+
+        sprite = InternalSprite(consts.FISH_SIZE)
+        placement = self.randomizeInternalLocation(sprite)
+        if (placement):
+            sprite.rect.x, sprite.rect.y = placement
+        else:
+            return None
+
+        return sprite
+
+    def randomizeInternalLocation(self, sprite):
+        def random_location():
+            random_x = randint(0, int(math.floor(self.rect.width - sprite.rect.height)))
+            random_y = randint(0, int(math.floor(self.rect.height - sprite.rect.width)))
+            return (random_x, random_y)
+
+        x,y = random_location()
+
+        count = consts.MAX_PLACEMENT_ATTAMPTS
+        while self.mask.overlap(sprite.mask, (x, y)) and count > 0:
+            x,y = random_location()
+            count-=1
+
+        return (x,y) if count > 0 else None
+    
+    def majorAreaChangesCase(self):
+        """"""
+
+    def update(self, contours):
+        self.image.fill((150,150,150))
+        prev_area = self.area
+        self.area = 0
+        for item in contours:
+            self.area += cv2.contourArea(item)
+            points = [(int(point[0][0] * self.resize_proportion), int(point[0][1] * self.resize_proportion)) for point in item]
+            pygame.draw.polygon(self.image, self.color, points)
+
+        self.mask = pygame.mask.from_threshold(self.image, self.color, (1,1,1))
+        self.rect = self.image.get_rect()
+
+        self.image = self.mask.to_surface()
+        if self.area and ((prev_area/self.area) < consts.SAME_CONTOUR_THRESHOLD or (prev_area/self.area) > (2-consts.SAME_CONTOUR_THRESHOLD)):
+            self.majorAreaChangesCase()
+
+        self.decideHowManyKids()
+
+        for sp in self.internal_sprites:
+            dot = self.mask.overlap(sp.mask, (sp.rect.x, sp.rect.y))
+            isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > self.rect.width or sp.rect.y + sp.rect.height > self.rect.height
+            if dot or isOutOfBounds:
+                sp.flipDirection()
+
+        self.internal_sprites.update()
+        self.internal_sprites.draw(self.image)
+
 class ContourPolygon(pygame.sprite.Sprite):
     def __init__(self, contour, resize_proportion):
         super().__init__()
         self.resize_proportion = resize_proportion
-        self.color = [getRandomColor(), getRandomColor(), getRandomColor()]
+        # self.color = [getRandomColor(), getRandomColor(), getRandomColor()]
+        self.color = (10,10,10)
         self.setShape(contour)
         self.internal_sprites = pygame.sprite.Group()
 
-        sp = self.newInternalSprite()
-        if sp:
-            self.internal_sprites.add(sp)
+        self.decideHowManyKids()
 
     def isSpriteBigEnoughToHaveInternal(self):
         w,h = consts.FISH_SIZE
@@ -25,7 +110,25 @@ class ContourPolygon(pygame.sprite.Sprite):
         self.setShape(contour)
         return self
     
-    def newInternalSprite(self):
+    def decideHowManyKids(self):
+        if not hasattr(self, 'internal_sprites'):
+            self.internal_sprites = pygame.sprite.Group()
+        
+        internal_amount = len(self.internal_sprites.sprites())
+        wanted_amount = int((self.area / (consts.FISH_SIZE[0]*consts.FISH_SIZE[1])) / consts.AREA_FOR_FISH)
+        # print(internal_amount, wanted_amount)
+
+        # if (internal_amount > wanted_amount):
+        #     for i in range(wanted_amount, internal_amount):
+        #         self.internal_sprites.sprites()[i].kill()
+        # elif internal_amount < wanted_amount:
+        if internal_amount < wanted_amount:
+            for i in range(internal_amount, wanted_amount):
+                sp = self.FishSprite()
+                if sp:
+                    self.internal_sprites.add(sp)
+    
+    def FishSprite(self):
         if not self.isSpriteBigEnoughToHaveInternal():
             return None
 
@@ -57,6 +160,8 @@ class ContourPolygon(pygame.sprite.Sprite):
         self.rect.height = bounding[consts.BOUND_LEGEND["HEIGHT"]]
         self.rect.width = bounding[consts.BOUND_LEGEND["WIDTH"]]
 
+        # self.decideHowManyKids()
+
     def randomizeInternalLocation(self, sprite):
         def random_location():
             random_x = randint(0, int(math.floor(self.rect.width - sprite.rect.height)))
@@ -77,7 +182,6 @@ class ContourPolygon(pygame.sprite.Sprite):
     def update(self):
         if pygame.mouse.get_pos():
             for sp in self.internal_sprites:
-
                 dot = self.inv_mask.overlap(sp.mask, (sp.rect.x, sp.rect.y))
                 isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > self.rect.width or sp.rect.y + sp.rect.height > self.rect.height
                 if dot or isOutOfBounds:
@@ -90,6 +194,7 @@ class ContourPolygon(pygame.sprite.Sprite):
 class InternalSprite(pygame.sprite.Sprite):
     def __init__(self, size):
         super().__init__()
+        # TODO: add borders for mask
         self.image = pygame.image.load("utils\\location.png").convert_alpha()
         self.image = pygame.transform.scale(self.image, size)
         self.rect = self.image.get_rect()
@@ -103,7 +208,7 @@ class InternalSprite(pygame.sprite.Sprite):
 
         for x in range(int(self.rect.width)):
             for y in range(int(self.rect.height)):
-                if self.image.get_at((x,y))[0] != 0:
+                if self.mask.get_at((x,y)) != 0:
                     self.image.set_at((x,y), self.color)
 
 
