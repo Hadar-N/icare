@@ -5,6 +5,7 @@ import utils.consts as consts
 from shapecontour import ContourPolygon, BigMask, InternalSprite
 from utils.helpers import screenSetup, getTransformationMatrix, originImageResize, calcResizeProportion
 from random import randint
+import math
 
 # image = cv2.imread(consts.IMAGE_PATH)
 cam = cv2.VideoCapture(0)
@@ -33,42 +34,6 @@ last_pictures = []
 #TODO: inner shapes only (on board)
 #TODO: fix internal black contours
 #TODO: change inner sprite location/remove it and add new if changes effect it
-
-# Function to capture the last x images and compute their average
-# def capture_and_average_images(images):
-#     avg_image = np.mean(images, axis=0).astype(np.uint8)
-#     return avg_image
-
-def findInImg(arr, curr_group):
-    cntrs = []
-    surfaces = pygame.sprite.Group()
-    max_elm = len(arr) - 1
-    # Iterating through each contour to retrieve coordinates of each shape
-    for i, zp in enumerate(reversed(arr)):
-        (contour, hirar) = zp
-        cnt_area = cv2.contourArea(contour)
-        # if i == 0 or len(contour) < MIN_CONTOUR_POINTS or (hirar[HIRAR_LEGEND["NEXT"]] == -1 and hirar[HIRAR_LEGEND["PREV"]] == -1):
-        if i == max_elm or cnt_area < consts.MIN_CONTOUR_POINTS:
-            continue
-
-        temp_sprite = ContourPolygon(contour, 1)
-        sim_spr = isSpriteExistInGroup(surfaces, temp_sprite)
-
-        if not sim_spr:
-            cntrs.append(contour)
-    
-    surfaces.empty()
-    big_mask.update(cntrs)
-
-def isSpriteExistInGroup(s_group, s_temp):
-    for s_i in s_group.sprites():
-        if s_temp.rect.colliderect(s_i.rect):
-            intersection_area = s_i.mask.overlap_area(s_temp.mask, (s_temp.rect.x - s_i.rect.x, s_temp.rect.y - s_i.rect.y))
-            perc = max(intersection_area / s_i.area, intersection_area / s_temp.area)
-            if(perc > consts.SAME_CONTOUR_THRESHOLD):
-                return s_i
-    
-    return None
 
 def analyzeImg(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -106,18 +71,50 @@ reference_image = cv2.warpPerspective(image, matrix, window_size ,flags=cv2.INTE
 # gray_reference = cv2.cvtColor(reference_image, cv2.COLOR_BGR2GRAY)
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
-# internals = pygame.sprite.Group()
-SP = InternalSprite(consts.FISH_SIZE)
-internals = pygame.sprite.GroupSingle(SP)
+internals = pygame.sprite.Group()
+# SP = InternalSprite(consts.FISH_SIZE)
+# internals = pygame.sprite.GroupSingle(SP)
 
-def createInternal(mask):
-    # image = pygame.image.load("utils\\location.png").convert_alpha()
-    # image = pygame.transform.scale(image, consts.FISH_SIZE)
+def AddSpritesToGroup(internals, mask, area = 15):
+    # TODO: make into more than 1 based on area calculation
+    internal_amount = len(internals.sprites())
+    wanted_amount = 1
 
-    return image
+    #TODO: add kill unwanted
+    if internal_amount < wanted_amount:
+        for i in range(internal_amount, wanted_amount):
+            sp = createFishSprite()
+            if sp:
+                internals.add(sp)
 
+def createFishSprite(mask):
+    sprite = InternalSprite(consts.FISH_SIZE)
+    placement = randomizeInternalLocation(mask, sprite)
+    if (placement):
+        sprite.rect.x, sprite.rect.y = placement
+    else:
+        return None
+
+    return sprite
+
+def randomizeInternalLocation(mask, sprite):
+    def random_location():
+        random_x = randint(0, window_size[0] - sprite.rect.height)
+        random_y = randint(0, window_size[1] - sprite.rect.width)
+        return (random_x, random_y)
+
+    x,y = random_location()
+
+    count = consts.MAX_PLACEMENT_ATTAMPTS
+    # TODO: check inverted?
+    while mask.overlap(sprite.mask, (x, y)) and count > 0:
+        x,y = random_location()
+        count-=1
+
+    return (x,y) if count > 0 else None    
 
 # Main loop
+# TODO: only redo image analysis every few frames??
 running = True
 while running:
     # Clear the Pygame window
@@ -134,8 +131,8 @@ while running:
     # findInImg(list(zip(contours, hierarchy[0])), curr_group)
     # big_mask.draw(window)
 
-    SP.rect.x= 50
-    SP.rect.y= 50
+    # SP.rect.x= 50
+    # SP.rect.y= 50
 
     mask = analyzepictures(reference_blur, image)
     # area = cv2.countNonZero(mask)
@@ -145,8 +142,8 @@ while running:
     # print(15, len(olist))
     if len(olist) > 2: pygame.draw.polygon(window,(200,150,150),olist,0)
 
-    dot = mmask.overlap(SP.mask, (SP.rect.x, SP.rect.y))
-    print("dot", dot)
+    # dot = mmask.overlap(SP.mask, (SP.rect.x, SP.rect.y))
+    # print("dot", dot)
     internals.draw(window)
     
 

@@ -190,7 +190,7 @@ class ContourPolygon(pygame.sprite.Sprite):
             self.internal_sprites.update()
             self.internal_sprites.draw(self.image)
 
-
+#TODO: add addition/disappearance animation
 class InternalSprite(pygame.sprite.Sprite):
     def __init__(self, size):
         super().__init__()
