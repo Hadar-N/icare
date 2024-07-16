@@ -3,7 +3,7 @@ import pygame
 import numpy as np
 import utils.consts as consts
 from shapecontour import ContourPolygon
-from utils.helpers import screenSetup, getTransformationMatrix, originImageResize, calcResizeProportion
+from utils.setup_helpers import screenSetup, getTransformationMatrix, originImageResize, calcResizeProportion
 
 # image = cv2.imread(consts.IMAGE_PATH)
 cam = cv2.VideoCapture(0)
