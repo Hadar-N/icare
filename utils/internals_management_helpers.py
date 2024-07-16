@@ -1,6 +1,6 @@
 from random import randint
 from utils.consts import FISH_SIZE, FREE_AREA_FOR_FISH, MAX_PLACEMENT_ATTAMPTS
-from shapecontour import InternalSprite
+from sprites.InternalSprite import InternalSprite
 
 def AddSpritesToGroup(internals, mask, area, window_size):
     internal_amount = len(internals.sprites())

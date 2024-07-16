@@ -4,7 +4,6 @@ import numpy as np
 import utils.consts as consts
 from utils.setup_helpers import screenSetup, getTransformationMatrix, originImageResize
 from utils.internals_management_helpers import AddSpritesToGroup, checkCollision
-from random import randint
 
 cam = cv2.VideoCapture(0)
 ret,image = cam.read()
@@ -56,8 +55,8 @@ internals = pygame.sprite.Group()
 # Main loop
 running = True
 
-win_name = "cv2_win"
-cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+# win_name = "cv2_win"
+# cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
 
 while running:
     window.fill((15, 15, 15))
@@ -84,9 +83,9 @@ while running:
     pygame.display.update()
     clock.tick(30)
     
-    cv2.imshow(win_name, mask_img)
-    if cv2.waitKey(1) & 0xFF == 27:
-        break
+    # cv2.imshow(win_name, mask_img)
+    # if cv2.waitKey(1) & 0xFF == 27:
+    #     break
 
     # Handle Pygame events
     for event in pygame.event.get():
@@ -94,5 +93,5 @@ while running:
             running = False
 
 pygame.quit()
-cv2.destroyAllWindows()
+# cv2.destroyAllWindows()
 cam.release()

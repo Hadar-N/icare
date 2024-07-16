@@ -2,7 +2,7 @@ import cv2
 import pygame
 import numpy as np
 import utils.consts as consts
-from shapecontour import ContourPolygon
+from sprites.ContourPolygon import ContourPolygon
 from utils.setup_helpers import screenSetup, getTransformationMatrix, originImageResize, calcResizeProportion
 
 # image = cv2.imread(consts.IMAGE_PATH)
