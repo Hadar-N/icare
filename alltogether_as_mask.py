@@ -12,8 +12,10 @@ ret,image = cam.read()
 if not ret:
     print("Error: Failed to capture image")
 
-win_name = "cv2_win"
+win_name = "threshold image"
+win_contour_name = "contour board res"
 cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+cv2.namedWindow(win_contour_name, cv2.WINDOW_NORMAL)
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -27,7 +29,7 @@ window = pygame.display.set_mode(global_data.window_size, window_flags)
 
 internals = pygame.sprite.Group()
 
-#TODO: fix lighting when most is darkened?
+#TODO: fix lighting when most is darkened? fish recognize themselves as non-mask!!!!
 #TODO: only redo image analysis every few frames?
 #TODO: detect which area has changes and add the internals accordingly?
 
@@ -52,7 +54,7 @@ def createMask(reference_blurred, current_image, kernel):
     return closed
 
 contours, _ = findContours(image)
-matrix = getTransformationMatrix(contours, img_resize, global_data.window_size)
+board_pts, matrix = getTransformationMatrix(contours, img_resize, global_data.window_size)
 
 reference_image = cv2.warpPerspective(image, matrix, global_data.window_size ,flags=cv2.INTER_LINEAR)
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
@@ -61,6 +63,10 @@ kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closin
 fish_options = getFishOptions()
 global_data.fish_options = fish_options
 internals = pygame.sprite.Group()
+
+board_cont = np.array(board_pts, dtype=np.int32).reshape((-1, 1, 2))
+cv2.drawContours(image,[board_cont], -1, (0,0,255), 10)
+cv2.imshow(win_contour_name, image)
 
 # Main loop
 running = True

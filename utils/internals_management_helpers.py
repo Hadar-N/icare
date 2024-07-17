@@ -66,8 +66,6 @@ def checkCollision(spriteGroup, mask, contour_size = None):
             continue
 
         area = mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
-        if area > (sp.rect.width*sp.rect.height)/4:
-            sp.kill()
-        elif area:
+        if area:
             sp.flipDirection()
 

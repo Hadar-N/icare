@@ -4,7 +4,7 @@ import pygame
 import cv2
 import math
 import numpy as np
-from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, SAME_CONTOUR_THRESHOLD, TRIM_EDGES_CONST
+from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, SAME_PROPORTIONS_THRESHOLD, TRIM_EDGES_CONST
 
 def get_secondary_monitor():
     monitors = get_monitors()
@@ -68,7 +68,7 @@ def getTransformationMatrix(contours, img_resize, win_size):
 
     new = inp
 
-    if min(inp_proportion/out_proportion, out_proportion/inp_proportion) < SAME_CONTOUR_THRESHOLD:
+    if min(inp_proportion/out_proportion, out_proportion/inp_proportion) < SAME_PROPORTIONS_THRESHOLD:
     # after organizing the spots, we can assume inp[0],inp[1] on the left end and inp[2],inp[3] on the right end, therefore x(inp[0],inp[1]) > x(inp[2],inp[3])
         dist_no_change = math.dist(inp[0],inp[1])
         top_proportion = math.dist(inp[1],inp[2]) / (math.dist(inp[3],inp[0]) + math.dist(inp[1],inp[2]))
@@ -80,7 +80,7 @@ def getTransformationMatrix(contours, img_resize, win_size):
 
     matrix = cv2.getPerspectiveTransform(new,out)
 
-    return matrix
+    return new, matrix
 
 def tripRectEdges(rect, avg_pt):
     trimmed = []

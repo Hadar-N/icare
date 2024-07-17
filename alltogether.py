@@ -16,6 +16,9 @@ if not ret:
 
 global_data = DataSingleton()
 
+win_name = "threshold image"
+cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+
 # Initialize Pygame data
 pygame.init()
 clock = pygame.time.Clock()
@@ -35,20 +38,17 @@ curr_group = pygame.sprite.Group()
 
 def findInImg(arr, curr_group):
     surfaces = pygame.sprite.Group()
-    max_elm = len(arr) - 1
     # Iterating through each contour to retrieve coordinates of each shape
     for i, zp in enumerate(reversed(arr)):
         (contour, hirar) = zp
         cnt_area = cv2.contourArea(contour)
         # if i == 0 or len(contour) < MIN_CONTOUR_POINTS or (hirar[HIRAR_LEGEND["NEXT"]] == -1 and hirar[HIRAR_LEGEND["PREV"]] == -1):
-        if i == max_elm or cnt_area < consts.MIN_CONTOUR_POINTS:
+        if cnt_area < consts.MIN_CONTOUR_AREA:
             continue
 
         temp_sprite = ContourPolygon(contour, 1)
         prev_spr = isSpriteExistInGroup(curr_group, temp_sprite)
         sim_spr = isSpriteExistInGroup(surfaces, temp_sprite)
-
-        # print("prev_spr: ", prev_spr, "sim_spr: ",  sim_spr)
 
         if not sim_spr:
             surfaces.add(temp_sprite if not prev_spr else prev_spr.updateShape(contour))
@@ -84,13 +84,13 @@ def analyzeImg(image):
 
 
 contours, _ = analyzeImg(image)
-matrix = getTransformationMatrix(contours, img_resize, window_size)
+board_pts, matrix = getTransformationMatrix(contours, img_resize, window_size)
 
 # Main loop
 running = True
 while running:
     # Clear the Pygame window
-    window.fill((150, 150, 150))
+    window.fill((0, 0, 0))
 
     # Draw the shapes on the frame
     _,image = cam.read()
@@ -102,9 +102,10 @@ while running:
     curr_group.update()
     curr_group.draw(window)
 
-    # copy = np.rot90(image)
-    # frame_surface = pygame.surfarray.make_surface(copy)
-    # window.blit(pygame.transform.flip(frame_surface, True, False), (0, 0))
+    [cv2.drawContours(image, sp.contour, -1, sp.contour_color, 2) for sp in curr_group.sprites()]
+    cv2.imshow(win_name, image)
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
 
     # Update the Pygame display
     pygame.display.update()

@@ -1,6 +1,7 @@
 import cv2
 import pygame
 import numpy as np
+from random import randint
 from utils.consts import *
 from utils.internals_management_helpers import createFishSprite, checkCollision
 
@@ -8,6 +9,7 @@ class ContourPolygon(pygame.sprite.Sprite):
     def __init__(self, contour, resize_proportion):
         super().__init__()
         self.resize_proportion = resize_proportion
+        self.contour_color = (randint(0,255),randint(0,255),randint(0,255))
         self.color = (10,10,10)
         self.__setShape(contour)
         self.internal_sprites = pygame.sprite.Group()
