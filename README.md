@@ -24,7 +24,7 @@ including the functions for controlling the InternalSprites, detecting collision
 * **alltogether.py**
 This version is based off detecting contours, then using said contours as sprites and each creates their own internal sprites. It compares old and new contours (as sprites) to decide which are new.
 _This structure proved to have many issues, for example detection of dark areas locked within other areas vs clear areas locked within contours, extreme sensitivity to noise and inability to merge or split contours while keeping the internal sprites._ While many of these issues are solvable, the solution chosen is to go with another structure, as detailed in the other main file.
-This file is kept as reference for people trying to use contours as sprites.
+This file is kept and maintained as reference for people trying to use contours as sprites.
 
 * **alltogether_as_mask.py**
 This version uses the initial image for comparison with current image to detect newly darkened areas. The internal sprites are held by the main file, all are calculated and used in the same group. Instead of checking contours against previous versions, we just check overlapping area between internal shapes and the calculated mask.

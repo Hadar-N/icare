@@ -1,49 +1,90 @@
 import pygame
 from random import randint
 import math
-import utils.consts as consts
+from utils.consts import *
+import time
 
-#TODO: add addition/disappearance animation
 class InternalSprite(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, image):
         super().__init__()
 
-        size = consts.FISH_SIZE
-        image = pygame.image.load(consts.INTERNAL_SPRITE_IMG).convert_alpha()
-        image = pygame.transform.scale(image, size)
-        self.image = pygame.Surface((size[0] + consts.FISH_BORDER*2, size[1] + consts.FISH_BORDER*2), pygame.SRCALPHA)
-        self.image.blit(image, (consts.FISH_BORDER, consts.FISH_BORDER))
-        
+        orig_rect = image.get_rect() #since we already rotated the fish 90 degrees, the hxw are flipped
+        ideal_height = randint(FISH_SIZE_WIDTH_RANGE[0], FISH_SIZE_WIDTH_RANGE[1])
+        ideal_width = (orig_rect[BOUND_LEGEND["WIDTH"]]/orig_rect[BOUND_LEGEND["HEIGHT"]])*ideal_height
+
+        self.orig_image = pygame.transform.scale(image, (ideal_width, ideal_height))
+        self.image = pygame.Surface((ideal_width + FISH_BORDER*2, ideal_height + FISH_BORDER*2), pygame.SRCALPHA)
+        self.image.blit(self.orig_image, (FISH_BORDER, FISH_BORDER))
         self.rect = self.image.get_rect()
-        self.mask = pygame.mask.from_surface(self.image)
 
-        self.DIRECTION_TIME_BEFORE_CHANGE = randint(100,250)
-        self.speed = randint(2,8)/2
-        self.direction = randint(0, 360)
-        self.dir_time = self.DIRECTION_TIME_BEFORE_CHANGE
-        self.color = consts.FISH_COLOR
+        self.__appearing = FISH_APPEAR_SPEED
+        self.__deleting = False
+        self.__flip_times = [time.time()]
 
-        for x in range(int(self.rect.width)):
-            for y in range(int(self.rect.height)):
-                if self.mask.get_at((x,y)) != 0:
-                    self.image.set_at((x,y), self.color)
+        self.__time_for_direction_change = randint(100,250)
+        self.__dir_time = 0
 
-        pygame.mask.Mask.invert(self.mask)
+        self.__randomizeDirection()
+
+        # color = FISH_COLOR
+        # for x in range(int(self.rect.width)):
+        #     for y in range(int(self.rect.height)):
+        #         if self.mask.get_at((x,y)) != 0:
+        #             self.image.set_at((x,y), color)
+
+        self.__setFishAlpha()
         self.area = self.mask.count()
         
-    def randomizeDirection(self):
-        if self.dir_time <= 0:
-            self.dir_time = self.DIRECTION_TIME_BEFORE_CHANGE
-            self.direction = randint(0, 360)
+    def __randomizeDirection(self):
+        if self.__deleting:
+            return
+        elif self.__dir_time <= 0:
+            self.__dir_time = self.__time_for_direction_change
+            self.__direction = pygame.math.Vector2(randint(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), randint(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
+            self.__rotateFish()
         else:
-            self.dir_time-=1
+            self.__dir_time-=1
     
     def flipDirection(self):
-        self.direction = (self.direction+180)%360
+        if self.__deleting:
+            return
+
+        self.__direction = pygame.math.Vector2(self.__direction[0] * -1, self.__direction[1] * -1)
+        self.__rotateFish()
+
+        last_item = self.__flip_times.pop()
+        curr = time.time()
+        if curr - last_item < 1: [self.removeSelf(True) if len(self.__flip_times) > FISH_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
+        else: self.__flip_times = [curr]
+        
+    def removeSelf(self, is_collision = False):
+        self.__deleting=True
+        if is_collision: self.__direction = pygame.math.Vector2(0,0)
+    
+    def __rotateFish(self):
+        angle = self.__direction.angle_to(pygame.math.Vector2(0, 1))
+        self.image = pygame.transform.rotate(self.orig_image, angle)
+        new_rect = self.image.get_rect()
+        new_rect.x, new_rect.y, _, _ = self.rect
+        self.rect = new_rect
+        self.mask = pygame.mask.from_surface(self.image)
+        pygame.mask.Mask.invert(self.mask)
+
+        # olist = self.mask.outline()
+        # if len(olist) > 2: pygame.draw.polygon(self.image,(150,150,200),olist,0)
+
+    def __setFishAlpha(self):        
+        self.image.set_alpha(FISH_MAX_OPACITY-(self.__appearing/FISH_APPEAR_SPEED)*FISH_MAX_OPACITY)
+        if (self.__deleting):
+            self.__appearing +=1
+            if self.__appearing == 255: self.kill()
+        elif (self.__appearing): self.__appearing -=1
+
     
     def update(self):
-        self.rect.x += self.speed*math.cos(math.radians(self.direction))
-        self.rect.y += self.speed*math.sin(math.radians(self.direction))
+        self.rect.x += self.__direction[0]
+        self.rect.y += self.__direction[1]
 
-        self.randomizeDirection()
+        self.__setFishAlpha()
+        self.__randomizeDirection()
 

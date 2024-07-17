@@ -2,8 +2,9 @@ import cv2
 import pygame
 import numpy as np
 import utils.consts as consts
+from utils.dataSingleton import DataSingleton
 from utils.setup_helpers import screenSetup, getTransformationMatrix, originImageResize
-from utils.internals_management_helpers import AddSpritesToGroup, checkCollision
+from utils.internals_management_helpers import AddSpritesToGroup, checkCollision, getFishOptions
 
 cam = cv2.VideoCapture(0)
 ret,image = cam.read()
@@ -11,17 +12,24 @@ ret,image = cam.read()
 if not ret:
     print("Error: Failed to capture image")
 
+win_name = "cv2_win"
+cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
+
 pygame.init()
 clock = pygame.time.Clock()
 
+global_data = DataSingleton()
+
 img_resize = originImageResize(image)
 window_size, window_flags = screenSetup(img_resize)
-window = pygame.display.set_mode(window_size, window_flags)
+global_data.window_size = window_size
+window = pygame.display.set_mode(global_data.window_size, window_flags)
 
 internals = pygame.sprite.Group()
 
 #TODO: fix lighting when most is darkened?
-#TODO: only redo image analysis every few frames??
+#TODO: only redo image analysis every few frames?
+#TODO: detect which area has changes and add the internals accordingly?
 
 def findContours(image):
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -44,37 +52,36 @@ def createMask(reference_blurred, current_image, kernel):
     return closed
 
 contours, _ = findContours(image)
-matrix = getTransformationMatrix(contours, img_resize, window_size)
+matrix = getTransformationMatrix(contours, img_resize, global_data.window_size)
 
-reference_image = cv2.warpPerspective(image, matrix, window_size ,flags=cv2.INTER_LINEAR)
+reference_image = cv2.warpPerspective(image, matrix, global_data.window_size ,flags=cv2.INTER_LINEAR)
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
 
+fish_options = getFishOptions()
+global_data.fish_options = fish_options
 internals = pygame.sprite.Group()
 
 # Main loop
 running = True
 
-# win_name = "cv2_win"
-# cv2.namedWindow(win_name, cv2.WINDOW_NORMAL)
-
 while running:
-    window.fill((15, 15, 15))
+    window.fill((0,0,0))
 
     _,image = cam.read()
-    image = cv2.warpPerspective(image, matrix, window_size ,flags=cv2.INTER_LINEAR)
+    image = cv2.warpPerspective(image, matrix, global_data.window_size ,flags=cv2.INTER_LINEAR)
 
     mask_img = createMask(reference_blur, image, kernel)
     mask_img_transformed = pygame.transform.flip(pygame.surfarray.make_surface(np.rot90(mask_img)), True, False)
     mask = pygame.mask.from_threshold(mask_img_transformed, (0,0,0), threshold=(1, 1, 1))
-    area = (window_size[0] * window_size[1]) - mask.count()
+    area = (global_data.window_size[0] * global_data.window_size[1]) - mask.count()
     # pygame.mask.Mask.invert(mask)
 
     # olist = mask.outline()
     # if len(olist) > 2: pygame.draw.polygon(window,(200,150,150),olist,0)
     
-    AddSpritesToGroup(internals, mask, area, window_size)
-    checkCollision(internals, mask, window_size)
+    AddSpritesToGroup(internals, mask, area)
+    checkCollision(internals, mask)
 
     internals.update()
     internals.draw(window)
@@ -83,9 +90,9 @@ while running:
     pygame.display.update()
     clock.tick(30)
     
-    # cv2.imshow(win_name, mask_img)
-    # if cv2.waitKey(1) & 0xFF == 27:
-    #     break
+    cv2.imshow(win_name, mask_img)
+    if cv2.waitKey(1) & 0xFF == 27:
+        break
 
     # Handle Pygame events
     for event in pygame.event.get():
@@ -93,5 +100,5 @@ while running:
             running = False
 
 pygame.quit()
-# cv2.destroyAllWindows()
+cv2.destroyAllWindows()
 cam.release()
