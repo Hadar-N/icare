@@ -119,7 +119,7 @@ def findBoard(conts, img_resize):
     for contour in conts:
         cnt_area = cv2.contourArea(contour)
         if cnt_area > area_theshold and cnt_area < full_area:
-            epsilon = 0.05 * cv2.arcLength(contour, True)
+            epsilon = 0.1 * cv2.arcLength(contour, True)
             approx = cv2.approxPolyDP(contour, epsilon, True)
             if len(approx) == 4:
                 rects.append((cnt_area, approx, contour))

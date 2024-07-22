@@ -11,7 +11,7 @@ def getFishOptions():
         width = FISH_SIZE_WIDTH_RANGE[1]
         img_orig_size = img.get_rect()
         height = (img_orig_size[BOUND_LEGEND["HEIGHT"]]/img_orig_size[BOUND_LEGEND["WIDTH"]])*width
-        return pygame.transform.rotate(pygame.transform.scale(img, (width, height)), -90)
+        return pygame.transform.scale(img, (width, height))
 
     fish = [getfish(p) for p in FISH_SPRITE_IMGS_PATHS]
 

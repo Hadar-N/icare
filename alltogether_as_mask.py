@@ -65,7 +65,7 @@ global_data.fish_options = fish_options
 internals = pygame.sprite.Group()
 
 board_cont = np.array(board_pts, dtype=np.int32).reshape((-1, 1, 2))
-cv2.drawContours(image,[board_cont], -1, (0,0,255), 10)
+cv2.drawContours(image,[board_cont], -1, (0,0,255), 5)
 cv2.imshow(win_contour_name, image)
 
 # Main loop
