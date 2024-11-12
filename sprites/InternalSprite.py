@@ -17,6 +17,8 @@ class InternalSprite(pygame.sprite.Sprite):
         self.image.blit(self.orig_image, (FISH_BORDER, FISH_BORDER))
         self.rect = self.image.get_rect()
 
+        self.interval = 0
+
         self.__appearing = FISH_APPEAR_SPEED
         self.__deleting = False
         self.__flip_times = [time.time()]
@@ -82,6 +84,8 @@ class InternalSprite(pygame.sprite.Sprite):
             if self.__appearing == 255: self.kill()
         elif (self.__appearing): self.__appearing -=1
 
+    @property
+    def isDeleting(self): return self.__deleting
     
     def update(self):
         self.rect.x += self.__direction[0]

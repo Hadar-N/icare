@@ -32,13 +32,15 @@ def AddSpritesToGroup(internals, mask, area):
 
 def createFishSprite(mask, contour_size = None):
     global_data = DataSingleton()
-    chosen_fish = global_data.fish_options[randint(0, len(global_data.fish_options) - 1)]
+    fish_index = randint(0, len(global_data.fish_options) - 1)
+    chosen_fish = global_data.fish_options[fish_index]
     if not contour_size: contour_size = global_data.window_size
     sprite = InternalSprite(chosen_fish)
     placement = randomizeInternalLocation(mask, sprite, contour_size)
 
     if (placement):
         sprite.rect.x, sprite.rect.y = placement
+        sprite.interval = INTERVALS_MAJ[fish_index]
     else:
         return None
 
@@ -58,14 +60,18 @@ def randomizeInternalLocation(mask, sprite, window_size):
     return (x,y) if count > 0 else None    
 
 def checkCollision(spriteGroup, mask, contour_size = None):
+    justFlipped= []
     for sp in spriteGroup.sprites():
         if not contour_size: contour_size = DataSingleton().window_size
         isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > contour_size[0] or sp.rect.y + sp.rect.height > contour_size[1]
         if isOutOfBounds:
             sp.flipDirection()
+            if not sp.isDeleting: justFlipped.append(sp)
             continue
 
         area = mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
         if area:
             sp.flipDirection()
+            if not sp.isDeleting: justFlipped.append(sp)
+    return justFlipped
 
