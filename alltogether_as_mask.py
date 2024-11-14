@@ -1,16 +1,25 @@
 import cv2
 import pygame
 import numpy as np
+import datetime
+import logging
+from picamera2 import Picamera2
+
 import utils.consts as consts
 from utils.dataSingleton import DataSingleton
-from utils.setup_helpers import screenSetup, getTransformationMatrix, originImageResize
+from utils.setup_helpers import screenSetup, getTransformationMatrix, originImageResize, get_pi_temp
 from utils.internals_management_helpers import AddSpritesToGroup, checkCollision, getFishOptions
 
-cam = cv2.VideoCapture(0)
-ret,image = cam.read()
+logging.basicConfig(filename=consts.LOGFILE)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
-if not ret:
-    print("Error: Failed to capture image")
+logger.info(f'--------------start datetime: {datetime.datetime.now()}')
+
+camera = Picamera2()
+camera.configure(camera.create_preview_configuration())
+camera.start()
+image = camera.capture_array()
 
 win_name = "threshold image"
 win_contour_name = "contour board res"
@@ -68,23 +77,33 @@ board_cont = np.array(board_pts, dtype=np.int32).reshape((-1, 1, 2))
 cv2.drawContours(image,[board_cont], -1, (0,0,255), 5)
 cv2.imshow(win_contour_name, image)
 
+def renewCameraPicture(counter, mask, area, mask_img):
+    if (counter%100 == 0 or not mask or not area):
+        image = camera.capture_array()
+        image = cv2.warpPerspective(image, matrix, global_data.window_size ,flags=cv2.INTER_LINEAR)
+
+        mask_img = createMask(reference_blur, image, kernel)
+        if mask_img.shape[2] == 4:
+            mask_img = mask_img[..., :3]  # Keep only the RGB channels
+        mask_img_transformed = pygame.transform.flip(pygame.surfarray.make_surface(np.rot90(mask_img)), True, False)
+        mask = pygame.mask.from_threshold(mask_img_transformed, (0,0,0), threshold=(1, 1, 1))
+        area = (global_data.window_size[0] * global_data.window_size[1]) - mask.count()
+
+    return mask,area,mask_img
+
 # Main loop
 running = True
+counter = 0
+mask = area = mask_img = None
 
 while running:
     window.fill((0,0,0))
 
-    _,image = cam.read()
-    image = cv2.warpPerspective(image, matrix, global_data.window_size ,flags=cv2.INTER_LINEAR)
-
-    mask_img = createMask(reference_blur, image, kernel)
-    mask_img_transformed = pygame.transform.flip(pygame.surfarray.make_surface(np.rot90(mask_img)), True, False)
-    mask = pygame.mask.from_threshold(mask_img_transformed, (0,0,0), threshold=(1, 1, 1))
-    area = (global_data.window_size[0] * global_data.window_size[1]) - mask.count()
     # pygame.mask.Mask.invert(mask)
 
     # olist = mask.outline()
     # if len(olist) > 2: pygame.draw.polygon(window,(200,150,150),olist,0)
+    mask, area, mask_img = renewCameraPicture(counter, mask,area, mask_img)
     
     AddSpritesToGroup(internals, mask, area)
     checkCollision(internals, mask)
@@ -95,6 +114,15 @@ while running:
     # Update the Pygame display
     pygame.display.update()
     clock.tick(30)
+    counter+=1
+
+    if (counter%100 == 0):
+        temp = get_pi_temp()
+        if (temp < 50):
+            logger.info(f'temp: {temp}')
+        else:
+            logger.warning(f'temp: {temp}')
+        print(f'counter: {counter}, %{counter%100}')
     
     cv2.imshow(win_name, mask_img)
     if cv2.waitKey(1) & 0xFF == 27:
@@ -107,4 +135,4 @@ while running:
 
 pygame.quit()
 cv2.destroyAllWindows()
-cam.release()
+camera.stop()

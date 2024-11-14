@@ -1,15 +1,23 @@
-from screeninfo import get_monitors
+# from screeninfo import get_monitors
 import os
 import pygame
 import cv2
 import math
 import numpy as np
+import re
 from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, SAME_PROPORTIONS_THRESHOLD, TRIM_EDGES_CONST
 
+pattern = re.compile("(?<=\=)\d+\.\d+")
+
+def get_pi_temp ():
+    t = os.popen('vcgencmd measure_temp').readline()
+    match = float(re.search(pattern, t)[0])
+    return match
+
 def get_secondary_monitor():
-    monitors = get_monitors()
-    if len(monitors) > 1:
-        return monitors[1]
+    # monitors = get_monitors()
+    # if len(monitors) > 1:
+    #     return monitors[1]
     return None
 
 def originImageResize(img):
@@ -39,6 +47,7 @@ def screenSetup(img_size):
 
         os.environ['SDL_VIDEO_WINDOW_POS'] = f"{screen_x},{screen_y}"
     else:
+        flags = pygame.FULLSCREEN
         print("Secondary monitor not found")
 
     window_size = (int(window_width), int(window_height))
