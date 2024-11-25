@@ -10,6 +10,9 @@ from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PAR
 temp_re = re.compile("(?<=\=)\d+\.\d+")
 diskspace_re = re.compile("[\d.]+(?=%)")
 
+def asstr(arr):
+    return f'[{",".join(asstr(x) if isinstance(x, np.ndarray) else str(x) for x in arr)}]'
+
 def get_pi_temp ():
     t = os.popen('vcgencmd measure_temp').readline()
     match = float(re.search(temp_re, t)[0])
@@ -21,7 +24,6 @@ def get_monitor_information(logger):
         monitor = monitors[0]
         is_main = True
         if len(monitors) > 1:
-            print("monitors 1", monitors[1])
             is_main = False
             monitor = monitors[1]
         return (monitor, is_main)
@@ -59,7 +61,6 @@ def screenSetup(img_size, logger):
     return (window_size, flags)
 
 def sortPoints(points):
-    print("start: ", points)
     points = np.array(points)
     sums = points.sum(axis=1)  # x + y
     diffs = np.diff(points, axis=1)[:, 0]
