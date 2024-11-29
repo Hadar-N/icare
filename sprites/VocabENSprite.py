@@ -18,6 +18,7 @@ class VocabENSprite(pygame.sprite.Sprite):
         self.__is_presented = False
 
         self.mask = pygame.mask.from_surface(self.image)
+        pygame.mask.Mask.invert(self.mask)
         self.area = self.mask.count()
 
         # color = (255,0,0)
@@ -37,20 +38,18 @@ class VocabENSprite(pygame.sprite.Sprite):
                 self.__global_data.espeak_engine.say(f'{self.__vocab["en"]} .')
                 self.__global_data.espeak_engine.runAndWait()
     
-    # def __setAlpha(self):
-    #     self.image.set_alpha(FISH_MAX_OPACITY-(self.__appearing/FISH_APPEAR_SPEED)*FISH_MAX_OPACITY)
-    #     if (self.__deleting):
-    #         self.__appearing +=1
-    #         if self.__appearing == 255: self.kill()
-    #     elif (self.__appearing): self.__appearing -=1
-
     @property
     def isDeleting(self): return self.__deleting
     @property
     def vocabEN(self): return self.__vocab["en"]
     @property
+    def vocabZH(self): return self.__vocab["zh"]
+    @property
     def isPresented(self): return self.__is_presented
     
+    def matchSuccess(self):
+        self.kill()
+
     # def update(self):
     #     # self.rect.x += self.__direction[0]
     #     # self.rect.y += self.__direction[1]

@@ -59,10 +59,10 @@ def randomizeInternalLocation(mask, sprite, window_size):
 
     return (x,y) if count > 0 else None    
 
-def checkCollision(spriteGroup, mask, contour_size = None):
+def checkCollision(spriteGroup, mask, contour_size):
     justFlipped= []
     for sp in spriteGroup.sprites():
-        if not contour_size: contour_size = DataSingleton().window_size
+
         isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > contour_size[0] or sp.rect.y + sp.rect.height > contour_size[1]
         if isOutOfBounds:
             sp.flipDirection()
