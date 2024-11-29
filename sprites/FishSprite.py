@@ -4,7 +4,7 @@ import math
 from utils.consts import *
 import time
 
-class InternalSprite(pygame.sprite.Sprite):
+class FishSprite(pygame.sprite.Sprite):
     def __init__(self, image):
         super().__init__()
 
@@ -75,7 +75,7 @@ class InternalSprite(pygame.sprite.Sprite):
         new_rect.x, new_rect.y, _, _ = self.rect
         self.rect = new_rect
         self.mask = pygame.mask.from_surface(self.image)
-        pygame.mask.Mask.invert(self.mask)
+        # pygame.mask.Mask.invert(self.mask)
 
     def __setFishAlpha(self):        
         self.image.set_alpha(FISH_MAX_OPACITY-(self.__appearing/FISH_APPEAR_SPEED)*FISH_MAX_OPACITY)

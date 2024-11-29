@@ -6,6 +6,9 @@ class DataSingleton:
             cls._instance = super().__new__(cls)
             cls._screen_size = None
             cls._fish_options = None
+            cls._vocab_options = None
+            cls._vocab_font = None
+            cls._espeak_engine = None
         return cls._instance
 
     @property
@@ -26,3 +29,27 @@ class DataSingleton:
     @fish_options.setter
     def fish_options(self, fish: list):
         self._fish_options = fish
+
+    @property
+    def vocab_options(self):
+        return self._vocab_options
+
+    @vocab_options.setter
+    def vocab_options(self, vocab: list):
+        self._vocab_options = vocab
+
+    @property
+    def vocab_font(self):
+        return self._vocab_font
+
+    @vocab_font.setter
+    def vocab_font(self, font):
+        self._vocab_font = font
+    
+    @property
+    def espeak_engine(self):
+        return self._espeak_engine
+
+    @espeak_engine.setter
+    def espeak_engine(self, eng):
+        self._espeak_engine = eng

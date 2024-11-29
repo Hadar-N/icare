@@ -3,7 +3,7 @@ import numpy as np
 from random import randint
 from utils.consts import *
 from utils.dataSingleton import DataSingleton
-from sprites.InternalSprite import InternalSprite
+from sprites.FishSprite import FishSprite
 
 def getFishOptions():
     def getfish(p):
@@ -35,7 +35,7 @@ def createFishSprite(mask, contour_size = None):
     fish_index = randint(0, len(global_data.fish_options) - 1)
     chosen_fish = global_data.fish_options[fish_index]
     if not contour_size: contour_size = global_data.window_size
-    sprite = InternalSprite(chosen_fish)
+    sprite = FishSprite(chosen_fish)
     placement = randomizeInternalLocation(mask, sprite, contour_size)
 
     if (placement):

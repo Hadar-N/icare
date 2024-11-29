@@ -11,6 +11,7 @@ import utils.consts as consts
 from utils.dataSingleton import DataSingleton
 from utils.setup_helpers import asstr, screenSetup, getTransformationMatrix, originImageResize, get_pi_temp
 from utils.internals_management_helpers import AddSpritesToGroup, checkCollision, getFishOptions
+from utils.vocab_management_helpers import initVocabOptions, AddVocabToGroup, vocabMaskCollision
 
 os.environ["DISPLAY"] = ":0"
 
@@ -40,9 +41,6 @@ window_size, window_flags = screenSetup(img_resize, logger)
 global_data.window_size = window_size
 window = pygame.display.set_mode(global_data.window_size, window_flags)
 
-internals = pygame.sprite.Group()
-kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
-
 def findContours(image):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     _, thresh = cv2.threshold(gray, consts.THRESHOLD_VAL, consts.THRESHOLD_MAX, cv2.THRESH_BINARY)
@@ -66,12 +64,17 @@ window.fill((0, 0, 0))
 pygame.display.update()
 time.sleep(2)  # Wait for 2 seconds
 # get darkened reference image
+kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
 reference_image = cv2.flip(cv2.warpPerspective(cv2.resize(camera.capture_array(), img_resize), matrix, (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
+initVocabOptions()
 fish_options = getFishOptions()
 global_data.fish_options = fish_options
 internals = pygame.sprite.Group()
+vocabgroup = pygame.sprite.Group()
+AddVocabToGroup(vocabgroup)
+
 
 def renewCameraPicture(counter, mask, area, mask_img, image):
     if (counter%(consts.CLOCK/2) == 0 or not mask or not area):
@@ -102,6 +105,11 @@ while running:
 
     internals.update()
     internals.draw(window)
+
+    vocabMaskCollision(vocabgroup, mask)
+
+    # vocabgroup.update()
+    vocabgroup.draw(window)
 
     pygame.display.update()
     clock.tick(consts.CLOCK)

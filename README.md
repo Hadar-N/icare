@@ -14,7 +14,7 @@ The first thing in both main files is to initialize the board: find the contour 
 **notice**: for successful initialization, the board should start off "clean".
 
 * **internals_management_helpers.py**
-including the functions for controlling the InternalSprites, detecting collisions, how many sprites to create, in what location, etc.
+including the functions for controlling the FishSprites, detecting collisions, how many sprites to create, in what location, etc.
 **notice**: some functions in ContourPolygon has their own versions to it and not always use helper functions.
 
 ---
@@ -34,9 +34,9 @@ This version uses the initial image for comparison with current image to detect 
 #### Sprites:
 
 * **ContourPolygon.py**
-used in _alltogether.py_ only, draws the physical polygon, holds InternalSprites and updates both it's own shape and the InternalSprite's movement
+used in _alltogether.py_ only, draws the physical polygon, holds FishSprites and updates both it's own shape and the FishSprite's movement
 
-* **InternalSprite.py**
+* **FishSprite.py**
 represent an "internal" (sometime referred to as fish). moves on its' own based on a randomized direction and speed. the collisions are checked from above.
 
 ***
