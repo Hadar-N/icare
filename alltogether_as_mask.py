@@ -78,9 +78,6 @@ reference_image = cv2.flip(cv2.warpPerspective(cv2.resize(camera.capture_array()
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
 initVocabOptions()
-fish_options = getFishOptions()
-global_data.fish_options = fish_options
-internals = pygame.sprite.Group()
 vocabengroup = pygame.sprite.Group()
 vocabzhbankgroup = pygame.sprite.Group()
 vocabzhdrawgroup = pygame.sprite.Group()
@@ -96,18 +93,14 @@ while running:
 
     mask, area, mask_img, image = renewCameraPicture(counter, mask, area, mask_img, image)
 
-    # AddSpritesToGroup(internals, mask, area)
-    # checkCollision(internals, mask, global_data.window_size)
-    # internals.update()
-    # internals.draw(window)
-    vocabMatching(vocabengroup, vocabzhdrawgroup)
-
+    vocabMatching(logger, vocabengroup, vocabzhdrawgroup)
+    
     presentNewZHVocab(vocabzhbankgroup, vocabzhdrawgroup, mask, area)
     checkCollision(vocabzhdrawgroup, mask, global_data.window_size)
+    vocabReadMaskCollision(vocabengroup, mask)
+
     vocabzhdrawgroup.update()
     vocabzhdrawgroup.draw(window)
-
-    vocabReadMaskCollision(vocabengroup, mask)
     vocabengroup.draw(window)
 
     pygame.display.update()

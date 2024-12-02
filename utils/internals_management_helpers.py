@@ -27,8 +27,8 @@ def AddSpritesToGroup(internals, mask, area):
             sp = createFishSprite(mask)
             if sp:
                 internals.add(sp)
-    elif internal_amount> 0 and internal_amount > wanted_amount:
-        [internals.sprites()[i].removeSelf() for i in range(wanted_amount, internal_amount)]
+    # elif internal_amount> 0 and internal_amount > wanted_amount:
+    #     [internals.sprites()[i].removeSelf() for i in range(wanted_amount, internal_amount)]
 
 def createFishSprite(mask, contour_size = None):
     global_data = DataSingleton()
@@ -46,15 +46,25 @@ def createFishSprite(mask, contour_size = None):
 
     return sprite
 
-def randomizeInternalLocation(mask, sprite, window_size):
-    def random_location():
-        return (randint(0, window_size[0] - sprite.rect.height), randint(0, window_size[1] - sprite.rect.width))
+def random_location(sprite, window_size):
+    return (randint(0, window_size[0] - sprite.rect.height), randint(0, window_size[1] - sprite.rect.width))
 
-    x,y = random_location()
+def randomizeUniqueLocations(group, sprite, window_size):
+    sprite.rect.x, sprite.rect.y = random_location(sprite, window_size)
+    count = MAX_PLACEMENT_ATTAMPTS
+
+    while pygame.sprite.spritecollide(sprite, group, False) and count > 0:
+        sprite.rect.x, sprite.rect.y = random_location(sprite, window_size)
+        count-=1
+
+    return True if count > 0 else False
+
+def randomizeInternalLocation(mask, sprite, window_size):
+    x,y = random_location(sprite, window_size)
     count = MAX_PLACEMENT_ATTAMPTS
 
     while mask.overlap(sprite.mask, (x, y)) and count > 0:
-        x,y = random_location()
+        x,y = random_location(sprite, window_size)
         count-=1
 
     return (x,y) if count > 0 else None    

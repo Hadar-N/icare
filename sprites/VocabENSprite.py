@@ -13,7 +13,6 @@ class VocabENSprite(pygame.sprite.Sprite):
 
         self.image = pygame.transform.flip(self.__global_data.vocab_font.render(self.__vocab["en"], True, (0,0,255)), True, False)
         self.rect = self.image.get_rect()
-        self.rect.x, self.rect.y = (randint(0, self.__global_data.window_size[0]-self.rect.width), randint(0, self.__global_data.window_size[1]-self.rect.height))
 
         self.__is_presented = False
 

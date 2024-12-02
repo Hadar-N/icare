@@ -53,12 +53,19 @@ class VocabZHSprite(pygame.sprite.Sprite):
             return
         elif self.__dir_time <= 0:
             self.__dir_time = self.__time_for_direction_change
-            if self.__direction:
-                angle_change = uniform(-FISH_ANGLE_MAX_DIFF, FISH_ANGLE_MAX_DIFF)
-                self.__direction = self.__direction.rotate(angle_change)
-            else: self.__direction = pygame.math.Vector2(uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
+            self.__direction = self.__randomizeAngle()
         else:
             self.__dir_time-=1
+
+    def __randomizeAngle(self):
+        res=None
+        if self.__direction:
+            angle_change = uniform(-FISH_ANGLE_MAX_DIFF, FISH_ANGLE_MAX_DIFF)
+            res = self.__direction.rotate(angle_change)
+        else: res = pygame.math.Vector2(uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
+        if(abs(res[0]) + abs(res[1]) < MIN_ACCEPTABLE_SPEED): res = self.__randomizeAngle()
+        return res
+
     
     def flipDirection(self):
         if self.__deleting:
@@ -69,7 +76,9 @@ class VocabZHSprite(pygame.sprite.Sprite):
         last_item = self.__flip_times.pop()
         curr = time.time()
         if curr - last_item < 1: [self.removeSelf(True) if len(self.__flip_times) > FISH_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
-        else: self.__flip_times = [curr]
+        else:
+            self.__flip_times = [curr]
+            self.__dir_time = self.__time_for_direction_change
         
     def removeSelf(self, is_collision = False):
         self.__deleting=True

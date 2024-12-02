@@ -7,7 +7,7 @@ from utils.consts import *
 from utils.dataSingleton import DataSingleton
 from sprites.VocabENSprite import VocabENSprite
 from sprites.VocabZHSprite import VocabZHSprite
-from .internals_management_helpers import randomizeInternalLocation
+from .internals_management_helpers import randomizeInternalLocation, randomizeUniqueLocations
 
 def initVocabOptions():
     globaldata = DataSingleton()
@@ -19,8 +19,14 @@ def initVocabOptions():
         globaldata.vocab_options = sample(data['vocab'], VOCAB_AMOUNT)
 
 def AddVocabToGroup(static, bank):
-    [static.add(VocabENSprite(i)) for i in range (0,VOCAB_AMOUNT - 1)]
-    [bank.add(VocabZHSprite(i, bank)) for i in range (0,VOCAB_AMOUNT - 1)]
+    globaldata = DataSingleton()
+    for i in range(VOCAB_AMOUNT):
+        ENvocab = VocabENSprite(i)
+        location = randomizeUniqueLocations(static,ENvocab, globaldata.window_size)
+        if (location):
+            static.add(ENvocab)
+            bank.add(VocabZHSprite(i, bank))
+        else: ENvocab.kill()
 
 def presentNewZHVocab(bank, active, mask, area):
     globaldata = DataSingleton()
@@ -44,7 +50,7 @@ def vocabReadMaskCollision(spriteGroup, mask):
         area = mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
         sp.changeIsPresented(area>sp.area/2)
 
-def vocabMatching(enggroup,zhactivegroup): 
+def vocabMatching(logger, enggroup,zhactivegroup): 
     for sp in zhactivegroup.sprites():
         collides = pygame.sprite.spritecollide(sp,enggroup,False)
         if collides:
@@ -52,5 +58,10 @@ def vocabMatching(enggroup,zhactivegroup):
             if relevant:
                 relevant.matchSuccess()
                 sp.matchSuccess()
+                logger.info(f'disappeared word: {sp.vocabZH}/{relevant.vocabEN}; left words: {len(enggroup.sprites())}')
+                if len(enggroup.sprites()) == 0: finishGame(logger)
 
+def finishGame(logger):
+    logger.info("game finished!")
+    print("finished!!!")
         
