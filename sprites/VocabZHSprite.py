@@ -4,6 +4,7 @@ import math
 from utils.consts import *
 import time
 from utils.dataSingleton import DataSingleton
+from .GenVocabSprite import GenVocabSprite
 
 # Structure instructions:
 # zh vocab will be divided into 2 groups:
@@ -14,40 +15,25 @@ from utils.dataSingleton import DataSingleton
 # - if it is currently on screen (aka not matched yet): should be in "active"
 # - if it is already matched: should be "kill"ed (aka in no group)
 
-class VocabZHSprite(pygame.sprite.Sprite):
+class VocabZHSprite(GenVocabSprite):
     def __init__(self, vocab_i, bank):
-        super().__init__()
+        super().__init__(vocab_i, "zh")
 
-        self.__global_data = DataSingleton()
-        self.__vocab = self.__global_data.vocab_options[vocab_i]
-
-        self.image = pygame.transform.flip(self.__global_data.vocab_font.render(self.__vocab["zh"], True, (255,0,0)), True, False)        
-        self.rect = self.image.get_rect()
-
-        # self.interval = 0
         self. __bank_group = bank
         self.__appearing = 0.0
         self.__deleting = False
         self.__flip_times = [time.time()]
 
-        self.__time_for_direction_change = randint(100,250)
+        self.__time_for_direction_change = randint(50,120)
         self.__dir_time = 0
         self.__direction = None
 
         self.__randomizeDirection()
-
-
-        # color = FISH_COLOR
-        # for x in range(int(self.rect.width)):
-        #     for y in range(int(self.rect.height)):
-        #         if self.mask.get_at((x,y)) != 0:
-        #             self.image.set_at((x,y), color)
-
         self.__setAlpha()
-        self.mask = pygame.mask.from_surface(self.image)
-        pygame.mask.Mask.invert(self.mask)
-        self.area = self.mask.count()
-        
+    
+    @property
+    def isDeleting(self): return self.__deleting
+
     def __randomizeDirection(self):
         if self.__deleting:
             return
@@ -60,12 +46,12 @@ class VocabZHSprite(pygame.sprite.Sprite):
     def __randomizeAngle(self):
         res=None
         if self.__direction:
-            angle_change = uniform(-FISH_ANGLE_MAX_DIFF, FISH_ANGLE_MAX_DIFF)
+            angle_change = uniform(-1*FISH_ANGLE_MAX_DIFF, FISH_ANGLE_MAX_DIFF)
             res = self.__direction.rotate(angle_change)
         else: res = pygame.math.Vector2(uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
-        if(abs(res[0]) + abs(res[1]) < MIN_ACCEPTABLE_SPEED): res = self.__randomizeAngle()
+        if res.length() < 1: res.normalize()*uniform(1,FISH_MAX_SPEED)
+        print(f'{self.vocabZH} new direction: ', res, res.length())
         return res
-
     
     def flipDirection(self):
         if self.__deleting:
@@ -82,7 +68,6 @@ class VocabZHSprite(pygame.sprite.Sprite):
         
     def removeSelf(self, is_collision = False):
         self.__deleting=True
-        print('starting to kill self: ', self.vocabZH)
         if is_collision: self.__direction = pygame.math.Vector2(0,0)
     
     def __setAlpha(self):
@@ -92,24 +77,12 @@ class VocabZHSprite(pygame.sprite.Sprite):
             if self.__appearing <= 0.0:
                 self.kill()
                 self.__bank_group.add(self)
-                print('just killed self: ', self.vocabZH)
+                self.__deleting = False
         elif (self.__appearing < 1.0): self.__appearing = 1.0 if self.__appearing+FISH_APPEAR_SPEED > 1.0 else self.__appearing+FISH_APPEAR_SPEED
 
-    def matchSuccess(self):
-        self.kill()
-
-    @property
-    def isDeleting(self): return self.__deleting
-    @property
-    def vocabEN(self): return self.__vocab["en"]
-    @property
-    def vocabZH(self): return self.__vocab["zh"]
-    @property
-    def isPresented(self): return self.__is_presented
-
     def update(self):
-        self.rect.x += self.__direction[0]
-        self.rect.y += self.__direction[1]
+        self.rect.x += round(self.__direction[0])
+        self.rect.y += round(self.__direction[1])
 
         self.__setAlpha()
         self.__randomizeDirection()
