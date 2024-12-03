@@ -27,8 +27,8 @@ def AddSpritesToGroup(internals, mask, area):
             sp = createFishSprite(mask)
             if sp:
                 internals.add(sp)
-    elif internal_amount> 0 and internal_amount > wanted_amount:
-        [internals.sprites()[i].removeSelf() for i in range(wanted_amount, internal_amount)]
+    # elif internal_amount> 0 and internal_amount > wanted_amount:
+    #     [internals.sprites()[i].removeSelf() for i in range(wanted_amount, internal_amount)]
 
 def createFishSprite(mask, contour_size = None):
     global_data = DataSingleton()
@@ -39,32 +39,40 @@ def createFishSprite(mask, contour_size = None):
     placement = randomizeInternalLocation(mask, sprite, contour_size)
 
     if (placement):
-        sprite.rect.x, sprite.rect.y = placement
+        sprite.setLocation(placement)
         sprite.interval = INTERVALS_MAJ[fish_index]
     else:
         return None
 
     return sprite
 
-def randomizeInternalLocation(mask, sprite, window_size):
-    def random_location():
-        return (randint(0, window_size[0] - sprite.rect.height), randint(0, window_size[1] - sprite.rect.width))
+def random_location(sprite, window_size):
+    return (randint(0, window_size[0] - sprite.rect.height), randint(0, window_size[1] - sprite.rect.width))
 
-    x,y = random_location()
+def randomizeUniqueLocations(group, sprite, window_size):
+    sprite.setLocation(random_location(sprite, window_size))
+    count = MAX_PLACEMENT_ATTAMPTS
+
+    while pygame.sprite.spritecollide(sprite, group, False) and count > 0:
+        sprite.setLocation(random_location(sprite, window_size))
+        count-=1
+
+    return True if count > 0 else False
+
+def randomizeInternalLocation(mask, sprite, window_size):
+    x,y = random_location(sprite, window_size)
     count = MAX_PLACEMENT_ATTAMPTS
 
     while mask.overlap(sprite.mask, (x, y)) and count > 0:
-        x,y = random_location()
+        x,y = random_location(sprite, window_size)
         count-=1
 
     return (x,y) if count > 0 else None    
 
-def checkCollision(spriteGroup, mask, contour_size = None):
+def checkCollision(spriteGroup, mask, contour_size):
     justFlipped= []
     for sp in spriteGroup.sprites():
-        if not contour_size: contour_size = DataSingleton().window_size
-        isOutOfBounds = sp.rect.x < 0 or sp.rect.y < 0 or sp.rect.x + sp.rect.width > contour_size[0] or sp.rect.y + sp.rect.height > contour_size[1]
-        if isOutOfBounds:
+        if sp.isOutOfBounds:
             sp.flipDirection()
             if not sp.isDeleting: justFlipped.append(sp)
             continue

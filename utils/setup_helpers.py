@@ -5,7 +5,7 @@ import cv2
 import math
 import numpy as np
 import re
-from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, SAME_PROPORTIONS_THRESHOLD, TRIM_EDGES_CONST
+from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
 diskspace_re = re.compile("[\d.]+(?=%)")
@@ -17,6 +17,18 @@ def get_pi_temp ():
     t = os.popen('vcgencmd measure_temp').readline()
     match = float(re.search(temp_re, t)[0])
     return match
+
+def followup_temp (logger, counter):
+    if (counter%100 == 0):
+        temp = get_pi_temp()
+        if (temp < 65):
+            logger.info(f'temp: {temp}')
+        elif (temp < 77):
+            logger.warning(f'temp: {temp}')
+        else:
+            logger.critical(f'temp: {temp} ==> program exited')
+            return True
+        
 
 def get_monitor_information(logger):
     try:
@@ -59,6 +71,12 @@ def screenSetup(img_size, logger):
     flags = pygame.FULLSCREEN
     window_size = (int(window_width), int(window_height))
     return (window_size, flags)
+
+def findContours(image):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    _, thresh = cv2.threshold(gray, THRESHOLD_VAL, THRESHOLD_MAX, cv2.THRESH_BINARY)
+    contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    return contours
 
 def sortPoints(points):
     points = np.array(points)
