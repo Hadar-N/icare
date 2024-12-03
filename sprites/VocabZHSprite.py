@@ -19,7 +19,7 @@ class VocabZHSprite(GenVocabSprite):
     def __init__(self, vocab_i, bank):
         super().__init__(vocab_i, "zh")
 
-        self. __bank_group = bank
+        self.__bank_group = bank
         self.__appearing = 0.0
         self.__deleting = False
         self.__flip_times = [time.time()]
@@ -50,7 +50,6 @@ class VocabZHSprite(GenVocabSprite):
             res = self.__direction.rotate(angle_change)
         else: res = pygame.math.Vector2(uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
         if res.length() < 1: res.normalize()*uniform(1,FISH_MAX_SPEED)
-        print(f'{self.vocabZH} new direction: ', res, res.length())
         return res
     
     def flipDirection(self):
@@ -81,8 +80,8 @@ class VocabZHSprite(GenVocabSprite):
         elif (self.__appearing < 1.0): self.__appearing = 1.0 if self.__appearing+FISH_APPEAR_SPEED > 1.0 else self.__appearing+FISH_APPEAR_SPEED
 
     def update(self):
-        self.rect.x += round(self.__direction[0])
-        self.rect.y += round(self.__direction[1])
+        self._floatlocation = [self._floatlocation[i]+self.__direction[i] for i in range(0,2)]
+        self.rect.x, self.rect.y = self._floatlocation
 
         self.__setAlpha()
         self.__randomizeDirection()

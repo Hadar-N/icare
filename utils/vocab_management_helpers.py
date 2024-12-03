@@ -38,10 +38,7 @@ def presentNewZHVocab(bank, active, mask, area):
         placement = randomizeInternalLocation(mask, temp, globaldata.window_size)
 
         if (placement):
-            print("adding: ", temp.vocabZH)
-            print("curr active: ", [{"word": sp.vocabZH, "rect": sp.rect} for sp in active.sprites()])
-            print("curr inbank: ", [sp.vocabZH for sp in bank.sprites()])
-            temp.rect.x, temp.rect.y = placement
+            temp.setLocation(placement)
             active.add(temp)
             temp.remove(bank)
 

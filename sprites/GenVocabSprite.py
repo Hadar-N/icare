@@ -11,6 +11,8 @@ class GenVocabSprite(pygame.sprite.Sprite):
         self._global_data = DataSingleton()
         self._vocab = self._global_data.vocab_options[vocab_i]
         self._color = (0,0,255) if property == "en" else (255,0,0)
+        self._floatlocation = (0.,0.)
+
         self.image = pygame.transform.flip(self._global_data.vocab_font.render(self._vocab[property], True, self._color), True, False)
         self.rect = self.image.get_rect()
 
@@ -28,6 +30,12 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def vocabEN(self): return self._vocab["en"]
     @property
     def vocabZH(self): return self._vocab["zh"]
+    @property
+    def isOutOfBounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
     
     def matchSuccess(self):
         self.kill()
+
+    def setLocation(self, coordinates):
+        self._floatlocation = coordinates
+        self.rect.x, self.rect.y = self._floatlocation
