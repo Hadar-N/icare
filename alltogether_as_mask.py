@@ -6,11 +6,10 @@ import datetime
 import time
 import logging
 from dotenv import load_dotenv
-from picamera2 import Picamera2
 
 import utils.consts as consts
 from utils.dataSingleton import DataSingleton
-from utils.setup_helpers import asstr, screenSetup, getTransformationMatrix, originImageResize, followup_temp, findContours
+from utils.setup_helpers import asstr, screenSetup, getTransformationMatrix, originImageResize, followup_temp, findContours, setCameraFunction
 from utils.internals_management_helpers import AddSpritesToGroup, checkCollision, getFishOptions
 from utils.vocab_management_helpers import initVocabOptions, AddVocabToGroup, vocabReadMaskCollision, presentNewZHVocab, vocabMatching
 
@@ -20,7 +19,7 @@ os.environ["DISPLAY"] = f':{os.getenv("DISPLAY")}'
 
 def renewCameraPicture(counter, mask, area, mask_img, image):
     if (counter%(consts.CLOCK/2) == 0 or not mask or not area):
-        image = cv2.resize(camera.capture_array(), img_resize)
+        image = cv2.resize(takePicture(), img_resize)
         image = cv2.flip(cv2.warpPerspective(image, matrix,  (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
 
         mask_img = createMask(image)
@@ -50,16 +49,9 @@ logger.setLevel(logging.DEBUG)
 
 logger.info(f'--------------start datetime: {datetime.datetime.now()} running on: {os.getenv("ENV")}')
 
-camera = Picamera2()
-
-config = camera.create_preview_configuration(
-    main={"size": (1640, 1232), "format": "BGR888"},
-    buffer_count=2
-)
-
-camera.configure(config)
-camera.start()
-image = camera.capture_array()
+takePicture, removeCamera = setCameraFunction(os.getenv("ENV"))
+print({takePicture, removeCamera})
+image = takePicture()
 
 global_data = DataSingleton()
 pygame.init()
@@ -67,7 +59,7 @@ clock = pygame.time.Clock()
 pygame.font.init()
 
 img_resize = originImageResize(image)
-window_size, window_flags = screenSetup(img_resize, logger)
+window_size, window_flags = screenSetup(img_resize, os.getenv('PROJECTOR_RESOLUTION'), logger)
 global_data.window_size = window_size
 window = pygame.display.set_mode(global_data.window_size, window_flags)
 
@@ -80,7 +72,7 @@ pygame.display.update()
 time.sleep(2)  # Wait for 2 seconds
 # get darkened reference image
 kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
-reference_image = cv2.flip(cv2.warpPerspective(cv2.resize(camera.capture_array(), img_resize), matrix, (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
+reference_image = cv2.flip(cv2.warpPerspective(cv2.resize(takePicture(), img_resize), matrix, (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
 reference_blur = cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 threshvalue = findthreshval(reference_blur) * 1.2
 print("threshvalue: ", findthreshval(reference_blur), threshvalue)
@@ -124,4 +116,4 @@ while running:
             running = False
 
 pygame.quit()
-camera.stop()
+removeCamera()
