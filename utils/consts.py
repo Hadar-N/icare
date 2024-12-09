@@ -10,7 +10,7 @@ BOUND_LEGEND={"X":0,"Y":1,"WIDTH":2,"HEIGHT":3}
 WINDOW_WIDTH = 1200; IMAGE_RESIZE_WIDTH = 600
 FREE_AREA_FOR_FISH = 20; FISH_BORDER = 3; FISH_APPEAR_SPEED = 0.05; FISH_STUCK_THRESH = 6; FISH_MAX_SPEED = 5; FISH_MAX_OPACITY = 200
 MAX_PLACEMENT_ATTAMPTS = 5; FISH_ANGLE_MAX_DIFF = 30
-TRIM_EDGES_CONST = 7
+CLEAN_EDGES = 25
 FISH_SPRITE_IMGS_PATHS = ('public/images/c28093183cac539e4485fda592865ae9.png','public/images/png-tuna--3500.png','public/images/fish-with-ai-generated-free-png.webp')
 VOCAB_PATH = 'public/vocab.json'; VOCAB_AMOUNT = 5; MAX_VOCAB_ACTIVE = 3
 FONT_PATH = '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'; FONT_SIZE= 30

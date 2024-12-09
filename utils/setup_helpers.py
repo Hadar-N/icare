@@ -5,6 +5,7 @@ import cv2
 import math
 import numpy as np
 import re
+from picamera2 import Picamera2
 from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
@@ -30,14 +31,14 @@ def followup_temp (logger, counter):
             return True
         
 
-def get_monitor_information(logger):
+def get_monitor_information(proj_res, logger):
     try:
         monitors = get_monitors()
         monitor = monitors[0]
         is_main = True
-        if len(monitors) > 1:
+        if len(monitors) > 1 and proj_res:
             is_main = False
-            monitor = monitors[1]
+            monitor = next((m for m in monitors if max(m.width,m.height) == max(map(int,proj_res.split('x'))) and min(m.width,m.height) == min(map(int,proj_res.split('x')))), monitors[1])
         return (monitor, is_main)
     except:
         logger.warning("no monitor found!")
@@ -51,24 +52,21 @@ def originImageResize(img):
 
     return img_size
 
-def screenSetup(img_size, logger):
+def screenSetup(img_size, proj_res, logger):
     window_width = WINDOW_WIDTH
     window_height = window_width*(img_size[1]/img_size[0])
-    screen_x = 0
-    screen_y = 0
 
-    monitor, is_main = get_monitor_information(logger)
+    monitor, is_main = get_monitor_information(proj_res, logger)
     if monitor:
         window_width = monitor.width
         window_height = monitor.height
-        if not is_main:
-            screen_x = monitor.x
-            screen_y = monitor.y
-            os.environ['SDL_VIDEO_WINDOW_POS'] = f"{screen_x},{screen_y}"
+        print(monitor, is_main)
+        if not is_main: 
+            os.environ['SDL_VIDEO_WINDOW_POS'] = f"{monitor.x},{monitor.y}"
     else:
         print("No monitor found!!!")
 
-    flags = pygame.FULLSCREEN
+    flags = pygame.NOFRAME
     window_size = (int(window_width), int(window_height))
     return (window_size, flags)
 
@@ -151,3 +149,35 @@ def findBoard(conts, img_resize):
         case 0: return fake_contour
         case 1: return rects[0]["cnt"]
         case _: return max(rects, key=lambda c: c["area"])["cnt"]
+
+def setCameraFunction(envval):
+    takePicture, removeCamera = None, None
+    if envval == "pi":
+        camera = Picamera2()
+
+        config = camera.create_preview_configuration(
+            main={"size": (1640, 1232), "format": "BGR888"},
+            buffer_count=2
+        )
+
+        camera.configure(config)
+        camera.start()
+        takePicture = lambda: camera.capture_array()
+        removeCamera = lambda: camera.stop()
+    elif envval == "pc":
+        camera = cv2.VideoCapture(0)
+        # ret,image = camera.read()
+        # if not ret:
+        #     print("Error: Failed to capture image")
+        def takePictureFunc():
+            _,image = camera.read()
+            return image
+            
+        takePicture = lambda: takePictureFunc
+        removeCamera = lambda: camera.release()
+    else:
+        raise Exception(".env value incorrect")
+    
+    return takePicture, removeCamera
+
+

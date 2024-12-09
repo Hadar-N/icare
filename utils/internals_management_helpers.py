@@ -47,7 +47,7 @@ def createFishSprite(mask, contour_size = None):
     return sprite
 
 def random_location(sprite, window_size):
-    return (randint(0, window_size[0] - sprite.rect.height), randint(0, window_size[1] - sprite.rect.width))
+    return randint(CLEAN_EDGES, window_size[0] - CLEAN_EDGES - sprite.rect.width), randint(CLEAN_EDGES, window_size[1] - CLEAN_EDGES - sprite.rect.height)
 
 def randomizeUniqueLocations(group, sprite, window_size):
     sprite.setLocation(random_location(sprite, window_size))

@@ -1,6 +1,7 @@
 import pygame
 from random import randint, uniform
 import math
+import numpy as np
 from utils.consts import *
 import time
 from utils.dataSingleton import DataSingleton
@@ -24,9 +25,8 @@ class VocabZHSprite(GenVocabSprite):
         self.__deleting = False
         self.__flip_times = [time.time()]
 
-        self.__time_for_direction_change = randint(50,120)
-        self.__dir_time = 0
         self.__direction = None
+        self.__rng = np.random.default_rng() # scale for random() = [-4,4]
 
         self.__randomizeDirection()
         self.__setAlpha()
@@ -37,17 +37,14 @@ class VocabZHSprite(GenVocabSprite):
     def __randomizeDirection(self):
         if self.__deleting:
             return
-        elif self.__dir_time <= 0:
-            self.__dir_time = self.__time_for_direction_change
-            self.__direction = self.__randomizeAngle()
         else:
-            self.__dir_time-=1
+            self.__direction = self.__randomizeAngle()
 
     def __randomizeAngle(self):
         res=None
         if self.__direction:
-            angle_change = uniform(-1*FISH_ANGLE_MAX_DIFF, FISH_ANGLE_MAX_DIFF)
-            res = self.__direction.rotate(angle_change)
+            change_course = self.__rng.normal()
+            res = self.__direction.rotate(change_course*(FISH_ANGLE_MAX_DIFF/4)) if change_course > 0.5 else self.__direction
         else: res = pygame.math.Vector2(uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
         if res.length() < 1: res.normalize()*uniform(1,FISH_MAX_SPEED)
         return res
@@ -63,7 +60,6 @@ class VocabZHSprite(GenVocabSprite):
         if curr - last_item < 1: [self.removeSelf(True) if len(self.__flip_times) > FISH_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
         else:
             self.__flip_times = [curr]
-            self.__dir_time = self.__time_for_direction_change
         
     def removeSelf(self, is_collision = False):
         self.__deleting=True
