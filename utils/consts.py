@@ -13,6 +13,6 @@ MAX_PLACEMENT_ATTAMPTS = 5; FISH_ANGLE_MAX_DIFF = 30
 CLEAN_EDGES = 25
 FISH_SPRITE_IMGS_PATHS = ('public/images/c28093183cac539e4485fda592865ae9.png','public/images/png-tuna--3500.png','public/images/fish-with-ai-generated-free-png.webp')
 VOCAB_PATH = 'public/vocab.json'; VOCAB_AMOUNT = 5; MAX_VOCAB_ACTIVE = 3
-FONT_PATH = '/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc'; FONT_SIZE= 30
+FONT_PATH = 'public/fonts/TaipeiSansTCBeta-Regular.ttf'; FONT_SIZE= 30
 FISH_SIZE_WIDTH_RANGE = (30,50)
 INTERVALS_MAJ = [0,4,7,11,12]

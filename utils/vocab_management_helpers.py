@@ -12,9 +12,9 @@ from .internals_management_helpers import randomizeInternalLocation, randomizeUn
 def initVocabOptions():
     globaldata = DataSingleton()
     globaldata.vocab_font = pygame.font.Font(FONT_PATH, FONT_SIZE)
-    globaldata.espeak_engine = pyttsx3.init(driverName='espeak')
+    globaldata.espeak_engine = pyttsx3.init(driverName='espeak') if globaldata.env == "pi" else pyttsx3.init()
 
-    with open(VOCAB_PATH, 'r') as file:
+    with open(VOCAB_PATH, 'r', encoding="utf8") as file:
         data = json.load(file)
         globaldata.vocab_options = sample(data['vocab'], VOCAB_AMOUNT)
 

@@ -47,16 +47,16 @@ logging.basicConfig(filename=consts.LOGFILE)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-logger.info(f'--------------start datetime: {datetime.datetime.now()} running on: {os.getenv("ENV")}')
-
-takePicture, removeCamera = setCameraFunction(os.getenv("ENV"))
-print({takePicture, removeCamera})
-image = takePicture()
+logger.info(f'--------------start datetime: {datetime.datetime.now()}')
 
 global_data = DataSingleton()
+global_data.env = os.getenv("ENV")
 pygame.init()
 clock = pygame.time.Clock()
 pygame.font.init()
+
+takePicture, removeCamera = setCameraFunction(global_data.env)
+image = takePicture()
 
 img_resize = originImageResize(image)
 window_size, window_flags = screenSetup(img_resize, os.getenv('PROJECTOR_RESOLUTION'), logger)
@@ -107,7 +107,7 @@ while running:
     clock.tick(consts.CLOCK)
     counter+=1
 
-    if followup_temp(logger, counter):
+    if global_data.env=='pi' and followup_temp(logger, counter):
         pygame.display.quit()
         running = False
     

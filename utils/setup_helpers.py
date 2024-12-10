@@ -5,7 +5,6 @@ import cv2
 import math
 import numpy as np
 import re
-from picamera2 import Picamera2
 from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
@@ -153,6 +152,7 @@ def findBoard(conts, img_resize):
 def setCameraFunction(envval):
     takePicture, removeCamera = None, None
     if envval == "pi":
+        from picamera2 import Picamera2
         camera = Picamera2()
 
         config = camera.create_preview_configuration(
@@ -173,7 +173,7 @@ def setCameraFunction(envval):
             _,image = camera.read()
             return image
             
-        takePicture = lambda: takePictureFunc
+        takePicture = takePictureFunc
         removeCamera = lambda: camera.release()
     else:
         raise Exception(".env value incorrect")

@@ -9,6 +9,7 @@ class DataSingleton:
             cls._vocab_options = None
             cls._vocab_font = None
             cls._espeak_engine = None
+            cls._env = None
         return cls._instance
 
     @property
@@ -53,3 +54,11 @@ class DataSingleton:
     @espeak_engine.setter
     def espeak_engine(self, eng):
         self._espeak_engine = eng
+
+    @property
+    def env(self):
+        return self._env
+
+    @env.setter
+    def env(self, env):
+        self._env = env
