@@ -5,7 +5,7 @@ import cv2
 import math
 import numpy as np
 import re
-from utils.consts import IMAGE_RESIZE_WIDTH, WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX
+from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
 diskspace_re = re.compile("[\d.]+(?=%)")
@@ -52,7 +52,7 @@ def originImageResize(img):
     return img_size
 
 def screenSetup(img_size, proj_res, logger):
-    window_width = WINDOW_WIDTH
+    window_width = DEFAULT_WINDOW_WIDTH
     window_height = window_width*(img_size[1]/img_size[0])
 
     monitor, is_main = get_monitor_information(proj_res, logger)
@@ -96,20 +96,6 @@ def getTransformationMatrix(contours, img_resize, win_size):
     
     inp =  np.float32(appx)
     out =  np.float32([[0,0], [0, win_size[0] - 1], [win_size[1] - 1, win_size[0] - 1], [win_size[1] - 1, 0]])
-
-    # inp_proportion = getRectProportions(inp)
-    # out_proportion = getRectProportions(out)
-
-    # new = inp
-
-    # if min(inp_proportion/out_proportion, out_proportion/inp_proportion) < SAME_PROPORTIONS_THRESHOLD:
-    #     dist_no_change = math.dist(inp[0],inp[1])
-    #     top_proportion = math.dist(inp[1],inp[2]) / (math.dist(inp[3],inp[0]) + math.dist(inp[1],inp[2]))
-
-    #     new_point_2 = findPointOnLine(inp[1], inp[2], dist_no_change*out_proportion*top_proportion*2)
-    #     new_point_3 = findPointOnLine(inp[0], inp[3], dist_no_change*out_proportion*(1-top_proportion)*2)
-
-    #     new = np.array((inp[0], inp[1], new_point_2, new_point_3), dtype=np.float32).reshape((-1, 1, 2))
 
     matrix = cv2.getPerspectiveTransform(inp, out)
 

@@ -10,8 +10,8 @@ from dotenv import load_dotenv
 import utils.consts as consts
 from utils.dataSingleton import DataSingleton
 from utils.setup_helpers import asstr, screenSetup, getTransformationMatrix, originImageResize, followup_temp, findContours, setCameraFunction
-from utils.internals_management_helpers import AddSpritesToGroup, checkCollision, getFishOptions
-from utils.vocab_management_helpers import initVocabOptions, AddVocabToGroup, vocabReadMaskCollision, presentNewZHVocab, vocabMatching
+from utils.vocab_interaction_helpers import checkCollision, vocabMatching
+from utils.vocab_management_helpers import initVocabOptions, AddVocabToGroup, vocabReadMaskCollision, presentNewZHVocab
 
 load_dotenv(verbose=True, override=True)
 
@@ -96,7 +96,7 @@ while running:
     vocabMatching(logger, vocabengroup, vocabzhdrawgroup)
     
     presentNewZHVocab(vocabzhbankgroup, vocabzhdrawgroup, mask, area)
-    checkCollision(vocabzhdrawgroup, mask, global_data.window_size)
+    checkCollision(vocabzhdrawgroup, mask)
     vocabReadMaskCollision(vocabengroup, mask)
 
     vocabzhdrawgroup.update()

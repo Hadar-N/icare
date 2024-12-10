@@ -44,9 +44,9 @@ class VocabZHSprite(GenVocabSprite):
         res=None
         if self.__direction:
             change_course = self.__rng.normal()
-            res = self.__direction.rotate(change_course*(FISH_ANGLE_MAX_DIFF/4)) if change_course > 0.5 else self.__direction
-        else: res = pygame.math.Vector2(uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED), uniform(-1*FISH_MAX_SPEED, FISH_MAX_SPEED))
-        if res.length() < 1: res.normalize()*uniform(1,FISH_MAX_SPEED)
+            res = self.__direction.rotate(change_course*(SPRITE_ANGLE_MAX_DIFF/4)) if change_course > 0.5 else self.__direction
+        else: res = pygame.math.Vector2(uniform(-1*SPRITE_MAX_SPEED, SPRITE_MAX_SPEED), uniform(-1*SPRITE_MAX_SPEED, SPRITE_MAX_SPEED))
+        if res.length() < 1: res.normalize()*uniform(1,SPRITE_MAX_SPEED)
         return res
     
     def flipDirection(self):
@@ -57,7 +57,7 @@ class VocabZHSprite(GenVocabSprite):
 
         last_item = self.__flip_times.pop()
         curr = time.time()
-        if curr - last_item < 1: [self.removeSelf(True) if len(self.__flip_times) > FISH_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
+        if curr - last_item < 1: [self.removeSelf(True) if len(self.__flip_times) > SPRITE_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
         else:
             self.__flip_times = [curr]
         
@@ -66,14 +66,14 @@ class VocabZHSprite(GenVocabSprite):
         if is_collision: self.__direction = pygame.math.Vector2(0,0)
     
     def __setAlpha(self):
-        self.image.set_alpha(self.__appearing*FISH_MAX_OPACITY)
+        self.image.set_alpha(self.__appearing*SPRITE_MAX_OPACITY)
         if (self.__deleting):
-            self.__appearing -=FISH_APPEAR_SPEED
+            self.__appearing -=SPRITE_APPEAR_SPEED
             if self.__appearing <= 0.0:
                 self.kill()
                 self.__bank_group.add(self)
                 self.__deleting = False
-        elif (self.__appearing < 1.0): self.__appearing = 1.0 if self.__appearing+FISH_APPEAR_SPEED > 1.0 else self.__appearing+FISH_APPEAR_SPEED
+        elif (self.__appearing < 1.0): self.__appearing = 1.0 if self.__appearing+SPRITE_APPEAR_SPEED > 1.0 else self.__appearing+SPRITE_APPEAR_SPEED
 
     def update(self):
         self._floatlocation = [self._floatlocation[i]+self.__direction[i] for i in range(0,2)]

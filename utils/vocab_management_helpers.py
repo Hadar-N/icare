@@ -1,13 +1,11 @@
 import json
 import pygame
 import pyttsx3
-import numpy as np
-from random import sample
+from random import sample, randint
 from utils.consts import *
 from utils.dataSingleton import DataSingleton
 from sprites.VocabENSprite import VocabENSprite
 from sprites.VocabZHSprite import VocabZHSprite
-from .internals_management_helpers import randomizeInternalLocation, randomizeUniqueLocations
 
 def initVocabOptions():
     globaldata = DataSingleton()
@@ -16,7 +14,7 @@ def initVocabOptions():
 
     with open(VOCAB_PATH, 'r', encoding="utf8") as file:
         data = json.load(file)
-        globaldata.vocab_options = sample(data['vocab'], VOCAB_AMOUNT)
+        globaldata.vocab_options = sample(data, VOCAB_AMOUNT)
 
 def AddVocabToGroup(static, bank):
     globaldata = DataSingleton()
@@ -47,18 +45,25 @@ def vocabReadMaskCollision(spriteGroup, mask):
         area = mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
         sp.changeIsPresented(area>sp.area/2)
 
-def vocabMatching(logger, enggroup,zhactivegroup): 
-    for sp in zhactivegroup.sprites():
-        collides = pygame.sprite.spritecollide(sp,enggroup,False)
-        if collides:
-            relevant = next((c_sp for c_sp in collides if c_sp.vocabZH == sp.vocabZH and c_sp.vocabEN == sp.vocabEN), None)
-            if relevant:
-                relevant.matchSuccess()
-                sp.matchSuccess()
-                logger.info(f'disappeared word: {sp.vocabZH}/{relevant.vocabEN}; left words: {len(enggroup.sprites())}')
-                if len(enggroup.sprites()) == 0: finishGame(logger)
+def random_location(sprite, window_size):
+    return randint(CLEAN_EDGES, window_size[0] - CLEAN_EDGES - sprite.rect.width), randint(CLEAN_EDGES, window_size[1] - CLEAN_EDGES - sprite.rect.height)
 
-def finishGame(logger):
-    logger.info("game finished!")
-    print("finished!!!")
-        
+def randomizeUniqueLocations(group, sprite, window_size):
+    sprite.setLocation(random_location(sprite, window_size))
+    count = MAX_PLACEMENT_ATTAMPTS
+
+    while pygame.sprite.spritecollide(sprite, group, False) and count > 0:
+        sprite.setLocation(random_location(sprite, window_size))
+        count-=1
+
+    return True if count > 0 else False
+
+def randomizeInternalLocation(mask, sprite, window_size):
+    x,y = random_location(sprite, window_size)
+    count = MAX_PLACEMENT_ATTAMPTS
+
+    while mask.overlap(sprite.mask, (x, y)) and count > 0:
+        x,y = random_location(sprite, window_size)
+        count-=1
+
+    return (x,y) if count > 0 else None    
