@@ -12,6 +12,7 @@ from utils.dataSingleton import DataSingleton
 from utils.setup_helpers import asstr, screenSetup, getTransformationMatrix, originImageResize, followup_temp, findContours, setCameraFunction
 from utils.vocab_interaction_helpers import checkCollision, vocabMatching
 from utils.vocab_management_helpers import initVocabOptions, AddVocabToGroup, vocabReadMaskCollision, presentNewZHVocab
+from mqtt.sub import init_sub, on_close
 
 load_dotenv(verbose=True, override=True)
 
@@ -83,6 +84,12 @@ vocabzhbankgroup = pygame.sprite.Group()
 vocabzhdrawgroup = pygame.sprite.Group()
 AddVocabToGroup(vocabengroup, vocabzhbankgroup)
 
+# TODO: delete! this is just a test!
+def win_on_message(client, userdata, message):
+    print("win_on_message", message.payload)
+
+mqtcc = init_sub(win_on_message)
+
 # Main loop
 running = True
 counter = 0
@@ -116,4 +123,5 @@ while running:
             running = False
 
 pygame.quit()
+on_close(mqtcc, os.getenv("TOPIC"))
 removeCamera()
