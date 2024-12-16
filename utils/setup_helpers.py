@@ -5,7 +5,10 @@ import cv2
 import math
 import numpy as np
 import re
-from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX
+import time
+
+from utils.dataSingleton import DataSingleton
+from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, MIN_FRAME_CONTENT_PARTITION, THRESHOLD_VAL, THRESHOLD_MAX, BLUR_SIZE
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
 diskspace_re = re.compile("[\d.]+(?=%)")
@@ -28,7 +31,41 @@ def followup_temp (logger, counter):
         else:
             logger.critical(f'temp: {temp} ==> program exited')
             return True
-        
+
+def setup_window(logger,PROJ_RES, image):
+    global_data = DataSingleton()
+    pygame.init()
+    pygame.font.init()
+
+    img_resize = originImageResize(image)
+    global_data.img_resize = img_resize
+    window_size, window_flags = screenSetup(img_resize, PROJ_RES, logger)
+    global_data.window_size = window_size
+    window = pygame.display.set_mode(global_data.window_size, window_flags)
+
+    return window
+
+def setup_img_comparison(window, image, takePicture):
+    global_data = DataSingleton()
+
+    image = cv2.resize(image, global_data.img_resize)
+    contours = findContours(image)
+    inp, out, matrix = getTransformationMatrix(contours, global_data.img_resize, global_data.window_size)
+
+    window.fill((0, 0, 0))
+    pygame.display.update()
+    time.sleep(2)  # Wait for 2 seconds
+    # get darkened reference image
+    reference_image = cv2.flip(cv2.warpPerspective(cv2.resize(takePicture(), global_data.img_resize), matrix, (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
+    reference_blur = cv2.GaussianBlur(reference_image, BLUR_SIZE, 0)
+    threshvalue = findthreshval(reference_blur) * 1.2
+    print("threshvalue: ", findthreshval(reference_blur), threshvalue)
+
+    return matrix, threshvalue, reference_blur
+
+def findthreshval(empty_image):
+    val = np.mean(np.mean(empty_image, axis=(0,1)), axis=0)
+    return val
 
 def get_monitor_information(proj_res, logger):
     try:
@@ -54,18 +91,18 @@ def originImageResize(img):
 def screenSetup(img_size, proj_res, logger):
     window_width = DEFAULT_WINDOW_WIDTH
     window_height = window_width*(img_size[1]/img_size[0])
+    flags = pygame.FULLSCREEN
 
     monitor, is_main = get_monitor_information(proj_res, logger)
     if monitor:
         window_width = monitor.width
         window_height = monitor.height
-        print(monitor, is_main)
         if not is_main: 
             os.environ['SDL_VIDEO_WINDOW_POS'] = f"{monitor.x},{monitor.y}"
+            flags = pygame.NOFRAME
     else:
         print("No monitor found!!!")
 
-    flags = pygame.NOFRAME
     window_size = (int(window_width), int(window_height))
     return (window_size, flags)
 
