@@ -5,6 +5,7 @@ class DataSingleton:
         if cls._instance is None:
             cls._instance = super().__new__(cls)
             cls._screen_size = None
+            cls._img_resize = None
             cls._fish_options = None
             cls._vocab_options = None
             cls._vocab_font = None
@@ -22,14 +23,17 @@ class DataSingleton:
             self._screen_size = size
         else:
             raise ValueError("Screen size must be a tuple of two integers")
-
+        
     @property
-    def fish_options(self):
-        return self._fish_options
+    def img_resize(self):
+        return self._img_resize
 
-    @fish_options.setter
-    def fish_options(self, fish: list):
-        self._fish_options = fish
+    @img_resize.setter
+    def img_resize(self, size):
+        if isinstance(size, tuple) and len(size) == 2:
+            self._img_resize = size
+        else:
+            raise ValueError("Image size must be a tuple of two integers")
 
     @property
     def vocab_options(self):

@@ -9,8 +9,8 @@ from sprites.VocabZHSprite import VocabZHSprite
 
 def initVocabOptions():
     globaldata = DataSingleton()
-    globaldata.vocab_font = pygame.font.Font(FONT_PATH, FONT_SIZE)
-    globaldata.espeak_engine = pyttsx3.init(driverName='espeak') if globaldata.env == "pi" else pyttsx3.init()
+    globaldata.vocab_font = globaldata.vocab_font if globaldata.vocab_font else pygame.font.Font(FONT_PATH, FONT_SIZE)
+    globaldata.espeak_engine = globaldata.espeak_engine if globaldata.espeak_engine else (pyttsx3.init(driverName='espeak') if globaldata.env == "pi" else pyttsx3.init())
 
     with open(VOCAB_PATH, 'r', encoding="utf8") as file:
         data = json.load(file)
