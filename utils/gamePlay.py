@@ -1,13 +1,16 @@
 import os
 import cv2
 import pygame
+import json
+import pyttsx3
 import numpy as np
 from logging import Logger
+from random import randint, sample
 
 import utils.consts as consts
 from utils.dataSingleton import DataSingleton
-from utils.vocab_interaction_helpers import checkCollision, vocabMatching
-from utils.vocab_management_helpers import initVocabOptions, AddVocabToGroup, vocabReadMaskCollision, presentNewZHVocab
+from sprites.VocabENSprite import VocabENSprite
+from sprites.VocabZHSprite import VocabZHSprite
 
 class GamePlay():
     def __init__(self, takePicture, window: pygame.Surface, matrix: np.ndarray, logger: Logger, threshval: np.float64, ref_img: np.ndarray):
@@ -25,11 +28,11 @@ class GamePlay():
         self._isrun = False
 
     def __initGame(self):
-        initVocabOptions()
+        self.__initVocabOptions()
         self._vocabengroup = pygame.sprite.Group()
         self._vocabzhbankgroup = pygame.sprite.Group()
         self._vocabzhdrawgroup = pygame.sprite.Group()
-        AddVocabToGroup(self._vocabengroup, self._vocabzhbankgroup)
+        self.__AddVocabToGroup()
 
         self._isrun=True
 
@@ -53,6 +56,95 @@ class GamePlay():
         closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, self._kernel)
         return closed
     
+    def __initVocabOptions(self):
+        self._global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
+        self._global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
+
+        with open(consts.VOCAB_PATH, 'r', encoding="utf8") as file:
+            data = json.load(file)
+            self._global_data.vocab_options = sample(data, consts.VOCAB_AMOUNT)
+
+    def __AddVocabToGroup(self):
+        for i in range(consts.VOCAB_AMOUNT):
+            ENvocab = VocabENSprite(i)
+            location = self.__randomizeUniqueLocations(self._vocabengroup,ENvocab)
+            if (location):
+                self._vocabengroup.add(ENvocab)
+                self._vocabzhbankgroup.add(VocabZHSprite(i, self._vocabzhbankgroup))
+            else: ENvocab.kill()
+
+    def __presentNewZHVocab(self):
+        amount_per_space = round(self._area / ((self._global_data.window_size[0]*self._global_data.window_size[1])/(consts.MAX_VOCAB_ACTIVE*2)))
+        amount_per_space = amount_per_space if amount_per_space < consts.MAX_VOCAB_ACTIVE else consts.MAX_VOCAB_ACTIVE
+        
+        if len(self._vocabzhdrawgroup.sprites()) < amount_per_space and len(self._vocabzhbankgroup.sprites()):
+            temp = self._vocabzhbankgroup.sprites()[0]
+            placement = self.__randomizeInternalLocation(temp)
+
+            if (placement):
+                temp.setLocation(placement)
+                self._vocabzhdrawgroup.add(temp)
+                temp.remove(self._vocabzhbankgroup)
+
+    def __random_location(self, sprite):
+        return randint(consts.CLEAN_EDGES, self._global_data.window_size[0] - consts.CLEAN_EDGES - sprite.rect.width), randint(consts.CLEAN_EDGES, self._global_data.window_size[1] - consts.CLEAN_EDGES - sprite.rect.height)
+
+    # TODO: unify __randomizeUniqueLocations & __randomizeInternalLocation
+    def __randomizeUniqueLocations(self, group, sprite):
+        sprite.setLocation(self.__random_location(sprite))
+        count = consts.MAX_PLACEMENT_ATTAMPTS
+
+        while pygame.sprite.spritecollide(sprite, group, False) and count > 0:
+            sprite.setLocation(self.__random_location(sprite))
+            count-=1
+
+        return True if count > 0 else False
+
+    def __randomizeInternalLocation(self, sprite):
+        x,y = self.__random_location(sprite)
+        count = consts.MAX_PLACEMENT_ATTAMPTS
+
+        while self._mask.overlap(sprite.mask, (x, y)) and count > 0:
+            x,y = self.__random_location(sprite)
+            count-=1
+
+        return (x,y) if count > 0 else None    
+
+    # TODO: unify __checkCollision & __vocabReadMaskCollision
+    def __checkCollision(self):
+        justFlipped= []
+        for sp in self._vocabzhdrawgroup.sprites():
+            if sp.isOutOfBounds:
+                sp.flipDirection()
+                if not sp.isDeleting: justFlipped.append(sp)
+                continue
+
+            overlap_area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
+            if overlap_area:
+                sp.flipDirection()
+                if not sp.isDeleting: justFlipped.append(sp)
+        return justFlipped
+
+    def __vocabReadMaskCollision(self):
+        for sp in self._vocabengroup.sprites():
+            area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
+            sp.changeIsPresented(area>sp.area/2)
+
+    def __vocabMatching(self): 
+        for sp in self._vocabzhdrawgroup.sprites():
+            collides = pygame.sprite.spritecollide(sp,self._vocabengroup,False)
+            if collides:
+                relevant = next((c_sp for c_sp in collides if c_sp.vocabZH == sp.vocabZH and c_sp.vocabEN == sp.vocabEN), None)
+                if relevant:
+                    relevant.matchSuccess()
+                    sp.matchSuccess()
+                    self._logger.info(f'disappeared word: {sp.vocabZH}/{relevant.vocabEN}; left words: {len(self._vocabengroup.sprites())}')
+                    if len(self._vocabengroup.sprites()) == 0: self.__finishGame()
+
+    def __finishGame(self):
+        self._logger.info("game finished!")
+        print("finished!!!")
+
     def startGame(self):
         self.__initGame()
 
@@ -60,11 +152,11 @@ class GamePlay():
         if self._isrun:
             self.__renewCameraPicture(counter)
 
-            vocabMatching(self._logger, self._vocabengroup, self._vocabzhdrawgroup)
+            self.__vocabMatching()
             
-            presentNewZHVocab(self._vocabzhbankgroup, self._vocabzhdrawgroup, self._mask, self._area)
-            checkCollision(self._vocabzhdrawgroup, self._mask)
-            vocabReadMaskCollision(self._vocabengroup, self._mask)
+            self.__presentNewZHVocab()
+            self.__checkCollision()
+            self.__vocabReadMaskCollision()
 
             self._vocabzhdrawgroup.update()
             self._vocabzhdrawgroup.draw(self._window)

@@ -49,7 +49,7 @@ class DataSingleton:
 
     @vocab_font.setter
     def vocab_font(self, font):
-        self._vocab_font = font
+        if self._vocab_font is None: self._vocab_font = font
     
     @property
     def espeak_engine(self):
@@ -57,7 +57,7 @@ class DataSingleton:
 
     @espeak_engine.setter
     def espeak_engine(self, eng):
-        self._espeak_engine = eng
+        if self._espeak_engine is None: self._espeak_engine = eng
 
     @property
     def env(self):
@@ -65,4 +65,4 @@ class DataSingleton:
 
     @env.setter
     def env(self, env):
-        self._env = env
+        if self._env is None: self._env = env
