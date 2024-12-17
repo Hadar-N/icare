@@ -67,8 +67,8 @@ class GamePlay():
     def __AddVocabToGroup(self):
         for i in range(consts.VOCAB_AMOUNT):
             ENvocab = VocabENSprite(i)
-            location = self.__randomizeUniqueLocations(self._vocabengroup,ENvocab)
-            if (location):
+            placement = self.__randomizeVacantLocation(ENvocab, self._vocabengroup)
+            if (placement):
                 self._vocabengroup.add(ENvocab)
                 self._vocabzhbankgroup.add(VocabZHSprite(i, self._vocabzhbankgroup))
             else: ENvocab.kill()
@@ -79,56 +79,36 @@ class GamePlay():
         
         if len(self._vocabzhdrawgroup.sprites()) < amount_per_space and len(self._vocabzhbankgroup.sprites()):
             temp = self._vocabzhbankgroup.sprites()[0]
-            placement = self.__randomizeInternalLocation(temp)
+            placement = self.__randomizeVacantLocation(temp)
 
             if (placement):
-                temp.setLocation(placement)
                 self._vocabzhdrawgroup.add(temp)
                 temp.remove(self._vocabzhbankgroup)
 
     def __random_location(self, sprite):
         return randint(consts.CLEAN_EDGES, self._global_data.window_size[0] - consts.CLEAN_EDGES - sprite.rect.width), randint(consts.CLEAN_EDGES, self._global_data.window_size[1] - consts.CLEAN_EDGES - sprite.rect.height)
 
-    # TODO: unify __randomizeUniqueLocations & __randomizeInternalLocation
-    def __randomizeUniqueLocations(self, group, sprite):
-        sprite.setLocation(self.__random_location(sprite))
-        count = consts.MAX_PLACEMENT_ATTAMPTS
+    def __randomizeVacantLocation(self, sprite, group=None):
+        def locationCondition(rect): 
+            return pygame.sprite.spritecollide(sprite, group, False) if type(group) == pygame.sprite.Group else self._mask.overlap(sprite.mask, (rect.x,rect.y))
 
-        while pygame.sprite.spritecollide(sprite, group, False) and count > 0:
+        count = consts.MAX_PLACEMENT_ATTAMPTS
+        sprite.setLocation(self.__random_location(sprite))
+        
+        while locationCondition(sprite.rect) and count > 0:
             sprite.setLocation(self.__random_location(sprite))
             count-=1
 
         return True if count > 0 else False
 
-    def __randomizeInternalLocation(self, sprite):
-        x,y = self.__random_location(sprite)
-        count = consts.MAX_PLACEMENT_ATTAMPTS
-
-        while self._mask.overlap(sprite.mask, (x, y)) and count > 0:
-            x,y = self.__random_location(sprite)
-            count-=1
-
-        return (x,y) if count > 0 else None    
-
-    # TODO: unify __checkCollision & __vocabReadMaskCollision
-    def __checkCollision(self):
-        justFlipped= []
-        for sp in self._vocabzhdrawgroup.sprites():
+    def __checkCollision(self, group):
+        for sp in group.sprites():
             if sp.isOutOfBounds:
-                sp.flipDirection()
-                if not sp.isDeleting: justFlipped.append(sp)
+                sp.onCollision(True)
                 continue
-
+            
             overlap_area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
-            if overlap_area:
-                sp.flipDirection()
-                if not sp.isDeleting: justFlipped.append(sp)
-        return justFlipped
-
-    def __vocabReadMaskCollision(self):
-        for sp in self._vocabengroup.sprites():
-            area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
-            sp.changeIsPresented(area>sp.area/2)
+            sp.onCollision(overlap_area)
 
     def __vocabMatching(self): 
         for sp in self._vocabzhdrawgroup.sprites():
@@ -155,8 +135,8 @@ class GamePlay():
             self.__vocabMatching()
             
             self.__presentNewZHVocab()
-            self.__checkCollision()
-            self.__vocabReadMaskCollision()
+            self.__checkCollision(self._vocabzhdrawgroup)
+            self.__checkCollision(self._vocabengroup)
 
             self._vocabzhdrawgroup.update()
             self._vocabzhdrawgroup.draw(self._window)

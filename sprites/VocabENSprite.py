@@ -1,6 +1,8 @@
 import pygame
 from random import randint, uniform
 import time
+import subprocess
+
 from utils.consts import *
 from utils.dataSingleton import DataSingleton
 from .GenVocabSprite import GenVocabSprite
@@ -13,10 +15,14 @@ class VocabENSprite(GenVocabSprite):
             
     @property
     def isPresented(self): return self.__is_presented
-    
-    def changeIsPresented(self, is_collision):
-        if (self.__is_presented and is_collision) or (not self.__is_presented and not is_collision):
-            self.__is_presented = not self.__is_presented
-            if self.__is_presented:
-                self._global_data.espeak_engine.say(f'{self._vocab["en"]} .')
-                self._global_data.espeak_engine.runAndWait()
+    @property
+    def isOutOfBounds(self): return False
+
+    def onCollision(self, area_collision):
+        new_presented = area_collision<self.area/4
+
+        if new_presented and not self.__is_presented:
+            self._global_data.espeak_engine.say(f'{self._vocab["en"]} .')
+            self._global_data.espeak_engine.runAndWait()
+        
+        self.__is_presented = new_presented

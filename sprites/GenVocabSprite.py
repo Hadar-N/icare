@@ -39,3 +39,7 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def setLocation(self, coordinates):
         self._floatlocation = coordinates
         self.rect.x, self.rect.y = self._floatlocation
+
+    def onCollision(self, area):
+        raise NotImplementedError("method not implemented")
+

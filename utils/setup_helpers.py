@@ -93,15 +93,18 @@ def screenSetup(img_size, proj_res, logger):
     window_height = window_width*(img_size[1]/img_size[0])
     flags = pygame.FULLSCREEN
 
-    monitor, is_main = get_monitor_information(proj_res, logger)
-    if monitor:
-        window_width = monitor.width
-        window_height = monitor.height
-        if not is_main: 
-            os.environ['SDL_VIDEO_WINDOW_POS'] = f"{monitor.x},{monitor.y}"
-            flags = pygame.NOFRAME
+    if proj_res is None:
+        flags=0
     else:
-        print("No monitor found!!!")
+        monitor, is_main = get_monitor_information(proj_res, logger)
+        if monitor:
+            window_width = monitor.width
+            window_height = monitor.height
+            if not is_main: 
+                os.environ['SDL_VIDEO_WINDOW_POS'] = f"{monitor.x},{monitor.y}"
+                flags = pygame.NOFRAME
+        else:
+            print("No monitor found!!!")
 
     window_size = (int(window_width), int(window_height))
     return (window_size, flags)

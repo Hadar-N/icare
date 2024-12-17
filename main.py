@@ -31,8 +31,7 @@ takePicture, removeCamera = setCameraFunction(global_data.env)
 
 image = takePicture()
 
-window = setup_window(logger, os.getenv('PROJECTOR_RESOLUTION'), image)
-
+window = setup_window(logger, os.getenv('PROJECTOR_RESOLUTION') if os.environ["DISPLAY"] == ":0" else None, image)
 matrix, threshvalue, reference_blur = setup_img_comparison(window, image, takePicture)
 
 gameplay = GamePlay(takePicture, window, matrix, logger, threshvalue, reference_blur)
