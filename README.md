@@ -1,6 +1,7 @@
-# Oasis
+# iCare
 
-**Oasis** is a physical platform designed for teaching English vocabulary through an interactive sandpit interface.
+**iCare** is a physical platform designed for teaching English vocabulary through an interactive sandpit interface. The interface is controlled by the [iCareControl](https://github.com/Hadar-N/icarecontrol) project, using MQTT protocol.
+
 The project is developed under the supervision of National Tsing Hua University.
 
 ## Resources
@@ -20,6 +21,35 @@ The project is designed to run on a RaspberryPi4, connected to the following com
 The setup includes a rack with a non-clear acrylic board serving as a base layer, above which lies a sand cover. The sand acts as the interface for the user. The projector displays the information onto the acrylic board beneath the sand, so the content is revealed through sand manipulation. All listed components are housed below the rack.
 
 For testing purposes, the project is also compatible with PCs using a standard webcam.
+
+## Software
+
+The program makes use of 2 main libraries:
+- *OpenCV* - used for the image processing, analyzing the covered areas.
+- *pygame* - runs the game itself.
+- *paho-mqtt* - responsible for managing the connection with the iCareControl remote. 
+
+The game is first run in the *main.py* file, which includes the game's setup and gameloop.
+
+## Required Config
+
+The programs uses a .env file specific to the environment and acts as a config file, required for a smooth run of the program.
+
+The relevant information expected in the file:
+
+```bash
+# used for running the code using SSH for choosing the relevant display.
+# ENV can be pi or pc
+ENV=pi
+DISPLAY=00
+PROJECTOR_RESOLUTION=848x480
+
+# MQTT connection information
+HOST=XXX
+PORT=XXX
+USERNAME=XXX
+PASSWORD=XXX
+``` 
 
 ## License
 

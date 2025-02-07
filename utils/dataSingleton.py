@@ -3,15 +3,22 @@ class DataSingleton:
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super().__new__(cls)
-            cls._screen_size = None
-            cls._img_resize = None
-            cls._fish_options = None
-            cls._vocab_options = None
-            cls._vocab_font = None
-            cls._espeak_engine = None
-            cls._env = None
+            cls._instance = super(DataSingleton, cls).__new__(cls)
+            cls._initialized = False
         return cls._instance
+
+    def __init__(self):
+        if self._initialized:
+            return
+
+        self._screen_size = None
+        self._img_resize = None
+        self._fish_options = None
+        self._vocab_options = None
+        self._vocab_font = None
+        self._espeak_engine = None
+        self._env = None
+        self._initialized = True
 
     @property
     def window_size(self):
