@@ -8,12 +8,13 @@ from logging import Logger
 from random import randint, sample
 
 import utils.consts as consts
+from utils.eventBus import EventBus
 from utils.dataSingleton import DataSingleton
 from sprites.VocabENSprite import VocabENSprite
 from sprites.VocabZHSprite import VocabZHSprite
 
 class GamePlay():
-    def __init__(self, takePicture, window: pygame.Surface, matrix: np.ndarray, logger: Logger, threshval: np.float64, ref_img: np.ndarray):
+    def __init__(self, takePicture, window: pygame.Surface, matrix: np.ndarray, logger: Logger, threshval: np.float64, ref_img: np.ndarray, eventbus : EventBus):
 
         self._global_data = DataSingleton()
         self._takePicture = takePicture
@@ -23,15 +24,22 @@ class GamePlay():
         self._threshval = threshval
         self._ref_img = ref_img
         self._kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
+        self._eventbus = eventbus
+        eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.handle_control_command)
+
+        self._vocabengroup = pygame.sprite.Group()
+        self._vocabzhbankgroup = pygame.sprite.Group()
+        self._vocabzhdrawgroup = pygame.sprite.Group()
 
         self._mask = self._area = None
         self._isrun = False
 
+
     def __initGame(self):
         self.__initVocabOptions()
-        self._vocabengroup = pygame.sprite.Group()
-        self._vocabzhbankgroup = pygame.sprite.Group()
-        self._vocabzhdrawgroup = pygame.sprite.Group()
+        self._vocabengroup.empty()
+        self._vocabzhbankgroup.empty()
+        self._vocabzhdrawgroup.empty()
         self.__AddVocabToGroup()
 
         self._isrun=True
@@ -116,6 +124,7 @@ class GamePlay():
             if collides:
                 relevant = next((c_sp for c_sp in collides if c_sp.vocabZH == sp.vocabZH and c_sp.vocabEN == sp.vocabEN), None)
                 if relevant:
+                    self.__eventbus.publish(consts.MQTT_TOPIC_DATA, {'word': {'zh': sp.vocabZH, 'en': relevant.vocabEN}})
                     relevant.matchSuccess()
                     sp.matchSuccess()
                     self._logger.info(f'disappeared word: {sp.vocabZH}/{relevant.vocabEN}; left words: {len(self._vocabengroup.sprites())}')
@@ -123,12 +132,37 @@ class GamePlay():
 
     def __finishGame(self):
         self._logger.info("game finished!")
+        self.__eventbus.publish(consts.MQTT_TOPIC_DATA, {'status': 'finished'})
         print("finished!!!")
 
-    def startGame(self):
-        self.__initGame()
+    def handle_control_command(self, command):
+        print("handle_control_command!!!", command)
+        if command == consts.MQTT_COMMANDS.START.value:
+            self.start_game()
+            pass
+        elif command == consts.MQTT_COMMANDS.PAUSE.value:
+            self.pause_game()
+            pass
+        elif command == consts.MQTT_COMMANDS.STOP.value:
+            self.stop_game()
+            pass
 
-    def gameLoop(self, counter):
+    def start_game(self):
+        if(len(self._vocabengroup.sprites())):
+            self._isrun = True
+        else:
+            self.__initGame()
+
+    def pause_game(self):
+        self._isrun = False
+
+    def stop_game(self):
+        self._isrun = False
+        self._vocabengroup.empty()
+        self._vocabzhbankgroup.empty()
+        self._vocabzhdrawgroup.empty()
+
+    def game_loop(self, counter):
         if self._isrun:
             self.__renewCameraPicture(counter)
 

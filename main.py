@@ -10,7 +10,8 @@ from dotenv import load_dotenv
 import utils.consts as consts
 from utils.dataSingleton import DataSingleton
 from utils.setup_helpers import asstr, followup_temp, setCameraFunction, setup_window, setup_img_comparison
-from mqtt.MQTTSubscribe import MQTTSubscribe
+from utils.eventBus import EventBus
+from mqtt.MQTTConnection import MQTTConnection
 from utils.gamePlay import GamePlay
 
 load_dotenv(verbose=True, override=True)
@@ -34,8 +35,10 @@ image = takePicture()
 window = setup_window(logger, os.getenv('PROJECTOR_RESOLUTION') if os.environ["DISPLAY"] == ":0" else None, image)
 matrix, threshvalue, reference_blur = setup_img_comparison(window, image, takePicture)
 
-gameplay = GamePlay(takePicture, window, matrix, logger, threshvalue, reference_blur)
-mqttc = MQTTSubscribe(logger, gameplay)
+eventbus = EventBus()
+gameplay = GamePlay(takePicture, window, matrix, logger, threshvalue, reference_blur, eventbus)
+mqttc = MQTTConnection(logger, eventbus)
+
 # Main loop
 running = True
 counter = 0
@@ -43,7 +46,7 @@ counter = 0
 while running:
     window.fill((0,0,0))
 
-    gameplay.gameLoop(counter)
+    gameplay.game_loop(counter)
 
     pygame.display.update()
     clock.tick(consts.CLOCK)
