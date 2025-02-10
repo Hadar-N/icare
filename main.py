@@ -46,7 +46,7 @@ counter = 0
 while running:
     window.fill((0,0,0))
 
-    gameplay.game_loop(counter)
+    gameplay.gameLoop(counter)
 
     pygame.display.update()
     clock.tick(consts.CLOCK)

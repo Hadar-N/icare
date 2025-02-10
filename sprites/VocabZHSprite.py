@@ -49,8 +49,9 @@ class VocabZHSprite(GenVocabSprite):
         if res.length() < 1: res.normalize()*uniform(1,SPRITE_MAX_SPEED)
         return res
     
-    def onCollision(self, area_collision):
+    def onCollision(self, area_collision: int):
         if area_collision: self.flipDirection()
+        return None
     
     def flipDirection(self):
         if self.__deleting:

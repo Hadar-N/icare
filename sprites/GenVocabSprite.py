@@ -1,6 +1,4 @@
 import pygame
-from random import randint, uniform
-import time
 from utils.consts import *
 from utils.dataSingleton import DataSingleton
 
@@ -32,7 +30,9 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def vocabZH(self): return self._vocab["zh"]
     @property
     def isOutOfBounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
-    
+    @property
+    def asDict(self): return {"en": self._vocab["en"], "zh": self._vocab["zh"]}
+
     def matchSuccess(self):
         self.kill()
 
@@ -40,6 +40,6 @@ class GenVocabSprite(pygame.sprite.Sprite):
         self._floatlocation = coordinates
         self.rect.x, self.rect.y = self._floatlocation
 
-    def onCollision(self, area):
+    def onCollision(self, area: int):
         raise NotImplementedError("method not implemented")
 

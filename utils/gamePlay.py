@@ -25,7 +25,7 @@ class GamePlay():
         self._ref_img = ref_img
         self._kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
         self._eventbus = eventbus
-        eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.handle_control_command)
+        self._eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.handleControlCommand)
 
         self._vocabengroup = pygame.sprite.Group()
         self._vocabzhbankgroup = pygame.sprite.Group()
@@ -93,7 +93,7 @@ class GamePlay():
                 self._vocabzhdrawgroup.add(temp)
                 temp.remove(self._vocabzhbankgroup)
 
-    def __random_location(self, sprite):
+    def __randomLocation(self, sprite):
         return randint(consts.CLEAN_EDGES, self._global_data.window_size[0] - consts.CLEAN_EDGES - sprite.rect.width), randint(consts.CLEAN_EDGES, self._global_data.window_size[1] - consts.CLEAN_EDGES - sprite.rect.height)
 
     def __randomizeVacantLocation(self, sprite, group=None):
@@ -101,76 +101,83 @@ class GamePlay():
             return pygame.sprite.spritecollide(sprite, group, False) if type(group) == pygame.sprite.Group else self._mask.overlap(sprite.mask, (rect.x,rect.y))
 
         count = consts.MAX_PLACEMENT_ATTAMPTS
-        sprite.setLocation(self.__random_location(sprite))
+        sprite.setLocation(self.__randomLocation(sprite))
         
         while locationCondition(sprite.rect) and count > 0:
-            sprite.setLocation(self.__random_location(sprite))
+            sprite.setLocation(self.__randomLocation(sprite))
             count-=1
 
         return True if count > 0 else False
 
     def __checkCollision(self, group):
+        to_publish = []
         for sp in group.sprites():
             if sp.isOutOfBounds:
-                sp.onCollision(True)
+                sp.onCollision(sp.area)
                 continue
             
             overlap_area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
-            sp.onCollision(overlap_area)
+            msg = sp.onCollision(overlap_area)
+            if msg: to_publish.append(msg)  
+        return to_publish      
 
     def __vocabMatching(self): 
+        matched = []
         for sp in self._vocabzhdrawgroup.sprites():
             collides = pygame.sprite.spritecollide(sp,self._vocabengroup,False)
             if collides:
                 relevant = next((c_sp for c_sp in collides if c_sp.vocabZH == sp.vocabZH and c_sp.vocabEN == sp.vocabEN), None)
                 if relevant:
-                    self.__eventbus.publish(consts.MQTT_TOPIC_DATA, {'word': {'zh': sp.vocabZH, 'en': relevant.vocabEN}})
+                    matched.append({"type": consts.MQTT_DATA_ACTIONS.MATCHED.value, "word": sp.asDict})
                     relevant.matchSuccess()
                     sp.matchSuccess()
                     self._logger.info(f'disappeared word: {sp.vocabZH}/{relevant.vocabEN}; left words: {len(self._vocabengroup.sprites())}')
-                    if len(self._vocabengroup.sprites()) == 0: self.__finishGame()
+                    if len(self._vocabengroup.sprites()) == 0: matched.append(self.__finishGame())
+        return matched
 
     def __finishGame(self):
         self._logger.info("game finished!")
-        self.__eventbus.publish(consts.MQTT_TOPIC_DATA, {'status': 'finished'})
-        print("finished!!!")
+        return {"type": consts.MQTT_DATA_ACTIONS.STATUS.value, "word": consts.MQTT_STATUSES.FINISHED.value}
 
-    def handle_control_command(self, command):
-        print("handle_control_command!!!", command)
-        if command == consts.MQTT_COMMANDS.START.value:
-            self.start_game()
+    def handleControlCommand(self, message):
+        message_dict = json.loads(message)
+        print("handleControlCommand: ", message, message_dict)
+        if message_dict["command"] == consts.MQTT_COMMANDS.START.value:
+            self.__startGame()
             pass
-        elif command == consts.MQTT_COMMANDS.PAUSE.value:
-            self.pause_game()
+        elif message_dict["command"] == consts.MQTT_COMMANDS.PAUSE.value:
+            self.__pauseGame()
             pass
-        elif command == consts.MQTT_COMMANDS.STOP.value:
-            self.stop_game()
+        elif message_dict["command"] == consts.MQTT_COMMANDS.STOP.value:
+            self.__stopGame()
             pass
 
-    def start_game(self):
+    def __startGame(self):
         if(len(self._vocabengroup.sprites())):
             self._isrun = True
         else:
             self.__initGame()
 
-    def pause_game(self):
+    def __pauseGame(self):
         self._isrun = False
 
-    def stop_game(self):
+    def __stopGame(self):
         self._isrun = False
         self._vocabengroup.empty()
         self._vocabzhbankgroup.empty()
         self._vocabzhdrawgroup.empty()
 
-    def game_loop(self, counter):
+    def gameLoop(self, counter):
         if self._isrun:
             self.__renewCameraPicture(counter)
 
-            self.__vocabMatching()
+            to_publish= self.__vocabMatching()
             
             self.__presentNewZHVocab()
             self.__checkCollision(self._vocabzhdrawgroup)
-            self.__checkCollision(self._vocabengroup)
+            to_publish+= self.__checkCollision(self._vocabengroup)
+
+            if len(to_publish): self._eventbus.publish(consts.MQTT_TOPIC_DATA, to_publish)
 
             self._vocabzhdrawgroup.update()
             self._vocabzhdrawgroup.draw(self._window)

@@ -1,4 +1,5 @@
 import os
+import json
 import paho.mqtt.client as mqtt
 from logging import Logger
 from dotenv import load_dotenv
@@ -45,8 +46,18 @@ class MQTTConnection:
             # TODO: handle publish errors
         except KeyError:
             print(KeyError)
+
+    def __parse_message(self, topic: str, msg: list[object]):
+        res = {}
+        if topic == MQTT_TOPIC_DATA:
+            for item in msg:
+                if item["type"] not in res: res[item["type"]] = []
+                res[item["type"]].append(item["word"])
+
+        return json.dumps(res)
             
-    def __publish_message(self, msg):
-        print("__publish_message", msg)
-        msg_info = self.client.publish(MQTT_TOPIC_DATA, msg)
+    def __publish_message(self, msg, topic = MQTT_TOPIC_DATA):
+        msg_final =self.__parse_message(topic,msg)
+        self.__logger.info(f'publishing message: {msg_final} in topic: {topic}')
+        msg_info = self.client.publish(topic, msg_final)
         msg_info.wait_for_publish()
