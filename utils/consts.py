@@ -38,6 +38,7 @@ class MQTT_DATA_ACTIONS(str,Enum):
 class MQTT_STATUSES(str,Enum):
     ONGOING = "ongoing"
     FINISHED = "finished"
+    PAUSED = "paused"
     STOPPED = "stopped"
     ERROR = "error"
 class MQTT_COMMANDS(str, Enum):

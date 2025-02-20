@@ -26,6 +26,7 @@ logger.info(f'--------------start datetime: {datetime.datetime.now()}')
 
 global_data = DataSingleton()
 global_data.env = os.getenv("ENV")
+global_data.is_spin = os.getenv("SPIN")
 clock = pygame.time.Clock()
 
 takePicture, removeCamera = setCameraFunction(global_data.env)

@@ -11,7 +11,7 @@ class GenVocabSprite(pygame.sprite.Sprite):
         self._color = (0,0,255) if property == "en" else (255,0,0)
         self._floatlocation = (0.,0.)
 
-        self.image = pygame.transform.flip(self._global_data.vocab_font.render(self._vocab[property], True, self._color), True, False)
+        self.image = pygame.transform.flip(self._global_data.vocab_font.render(self._vocab[property], True, self._color), not self._global_data.is_spin, self._global_data.is_spin)
         self.rect = self.image.get_rect()
 
         self.mask = pygame.mask.from_surface(self.image)

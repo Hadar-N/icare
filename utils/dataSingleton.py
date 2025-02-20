@@ -18,6 +18,7 @@ class DataSingleton:
         self._vocab_font = None
         self._espeak_engine = None
         self._env = None
+        self._is_spin = None
         self._initialized = True
 
     @property
@@ -73,3 +74,11 @@ class DataSingleton:
     @env.setter
     def env(self, env):
         if self._env is None: self._env = env
+
+    @property
+    def is_spin(self):
+        return self._is_spin
+
+    @is_spin.setter
+    def is_spin(self, is_spin):
+        self._is_spin = bool(int(is_spin))
