@@ -18,8 +18,8 @@ class VocabENSprite(GenVocabSprite):
 
         if new_presented and not self.__is_presented:
             to_publish = { "type": MQTT_DATA_ACTIONS.NEW.value, "word": self.asDict }
-            self._global_data.espeak_engine.say(f'{self._vocab["en"]} .')
-            self._global_data.espeak_engine.runAndWait()
+            # self._global_data.espeak_engine.say(f'{self._vocab["en"]} .')
+            # self._global_data.espeak_engine.runAndWait()
         elif self.__is_presented and not new_presented:
             to_publish = { "type": MQTT_DATA_ACTIONS.REMOVE.value, "word": self.asDict }
         

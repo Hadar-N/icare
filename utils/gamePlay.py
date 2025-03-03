@@ -1,9 +1,6 @@
-import os
-import cv2
 import pygame
 import json
 import pyttsx3
-import numpy as np
 from logging import Logger
 from random import randint, sample
 
@@ -14,26 +11,31 @@ from sprites.VocabENSprite import VocabENSprite
 from sprites.VocabZHSprite import VocabZHSprite
 
 class GamePlay():
-    def __init__(self, takePicture, window: pygame.Surface, matrix: np.ndarray, logger: Logger, threshval: np.float64, ref_img: np.ndarray, eventbus : EventBus):
+    def __init__(self, window: pygame.Surface, logger: Logger, eventbus: EventBus, getMask):
 
         self._global_data = DataSingleton()
-        self._takePicture = takePicture
         self._logger = logger
         self._window = window
-        self._matrix = matrix
-        self._threshval = threshval
-        self._ref_img = ref_img
-        self._kernel = np.ones((11, 11), np.uint8)  # Larger kernel for more aggressive closing
+
+        self._getmask = getMask
         self._eventbus = eventbus
-        self._eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.handleControlCommand)
 
         self._vocabengroup = pygame.sprite.Group()
         self._vocabzhbankgroup = pygame.sprite.Group()
         self._vocabzhdrawgroup = pygame.sprite.Group()
 
         self._mask = self._area = None
+        self.__setupMask(True)
         self._isrun = False
 
+    @property 
+    def mask(self): 
+        return self._mask.to_surface() if self._mask else pygame.Surface((0,0))
+        # return pygame.surfarray.make_surface(self._mask) if self._mask else pygame.Surface((0,0))
+
+    def __setupMask(self, isOverride = False):
+        temp = self._getmask(isOverride or not self._mask or self._area is None)
+        if temp: self._mask, self._area = temp
 
     def __initGame(self):
         self.__initVocabOptions()
@@ -43,26 +45,6 @@ class GamePlay():
         self.__AddVocabToGroup()
 
         self._isrun=True
-
-    def __renewCameraPicture(self, counter):
-        if (counter%(consts.CLOCK/2) == 0 or not self._mask or not self._area):
-            image = cv2.resize(self._takePicture(), self._global_data.img_resize)
-            image = cv2.flip(cv2.warpPerspective(image, self._matrix,  (self._global_data.window_size[1], self._global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
-
-            mask_img = self.__createMask(image)
-            mask_img = cv2.bitwise_not(mask_img)
-
-            mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
-            self._mask = pygame.mask.from_threshold(mask_img_rgb, (0,0,0), threshold=(1,1,1))
-            self._area = (self._global_data.window_size[0] * self._global_data.window_size[1]) - self._mask.count()
-
-    def __createMask(self, current_image):
-        current_blurred = cv2.GaussianBlur(current_image, consts.BLUR_SIZE, 0)
-        difference = cv2.absdiff(current_blurred, self._ref_img)
-        gray_image = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
-        _, thresholded = cv2.threshold(gray_image, self._threshval, consts.THRESHOLD_MAX, cv2.THRESH_BINARY_INV)
-        closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, self._kernel)
-        return closed
     
     def __initVocabOptions(self):
         self._global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
@@ -139,37 +121,32 @@ class GamePlay():
         self._logger.info("game finished!")
         return {"type": consts.MQTT_DATA_ACTIONS.STATUS.value, "word": consts.MQTT_STATUSES.FINISHED.value}
 
-    def handleControlCommand(self, message):
-        message_dict = json.loads(message)
-        print("handleControlCommand: ", message, message_dict)
-        if message_dict["command"] == consts.MQTT_COMMANDS.START.value:
-            self.__startGame()
-            pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.PAUSE.value:
-            self.__pauseGame()
-            pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.STOP.value:
-            self.__stopGame()
-            pass
-
-    def __startGame(self):
+    def startGame(self):
         if(len(self._vocabengroup.sprites())):
             self._isrun = True
         else:
             self.__initGame()
 
-    def __pauseGame(self):
+    def pauseGame(self):
         self._isrun = False
 
-    def __stopGame(self):
+    def stopGame(self):
         self._isrun = False
         self._vocabengroup.empty()
         self._vocabzhbankgroup.empty()
         self._vocabzhdrawgroup.empty()
 
-    def gameLoop(self, counter):
+    def getStatus(self):
+        res = consts.MQTT_STATUSES.ERROR
+        if self._isrun: res= consts.MQTT_STATUSES.ONGOING
+        elif len(self._vocabengroup.sprites()): res= consts.MQTT_STATUSES.PAUSED
+        else: res = consts.MQTT_STATUSES.STOPPED
+
+        return res
+
+    def gameLoop(self):
         if self._isrun:
-            self.__renewCameraPicture(counter)
+            self.__setupMask()
 
             to_publish= self.__vocabMatching()
             
