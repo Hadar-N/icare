@@ -23,6 +23,7 @@ class GamePlay():
         self._vocabengroup = pygame.sprite.Group()
         self._vocabzhbankgroup = pygame.sprite.Group()
         self._vocabzhdrawgroup = pygame.sprite.Group()
+        self.__all_spritegroups = [self._vocabengroup, self._vocabzhbankgroup, self._vocabzhdrawgroup]
 
         self._mask = self._area = None
         self.__setupMask(True)
@@ -39,9 +40,7 @@ class GamePlay():
 
     def __initGame(self):
         self.__initVocabOptions()
-        self._vocabengroup.empty()
-        self._vocabzhbankgroup.empty()
-        self._vocabzhdrawgroup.empty()
+        [spg.empty() for spg in self.__all_spritegroups]
         self.__AddVocabToGroup()
 
         self._isrun=True
@@ -68,7 +67,7 @@ class GamePlay():
         amount_per_space = amount_per_space if amount_per_space < consts.MAX_VOCAB_ACTIVE else consts.MAX_VOCAB_ACTIVE
         
         if len(self._vocabzhdrawgroup.sprites()) < amount_per_space and len(self._vocabzhbankgroup.sprites()):
-            temp = self._vocabzhbankgroup.sprites()[0]
+            temp = self._vocabzhbankgroup.sprites()[0] #TODO: if there are any visible english words - based on it!!!
             placement = self.__randomizeVacantLocation(temp)
 
             if (placement):
@@ -132,9 +131,7 @@ class GamePlay():
 
     def stopGame(self):
         self._isrun = False
-        self._vocabengroup.empty()
-        self._vocabzhbankgroup.empty()
-        self._vocabzhdrawgroup.empty()
+        [spg.empty() for spg in self.__all_spritegroups]
 
     def getStatus(self):
         res = consts.MQTT_STATUSES.ERROR
@@ -143,6 +140,9 @@ class GamePlay():
         else: res = consts.MQTT_STATUSES.STOPPED
 
         return res
+    
+    def spinWords(self):
+        [[sp.createSpinnedWord() for sp in spg.sprites()] for spg in self.__all_spritegroups]
 
     def gameLoop(self):
         if self._isrun:

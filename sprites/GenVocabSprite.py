@@ -6,12 +6,14 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def __init__(self, vocab_i, property):
         super().__init__()
 
+        self._language = property
         self._global_data = DataSingleton()
         self._vocab = self._global_data.vocab_options[vocab_i]
         self._color = (0,0,255) if property == "en" else (255,0,0)
         self._floatlocation = (0.,0.)
 
-        self.image = pygame.transform.flip(self._global_data.vocab_font.render(self._vocab[property], True, self._color), not self._global_data.is_spin, self._global_data.is_spin)
+        self.image = self._global_data.vocab_font.render(self._vocab[self._language], True, self._color)
+        self.createSpinnedWord()
         self.rect = self.image.get_rect()
 
         self.mask = pygame.mask.from_surface(self.image)
@@ -42,4 +44,8 @@ class GenVocabSprite(pygame.sprite.Sprite):
 
     def onCollision(self, area: int):
         raise NotImplementedError("method not implemented")
+    
+    def createSpinnedWord(self):
+        self.image = self._global_data.vocab_font.render(self._vocab[self._language], True, self._color)
+        self.image = pygame.transform.flip(self.image, not self._global_data.is_spin, self._global_data.is_spin)
 
