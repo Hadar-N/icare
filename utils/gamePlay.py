@@ -27,12 +27,16 @@ class GamePlay():
 
         self._mask = self._area = None
         self.__setupMask(True)
-        self._isrun = False
+        self.__status = consts.GAME_STATUS.HALTED
 
     @property 
     def mask(self): 
         return self._mask.to_surface() if self._mask else pygame.Surface((0,0))
         # return pygame.surfarray.make_surface(self._mask) if self._mask else pygame.Surface((0,0))
+
+    @property
+    def status(self):
+        return self.__status
 
     def __setupMask(self, isOverride = False):
         temp = self._getmask(isOverride or not self._mask or self._area is None)
@@ -42,8 +46,7 @@ class GamePlay():
         self.__initVocabOptions()
         [spg.empty() for spg in self.__all_spritegroups]
         self.__AddVocabToGroup()
-
-        self._isrun=True
+        self.__status=consts.GAME_STATUS.ACTIVE
     
     def __initVocabOptions(self):
         self._global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
@@ -62,7 +65,7 @@ class GamePlay():
                 self._vocabzhbankgroup.add(VocabZHSprite(i, self._vocabzhbankgroup))
             else: ENvocab.kill()
 
-    def __presentNewZHVocab(self):
+    def __addNewZHVocab(self):
         amount_per_space = round(self._area / ((self._global_data.window_size[0]*self._global_data.window_size[1])/(consts.MAX_VOCAB_ACTIVE*2)))
         amount_per_space = amount_per_space if amount_per_space < consts.MAX_VOCAB_ACTIVE else consts.MAX_VOCAB_ACTIVE
         
@@ -118,44 +121,43 @@ class GamePlay():
 
     def __finishGame(self):
         self._logger.info("game finished!")
-        return {"type": consts.MQTT_DATA_ACTIONS.STATUS.value, "word": consts.MQTT_STATUSES.FINISHED.value}
+        self.__status=consts.GAME_STATUS.DONE
+        return {"type": consts.MQTT_DATA_ACTIONS.STATUS.value, "word": consts.GAME_STATUS.DONE.value}
 
     def startGame(self):
         if(len(self._vocabengroup.sprites())):
-            self._isrun = True
+            self.__status=consts.GAME_STATUS.ACTIVE
         else:
             self.__initGame()
 
     def pauseGame(self):
-        self._isrun = False
+        self.__status=consts.GAME_STATUS.HALTED
 
     def stopGame(self):
-        self._isrun = False
+        self.__status=consts.GAME_STATUS.HALTED
         [spg.empty() for spg in self.__all_spritegroups]
-
-    def getStatus(self):
-        res = consts.MQTT_STATUSES.ERROR
-        if self._isrun: res= consts.MQTT_STATUSES.ONGOING
-        elif len(self._vocabengroup.sprites()): res= consts.MQTT_STATUSES.PAUSED
-        else: res = consts.MQTT_STATUSES.STOPPED
-
-        return res
     
-    def spinWords(self):
+    def spinWords(self) -> None:
         [[sp.createSpinnedWord() for sp in spg.sprites()] for spg in self.__all_spritegroups]
 
+    def __logic_stage(self) -> list:
+        self.__setupMask()
+
+        to_publish= self.__vocabMatching()
+        self.__addNewZHVocab()
+
+        self.__checkCollision(self._vocabzhdrawgroup)
+        to_publish+= self.__checkCollision(self._vocabengroup)
+
+        return to_publish
+
+    def __render_stage(self):
+        self._vocabzhdrawgroup.update()
+        self._vocabzhdrawgroup.draw(self._window)
+        self._vocabengroup.draw(self._window)
+
     def gameLoop(self):
-        if self._isrun:
-            self.__setupMask()
-
-            to_publish= self.__vocabMatching()
-            
-            self.__presentNewZHVocab()
-            self.__checkCollision(self._vocabzhdrawgroup)
-            to_publish+= self.__checkCollision(self._vocabengroup)
-
+        if self.__status == consts.GAME_STATUS.ACTIVE:
+            to_publish = self.__logic_stage()
             if len(to_publish): self._eventbus.publish(consts.MQTT_TOPIC_DATA, to_publish)
-
-            self._vocabzhdrawgroup.update()
-            self._vocabzhdrawgroup.draw(self._window)
-            self._vocabengroup.draw(self._window)
+            self.__render_stage()

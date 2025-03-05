@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 import utils.consts as consts
 from utils.dataSingleton import DataSingleton
-from utils.setup_helpers import setCameraFunction
+from utils.helper_functions.setup_helpers import setCameraFunction, get_img_resize_information
 from utils.eventBus import EventBus
 from mqtt.MQTTConnection import MQTTConnection
 from utils.gameEngine import GameEngine
@@ -24,8 +24,9 @@ logger.info(f'--------------start datetime: {datetime.datetime.now()}')
 global_data = DataSingleton()
 global_data.env = os.getenv("ENV")
 global_data.is_spin = os.getenv("SPIN")
+global_data.img_resize = get_img_resize_information()
 
-takePicture, removeCamera = setCameraFunction(global_data.env)
+takePicture, removeCamera = setCameraFunction(global_data.env, global_data.img_resize)
 
 eventbus = EventBus()
 gameengine = GameEngine(logger, eventbus, takePicture)

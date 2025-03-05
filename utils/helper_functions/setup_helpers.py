@@ -1,24 +1,25 @@
-from screeninfo import get_monitors
+from screeninfo import get_monitors, Monitor
 import os
 import cv2
 import numpy as np
 import re
 import math
+from logging import Logger
 
 from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, CAMERA_RES
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
 diskspace_re = re.compile("[\d.]+(?=%)")
 
-def asstr(arr):
+def asstr(arr: np.ndarray | list) -> str:
     return f'[{",".join(asstr(x) if isinstance(x, np.ndarray) else str(x) for x in arr)}]'
 
-def get_pi_temp ():
+def get_pi_temp () -> float:
     t = os.popen('vcgencmd measure_temp').readline()
     match = float(re.search(temp_re, t)[0])
     return match
 
-def followup_temp (logger, counter):
+def followup_temp (logger: Logger, counter: int) -> bool:
     if (counter%100 == 0):
         temp = get_pi_temp()
         if (temp < 57):
@@ -32,7 +33,7 @@ def followup_temp (logger, counter):
             return True
     return False
 
-def get_monitor_information(proj_res, logger):
+def get_monitor_information(proj_res: str, logger: Logger) -> tuple[Monitor, bool]:
     try:
         monitors = get_monitors()
         monitor = monitors[0]
@@ -43,17 +44,16 @@ def get_monitor_information(proj_res, logger):
         return (monitor, is_main)
     except:
         logger.warning("no monitor found!")
-        return None, None
+        return (None, None)
 
-def get_img_resize_information():
+def get_img_resize_information() -> tuple[int]:
     img_w, img_h = CAMERA_RES
     img_w_resized = IMAGE_RESIZE_WIDTH
     img_h_resized = int(img_h * (img_w_resized/img_w))
     img_size = (int(img_w_resized), int(img_h_resized))
-
     return img_size
 
-def screen_setup(img_size, proj_res, logger):
+def screen_setup(img_size: tuple, proj_res: str, logger: Logger) -> tuple[tuple, bool]:
     window_width = DEFAULT_WINDOW_WIDTH
     window_height = window_width*(img_size[1]/img_size[0])
     isfullscreen= True
@@ -61,7 +61,8 @@ def screen_setup(img_size, proj_res, logger):
     if proj_res is None:
         isfullscreen = False
     else:
-        monitor, is_main = get_monitor_information(proj_res, logger)
+        blah = get_monitor_information(proj_res, logger)
+        monitor, is_main = blah
         if monitor:
             window_width = monitor.width
             window_height = monitor.height
@@ -74,8 +75,7 @@ def screen_setup(img_size, proj_res, logger):
     window_size = (int(window_width), int(window_height))
     return (window_size, isfullscreen)
 
-
-def sort_points(points):
+def sort_points(points : list[float]) -> list[float]:
     points = np.array(points)
     sums = points.sum(axis=1)  # x + y
     diffs = np.diff(points, axis=1)[:, 0]
@@ -91,9 +91,8 @@ def sort_points(points):
 
     return sorted_points
 
-
-def setCameraFunction(envval):
-    takePicture, removeCamera = None, None
+def setCameraFunction(envval: str, img_resize: tuple[int]) -> tuple[callable]:
+    takePicture, removeCamera, incResize = None
     if envval == "pi":
         from picamera2 import Picamera2
         camera = Picamera2()
@@ -121,6 +120,6 @@ def setCameraFunction(envval):
     else:
         raise Exception(".env value incorrect")
     
-    return takePicture, removeCamera
+    incResize = lambda: cv2.resize(takePicture(), img_resize)
 
-
+    return incResize, removeCamera
