@@ -28,19 +28,19 @@ class VocabZHSprite(GenVocabSprite):
         self.__direction = None
         self.__rng = np.random.default_rng() # scale for random() = [-4,4]
 
-        self.__randomizeDirection()
-        self.__setAlpha()
+        self.__randomize_direction()
+        self.__set_alpha()
     
     @property
-    def isDeleting(self): return self.__deleting
+    def is_deleting(self): return self.__deleting
 
-    def __randomizeDirection(self):
+    def __randomize_direction(self):
         if self.__deleting:
             return
         else:
-            self.__direction = self.__randomizeAngle()
+            self.__direction = self.__randomize_angle()
 
-    def __randomizeAngle(self):
+    def __randomize_angle(self):
         res=None
         if self.__direction:
             change_course = self.__rng.normal()
@@ -49,11 +49,11 @@ class VocabZHSprite(GenVocabSprite):
         if res.length() < 1: res.normalize()*uniform(1,SPRITE_MAX_SPEED)
         return res
     
-    def onCollision(self, area_collision: int):
-        if area_collision: self.flipDirection()
+    def on_collision(self, area_collision: int):
+        if area_collision: self.flip_direction()
         return None
     
-    def flipDirection(self):
+    def flip_direction(self):
         if self.__deleting:
             return
 
@@ -61,15 +61,15 @@ class VocabZHSprite(GenVocabSprite):
 
         last_item = self.__flip_times.pop()
         curr = time.time()
-        if curr - last_item < 1: [self.removeSelf(True) if len(self.__flip_times) > SPRITE_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
+        if curr - last_item < 1: [self.remove_self(True) if len(self.__flip_times) > SPRITE_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
         else:
             self.__flip_times = [curr]
         
-    def removeSelf(self, is_collision = False):
+    def remove_self(self, is_collision = False):
         self.__deleting=True
         if is_collision: self.__direction = pygame.math.Vector2(0,0)
     
-    def __setAlpha(self):
+    def __set_alpha(self):
         self.image.set_alpha(self.__appearing*SPRITE_MAX_OPACITY)
         if (self.__deleting):
             self.__appearing -=SPRITE_APPEAR_SPEED
@@ -83,6 +83,6 @@ class VocabZHSprite(GenVocabSprite):
         self._floatlocation = [self._floatlocation[i]+self.__direction[i] for i in range(0,2)]
         self.rect.x, self.rect.y = self._floatlocation
 
-        self.__setAlpha()
-        self.__randomizeDirection()
+        self.__set_alpha()
+        self.__randomize_direction()
 

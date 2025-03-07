@@ -6,8 +6,8 @@ import json
 import numpy as np
 from logging import Logger
 
-from utils.helper_functions.setup_helpers import asstr, followup_temp, screen_setup, sort_points
-from utils.helper_functions.image_proc_helpers import create_mask, find_board, find_contours, find_threshval, get_blurred_picture, write_controured_img
+from utils.helper_functions.setup_helpers import asstr, followup_temp, screen_setup
+from utils.helper_functions.image_proc_helpers import create_mask, set_transformation_matrix, set_compare_values, get_blurred_picture, write_controured_img
 import utils.consts as consts
 from utils.eventBus import EventBus
 from utils.dataSingleton import DataSingleton
@@ -19,12 +19,12 @@ def change_actions_decorator(method):
         prev_gamestatus = self.gameplay.status
 
         if prev_gamestatus == consts.GAME_STATUS.ACTIVE:
-            self.gameplay.pauseGame()
+            self.gameplay.pause_game()
         
         method(self, *args, **kwargs)
 
         if prev_gamestatus == consts.GAME_STATUS.ACTIVE:
-            self.gameplay.startGame()
+            self.gameplay.start_game()
     
     return wrapper
 
@@ -56,41 +56,16 @@ class GameEngine():
             return mask, area
 
     def __setup_comparison_data(self, img):
-        self.__set_transformation_matrix(img)
+        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, img)
+        self.__logger.info(f'automatic contouring data: inp={asstr(self.__inp_coords)}; out={asstr(self.__out_coords)}; matrix={asstr(self.__matrix)}')
 
         self.__window.fill((0, 0, 0))
         pygame.display.update()
         time.sleep(1)
 
-        self.__set_compare_values()
+        self.__reference_blur, self.__threshvalue, _ = set_compare_values(self.__takePicture, self.__matrix, self.__global_data.window_size, self.__logger)
         write_controured_img(img, self.__inp_coords, self.__threshvalue)
     
-    def __set_transformation_matrix(self, ref = None):
-        coordinates = ref if isinstance(ref, list) else None
-        image = ref if isinstance(ref, np.ndarray) else None
-    
-        if not coordinates:
-            contours = find_contours(image)
-            coordinates = find_board(contours, self.__global_data.img_resize)
-
-        ordered_points_in_board = sort_points([item[0] for item in coordinates])
-        
-        self.__inp_coords =  np.float32(ordered_points_in_board)
-        self.__out_coords =  np.float32([[0,0], [0, self.__global_data.window_size[0] - 1], [self.__global_data.window_size[1] - 1, self.__global_data.window_size[0] - 1], [self.__global_data.window_size[1] - 1, 0]])
-
-        self.__matrix = cv2.getPerspectiveTransform(self.__inp_coords, self.__out_coords)
-
-        self.__logger.info(f'contouring data: inp={asstr(self.__inp_coords)}; out={asstr(self.__out_coords)}; matrix={asstr(self.__matrix)}')
-    
-    def __set_compare_values(self):
-        new_img = self.__takePicture()
-        self.__reference_blur = get_blurred_picture(new_img, self.__matrix, self.__global_data.window_size)
-
-        self.__threshvalue = find_threshval(self.__reference_blur, consts.LIGHT_SENSITIVITY_FACTOR)
-        self.__logger.info(f'threshvalue={self.__threshvalue}')
-
-        return new_img
-
     def __setup_window(self):
         pygame.init()
         pygame.font.init()
@@ -105,13 +80,13 @@ class GameEngine():
         message_dict = json.loads(message)
         print("handleControlCommand: ", message_dict)
         if message_dict["command"] == consts.MQTT_COMMANDS.START.value:
-            self.gameplay.startGame()
+            self.gameplay.start_game()
             pass
         elif message_dict["command"] == consts.MQTT_COMMANDS.PAUSE.value:
-            self.gameplay.pauseGame()
+            self.gameplay.pause_game()
             pass
         elif message_dict["command"] == consts.MQTT_COMMANDS.STOP.value:
-            self.gameplay.stopGame()
+            self.gameplay.stop_game()
             pass
         elif message_dict["command"] == consts.MQTT_COMMANDS.FLIP_VIEW.value:
             self.__flip_view()
@@ -127,14 +102,14 @@ class GameEngine():
             print('invalid coordinates!', type(coordinates), coordinates)
             return
         
-        self.__set_transformation_matrix(coordinates)
-        img = self.__set_compare_values()
+        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, coordinates)
+        self.__reference_blur, self.__threshvalue, img = set_compare_values(self.__takePicture, self.__matrix, self.__global_data.window_size, self.__logger)
         write_controured_img(img, self.__inp_coords, self.__threshvalue)
 
     @change_actions_decorator
     def __flip_view(self):
         self.__global_data.is_spin = not self.__global_data.is_spin
-        self.gameplay.spinWords()
+        self.gameplay.spin_words()
 
     def __event_handler(self):
         if self.__global_data.env=='pi' and followup_temp(self.__logger, self.__counter):
@@ -149,7 +124,7 @@ class GameEngine():
         while self.__running:
             self.__window.fill((0,0,0))
 
-            self.gameplay.gameLoop()
+            self.gameplay.game_loop()
 
             pygame.display.update()
             self.__clock.tick(consts.CLOCK)

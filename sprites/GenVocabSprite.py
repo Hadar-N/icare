@@ -11,9 +11,10 @@ class GenVocabSprite(pygame.sprite.Sprite):
         self._vocab = self._global_data.vocab_options[vocab_i]
         self._color = (0,0,255) if property == "en" else (255,0,0)
         self._floatlocation = (0.,0.)
+        self._twin = None
 
         self.image = self._global_data.vocab_font.render(self._vocab[self._language], True, self._color)
-        self.createSpinnedWord()
+        self.spin_word()
         self.rect = self.image.get_rect()
 
         self.mask = pygame.mask.from_surface(self.image)
@@ -31,21 +32,28 @@ class GenVocabSprite(pygame.sprite.Sprite):
     @property
     def vocabZH(self): return self._vocab["zh"]
     @property
-    def isOutOfBounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
+    def is_out_of_bounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
     @property
-    def asDict(self): return {"en": self._vocab["en"], "zh": self._vocab["zh"]}
+    def as_dict(self): return {"en": self._vocab["en"], "zh": self._vocab["zh"]}
+    @property
+    def twin(self): return self._twin
+    @twin.setter
+    def twin(self, sprite):
+        self._twin = sprite
+        if self._twin.twin is None: self._twin._twin = self
 
-    def matchSuccess(self):
+    def match_success(self):
+        if self._twin: self._twin.kill()
         self.kill()
 
-    def setLocation(self, coordinates):
+    def set_location(self, coordinates):
         self._floatlocation = coordinates
         self.rect.x, self.rect.y = self._floatlocation
 
-    def onCollision(self, area: int):
+    def on_collision(self, area: int):
         raise NotImplementedError("method not implemented")
     
-    def createSpinnedWord(self):
+    def spin_word(self):
         self.image = self._global_data.vocab_font.render(self._vocab[self._language], True, self._color)
         self.image = pygame.transform.flip(self.image, not self._global_data.is_spin, self._global_data.is_spin)
 

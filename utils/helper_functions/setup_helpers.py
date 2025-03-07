@@ -3,7 +3,6 @@ import os
 import cv2
 import numpy as np
 import re
-import math
 from logging import Logger
 
 from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, CAMERA_RES
@@ -75,24 +74,8 @@ def screen_setup(img_size: tuple, proj_res: str, logger: Logger) -> tuple[tuple,
     window_size = (int(window_width), int(window_height))
     return (window_size, isfullscreen)
 
-def sort_points(points : list[float]) -> list[float]:
-    points = np.array(points)
-    sums = points.sum(axis=1)  # x + y
-    diffs = np.diff(points, axis=1)[:, 0]
-
-    sorted_points = np.zeros((4, 2), dtype=np.float32)
-    sorted_points[0] = points[np.argmin(sums)]  # Top-left
-    sorted_points[1] = points[np.argmax(diffs)]  # Bottom-left
-    sorted_points[2] = points[np.argmax(sums)]  # Bottom-right
-    sorted_points[3] = points[np.argmin(diffs)]  # Top-right
-
-    if math.dist(sorted_points[0], sorted_points[1]) < math.dist(sorted_points[0], sorted_points[3]):
-        sorted_points = [sorted_points[0],sorted_points[3], sorted_points[2], sorted_points[1]]
-
-    return sorted_points
-
 def setCameraFunction(envval: str, img_resize: tuple[int]) -> tuple[callable]:
-    takePicture, removeCamera, incResize = None
+    takePicture = removeCamera = incResize = None
     if envval == "pi":
         from picamera2 import Picamera2
         camera = Picamera2()
