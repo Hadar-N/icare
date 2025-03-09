@@ -40,13 +40,15 @@ class VocabZHSprite(GenVocabSprite):
         else:
             self.__direction = self.__randomize_angle()
 
+    def __randomize_sign(self): return -1 if randint(0,1) else 1
+
     def __randomize_angle(self):
         res=None
         if self.__direction:
             change_course = self.__rng.normal()
             res = self.__direction.rotate(change_course*(SPRITE_ANGLE_MAX_DIFF/4)) if change_course > 0.5 else self.__direction
-        else: res = pygame.math.Vector2(uniform(-1*SPRITE_MAX_SPEED, SPRITE_MAX_SPEED), uniform(-1*SPRITE_MAX_SPEED, SPRITE_MAX_SPEED))
-        if res.length() < 1: res.normalize()*uniform(1,SPRITE_MAX_SPEED)
+            if res.length() < 1: res.normalize()*uniform(SPRITE_MIN_SPEED,SPRITE_MAX_SPEED)
+        else: res = pygame.math.Vector2(self.__randomize_sign()*uniform(SPRITE_MIN_SPEED, SPRITE_MAX_SPEED), self.__randomize_sign()*uniform(SPRITE_MIN_SPEED, SPRITE_MAX_SPEED))
         return res
     
     def on_collision(self, area_collision: int):
