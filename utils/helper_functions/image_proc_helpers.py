@@ -11,8 +11,8 @@ def get_blurred_picture(image: np.ndarray, matrix: np.ndarray, window_size: tupl
         reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (window_size[1], window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
         return cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
-def write_controured_img(image: np.ndarray, coords: np.ndarray, threshvalue : int) -> None:
-        cv2.polylines(image, [coords.astype(np.int32)], isClosed=True, color=(threshvalue, threshvalue, threshvalue), thickness=3)
+def write_controured_img(image: np.ndarray, coords: list[np.ndarray], threshvalue : int) -> None:
+        cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(threshvalue, threshvalue, threshvalue), thickness=3)
         cv2.imwrite(consts.CONTOUR_IMAGE_LOC, image)
 
 def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, threshvalue : int) -> pygame.mask.Mask:
@@ -41,20 +41,32 @@ def set_transformation_matrix(global_data, ref = None) -> tuple[np.ndarray]:
 
         return inp_coords, out_coords, matrix
 
-def set_compare_values(takePicture: callable, matrix: np.ndarray, window_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
+def get_transformation_matrix_with_borders(orig_inp_coords: np.ndarray, out_coords: np.ndarray, img_resize:tuple[int]) -> np.ndarray:
+        middlepoint = orig_inp_coords.sum(axis=0)/4 # since we know the shape to be rectangle-like, we can assume the middlepoint to have 2 points on each side
+        bordered_inp = np.float32(list(map(lambda i: np.array([max(i[0] - consts.BORDER_SIZE, 0.) if i[0] < middlepoint[0] else min(i[0] + consts.BORDER_SIZE, img_resize[0]),
+                                                                max(i[1] - consts.BORDER_SIZE, 0.) if i[1] < middlepoint[1] else min(i[1] + consts.BORDER_SIZE, img_resize[1])])
+                                                                , orig_inp_coords)))
+        matrix = cv2.getPerspectiveTransform(bordered_inp, out_coords)
+
+        return matrix, bordered_inp
+
+def set_compare_values(takePicture: callable, matrix: np.ndarray, matrix_bordered: np.ndarray, window_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
         new_img = takePicture()
         reference_blur = get_blurred_picture(new_img, matrix, window_size)
-        threshvalue = find_threshval(reference_blur, consts.LIGHT_SENSITIVITY_FACTOR)
-        logger.info(f'calculated threshvalue={threshvalue}')
+        bordered_reference_blur = get_blurred_picture(new_img, matrix_bordered, window_size)
+        threshvalue_bordered = find_threshval(bordered_reference_blur)
+        logger.info(f'calculated threshvalue by border={threshvalue_bordered}')
 
-        return reference_blur, threshvalue, new_img
+        return reference_blur, threshvalue_bordered, new_img
 
-def find_threshval(empty_image: np.ndarray, multip: float) -> float:
-        return np.mean(np.mean(empty_image, axis=(0,1)), axis=0) * multip
+def find_threshval(empty_image: np.ndarray, multip: float = 1.) -> float:
+        step_a = np.mean(empty_image, axis=(0,1))
+        step_b = np.mean(step_a, axis=0)
+        return step_b * multip
 
 def find_contours(image: np.ndarray) -> list:
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        threshval = find_threshval(image, 1.)
+        threshval = find_threshval(image)
         _, thresh = cv2.threshold(gray, threshval, consts.THRESHOLD_MAX, cv2.THRESH_BINARY)
         contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         return contours

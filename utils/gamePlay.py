@@ -36,8 +36,8 @@ class GamePlay():
     def status(self):
         return self.__status
 
-    def __setup_mask(self, isOverride = False):
-        temp = self._getmask(isOverride or not self._mask or self._area is None)
+    def __setup_mask(self, is_override = False):
+        temp = self._getmask(is_override or not self._mask or self._area is None)
         if temp: self._mask, self._area = temp
 
     def __init_game(self):
@@ -65,7 +65,7 @@ class GamePlay():
             temp = next((sp for sp in self._vocabzhbankgroup.sprites() if sp.twin.is_presented), self._vocabzhbankgroup.sprites()[0])
             placement = randomize_vacant_location(temp, self._global_data.window_size, self._mask)
 
-            if (placement):
+            if (placement and temp.distance_to_twin > consts.MIN_DISTANCE_TO_TWIN):
                 self._vocabzhdrawgroup.add(temp)
                 temp.remove(self._vocabzhbankgroup)
 

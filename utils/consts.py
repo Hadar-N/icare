@@ -14,7 +14,7 @@ CAMERA_RES = (1640, 1232)
 CONTOUR_IMAGE_LOC="tests/image_with_contours.jpg"
 
 # game constants
-VOCAB_AMOUNT = 5
+VOCAB_AMOUNT = 7
 MAX_VOCAB_ACTIVE = 3
 class GAME_STATUS(str, Enum):
     ACTIVE= "active"
@@ -27,6 +27,7 @@ THRESHOLD_MAX = 255
 MIN_FRAME_CONTENT_PARTITION = 7
 KERNEL = np.ones((11, 11), np.uint8)
 LIGHT_SENSITIVITY_FACTOR = 1.4 # TODO: calc based on lighting conditions???
+BORDER_SIZE = 50
 
 # text/movement consts
 SPRITE_APPEAR_SPEED = 0.05
@@ -36,8 +37,10 @@ SPRITE_MIN_SPEED = 1
 SPRITE_MAX_OPACITY = 200
 MAX_PLACEMENT_ATTAMPTS = 5
 SPRITE_ANGLE_MAX_DIFF = 20
+MIN_DISTANCE_TO_TWIN = 50
 VOCAB_PATH = 'public/vocab.json'
-FONT_PATH = 'public/fonts/TaipeiSansTCBeta-Regular.ttf'; FONT_SIZE= 30
+FONT_PATH = 'public/fonts/TaipeiSansTCBeta-Regular.ttf';
+FONT_SIZE= 30
 
 # mqtt consts
 MQTT_TOPIC_CONTROL = "game/control"

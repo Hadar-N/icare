@@ -41,6 +41,11 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def twin(self, sprite):
         self._twin = sprite
         if self._twin.twin is None: self._twin._twin = self
+    @property
+    def sprite_midpoint(self): return (self.rect.x + self.rect.width/2, self.rect.y + self.rect.height/2)
+    @property
+    def distance_to_twin(self): return pygame.math.Vector2(self.sprite_midpoint).distance_to(self.twin.sprite_midpoint)
+
 
     def match_success(self):
         if self._twin: self._twin.kill()
