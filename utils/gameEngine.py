@@ -45,8 +45,13 @@ class GameEngine():
         self.__window = self.__setup_window()
         self.__setup_comparison_data(initial_img)
         self.__eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.__handle_control_command)
+        self.__eventbus.subscribe(consts.MQTT_TOPIC_DATA, self.__add_time_to_payload)
         self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)
     
+    def __add_time_to_payload(self, payload):
+        for x in payload:
+            x["time"]=self.__counter / consts.CLOCK
+
     def __get_image_for_game(self, is_initial = False):
         if (self.__counter%consts.NEW_IMAGE_INTERVALS == 0 or is_initial):
             image = get_blurred_picture(self.__takePicture(), self.__matrix, self.__global_data.window_size)

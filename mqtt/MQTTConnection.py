@@ -12,7 +12,7 @@ class MQTTConnection:
         load_dotenv(verbose=True, override=True)
         self.__logger = logger
         self.__eventbus = eventbus
-        self.__eventbus.subscribe(MQTT_TOPIC_DATA, self.__publish_message)
+        self.__eventbus.subscribe(MQTT_TOPIC_DATA, self.__publish_message, True)
 
         self.client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
         self.client.on_connect = self.on_connect
