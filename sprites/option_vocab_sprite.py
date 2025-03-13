@@ -2,10 +2,11 @@ import pygame
 from random import randint, uniform
 import math
 import numpy as np
-from utils.consts import *
 import time
-from utils.dataSingleton import DataSingleton
-from .GenVocabSprite import GenVocabSprite
+
+from utils import DataSingleton
+from utils.consts import *
+from .gen_vocab_sprite import GenVocabSprite
 
 # Structure instructions:
 # zh vocab will be divided into 2 groups:
@@ -16,9 +17,9 @@ from .GenVocabSprite import GenVocabSprite
 # - if it is currently on screen (aka not matched yet): should be in "active"
 # - if it is already matched: should be "kill"ed (aka in no group)
 
-class VocabZHSprite(GenVocabSprite):
-    def __init__(self, vocab_i, bank):
-        super().__init__(vocab_i, "zh")
+class OptionVocabSprite(GenVocabSprite):
+    def __init__(self, vocab, bank):
+        super().__init__(vocab)
 
         self.__bank_group = bank
         self.__appearing = 0.0
@@ -32,7 +33,11 @@ class VocabZHSprite(GenVocabSprite):
         self.__set_alpha()
     
     @property
+    def vocabSelf(self): return self.vocabTranslation
+    @property
     def is_deleting(self): return self.__deleting
+    @property
+    def _get_color(self): return (255,0,0)
 
     def __randomize_direction(self):
         if self.__deleting:

@@ -1,12 +1,11 @@
 import pygame
 from logging import Logger
 
+from .event_bus import EventBus
+from .data_singleton import DataSingleton
 import utils.consts as consts
-from utils.eventBus import EventBus
-from utils.dataSingleton import DataSingleton
-from utils.helper_functions.game_helpers import init_vocab_options, randomize_vacant_location
-from sprites.VocabENSprite import VocabENSprite
-from sprites.VocabZHSprite import VocabZHSprite
+from utils.helper_functions import init_vocab_options, randomize_vacant_location, isVarInEnum
+from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
     def __init__(self, window: pygame.Surface, logger: Logger, eventbus: EventBus, getMask):
@@ -17,11 +16,13 @@ class GamePlay():
 
         self._getmask = getMask
         self._eventbus = eventbus
+        self.__vocab_options = []
 
         self._vocabengroup = pygame.sprite.Group()
         self._vocabzhbankgroup = pygame.sprite.Group()
         self._vocabzhdrawgroup = pygame.sprite.Group()
         self.__all_spritegroups = [self._vocabengroup, self._vocabzhbankgroup, self._vocabzhdrawgroup]
+        self.__level = self.__mode = None
 
         self._mask = self._area = None
         self.__setup_mask(True)
@@ -40,18 +41,20 @@ class GamePlay():
         temp = self._getmask(is_override or not self._mask or self._area is None)
         if temp: self._mask, self._area = temp
 
-    def __init_game(self):
-        init_vocab_options(self._global_data)
+    def __init_game(self, level, mode):
+        self.__level = level
+        self.__mode = mode
+        self.__vocab_options = init_vocab_options(self.__level, self.__mode)
         [spg.empty() for spg in self.__all_spritegroups]
         self.__init_new_vocab()
         self.__status=consts.GAME_STATUS.ACTIVE
     
     def __init_new_vocab(self):
         for i in range(consts.VOCAB_AMOUNT):
-            ENvocab = VocabENSprite(i)
+            ENvocab = MainVocabSprite(self.__vocab_options[i])
             placement = randomize_vacant_location(ENvocab, self._global_data.window_size, self._mask, self._vocabengroup)
             if (placement):
-                ZHvocab = VocabZHSprite(i, self._vocabzhbankgroup)
+                ZHvocab = OptionVocabSprite(self.__vocab_options[i], self._vocabzhbankgroup)
                 self._vocabengroup.add(ENvocab)
                 self._vocabzhbankgroup.add(ZHvocab)
                 ENvocab.twin = ZHvocab
@@ -62,7 +65,8 @@ class GamePlay():
         amount_per_space = amount_per_space if amount_per_space < consts.MAX_VOCAB_ACTIVE else consts.MAX_VOCAB_ACTIVE
         
         if len(self._vocabzhdrawgroup.sprites()) < amount_per_space and len(self._vocabzhbankgroup.sprites()):
-            temp = next((sp for sp in self._vocabzhbankgroup.sprites() if sp.twin.is_presented), self._vocabzhbankgroup.sprites()[0])
+            # temp = next((sp for sp in self._vocabzhbankgroup.sprites() if sp.twin.is_presented), self._vocabzhbankgroup.sprites()[0])
+            temp = self._vocabzhbankgroup.sprites()[0]
             placement = randomize_vacant_location(temp, self._global_data.window_size, self._mask)
 
             if (placement and temp.distance_to_twin > consts.MIN_DISTANCE_TO_TWIN):
@@ -88,20 +92,23 @@ class GamePlay():
             if collides:
                 matched.append({"type": consts.MQTT_DATA_ACTIONS.MATCHED.value, "word": sp.as_dict})
                 sp.match_success()
-                self._logger.info(f'disappeared word: {sp.vocabZH}/{sp.vocabEN}; left words: {len(self._vocabengroup.sprites())}')
+                self._logger.info(f'disappeared word: {sp.vocabTranslation}/{sp.vocabMain}; left words: {len(self._vocabengroup.sprites())}')
                 if len(self._vocabengroup.sprites()) == 0: matched.append(self.__finish_game())
         return matched
 
     def __finish_game(self):
         self._logger.info("game finished!")
         self.__status=consts.GAME_STATUS.DONE
-        return {"type": consts.MQTT_DATA_ACTIONS.STATUS.value, "word": consts.GAME_STATUS.DONE.value}
+        return {"type": consts.MQTT_DATA_ACTIONS.STATUS.value, "word": consts.GAME_STATUS.DONE.name}
 
-    def start_game(self):
+    def start_game(self, payload):
         if(len(self._vocabengroup.sprites())):
             self.__status=consts.GAME_STATUS.ACTIVE
         else:
-            self.__init_game()
+            if payload and isVarInEnum(payload['level'], consts.GAME_LEVELS) and isVarInEnum(payload['option'], consts.GAME_MODES):
+                self.__init_game(payload['level'], payload['option'])
+            else:
+                self._logger.error(f'invalid start_game payload: {payload}')
 
     def pause_game(self):
         self.__status=consts.GAME_STATUS.HALTED

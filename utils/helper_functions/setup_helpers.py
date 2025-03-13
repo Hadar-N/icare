@@ -4,11 +4,15 @@ import cv2
 import numpy as np
 import re
 from logging import Logger
+from enum import Enum
 
 from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, CAMERA_RES
 
 temp_re = re.compile("(?<=\=)\d+\.\d+")
 diskspace_re = re.compile("[\d.]+(?=%)")
+
+def isVarInEnum(var: str, enum: Enum, is_value: bool = False) -> bool:
+    return var and var in [i.value if is_value else i.name for i in enum]
 
 def asstr(arr: np.ndarray | list) -> str:
     return f'[{",".join(asstr(x) if isinstance(x, np.ndarray) else str(x) for x in arr)}]'

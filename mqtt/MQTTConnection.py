@@ -3,8 +3,8 @@ import json
 import paho.mqtt.client as mqtt
 from logging import Logger
 from dotenv import load_dotenv
+from utils import EventBus
 from utils.consts import MQTT_TOPIC_CONTROL, MQTT_TOPIC_DATA
-from utils.eventBus import EventBus
 
 class MQTTConnection:
 

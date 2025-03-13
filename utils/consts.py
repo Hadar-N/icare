@@ -20,6 +20,13 @@ class GAME_STATUS(str, Enum):
     ACTIVE= "active"
     HALTED= "halted"
     DONE= "done"
+class GAME_LEVELS(str, Enum):
+    BEGINNER = "beginner"
+    INTERMEDIATE = "intermediate"
+    ADVANCED = "advanced"
+class GAME_MODES(str, Enum):
+    ENtoZH = 'ENtoZH'
+    ZHtoEN = 'ZHtoEN'
 
 # image proc. consts
 BLUR_SIZE = (21, 21)
@@ -38,8 +45,11 @@ SPRITE_MAX_OPACITY = 200
 MAX_PLACEMENT_ATTAMPTS = 5
 SPRITE_ANGLE_MAX_DIFF = 20
 MIN_DISTANCE_TO_TWIN = 50
-VOCAB_PATH = 'public/vocab.json'
-FONT_PATH = 'public/fonts/TaipeiSansTCBeta-Regular.ttf';
+VOCAB_PATH = {
+    GAME_MODES.ENtoZH: 'public/english_to_chinese.json',
+    GAME_MODES.ZHtoEN: 'public/chinese_to_english.json'
+}
+FONT_PATH = 'public/fonts/TaipeiSansTCBeta-Regular.ttf'
 FONT_SIZE= 30
 
 # mqtt consts

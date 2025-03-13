@@ -5,13 +5,11 @@ from functools import partial
 
 import utils.consts as consts
 
-def init_vocab_options(global_data) -> None:
-        global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
-        # self._global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
-
-        with open(consts.VOCAB_PATH, 'r', encoding="utf8") as file:
+def init_vocab_options(level, mode) -> list[dict]:
+        with open(consts.VOCAB_PATH[mode], 'r', encoding="utf8") as file:
             data = json.load(file)
-            global_data.vocab_options = sample(data, consts.VOCAB_AMOUNT)
+            vocab_options = sample(data, consts.VOCAB_AMOUNT)
+        return vocab_options
 
 def random_location_in_window(sprite: pygame.sprite.Sprite, window_size: tuple[int]) -> int:
         return randint(consts.CLEAN_EDGES, window_size[0] - consts.CLEAN_EDGES - sprite.rect.width), randint(consts.CLEAN_EDGES, window_size[1] - consts.CLEAN_EDGES - sprite.rect.height)

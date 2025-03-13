@@ -6,12 +6,11 @@ import json
 import numpy as np
 from logging import Logger
 
-from utils.helper_functions.setup_helpers import asstr, followup_temp, screen_setup
-from utils.helper_functions.image_proc_helpers import create_mask, set_transformation_matrix, set_compare_values, get_blurred_picture, write_controured_img, get_transformation_matrix_with_borders
 import utils.consts as consts
-from utils.eventBus import EventBus
-from utils.dataSingleton import DataSingleton
-from utils.gamePlay import GamePlay
+from .helper_functions import *
+from .event_bus import EventBus
+from .data_singleton import DataSingleton
+from .game_play import GamePlay
 
 
 def change_actions_decorator(method):
@@ -46,6 +45,8 @@ class GameEngine():
         self.__setup_comparison_data(initial_img)
         self.__eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.__handle_control_command)
         self.__eventbus.subscribe(consts.MQTT_TOPIC_DATA, self.__add_time_to_payload)
+        self.__global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
+        # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
         self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)
     
     def __add_time_to_payload(self, payload):
@@ -76,6 +77,7 @@ class GameEngine():
     def __setup_window(self):
         pygame.init()
         pygame.font.init()
+        pygame.mouse.set_visible(False)
 
         window_size, isfullscreen = screen_setup(self.__global_data.img_resize, os.getenv('PROJECTOR_RESOLUTION') if os.environ["DISPLAY"] == ":0" else None, self.__logger)
         self.__global_data.window_size = window_size
@@ -87,7 +89,7 @@ class GameEngine():
         message_dict = json.loads(message)
         print("handleControlCommand: ", message_dict)
         if message_dict["command"] == consts.MQTT_COMMANDS.START.value:
-            self.gameplay.start_game()
+            self.gameplay.start_game(message_dict['payload'])
             pass
         elif message_dict["command"] == consts.MQTT_COMMANDS.PAUSE.value:
             self.gameplay.pause_game()

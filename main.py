@@ -4,12 +4,10 @@ import datetime
 import logging
 from dotenv import load_dotenv
 
+from utils import DataSingleton, EventBus, GameEngine
 import utils.consts as consts
-from utils.dataSingleton import DataSingleton
-from utils.helper_functions.setup_helpers import setCameraFunction, get_img_resize_information
-from utils.eventBus import EventBus
+from utils.helper_functions import setCameraFunction, get_img_resize_information
 from mqtt.MQTTConnection import MQTTConnection
-from utils.gameEngine import GameEngine
 
 load_dotenv(verbose=True, override=True)
 
