@@ -1,6 +1,8 @@
 from enum import Enum
 import numpy as np
 
+from game_shared import GAME_MODES
+
 # setup consts
 LOGFILE= "running.log"
 CLEAN_EDGES = 25
@@ -16,17 +18,6 @@ CONTOUR_IMAGE_LOC="tests/image_with_contours.jpg"
 # game constants
 VOCAB_AMOUNT = 7
 MAX_VOCAB_ACTIVE = 3
-class GAME_STATUS(str, Enum):
-    ACTIVE= "active"
-    HALTED= "halted"
-    DONE= "done"
-class GAME_LEVELS(str, Enum):
-    BEGINNER = "beginner"
-    INTERMEDIATE = "intermediate"
-    ADVANCED = "advanced"
-class GAME_MODES(str, Enum):
-    ENtoZH = 'ENtoZH'
-    ZHtoEN = 'ZHtoEN'
 
 # image proc. consts
 BLUR_SIZE = (21, 21)
@@ -51,18 +42,3 @@ VOCAB_PATH = {
 }
 FONT_PATH = 'public/fonts/TaipeiSansTCBeta-Regular.ttf'
 FONT_SIZE= 30
-
-# mqtt consts
-MQTT_TOPIC_CONTROL = "game/control"
-MQTT_TOPIC_DATA = "game/data"
-class MQTT_DATA_ACTIONS(str,Enum):
-    NEW = "new"
-    REMOVE = "remove"
-    MATCHED = "matched"
-    STATUS = "status"
-class MQTT_COMMANDS(str, Enum):
-    START = "start"
-    PAUSE = "pause"
-    STOP = "stop"
-    RESET_DISPLAY = "reset_display"
-    FLIP_VIEW = "flip_view"

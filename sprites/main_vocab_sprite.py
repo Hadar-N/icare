@@ -1,6 +1,6 @@
 from random import sample, randint
 
-from utils.consts import MQTT_DATA_ACTIONS
+from game_shared import MQTT_DATA_ACTIONS
 from .gen_vocab_sprite import GenVocabSprite
 
 class MainVocabSprite(GenVocabSprite):

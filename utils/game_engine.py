@@ -6,6 +6,9 @@ import json
 import numpy as np
 from logging import Logger
 
+from mqtt_shared import ControlCommandBody, Topics
+from game_shared import MQTT_COMMANDS, GAME_STATUS
+
 import utils.consts as consts
 from .helper_functions import *
 from .event_bus import EventBus
@@ -17,12 +20,12 @@ def change_actions_decorator(method):
     def wrapper(self, *args, **kwargs):
         prev_gamestatus = self.gameplay.status
 
-        if prev_gamestatus == consts.GAME_STATUS.ACTIVE:
+        if prev_gamestatus == GAME_STATUS.ACTIVE:
             self.gameplay.pause_game()
         
         method(self, *args, **kwargs)
 
-        if prev_gamestatus == consts.GAME_STATUS.ACTIVE:
+        if prev_gamestatus == GAME_STATUS.ACTIVE:
             self.gameplay.start_game()
     
     return wrapper
@@ -43,8 +46,8 @@ class GameEngine():
     
         self.__window = self.__setup_window()
         self.__setup_comparison_data(initial_img)
-        self.__eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.__handle_control_command)
-        self.__eventbus.subscribe(consts.MQTT_TOPIC_DATA, self.__add_time_to_payload)
+        self.__eventbus.subscribe(Topics.CONTROL, self.__handle_control_command)
+        # self.__eventbus.subscribe(Topics.DATA, self.__add_time_to_payload)
         self.__global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
         # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
         self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)
@@ -85,25 +88,23 @@ class GameEngine():
 
         return window
     
-    def __handle_control_command(self, message):
-        message_dict = json.loads(message)
-        print("handleControlCommand: ", message_dict)
-        if message_dict["command"] == consts.MQTT_COMMANDS.START.value:
-            self.gameplay.start_game(message_dict['payload'])
+    def __handle_control_command(self, message: ControlCommandBody):
+        if message.command == MQTT_COMMANDS.START:
+            self.gameplay.start_game(message.payload)
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.PAUSE.value:
+        elif message.command == MQTT_COMMANDS.PAUSE:
             self.gameplay.pause_game()
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.STOP.value:
+        elif message.command == MQTT_COMMANDS.STOP:
             self.gameplay.stop_game()
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.FLIP_VIEW.value:
+        elif message.command == MQTT_COMMANDS.FLIP_VIEW:
             self.__flip_view()
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.RESET_DISPLAY.value:
-            self.__reset_comparison_data(message_dict["payload"])
+        elif message.command == MQTT_COMMANDS.RESET_DISPLAY:
+            self.__reset_comparison_data(message.payload)
             pass
-        else: print(f'invalid message/command {message_dict}')
+        else: print(f'invalid message/command {message}')
 
     @change_actions_decorator
     def __reset_comparison_data(self, coordinates):
