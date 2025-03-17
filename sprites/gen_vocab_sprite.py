@@ -1,13 +1,14 @@
 import pygame
-from utils import DataSingleton
+from game_shared import VocabItem
+from utils import DataSingleton, EventBus
 from utils.consts import *
 
 class GenVocabSprite(pygame.sprite.Sprite):
-    def __init__(self, vocab: dict):
+    def __init__(self, vocab: dict, eventbus: EventBus):
         super().__init__()
 
         self._global_data = DataSingleton()
-        self._vocab = vocab
+        self._vocab = VocabItem(**vocab)
         self._color = self._get_color
         self._floatlocation = (0.,0.)
         self._twin = None
@@ -20,6 +21,8 @@ class GenVocabSprite(pygame.sprite.Sprite):
         pygame.mask.Mask.invert(self.mask)
         self.area = self.mask.count()
 
+        self._eventbus = eventbus
+
         # color = (255,0,0)
         # for x in range(int(self.rect.width)):
         #     for y in range(int(self.rect.height)):
@@ -27,11 +30,10 @@ class GenVocabSprite(pygame.sprite.Sprite):
         #             self.image.set_at((x,y), color)
     
     @property
-    def vocabMain(self): return self._vocab["word"]
+    def vocabMain(self): return self._vocab.word
     @property
-    def vocabTranslation(self): return self._vocab["meaning"]
-    @property
-    def as_dict(self): return {"word": self.vocabMain, "meaning": self.vocabTranslation}
+    def vocabTranslation(self): return self._vocab.meaning
+
     @property
     def vocabSelf(self): raise NotImplementedError("method 'vocabSelf' not implemented!", self)
     @property
@@ -42,7 +44,7 @@ class GenVocabSprite(pygame.sprite.Sprite):
     @twin.setter
     def twin(self, sprite):
         self._twin = sprite
-        if self._twin.twin is None: self._twin._twin = self
+        if self._twin and not self._twin.twin: self._twin.twin = self
 
     @property
     def is_out_of_bounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
@@ -50,6 +52,8 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def sprite_midpoint(self): return (self.rect.x + self.rect.width/2, self.rect.y + self.rect.height/2)
     @property
     def distance_to_twin(self): return pygame.math.Vector2(self.sprite_midpoint).distance_to(self.twin.sprite_midpoint)
+
+    def as_dict(self, removed_args:list[str] = []): return self._vocab.asDict(removed_args)
 
     def match_success(self):
         if self._twin: self._twin.kill()

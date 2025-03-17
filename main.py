@@ -40,11 +40,12 @@ init_data = MQTTInitialData(
 
 def on_message(*args, **kwargs):
     eventbus.publish(kwargs["topic"], kwargs["data"])
-def publish_message(msg):
-    conn.publish_message(Topics.DATA, msg)
+def publish_word_state(msg):
+    conn.publish_message(Topics.word_state(msg["word"]["word"]), msg)
 
 conn = ConnectionManager.initialize(init_data, DEVICE_TYPE.GAME, logger, on_message)
-eventbus.subscribe(Topics.DATA, publish_message, True)
+eventbus.subscribe(Topics.word_state(), publish_word_state)
+eventbus.subscribe(Topics.STATE, lambda msg: conn.publish_message(Topics.STATE, msg))
 
 gameengine.engine_loop()
 
