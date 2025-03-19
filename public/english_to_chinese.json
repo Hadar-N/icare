@@ -1,0 +1,932 @@
+[
+    {
+        "word": "apple",
+        "meaning": "蘋果",
+        "similar": [
+            "水果",
+            "紅色",
+            "果實",
+            "梨子",
+            "香蕉"
+        ]
+    },
+    {
+        "word": "boat",
+        "meaning": "船",
+        "similar": [
+            "小船",
+            "渡輪",
+            "航行",
+            "漁船",
+            "遊艇"
+        ]
+    },
+    {
+        "word": "baby",
+        "meaning": "嬰兒",
+        "similar": [
+            "小孩",
+            "新生兒",
+            "幼兒",
+            "寶寶",
+            "兒童"
+        ]
+    },
+    {
+        "word": "book",
+        "meaning": "書",
+        "similar": [
+            "小說",
+            "閱讀",
+            "筆記本",
+            "課本",
+            "雜誌"
+        ]
+    },
+    {
+        "word": "back",
+        "meaning": "背部",
+        "similar": [
+            "身體",
+            "脊椎",
+            "後面",
+            "肩膀",
+            "腰部"
+        ]
+    },
+    {
+        "word": "box",
+        "meaning": "盒子",
+        "similar": [
+            "箱子",
+            "容器",
+            "收納",
+            "袋子",
+            "罐子"
+        ]
+    },
+    {
+        "word": "ball",
+        "meaning": "球",
+        "similar": [
+            "足球",
+            "籃球",
+            "圓形",
+            "棒球",
+            "排球"
+        ]
+    },
+    {
+        "word": "boy",
+        "meaning": "男孩",
+        "similar": [
+            "小孩",
+            "兒子",
+            "學生",
+            "青年",
+            "男人"
+        ]
+    },
+    {
+        "word": "bath",
+        "meaning": "洗澡",
+        "similar": [
+            "淋浴",
+            "清潔",
+            "泡澡",
+            "浴室",
+            "洗手"
+        ]
+    },
+    {
+        "word": "bread",
+        "meaning": "麵包",
+        "similar": [
+            "早餐",
+            "烘焙",
+            "吐司",
+            "糕點",
+            "三明治"
+        ]
+    },
+    {
+        "word": "bear",
+        "meaning": "熊",
+        "similar": [
+            "球",
+            "嬰兒",
+            "貓"
+        ]
+    },
+    {
+        "word": "brother",
+        "meaning": "兄、弟",
+        "similar": [
+            "車",
+            "房子",
+            "男孩"
+        ]
+    },
+    {
+        "word": "bed",
+        "meaning": "床",
+        "similar": [
+            "背部",
+            "房子",
+            "書"
+        ]
+    },
+    {
+        "word": "cake",
+        "meaning": "蛋糕",
+        "similar": [
+            "學校",
+            "車",
+            "狗"
+        ]
+    },
+    {
+        "word": "bell",
+        "meaning": "鈴鐺",
+        "similar": [
+            "車",
+            "蘋果",
+            "球"
+        ]
+    },
+    {
+        "word": "car",
+        "meaning": "車",
+        "similar": [
+            "汽車",
+            "交通",
+            "公車",
+            "計程車",
+            "火車"
+        ]
+    },
+    {
+        "word": "bird",
+        "meaning": "鳥",
+        "similar": [
+            "洗澡",
+            "狗",
+            "房子"
+        ]
+    },
+    {
+        "word": "cat",
+        "meaning": "貓",
+        "similar": [
+            "動物",
+            "寵物",
+            "小貓",
+            "老虎",
+            "獅子"
+        ]
+    },
+    {
+        "word": "birth",
+        "meaning": "生日",
+        "similar": [
+            "男孩",
+            "麵包",
+            "車"
+        ]
+    },
+    {
+        "word": "chair",
+        "meaning": "椅子",
+        "similar": [
+            "嬰兒",
+            "房子",
+            "狗"
+        ]
+    },
+    {
+        "word": "chicken",
+        "meaning": "雞",
+        "similar": [
+            "麵包",
+            "房子",
+            "嬰兒"
+        ]
+    },
+    {
+        "word": "door",
+        "meaning": "門",
+        "similar": [
+            "車",
+            "男孩",
+            "船"
+        ]
+    },
+    {
+        "word": "child",
+        "meaning": "孩子",
+        "similar": [
+            "背部",
+            "盒子",
+            "車"
+        ]
+    },
+    {
+        "word": "duck",
+        "meaning": "鴨",
+        "similar": [
+            "男孩",
+            "球",
+            "麵包"
+        ]
+    },
+    {
+        "word": "christmas",
+        "meaning": "聖誕節",
+        "similar": [
+            "麵包",
+            "蘋果",
+            "狗"
+        ]
+    },
+    {
+        "word": "egg",
+        "meaning": "蛋",
+        "similar": [
+            "貓",
+            "男孩",
+            "蘋果"
+        ]
+    },
+    {
+        "word": "chocolate",
+        "meaning": "巧克力",
+        "similar": [
+            "蘋果",
+            "嬰兒",
+            "麵包"
+        ]
+    },
+    {
+        "word": "eye",
+        "meaning": "眼睛",
+        "similar": [
+            "蘋果",
+            "洗澡",
+            "書"
+        ]
+    },
+    {
+        "word": "coat",
+        "meaning": "外套",
+        "similar": [
+            "嬰兒",
+            "男孩",
+            "洗澡"
+        ]
+    },
+    {
+        "word": "farm",
+        "meaning": "農場",
+        "similar": [
+            "球",
+            "嬰兒",
+            "蘋果"
+        ]
+    },
+    {
+        "word": "corn",
+        "meaning": "玉米",
+        "similar": [
+            "球",
+            "蘋果",
+            "船"
+        ]
+    },
+    {
+        "word": "father",
+        "meaning": "父親",
+        "similar": [
+            "學校",
+            "嬰兒",
+            "盒子"
+        ]
+    },
+    {
+        "word": "cow",
+        "meaning": "乳牛",
+        "similar": [
+            "球",
+            "學校",
+            "蘋果"
+        ]
+    },
+    {
+        "word": "foot",
+        "meaning": "腳",
+        "similar": [
+            "球",
+            "學校",
+            "車"
+        ]
+    },
+    {
+        "word": "day",
+        "meaning": "日子",
+        "similar": [
+            "洗澡",
+            "嬰兒",
+            "貓"
+        ]
+    },
+    {
+        "word": "fire",
+        "meaning": "火",
+        "similar": [
+            "蘋果",
+            "男孩",
+            "麵包"
+        ]
+    },
+    {
+        "word": "dog",
+        "meaning": "狗",
+        "similar": [
+            "寵物",
+            "動物",
+            "小狗",
+            "狼",
+            "牧羊犬"
+        ]
+    },
+    {
+        "word": "fish",
+        "meaning": "魚",
+        "similar": [
+            "男孩",
+            "洗澡",
+            "麵包"
+        ]
+    },
+    {
+        "word": "doll",
+        "meaning": "玩偶",
+        "similar": [
+            "狗",
+            "麵包",
+            "學校"
+        ]
+    },
+    {
+        "word": "floor",
+        "meaning": "地板",
+        "similar": [
+            "嬰兒",
+            "船",
+            "球"
+        ]
+    },
+    {
+        "word": "flower",
+        "meaning": "花",
+        "similar": [
+            "貓",
+            "麵包",
+            "盒子"
+        ]
+    },
+    {
+        "word": "hill",
+        "meaning": "小山丘",
+        "similar": [
+            "學校",
+            "書",
+            "房子"
+        ]
+    },
+    {
+        "word": "friend",
+        "meaning": "朋友",
+        "similar": [
+            "車",
+            "學校",
+            "狗"
+        ]
+    },
+    {
+        "word": "home",
+        "meaning": "家",
+        "similar": [
+            "盒子",
+            "麵包",
+            "洗澡"
+        ]
+    },
+    {
+        "word": "game",
+        "meaning": "遊戲",
+        "similar": [
+            "狗",
+            "書",
+            "麵包"
+        ]
+    },
+    {
+        "word": "horse",
+        "meaning": "馬",
+        "similar": [
+            "房子",
+            "貓",
+            "球"
+        ]
+    },
+    {
+        "word": "garden",
+        "meaning": "花園",
+        "similar": [
+            "男孩",
+            "背部",
+            "船"
+        ]
+    },
+    {
+        "word": "house",
+        "meaning": "房子",
+        "similar": [
+            "家",
+            "建築",
+            "公寓",
+            "別墅",
+            "宿舍"
+        ]
+    },
+    {
+        "word": "girl",
+        "meaning": "女孩",
+        "similar": [
+            "男孩",
+            "背部",
+            "洗澡"
+        ]
+    },
+    {
+        "word": "kitty",
+        "meaning": "小貓",
+        "similar": [
+            "嬰兒",
+            "狗",
+            "男孩"
+        ]
+    },
+    {
+        "word": "goodbye",
+        "meaning": "再見",
+        "similar": [
+            "房子",
+            "麵包",
+            "車"
+        ]
+    },
+    {
+        "word": "leg",
+        "meaning": "腿",
+        "similar": [
+            "船",
+            "房子",
+            "麵包"
+        ]
+    },
+    {
+        "word": "grass",
+        "meaning": "草",
+        "similar": [
+            "房子",
+            "貓",
+            "球"
+        ]
+    },
+    {
+        "word": "letter",
+        "meaning": "信",
+        "similar": [
+            "船",
+            "背部",
+            "球"
+        ]
+    },
+    {
+        "word": "ground",
+        "meaning": "地面",
+        "similar": [
+            "球",
+            "狗",
+            "背部"
+        ]
+    },
+    {
+        "word": "man",
+        "meaning": "男人",
+        "similar": [
+            "球",
+            "洗澡",
+            "盒子"
+        ]
+    },
+    {
+        "word": "hand",
+        "meaning": "手",
+        "similar": [
+            "男孩",
+            "車",
+            "學校"
+        ]
+    },
+    {
+        "word": "milk",
+        "meaning": "牛奶",
+        "similar": [
+            "狗",
+            "球",
+            "蘋果"
+        ]
+    },
+    {
+        "word": "head",
+        "meaning": "頭",
+        "similar": [
+            "學校",
+            "嬰兒",
+            "貓"
+        ]
+    },
+    {
+        "word": "money",
+        "meaning": "錢",
+        "similar": [
+            "狗",
+            "船",
+            "貓"
+        ]
+    },
+    {
+        "word": "morning",
+        "meaning": "早晨",
+        "similar": [
+            "男孩",
+            "貓",
+            "麵包"
+        ]
+    },
+    {
+        "word": "rain",
+        "meaning": "雨",
+        "similar": [
+            "房子",
+            "車",
+            "狗"
+        ]
+    },
+    {
+        "word": "mother",
+        "meaning": "母親",
+        "similar": [
+            "房子",
+            "球",
+            "貓"
+        ]
+    },
+    {
+        "word": "ring",
+        "meaning": "戒指",
+        "similar": [
+            "學校",
+            "麵包",
+            "貓"
+        ]
+    },
+    {
+        "word": "name",
+        "meaning": "姓名",
+        "similar": [
+            "洗澡",
+            "船",
+            "學校"
+        ]
+    },
+    {
+        "word": "road",
+        "meaning": "路",
+        "similar": [
+            "男孩",
+            "球",
+            "貓"
+        ]
+    },
+    {
+        "word": "nest",
+        "meaning": "巢",
+        "similar": [
+            "學校",
+            "船",
+            "洗澡"
+        ]
+    },
+    {
+        "word": "claus",
+        "meaning": "聖誕老人",
+        "similar": [
+            "書",
+            "嬰兒",
+            "學校"
+        ]
+    },
+    {
+        "word": "night",
+        "meaning": "夜晚",
+        "similar": [
+            "學校",
+            "房子",
+            "男孩"
+        ]
+    },
+    {
+        "word": "school",
+        "meaning": "學校",
+        "similar": [
+            "教育",
+            "學生",
+            "教室",
+            "老師",
+            "課堂"
+        ]
+    },
+    {
+        "word": "paper",
+        "meaning": "紙",
+        "similar": [
+            "麵包",
+            "蘋果",
+            "球"
+        ]
+    },
+    {
+        "word": "seed",
+        "meaning": "種子",
+        "similar": [
+            "船",
+            "車",
+            "背部"
+        ]
+    },
+    {
+        "word": "party",
+        "meaning": "派對",
+        "similar": [
+            "球",
+            "蘋果",
+            "船"
+        ]
+    },
+    {
+        "word": "sheep",
+        "meaning": "羊",
+        "similar": [
+            "學校",
+            "男孩",
+            "車"
+        ]
+    },
+    {
+        "word": "picture",
+        "meaning": "圖片",
+        "similar": [
+            "狗",
+            "蘋果",
+            "學校"
+        ]
+    },
+    {
+        "word": "shoe",
+        "meaning": "鞋子",
+        "similar": [
+            "船",
+            "貓",
+            "嬰兒"
+        ]
+    },
+    {
+        "word": "pig",
+        "meaning": "豬",
+        "similar": [
+            "男孩",
+            "蘋果",
+            "盒子"
+        ]
+    },
+    {
+        "word": "sister",
+        "meaning": "姐、妹",
+        "similar": [
+            "男孩",
+            "背部",
+            "學校"
+        ]
+    },
+    {
+        "word": "rabbit",
+        "meaning": "兔子",
+        "similar": [
+            "背部",
+            "船",
+            "貓"
+        ]
+    },
+    {
+        "word": "smile",
+        "meaning": "微笑",
+        "similar": [
+            "嬰兒",
+            "球",
+            "洗澡"
+        ]
+    },
+    {
+        "word": "snow",
+        "meaning": "雪",
+        "similar": [
+            "盒子",
+            "車",
+            "狗"
+        ]
+    },
+    {
+        "word": "time",
+        "meaning": "時間",
+        "similar": [
+            "船",
+            "男孩",
+            "球"
+        ]
+    },
+    {
+        "word": "song",
+        "meaning": "歌曲",
+        "similar": [
+            "男孩",
+            "盒子",
+            "學校"
+        ]
+    },
+    {
+        "word": "top",
+        "meaning": "最佳",
+        "similar": [
+            "盒子",
+            "書",
+            "貓"
+        ]
+    },
+    {
+        "word": "squirrel",
+        "meaning": "松鼠",
+        "similar": [
+            "學校",
+            "男孩",
+            "貓"
+        ]
+    },
+    {
+        "word": "toy",
+        "meaning": "玩具",
+        "similar": [
+            "蘋果",
+            "車",
+            "學校"
+        ]
+    },
+    {
+        "word": "star",
+        "meaning": "星星",
+        "similar": [
+            "船",
+            "男孩",
+            "車"
+        ]
+    },
+    {
+        "word": "tree",
+        "meaning": "樹",
+        "similar": [
+            "麵包",
+            "狗",
+            "貓"
+        ]
+    },
+    {
+        "word": "street",
+        "meaning": "街道",
+        "similar": [
+            "背部",
+            "嬰兒",
+            "車"
+        ]
+    },
+    {
+        "word": "watch",
+        "meaning": "手錶",
+        "similar": [
+            "學校",
+            "盒子",
+            "洗澡"
+        ]
+    },
+    {
+        "word": "story",
+        "meaning": "故事",
+        "similar": [
+            "狗",
+            "球",
+            "房子"
+        ]
+    },
+    {
+        "word": "water",
+        "meaning": "水",
+        "similar": [
+            "洗澡",
+            "球",
+            "貓"
+        ]
+    },
+    {
+        "word": "student",
+        "meaning": "學生",
+        "similar": [
+            "球",
+            "房子",
+            "貓"
+        ]
+    },
+    {
+        "word": "way",
+        "meaning": "方法",
+        "similar": [
+            "蘋果",
+            "狗",
+            "麵包"
+        ]
+    },
+    {
+        "word": "sun",
+        "meaning": "太陽",
+        "similar": [
+            "男孩",
+            "麵包",
+            "嬰兒"
+        ]
+    },
+    {
+        "word": "wind",
+        "meaning": "風",
+        "similar": [
+            "狗",
+            "書",
+            "船"
+        ]
+    },
+    {
+        "word": "table",
+        "meaning": "桌子",
+        "similar": [
+            "男孩",
+            "房子",
+            "車"
+        ]
+    },
+    {
+        "word": "window",
+        "meaning": "窗戶",
+        "similar": [
+            "房子",
+            "盒子",
+            "車"
+        ]
+    },
+    {
+        "word": "thing",
+        "meaning": "東西",
+        "similar": [
+            "背部",
+            "洗澡",
+            "船"
+        ]
+    },
+    {
+        "word": "wood",
+        "meaning": "木頭",
+        "similar": [
+            "麵包",
+            "書",
+            "男孩"
+        ]
+    }
+]

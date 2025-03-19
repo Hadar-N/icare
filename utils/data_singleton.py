@@ -13,8 +13,6 @@ class DataSingleton:
 
         self._screen_size = None
         self._img_resize = None
-        self._fish_options = None
-        self._vocab_options = None
         self._vocab_font = None
         self._espeak_engine = None
         self._env = None
@@ -42,14 +40,6 @@ class DataSingleton:
             self._img_resize = size
         else:
             raise ValueError("Image size must be a tuple of two integers")
-
-    @property
-    def vocab_options(self):
-        return self._vocab_options
-
-    @vocab_options.setter
-    def vocab_options(self, vocab: list):
-        self._vocab_options = vocab
 
     @property
     def vocab_font(self):

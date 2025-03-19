@@ -2,10 +2,14 @@ import pygame
 from random import randint, uniform
 import math
 import numpy as np
-from utils.consts import *
 import time
-from utils.dataSingleton import DataSingleton
-from .GenVocabSprite import GenVocabSprite
+
+from game_shared import MQTT_DATA_ACTIONS
+from mqtt_shared import Topics
+
+from utils import DataSingleton
+from utils.consts import *
+from .gen_vocab_sprite import GenVocabSprite
 
 # Structure instructions:
 # zh vocab will be divided into 2 groups:
@@ -16,11 +20,10 @@ from .GenVocabSprite import GenVocabSprite
 # - if it is currently on screen (aka not matched yet): should be in "active"
 # - if it is already matched: should be "kill"ed (aka in no group)
 
-class VocabZHSprite(GenVocabSprite):
-    def __init__(self, vocab_i, bank):
-        super().__init__(vocab_i, "zh")
+class OptionVocabSprite(GenVocabSprite):
+    def __init__(self, vocab, eventbus):
+        super().__init__(vocab, eventbus)
 
-        self.__bank_group = bank
         self.__appearing = 0.0
         self.__deleting = False
         self.__flip_times = [time.time()]
@@ -32,7 +35,11 @@ class VocabZHSprite(GenVocabSprite):
         self.__set_alpha()
     
     @property
+    def vocabSelf(self): return self.vocabTranslation
+    @property
     def is_deleting(self): return self.__deleting
+    @property
+    def _get_color(self): return (255,0,0)
 
     def __randomize_direction(self):
         if self.__deleting:
@@ -50,6 +57,17 @@ class VocabZHSprite(GenVocabSprite):
             if res.length() < 1: res.normalize()*uniform(SPRITE_MIN_SPEED,SPRITE_MAX_SPEED)
         else: res = pygame.math.Vector2(self.__randomize_sign()*uniform(SPRITE_MIN_SPEED, SPRITE_MAX_SPEED), self.__randomize_sign()*uniform(SPRITE_MIN_SPEED, SPRITE_MAX_SPEED))
         return res
+    
+    def test_match(self):
+        if self.vocabTranslation == self.twin.vocabTranslation:
+            self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.MATCHED, "word": self.as_dict()})
+            self.match_success()
+        else:
+            self.twin.turn_option_off(self.vocabTranslation)
+            self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.STATUS, "word": self.twin.as_dict()})
+            self.twin = None
+            self.kill()
+            
     
     def on_collision(self, area_collision: int):
         if area_collision: self.flip_direction()
@@ -77,7 +95,6 @@ class VocabZHSprite(GenVocabSprite):
             self.__appearing -=SPRITE_APPEAR_SPEED
             if self.__appearing <= 0.0:
                 self.kill()
-                self.__bank_group.add(self)
                 self.__deleting = False
         elif (self.__appearing < 1.0): self.__appearing = 1.0 if self.__appearing+SPRITE_APPEAR_SPEED > 1.0 else self.__appearing+SPRITE_APPEAR_SPEED
 

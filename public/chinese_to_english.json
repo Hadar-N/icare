@@ -1,0 +1,932 @@
+[
+    {
+        "word": "蘋果",
+        "meaning": "apple",
+        "similar": [
+            "fruit",
+            "red",
+            "food",
+            "banana",
+            "pear"
+        ]
+    },
+    {
+        "word": "船",
+        "meaning": "boat",
+        "similar": [
+            "ship",
+            "canoe",
+            "sail",
+            "yacht",
+            "raft"
+        ]
+    },
+    {
+        "word": "嬰兒",
+        "meaning": "baby",
+        "similar": [
+            "infant",
+            "child",
+            "toddler",
+            "newborn",
+            "kid"
+        ]
+    },
+    {
+        "word": "書",
+        "meaning": "book",
+        "similar": [
+            "novel",
+            "read",
+            "notebook",
+            "magazine",
+            "textbook"
+        ]
+    },
+    {
+        "word": "背部",
+        "meaning": "back",
+        "similar": [
+            "spine",
+            "rear",
+            "behind",
+            "shoulder",
+            "waist"
+        ]
+    },
+    {
+        "word": "盒子",
+        "meaning": "box",
+        "similar": [
+            "container",
+            "case",
+            "crate",
+            "bag",
+            "jar"
+        ]
+    },
+    {
+        "word": "球",
+        "meaning": "ball",
+        "similar": [
+            "sphere",
+            "soccer",
+            "basketball",
+            "volleyball",
+            "baseball"
+        ]
+    },
+    {
+        "word": "男孩",
+        "meaning": "boy",
+        "similar": [
+            "child",
+            "son",
+            "student",
+            "teen",
+            "man"
+        ]
+    },
+    {
+        "word": "洗澡",
+        "meaning": "bath",
+        "similar": [
+            "shower",
+            "clean",
+            "soak",
+            "tub",
+            "wash"
+        ]
+    },
+    {
+        "word": "麵包",
+        "meaning": "bread",
+        "similar": [
+            "toast",
+            "bakery",
+            "food",
+            "pastry",
+            "sandwich"
+        ]
+    },
+    {
+        "word": "熊",
+        "meaning": "bear",
+        "similar": [
+            "boat",
+            "car",
+            "ball"
+        ]
+    },
+    {
+        "word": "兄、弟",
+        "meaning": "brother",
+        "similar": [
+            "boat",
+            "apple",
+            "bread"
+        ]
+    },
+    {
+        "word": "床",
+        "meaning": "bed",
+        "similar": [
+            "bath",
+            "boat",
+            "box"
+        ]
+    },
+    {
+        "word": "蛋糕",
+        "meaning": "cake",
+        "similar": [
+            "bread",
+            "cat",
+            "boy"
+        ]
+    },
+    {
+        "word": "鈴鐺",
+        "meaning": "bell",
+        "similar": [
+            "bread",
+            "book",
+            "boy"
+        ]
+    },
+    {
+        "word": "車",
+        "meaning": "car",
+        "similar": [
+            "automobile",
+            "vehicle",
+            "transport",
+            "bus",
+            "taxi"
+        ]
+    },
+    {
+        "word": "鳥",
+        "meaning": "bird",
+        "similar": [
+            "dog",
+            "cat",
+            "book"
+        ]
+    },
+    {
+        "word": "貓",
+        "meaning": "cat",
+        "similar": [
+            "pet",
+            "animal",
+            "kitten",
+            "tiger",
+            "lion"
+        ]
+    },
+    {
+        "word": "生日",
+        "meaning": "birth",
+        "similar": [
+            "ball",
+            "school",
+            "car"
+        ]
+    },
+    {
+        "word": "椅子",
+        "meaning": "chair",
+        "similar": [
+            "boat",
+            "dog",
+            "car"
+        ]
+    },
+    {
+        "word": "雞",
+        "meaning": "chicken",
+        "similar": [
+            "bath",
+            "dog",
+            "ball"
+        ]
+    },
+    {
+        "word": "門",
+        "meaning": "door",
+        "similar": [
+            "school",
+            "house",
+            "bread"
+        ]
+    },
+    {
+        "word": "孩子",
+        "meaning": "child",
+        "similar": [
+            "house",
+            "school",
+            "ball"
+        ]
+    },
+    {
+        "word": "鴨",
+        "meaning": "duck",
+        "similar": [
+            "boat",
+            "baby",
+            "dog"
+        ]
+    },
+    {
+        "word": "聖誕節",
+        "meaning": "christmas",
+        "similar": [
+            "house",
+            "boat",
+            "bath"
+        ]
+    },
+    {
+        "word": "蛋",
+        "meaning": "egg",
+        "similar": [
+            "apple",
+            "book",
+            "ball"
+        ]
+    },
+    {
+        "word": "巧克力",
+        "meaning": "chocolate",
+        "similar": [
+            "bath",
+            "boy",
+            "cat"
+        ]
+    },
+    {
+        "word": "眼睛",
+        "meaning": "eye",
+        "similar": [
+            "book",
+            "baby",
+            "house"
+        ]
+    },
+    {
+        "word": "外套",
+        "meaning": "coat",
+        "similar": [
+            "baby",
+            "book",
+            "bath"
+        ]
+    },
+    {
+        "word": "農場",
+        "meaning": "farm",
+        "similar": [
+            "apple",
+            "ball",
+            "back"
+        ]
+    },
+    {
+        "word": "玉米",
+        "meaning": "corn",
+        "similar": [
+            "baby",
+            "boy",
+            "school"
+        ]
+    },
+    {
+        "word": "父親",
+        "meaning": "father",
+        "similar": [
+            "ball",
+            "dog",
+            "bread"
+        ]
+    },
+    {
+        "word": "乳牛",
+        "meaning": "cow",
+        "similar": [
+            "car",
+            "box",
+            "dog"
+        ]
+    },
+    {
+        "word": "腳",
+        "meaning": "foot",
+        "similar": [
+            "book",
+            "baby",
+            "house"
+        ]
+    },
+    {
+        "word": "日子",
+        "meaning": "day",
+        "similar": [
+            "school",
+            "cat",
+            "car"
+        ]
+    },
+    {
+        "word": "火",
+        "meaning": "fire",
+        "similar": [
+            "baby",
+            "apple",
+            "book"
+        ]
+    },
+    {
+        "word": "狗",
+        "meaning": "dog",
+        "similar": [
+            "pet",
+            "animal",
+            "puppy",
+            "wolf",
+            "shepherd"
+        ]
+    },
+    {
+        "word": "魚",
+        "meaning": "fish",
+        "similar": [
+            "baby",
+            "bath",
+            "cat"
+        ]
+    },
+    {
+        "word": "玩偶",
+        "meaning": "doll",
+        "similar": [
+            "boy",
+            "bath",
+            "cat"
+        ]
+    },
+    {
+        "word": "地板",
+        "meaning": "floor",
+        "similar": [
+            "baby",
+            "dog",
+            "box"
+        ]
+    },
+    {
+        "word": "花",
+        "meaning": "flower",
+        "similar": [
+            "school",
+            "boat",
+            "apple"
+        ]
+    },
+    {
+        "word": "小山丘",
+        "meaning": "hill",
+        "similar": [
+            "bread",
+            "car",
+            "box"
+        ]
+    },
+    {
+        "word": "朋友",
+        "meaning": "friend",
+        "similar": [
+            "boat",
+            "baby",
+            "bread"
+        ]
+    },
+    {
+        "word": "家",
+        "meaning": "home",
+        "similar": [
+            "boat",
+            "bread",
+            "box"
+        ]
+    },
+    {
+        "word": "遊戲",
+        "meaning": "game",
+        "similar": [
+            "book",
+            "dog",
+            "apple"
+        ]
+    },
+    {
+        "word": "馬",
+        "meaning": "horse",
+        "similar": [
+            "apple",
+            "house",
+            "baby"
+        ]
+    },
+    {
+        "word": "花園",
+        "meaning": "garden",
+        "similar": [
+            "box",
+            "bread",
+            "ball"
+        ]
+    },
+    {
+        "word": "房子",
+        "meaning": "house",
+        "similar": [
+            "home",
+            "building",
+            "apartment",
+            "villa",
+            "dormitory"
+        ]
+    },
+    {
+        "word": "女孩",
+        "meaning": "girl",
+        "similar": [
+            "cat",
+            "apple",
+            "bread"
+        ]
+    },
+    {
+        "word": "小貓",
+        "meaning": "kitty",
+        "similar": [
+            "ball",
+            "box",
+            "house"
+        ]
+    },
+    {
+        "word": "再見",
+        "meaning": "goodbye",
+        "similar": [
+            "house",
+            "cat",
+            "back"
+        ]
+    },
+    {
+        "word": "腿",
+        "meaning": "leg",
+        "similar": [
+            "bread",
+            "ball",
+            "back"
+        ]
+    },
+    {
+        "word": "草",
+        "meaning": "grass",
+        "similar": [
+            "book",
+            "dog",
+            "box"
+        ]
+    },
+    {
+        "word": "信",
+        "meaning": "letter",
+        "similar": [
+            "box",
+            "cat",
+            "book"
+        ]
+    },
+    {
+        "word": "地面",
+        "meaning": "ground",
+        "similar": [
+            "apple",
+            "boat",
+            "cat"
+        ]
+    },
+    {
+        "word": "男人",
+        "meaning": "man",
+        "similar": [
+            "back",
+            "book",
+            "school"
+        ]
+    },
+    {
+        "word": "手",
+        "meaning": "hand",
+        "similar": [
+            "boy",
+            "house",
+            "car"
+        ]
+    },
+    {
+        "word": "牛奶",
+        "meaning": "milk",
+        "similar": [
+            "ball",
+            "boy",
+            "dog"
+        ]
+    },
+    {
+        "word": "頭",
+        "meaning": "head",
+        "similar": [
+            "cat",
+            "book",
+            "house"
+        ]
+    },
+    {
+        "word": "錢",
+        "meaning": "money",
+        "similar": [
+            "back",
+            "baby",
+            "bath"
+        ]
+    },
+    {
+        "word": "早晨",
+        "meaning": "morning",
+        "similar": [
+            "bath",
+            "house",
+            "book"
+        ]
+    },
+    {
+        "word": "雨",
+        "meaning": "rain",
+        "similar": [
+            "bath",
+            "school",
+            "house"
+        ]
+    },
+    {
+        "word": "母親",
+        "meaning": "mother",
+        "similar": [
+            "car",
+            "book",
+            "bread"
+        ]
+    },
+    {
+        "word": "戒指",
+        "meaning": "ring",
+        "similar": [
+            "ball",
+            "apple",
+            "boy"
+        ]
+    },
+    {
+        "word": "姓名",
+        "meaning": "name",
+        "similar": [
+            "bread",
+            "cat",
+            "car"
+        ]
+    },
+    {
+        "word": "路",
+        "meaning": "road",
+        "similar": [
+            "boat",
+            "cat",
+            "baby"
+        ]
+    },
+    {
+        "word": "巢",
+        "meaning": "nest",
+        "similar": [
+            "house",
+            "bread",
+            "baby"
+        ]
+    },
+    {
+        "word": "聖誕老人",
+        "meaning": "claus",
+        "similar": [
+            "boy",
+            "dog",
+            "car"
+        ]
+    },
+    {
+        "word": "夜晚",
+        "meaning": "night",
+        "similar": [
+            "bread",
+            "school",
+            "apple"
+        ]
+    },
+    {
+        "word": "學校",
+        "meaning": "school",
+        "similar": [
+            "education",
+            "student",
+            "classroom",
+            "teacher",
+            "lesson"
+        ]
+    },
+    {
+        "word": "紙",
+        "meaning": "paper",
+        "similar": [
+            "house",
+            "cat",
+            "back"
+        ]
+    },
+    {
+        "word": "種子",
+        "meaning": "seed",
+        "similar": [
+            "dog",
+            "box",
+            "boat"
+        ]
+    },
+    {
+        "word": "派對",
+        "meaning": "party",
+        "similar": [
+            "bath",
+            "apple",
+            "boy"
+        ]
+    },
+    {
+        "word": "羊",
+        "meaning": "sheep",
+        "similar": [
+            "bath",
+            "book",
+            "apple"
+        ]
+    },
+    {
+        "word": "圖片",
+        "meaning": "picture",
+        "similar": [
+            "bath",
+            "boy",
+            "dog"
+        ]
+    },
+    {
+        "word": "鞋子",
+        "meaning": "shoe",
+        "similar": [
+            "boy",
+            "ball",
+            "boat"
+        ]
+    },
+    {
+        "word": "豬",
+        "meaning": "pig",
+        "similar": [
+            "apple",
+            "baby",
+            "ball"
+        ]
+    },
+    {
+        "word": "姐、妹",
+        "meaning": "sister",
+        "similar": [
+            "bread",
+            "boat",
+            "box"
+        ]
+    },
+    {
+        "word": "兔子",
+        "meaning": "rabbit",
+        "similar": [
+            "book",
+            "cat",
+            "apple"
+        ]
+    },
+    {
+        "word": "微笑",
+        "meaning": "smile",
+        "similar": [
+            "dog",
+            "boat",
+            "bread"
+        ]
+    },
+    {
+        "word": "雪",
+        "meaning": "snow",
+        "similar": [
+            "dog",
+            "boat",
+            "baby"
+        ]
+    },
+    {
+        "word": "時間",
+        "meaning": "time",
+        "similar": [
+            "boat",
+            "apple",
+            "cat"
+        ]
+    },
+    {
+        "word": "歌曲",
+        "meaning": "song",
+        "similar": [
+            "bath",
+            "ball",
+            "car"
+        ]
+    },
+    {
+        "word": "最佳",
+        "meaning": "top",
+        "similar": [
+            "back",
+            "school",
+            "boy"
+        ]
+    },
+    {
+        "word": "松鼠",
+        "meaning": "squirrel",
+        "similar": [
+            "back",
+            "bread",
+            "box"
+        ]
+    },
+    {
+        "word": "玩具",
+        "meaning": "toy",
+        "similar": [
+            "ball",
+            "apple",
+            "car"
+        ]
+    },
+    {
+        "word": "星星",
+        "meaning": "star",
+        "similar": [
+            "house",
+            "bath",
+            "car"
+        ]
+    },
+    {
+        "word": "樹",
+        "meaning": "tree",
+        "similar": [
+            "school",
+            "dog",
+            "ball"
+        ]
+    },
+    {
+        "word": "街道",
+        "meaning": "street",
+        "similar": [
+            "baby",
+            "box",
+            "cat"
+        ]
+    },
+    {
+        "word": "手錶",
+        "meaning": "watch",
+        "similar": [
+            "school",
+            "bath",
+            "cat"
+        ]
+    },
+    {
+        "word": "故事",
+        "meaning": "story",
+        "similar": [
+            "ball",
+            "school",
+            "bath"
+        ]
+    },
+    {
+        "word": "水",
+        "meaning": "water",
+        "similar": [
+            "baby",
+            "boat",
+            "bath"
+        ]
+    },
+    {
+        "word": "學生",
+        "meaning": "student",
+        "similar": [
+            "ball",
+            "bread",
+            "school"
+        ]
+    },
+    {
+        "word": "方法",
+        "meaning": "way",
+        "similar": [
+            "car",
+            "book",
+            "boy"
+        ]
+    },
+    {
+        "word": "太陽",
+        "meaning": "sun",
+        "similar": [
+            "back",
+            "box",
+            "car"
+        ]
+    },
+    {
+        "word": "風",
+        "meaning": "wind",
+        "similar": [
+            "cat",
+            "box",
+            "book"
+        ]
+    },
+    {
+        "word": "桌子",
+        "meaning": "table",
+        "similar": [
+            "ball",
+            "back",
+            "bath"
+        ]
+    },
+    {
+        "word": "窗戶",
+        "meaning": "window",
+        "similar": [
+            "ball",
+            "school",
+            "boy"
+        ]
+    },
+    {
+        "word": "東西",
+        "meaning": "thing",
+        "similar": [
+            "ball",
+            "cat",
+            "dog"
+        ]
+    },
+    {
+        "word": "木頭",
+        "meaning": "wood",
+        "similar": [
+            "apple",
+            "boy",
+            "box"
+        ]
+    }
+]

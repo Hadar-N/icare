@@ -4,12 +4,12 @@ import datetime
 import logging
 from dotenv import load_dotenv
 
+from mqtt_shared import MQTTInitialData, ConnectionManager, Topics
+from game_shared import DEVICE_TYPE
+
+from utils import DataSingleton, EventBus, GameEngine
 import utils.consts as consts
-from utils.dataSingleton import DataSingleton
-from utils.helper_functions.setup_helpers import setCameraFunction, get_img_resize_information
-from utils.eventBus import EventBus
-from mqtt.MQTTConnection import MQTTConnection
-from utils.gameEngine import GameEngine
+from utils.helper_functions import setCameraFunction, get_img_resize_information
 
 load_dotenv(verbose=True, override=True)
 
@@ -30,11 +30,26 @@ takePicture, removeCamera = setCameraFunction(global_data.env, global_data.img_r
 
 eventbus = EventBus()
 gameengine = GameEngine(logger, eventbus, takePicture)
-mqttc = MQTTConnection(logger, eventbus)
+
+init_data = MQTTInitialData(
+    host = os.getenv("HOST"),
+    port = os.getenv("PORT"),
+    username = os.getenv("USERNAME"),
+    password = os.getenv("PASSWORD")
+)
+
+def on_message(*args, **kwargs):
+    eventbus.publish(kwargs["topic"], kwargs["data"])
+def publish_word_state(msg):
+    conn.publish_message(Topics.word_state(msg["word"]["word"]), msg)
+
+conn = ConnectionManager.initialize(init_data, DEVICE_TYPE.GAME, logger, on_message)
+eventbus.subscribe(Topics.word_state(), publish_word_state)
+eventbus.subscribe(Topics.STATE, lambda msg: conn.publish_message(Topics.STATE, msg))
 
 gameengine.engine_loop()
 
 logger.info("program exited")
 pygame.quit()
-mqttc.on_close()
+conn.close_connection()
 removeCamera()

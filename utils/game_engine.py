@@ -6,24 +6,26 @@ import json
 import numpy as np
 from logging import Logger
 
-from utils.helper_functions.setup_helpers import asstr, followup_temp, screen_setup
-from utils.helper_functions.image_proc_helpers import create_mask, set_transformation_matrix, set_compare_values, get_blurred_picture, write_controured_img, get_transformation_matrix_with_borders
+from mqtt_shared import ControlCommandBody, Topics
+from game_shared import MQTT_COMMANDS, GAME_STATUS
+
 import utils.consts as consts
-from utils.eventBus import EventBus
-from utils.dataSingleton import DataSingleton
-from utils.gamePlay import GamePlay
+from .helper_functions import *
+from .event_bus import EventBus
+from .data_singleton import DataSingleton
+from .game_play import GamePlay
 
 
 def change_actions_decorator(method):
     def wrapper(self, *args, **kwargs):
         prev_gamestatus = self.gameplay.status
 
-        if prev_gamestatus == consts.GAME_STATUS.ACTIVE:
+        if prev_gamestatus == GAME_STATUS.ACTIVE:
             self.gameplay.pause_game()
         
         method(self, *args, **kwargs)
 
-        if prev_gamestatus == consts.GAME_STATUS.ACTIVE:
+        if prev_gamestatus == GAME_STATUS.ACTIVE:
             self.gameplay.start_game()
     
     return wrapper
@@ -44,8 +46,10 @@ class GameEngine():
     
         self.__window = self.__setup_window()
         self.__setup_comparison_data(initial_img)
-        self.__eventbus.subscribe(consts.MQTT_TOPIC_CONTROL, self.__handle_control_command)
-        self.__eventbus.subscribe(consts.MQTT_TOPIC_DATA, self.__add_time_to_payload)
+        self.__eventbus.subscribe(Topics.CONTROL, self.__handle_control_command)
+        # self.__eventbus.subscribe(Topics.DATA, self.__add_time_to_payload)
+        self.__global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
+        # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
         self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)
     
     def __add_time_to_payload(self, payload):
@@ -76,6 +80,7 @@ class GameEngine():
     def __setup_window(self):
         pygame.init()
         pygame.font.init()
+        pygame.mouse.set_visible(False)
 
         window_size, isfullscreen = screen_setup(self.__global_data.img_resize, os.getenv('PROJECTOR_RESOLUTION') if os.environ["DISPLAY"] == ":0" else None, self.__logger)
         self.__global_data.window_size = window_size
@@ -83,25 +88,23 @@ class GameEngine():
 
         return window
     
-    def __handle_control_command(self, message):
-        message_dict = json.loads(message)
-        print("handleControlCommand: ", message_dict)
-        if message_dict["command"] == consts.MQTT_COMMANDS.START.value:
-            self.gameplay.start_game()
+    def __handle_control_command(self, message: dict):
+        if message["command"] == MQTT_COMMANDS.START:
+            self.gameplay.start_game(message["payload"])
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.PAUSE.value:
+        elif message["command"] == MQTT_COMMANDS.PAUSE:
             self.gameplay.pause_game()
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.STOP.value:
+        elif message["command"] == MQTT_COMMANDS.STOP:
             self.gameplay.stop_game()
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.FLIP_VIEW.value:
+        elif message["command"] == MQTT_COMMANDS.FLIP_VIEW:
             self.__flip_view()
             pass
-        elif message_dict["command"] == consts.MQTT_COMMANDS.RESET_DISPLAY.value:
-            self.__reset_comparison_data(message_dict["payload"])
+        elif message["command"] == MQTT_COMMANDS.RESET_DISPLAY:
+            self.__reset_comparison_data(message["payload"])
             pass
-        else: print(f'invalid message/command {message_dict}')
+        else: print(f'invalid message/command {message}')
 
     @change_actions_decorator
     def __reset_comparison_data(self, coordinates):
