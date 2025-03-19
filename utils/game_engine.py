@@ -88,21 +88,21 @@ class GameEngine():
 
         return window
     
-    def __handle_control_command(self, message: ControlCommandBody):
-        if message.command == MQTT_COMMANDS.START:
-            self.gameplay.start_game(message.payload)
+    def __handle_control_command(self, message: dict):
+        if message["command"] == MQTT_COMMANDS.START:
+            self.gameplay.start_game(message["payload"])
             pass
-        elif message.command == MQTT_COMMANDS.PAUSE:
+        elif message["command"] == MQTT_COMMANDS.PAUSE:
             self.gameplay.pause_game()
             pass
-        elif message.command == MQTT_COMMANDS.STOP:
+        elif message["command"] == MQTT_COMMANDS.STOP:
             self.gameplay.stop_game()
             pass
-        elif message.command == MQTT_COMMANDS.FLIP_VIEW:
+        elif message["command"] == MQTT_COMMANDS.FLIP_VIEW:
             self.__flip_view()
             pass
-        elif message.command == MQTT_COMMANDS.RESET_DISPLAY:
-            self.__reset_comparison_data(message.payload)
+        elif message["command"] == MQTT_COMMANDS.RESET_DISPLAY:
+            self.__reset_comparison_data(message["payload"])
             pass
         else: print(f'invalid message/command {message}')
 

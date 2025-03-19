@@ -52,6 +52,7 @@ class GamePlay():
         [spg.empty() for spg in self.__all_spritegroups]
         self.__init_new_vocab()
         self.__status=GAME_STATUS.ACTIVE
+        self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
     
     def __init_new_vocab(self):
         for i in range(consts.VOCAB_AMOUNT):
@@ -61,18 +62,20 @@ class GamePlay():
                 self._vocabengroup.add(ENvocab)
             else: ENvocab.kill()
 
-    def __add_ZH_draw_vocab(self, data: WordSelectBody):
+    def __add_ZH_draw_vocab(self, data: dict):
         MINIMUM_AREA_FOR_WORD_PRESENTATION = (self._global_data.window_size[0]*self._global_data.window_size[1])/10
-        main_vocab = next((sp for sp in self._vocabengroup.sprites() if sp.vocabMain == data.word), None)
+        word = data["word"] if isinstance(data, dict) else data.word
+        selected = data["selected"] if isinstance(data, dict) else data.selected
+        main_vocab = next((sp for sp in self._vocabengroup.sprites() if sp.vocabMain == word), None)
         
         if not main_vocab:
-            self._logger.error(f"selected word not in bank! selected: {data.selected}; vocab: [{', '.join([sp.vocabMain for sp in self._vocabengroup.sprites()])}]")
+            self._logger.error(f"selected word not in bank! selected: {selected}; vocab: [{', '.join([sp.vocabMain for sp in self._vocabengroup.sprites()])}]")
             return
         if self._area < MINIMUM_AREA_FOR_WORD_PRESENTATION:
-            self._logger.warning(f"not enough space to present word! selected: {data.selected};")
+            self._logger.warning(f"not enough space to present word! selected: {selected};")
             return
         
-        temp = OptionVocabSprite({"word": data.word, "meaning": data.selected}, self._eventbus)
+        temp = OptionVocabSprite({"word": word, "meaning": selected}, self._eventbus)
         temp.twin = main_vocab
         placement = randomize_vacant_location(temp, self._global_data.window_size, self._mask)
         while (not placement or temp.distance_to_twin < consts.MIN_DISTANCE_TO_TWIN):
@@ -96,16 +99,18 @@ class GamePlay():
                 self._logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}; left words: {len(self._vocabengroup.sprites())}')
                 sp.test_match()
                 if len(self._vocabengroup.sprites()) == 0:
-                    self._eventbus.publish(Topics.STATE, {"state": self.__finish_game()})
+                    self.__finish_game()
 
     def __finish_game(self):
         self._logger.info("game finished!")
         self.__status=GAME_STATUS.DONE
+        self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.DONE})
         return self.__status
 
     def start_game(self, payload = None):
         if(len(self._vocabengroup.sprites()) and payload):
             self.__status=GAME_STATUS.ACTIVE
+            self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
         else:
             if payload and isinstance(payload['level'], GAME_LEVELS) and isinstance(payload['mode'], GAME_MODES):
                 self.__init_game(payload['level'].value, payload['mode'].value)
@@ -114,10 +119,12 @@ class GamePlay():
 
     def pause_game(self):
         self.__status=GAME_STATUS.HALTED
+        self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.HALTED})
 
     def stop_game(self):
-        self.__status=GAME_STATUS.HALTED
         [spg.empty() for spg in self.__all_spritegroups]
+        self.__status=GAME_STATUS.STOPPED
+        self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.STOPPED})
     
     def spin_words(self) -> None:
         [[sp.spin_word() for sp in spg.sprites()] for spg in self.__all_spritegroups]
