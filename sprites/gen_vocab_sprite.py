@@ -4,11 +4,11 @@ from utils import DataSingleton, EventBus
 from utils.consts import *
 
 class GenVocabSprite(pygame.sprite.Sprite):
-    def __init__(self, vocab: dict, eventbus: EventBus):
+    def __init__(self, vocab: VocabItem, eventbus: EventBus):
         super().__init__()
 
         self._global_data = DataSingleton()
-        self._vocab = VocabItem(**vocab)
+        self._vocab = vocab
         self._color = self._get_color
         self._floatlocation = (0.,0.)
         self._twin = None
@@ -56,7 +56,10 @@ class GenVocabSprite(pygame.sprite.Sprite):
     def as_dict(self, removed_args:list[str] = []): return self._vocab.asDict(removed_args)
 
     def match_success(self):
-        if self._twin: self._twin.kill()
+        if self._twin: 
+            self._twin._vocab.is_solved = True
+            self._twin.kill()
+        self._vocab.is_solved = True
         self.kill()
 
     def set_location(self, coordinates):

@@ -31,19 +31,13 @@ takePicture, removeCamera = setCameraFunction(global_data.env, global_data.img_r
 eventbus = EventBus()
 gameengine = GameEngine(logger, eventbus, takePicture)
 
-init_data = MQTTInitialData(
-    host = os.getenv("HOST"),
-    port = os.getenv("PORT"),
-    username = os.getenv("USERNAME"),
-    password = os.getenv("PASSWORD")
-)
-
+init_data = MQTTInitialData( host = os.getenv("HOST"), port = os.getenv("PORT"), username = os.getenv("USERNAME"), password = os.getenv("PASSWORD"))
 def on_message(*args, **kwargs):
     eventbus.publish(kwargs["topic"], kwargs["data"])
+conn = ConnectionManager.initialize(init_data, DEVICE_TYPE.GAME, logger, on_message)
+
 def publish_word_state(msg):
     conn.publish_message(Topics.word_state(msg["word"]["word"]), msg)
-
-conn = ConnectionManager.initialize(init_data, DEVICE_TYPE.GAME, logger, on_message)
 eventbus.subscribe(Topics.word_state(), publish_word_state)
 eventbus.subscribe(Topics.STATE, lambda msg: conn.publish_message(Topics.STATE, msg))
 

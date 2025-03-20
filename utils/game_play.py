@@ -2,7 +2,7 @@ import pygame
 from logging import Logger
 
 from mqtt_shared import Topics, ConnectionManager, WordSelectBody
-from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS
+from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS, VocabItem
 
 from .event_bus import EventBus
 from .data_singleton import DataSingleton
@@ -48,7 +48,7 @@ class GamePlay():
     def __init_game(self, level, mode):
         self.__level = level
         self.__mode = mode
-        self.__vocab_options = init_vocab_options(self.__level, self.__mode)
+        self.__vocab_options = [VocabItem(**item) for item in init_vocab_options(self.__level, self.__mode)]
         [spg.empty() for spg in self.__all_spritegroups]
         self.__init_new_vocab()
         self.__status=GAME_STATUS.ACTIVE
@@ -72,10 +72,11 @@ class GamePlay():
             self._logger.error(f"selected word not in bank! selected: {selected}; vocab: [{', '.join([sp.vocabMain for sp in self._vocabengroup.sprites()])}]")
             return
         if self._area < MINIMUM_AREA_FOR_WORD_PRESENTATION:
+            self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()})
             self._logger.warning(f"not enough space to present word! selected: {selected};")
             return
         
-        temp = OptionVocabSprite({"word": word, "meaning": selected}, self._eventbus)
+        temp = OptionVocabSprite(VocabItem(word= word, meaning= selected), self._eventbus)
         temp.twin = main_vocab
         placement = randomize_vacant_location(temp, self._global_data.window_size, self._mask)
         while (not placement or temp.distance_to_twin < consts.MIN_DISTANCE_TO_TWIN):
@@ -98,7 +99,8 @@ class GamePlay():
             if collides:
                 self._logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}; left words: {len(self._vocabengroup.sprites())}')
                 sp.test_match()
-                if len(self._vocabengroup.sprites()) == 0:
+                next_word= next((i.word for i in self.__vocab_options if not i.is_solved), None)
+                if not next_word:
                     self.__finish_game()
 
     def __finish_game(self):
@@ -108,7 +110,7 @@ class GamePlay():
         return self.__status
 
     def start_game(self, payload = None):
-        if(len(self._vocabengroup.sprites()) and payload):
+        if(len(self._vocabengroup.sprites())):
             self.__status=GAME_STATUS.ACTIVE
             self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
         else:
