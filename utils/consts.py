@@ -16,7 +16,7 @@ CAMERA_RES = (1640, 1232)
 CONTOUR_IMAGE_LOC="tests/image_with_contours.jpg"
 
 # game constants
-VOCAB_AMOUNT = 7
+VOCAB_AMOUNT = 5
 MAX_VOCAB_ACTIVE = 3
 
 # image proc. consts
@@ -26,6 +26,11 @@ MIN_FRAME_CONTENT_PARTITION = 7
 KERNEL = np.ones((11, 11), np.uint8)
 LIGHT_SENSITIVITY_FACTOR = 1.4 # TODO: calc based on lighting conditions???
 BORDER_SIZE = 50
+class HIRAR_LOCATIONS (Enum):
+    NEXT = 0
+    PREV = 1
+    CHILD = 2
+    PARENT = 3
 
 # text/movement consts
 SPRITE_APPEAR_SPEED = 0.05

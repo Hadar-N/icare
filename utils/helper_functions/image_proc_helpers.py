@@ -15,12 +15,34 @@ def write_controured_img(image: np.ndarray, coords: list[np.ndarray], threshvalu
         cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(threshvalue, threshvalue, threshvalue), thickness=3)
         cv2.imwrite(consts.CONTOUR_IMAGE_LOC, image)
 
+def find_uncovered_contours(img: np.ndarray) -> list[dict]:
+        contours, hirar = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+        uncovered_ixs = [None for i in range(0,len(contours))]
+    
+        def apply_to_all_levels(ix: int, start_val: bool):
+                curr_ix = ix
+                level_counter = int(start_val)
+                while curr_ix != -1 and uncovered_ixs[curr_ix] == None:
+                        uncovered_ixs[curr_ix] = bool(level_counter%2)
+                        curr_ix = hirar[0][ix][consts.HIRAR_LOCATIONS.PARENT.value]
+                        level_counter+=1
+
+        for i in range(0, len(contours)):
+                if hirar[0][i][consts.HIRAR_LOCATIONS.CHILD.value] == -1:
+                        M = cv2.moments(contours[i]) # TODO: what if midpoint not inside???
+                        midpoint = [int(M["m01"] / M["m00"]), int(M["m10"] / M["m00"])]
+                        apply_to_all_levels(i, np.mean(img[*midpoint]) > 250)
+
+        def getchildrenarea(ix): return np.sum([cv2.contourArea(contours[i]) for i in range(0, len(contours)) if hirar[0][i][consts.HIRAR_LOCATIONS.PARENT.value] == ix])
+        return [{"contour": contours[i], "area": cv2.contourArea(contours[i]) - getchildrenarea(i)} for i in range(0,len(contours)) if uncovered_ixs[i]]
+                        
 def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, threshvalue : int) -> pygame.mask.Mask:
         difference = cv2.absdiff(current_image, reference_blur)
         gray_image = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
         _, thresholded = cv2.threshold(gray_image, threshvalue, consts.THRESHOLD_MAX, cv2.THRESH_BINARY_INV)
         closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, consts.KERNEL)
         mask_img=cv2.bitwise_not(closed)
+        contours_information = find_uncovered_contours(mask_img)
         mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
         return pygame.mask.from_threshold(mask_img_rgb, (0,0,0), threshold=(1,1,1))
 
@@ -29,7 +51,10 @@ def set_transformation_matrix(global_data, ref = None) -> tuple[np.ndarray]:
         image = ref if isinstance(ref, np.ndarray) else None
     
         if not coordinates:
-            contours = find_contours(image)
+            gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            threshval = find_threshval(image)
+            _, thresh = cv2.threshold(gray, threshval, consts.THRESHOLD_MAX, cv2.THRESH_BINARY)
+            contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
             coordinates = find_board(contours, global_data.img_resize)
 
         ordered_points_in_board = sort_points([item[0] for item in coordinates])
@@ -63,13 +88,6 @@ def find_threshval(empty_image: np.ndarray, multip: float = 1.) -> float:
         step_a = np.mean(empty_image, axis=(0,1))
         step_b = np.mean(step_a, axis=0)
         return step_b * multip
-
-def find_contours(image: np.ndarray) -> list:
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        threshval = find_threshval(image)
-        _, thresh = cv2.threshold(gray, threshval, consts.THRESHOLD_MAX, cv2.THRESH_BINARY)
-        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        return contours
 
 def find_board(conts: tuple, img_resize: tuple) -> np.ndarray:
         rects = []

@@ -52,7 +52,6 @@ class GamePlay():
         [spg.empty() for spg in self.__all_spritegroups]
         self.__init_new_vocab()
         self.__status=GAME_STATUS.ACTIVE
-        self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
     
     def __init_new_vocab(self):
         for i in range(consts.VOCAB_AMOUNT):
@@ -116,6 +115,7 @@ class GamePlay():
         else:
             if payload and isinstance(payload['level'], GAME_LEVELS) and isinstance(payload['mode'], GAME_MODES):
                 self.__init_game(payload['level'].value, payload['mode'].value)
+                self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
             else:
                 self._logger.error(f'invalid start_game payload: {payload}')
 
