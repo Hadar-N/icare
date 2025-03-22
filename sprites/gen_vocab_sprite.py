@@ -1,26 +1,28 @@
 import pygame
+from .moving_sprite import MovingSprite
 from game_shared import VocabItem
 from utils import DataSingleton, EventBus
 from utils.consts import *
+import time
+from random import randint, uniform
 
-class GenVocabSprite(pygame.sprite.Sprite):
+class GenVocabSprite(MovingSprite):
     def __init__(self, vocab: VocabItem, eventbus: EventBus):
-        super().__init__()
-
         self._global_data = DataSingleton()
+
         self._vocab = vocab
         self._color = self._get_color
-        self._floatlocation = (0.,0.)
-        self._twin = None
+        
+        image = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)
 
-        self.image = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)
-        self.spin_word()
-        self.rect = self.image.get_rect()
+        super().__init__(image)
 
         self.mask = pygame.mask.from_surface(self.image)
         pygame.mask.Mask.invert(self.mask)
         self.area = self.mask.count()
 
+        self.spin_word()
+        self._twin = None
         self._eventbus = eventbus
 
         # color = (255,0,0)
@@ -30,14 +32,14 @@ class GenVocabSprite(pygame.sprite.Sprite):
         #             self.image.set_at((x,y), color)
     
     @property
-    def vocabMain(self): return self._vocab.word
+    def vocabMain(self) -> str: return self._vocab.word
     @property
-    def vocabTranslation(self): return self._vocab.meaning
+    def vocabTranslation(self) -> str: return self._vocab.meaning
 
     @property
-    def vocabSelf(self): raise NotImplementedError("method 'vocabSelf' not implemented!", self)
+    def vocabSelf(self) -> str: raise NotImplementedError("method 'vocabSelf' not implemented!", self)
     @property
-    def _get_color(self): raise NotImplementedError("method '_get_color' not implemented!", self)
+    def _get_color(self) -> tuple: raise NotImplementedError("method '_get_color' not implemented!", self)
 
     @property
     def twin(self): return self._twin
@@ -46,10 +48,6 @@ class GenVocabSprite(pygame.sprite.Sprite):
         self._twin = sprite
         if self._twin and not self._twin.twin: self._twin.twin = self
 
-    @property
-    def is_out_of_bounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
-    @property
-    def sprite_midpoint(self): return (self.rect.x + self.rect.width/2, self.rect.y + self.rect.height/2)
     @property
     def distance_to_twin(self): return pygame.math.Vector2(self.sprite_midpoint).distance_to(self.twin.sprite_midpoint)
 
@@ -61,13 +59,6 @@ class GenVocabSprite(pygame.sprite.Sprite):
             self._twin.kill()
         self._vocab.is_solved = True
         self.kill()
-
-    def set_location(self, coordinates):
-        self._floatlocation = coordinates
-        self.rect.x, self.rect.y = self._floatlocation
-
-    def on_collision(self, area: int):
-        raise NotImplementedError("method not implemented")
     
     def spin_word(self):
         self.image = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)

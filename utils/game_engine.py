@@ -59,10 +59,8 @@ class GameEngine():
     def __get_image_for_game(self, is_initial = False):
         if (self.__counter%consts.NEW_IMAGE_INTERVALS == 0 or is_initial):
             image = get_blurred_picture(self.__takePicture(), self.__matrix, self.__global_data.window_size)
-            mask = create_mask(image, self.__reference_blur, self.__threshvalue)
-
-            area = (self.__global_data.window_size[0] * self.__global_data.window_size[1]) - mask.count()
-            return mask, area
+            mask, contours_info = create_mask(image, self.__reference_blur, self.__threshvalue)
+            return mask, contours_info
         return None
 
     def __setup_comparison_data(self, img):
@@ -85,6 +83,8 @@ class GameEngine():
         window_size, isfullscreen = screen_setup(self.__global_data.img_resize, os.getenv('PROJECTOR_RESOLUTION') if os.environ["DISPLAY"] == ":0" else None, self.__logger)
         self.__global_data.window_size = window_size
         window = pygame.display.set_mode(self.__global_data.window_size, pygame.FULLSCREEN if isfullscreen else 0)
+
+        self.__logger.info(f"image information: img_resize = {asstr(self.__global_data.img_resize)}; window_size = {asstr(self.__global_data.window_size)}")
 
         return window
     
