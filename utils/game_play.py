@@ -10,7 +10,7 @@ from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS,
 from .event_bus import EventBus
 from .data_singleton import DataSingleton
 import utils.consts as consts
-from utils.helper_functions import init_vocab_options, randomize_vacant_location, isVarInEnum
+from utils.helper_functions import init_vocab_options, randomize_vacant_location, isVarInEnum, check_pygame_pt_in_contour, convert_contour_to_polygon, calc_contour_midpoint
 from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
@@ -72,14 +72,15 @@ class GamePlay():
         word = data["word"] if isinstance(data, dict) else data.word
         selected = data["selected"] if isinstance(data, dict) else data.selected
         main_vocab = next((sp for sp in self.__vocab_sprites.sprites() if isinstance(sp, MainVocabSprite) and sp.vocabMain == word), None)
-        
+
         if not main_vocab:
             self._logger.error(f"selected word not currently presented! word:{word}; selected: {selected}")
+            # self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()}) # publish remove instead???
             return
         
         destenation_contour = next((cnt for cnt in self._contours_info
                                     if cnt["area"] > self.MINIMUM_AREA_FOR_WORD_PRESENTATION
-                                    and cv2.pointPolygonTest(cnt["contour"], main_vocab.sprite_midpoint, False) < 1.), None)
+                                    and check_pygame_pt_in_contour(cnt["contour"], main_vocab.sprite_midpoint)), None)
         if not destenation_contour:
             self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()})
             self._logger.warning(f"not enough contours to present word! selected: {selected};")
@@ -87,11 +88,11 @@ class GamePlay():
         
         temp = OptionVocabSprite(VocabItem(word= word, meaning= selected), self._eventbus)
         temp.twin = main_vocab
-        temp.set_location(destenation_contour["center_pt"])
+        temp.set_location(calc_contour_midpoint(destenation_contour["contour"], True))
         self.__vocab_sprites.add(temp)
 
-    def __check_collision(self, group):
-        for sp in group.sprites():
+    def __check_collision(self):
+        for sp in self.__vocab_sprites.sprites():
             if sp.is_out_of_bounds:
                 sp.on_collision(sp.area)
                 continue
@@ -142,7 +143,7 @@ class GamePlay():
         self.__setup_mask()
 
         self.__vocab_matching()
-        self.__check_collision(self.__vocab_sprites)
+        self.__check_collision()
 
         self.__add_EN_vocab()
 
