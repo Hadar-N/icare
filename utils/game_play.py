@@ -2,6 +2,7 @@ import pygame
 from logging import Logger
 from random import sample
 import numpy as np
+import cv2
 
 from mqtt_shared import Topics, ConnectionManager, WordSelectBody
 from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS, VocabItem
@@ -75,17 +76,18 @@ class GamePlay():
         if not main_vocab:
             self._logger.error(f"selected word not currently presented! word:{word}; selected: {selected}")
             return
-        if np.sum([i["area"] for i in self._contours_info]) < self.MINIMUM_AREA_FOR_WORD_PRESENTATION:
+        
+        destenation_contour = next((cnt for cnt in self._contours_info
+                                    if cnt["area"] > self.MINIMUM_AREA_FOR_WORD_PRESENTATION
+                                    and cv2.pointPolygonTest(cnt["contour"], main_vocab.sprite_midpoint, False) < 1.), None)
+        if not destenation_contour:
             self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()})
-            self._logger.warning(f"not enough space to present word! selected: {selected};")
+            self._logger.warning(f"not enough contours to present word! selected: {selected};")
             return
         
         temp = OptionVocabSprite(VocabItem(word= word, meaning= selected), self._eventbus)
         temp.twin = main_vocab
-        placement = randomize_vacant_location(temp, self._global_data.window_size, self._mask)
-        while (not placement or temp.distance_to_twin < (consts.MIN_DISTANCE_TO_TWIN * temp.twin.rect.width)):
-            placement = randomize_vacant_location(temp, self._global_data.window_size, self._mask)
-
+        temp.set_location(destenation_contour["center_pt"])
         self.__vocab_sprites.add(temp)
 
     def __check_collision(self, group):

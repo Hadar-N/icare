@@ -3,3 +3,6 @@
 tests/*
 venv/*
 .env
+
+public/fonts/DFT_K90.ttf
+public/fonts/DFT_K91.ttf
