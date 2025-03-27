@@ -1,10 +1,7 @@
 import pygame
 from logging import Logger
 from random import sample
-import numpy as np
-import cv2
-
-from mqtt_shared import Topics, ConnectionManager, WordSelectBody
+from mqtt_shared import Topics
 from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS, VocabItem
 
 from .event_bus import EventBus
@@ -14,7 +11,7 @@ from utils.helper_functions import init_vocab_options, randomize_vacant_location
 from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
-    def __init__(self, window: pygame.Surface, logger: Logger, eventbus: EventBus, getMask):
+    def __init__(self, window: pygame.Surface, logger: Logger, eventbus: EventBus, getMask: callable):
 
         self._global_data = DataSingleton()
         self._logger = logger
@@ -65,7 +62,7 @@ class GamePlay():
                 if (unsolved):
                     word = sample(unsolved, 1)[0]
                     ENvocab = MainVocabSprite(word, self._eventbus)
-                    ENvocab.set_location(relevant_cnt["center_pt"])
+                    ENvocab.set_location(calc_contour_midpoint(relevant_cnt["contour"]))
                     self.__vocab_sprites.add(ENvocab)
 
     def __add_ZH_draw_vocab(self, data: dict):
@@ -88,7 +85,7 @@ class GamePlay():
         
         temp = OptionVocabSprite(VocabItem(word= word, meaning= selected), self._eventbus)
         temp.twin = main_vocab
-        temp.set_location(calc_contour_midpoint(destenation_contour["contour"], True))
+        temp.set_location(calc_contour_midpoint(destenation_contour["contour"]))
         self.__vocab_sprites.add(temp)
 
     def __check_collision(self):
@@ -148,6 +145,8 @@ class GamePlay():
         self.__add_EN_vocab()
 
     def __render_stage(self):
+        # for ct in self._contours_info:
+        #     pygame.draw.polygon(self._window, (100, 100, 100), convert_contour_to_polygon(ct["contour"]), 5)
         self.__vocab_sprites.update()
         self.__vocab_sprites.draw(self._window)
 

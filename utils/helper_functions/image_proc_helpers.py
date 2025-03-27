@@ -16,41 +16,39 @@ def write_controured_img(image: np.ndarray, coords: list[np.ndarray], threshvalu
         cv2.imwrite(consts.CONTOUR_IMAGE_LOC, image)
 
 def check_pygame_pt_in_contour(cnt: np.ndarray, pt: tuple) -> bool:
-       return cv2.pointPolygonTest(cnt["contour"], (pt[1], pt[0]), False) < 0
+       return cv2.pointPolygonTest(cnt, (pt[1], pt[0]), False) < 0
 
 def convert_contour_to_polygon(cnt: np.ndarray) -> list:
        return [[c[1], c[0]] for c in cnt.reshape(-1, 2)]
 
-def calc_contour_midpoint(cnt: np.ndarray, is_pygame: bool) -> tuple:
+def calc_contour_midpoint(cnt: np.ndarray) -> tuple:
        M = cv2.moments(cnt) # TODO: what if midpoint not inside???
-       midpoint = (int(M["m01"] / M["m00"]), int(M["m10"] / M["m00"]))
-       return (midpoint[1], midpoint[0]) if is_pygame else midpoint
+       return (int(M["m01"] / M["m00"]), int(M["m10"] / M["m00"]))
 
 def find_uncovered_contours(img: np.ndarray) -> list[dict]:
         contours, hirar = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-        uncovered_center_pts = [None for i in range(0,len(contours))]
+        is_uncovered = np.zeros(len(contours))
         children_areas = np.zeros(len(contours))
     
         def apply_to_all_levels(ix: int, start_val: bool):
                 curr_ix = ix
                 level_counter = int(start_val)
-                while curr_ix != -1 and not uncovered_center_pts[curr_ix]:
+                while curr_ix != -1 and not is_uncovered[curr_ix]:
                         parent_ix = hirar[0][curr_ix][consts.HIRAR_LOCATIONS.PARENT.value]
                         if bool(level_counter%2):
-                                uncovered_center_pts[curr_ix] = calc_contour_midpoint(contours[curr_ix], False)
-                        elif parent_ix != -1:
-                               children_areas[parent_ix]+=cv2.contourArea(contours[curr_ix])
+                                is_uncovered[curr_ix] = True
+                        else:
+                                is_uncovered[curr_ix] = False
+                                if parent_ix != -1: children_areas[parent_ix]+=cv2.contourArea(contours[curr_ix])
                         curr_ix = parent_ix
                         level_counter+=1
 
         for i in range(0, len(contours)):
                 if hirar[0][i][consts.HIRAR_LOCATIONS.CHILD.value] == -1:
-                        midpoint = calc_contour_midpoint(contours[i], False)
+                        midpoint = calc_contour_midpoint(contours[i])
                         apply_to_all_levels(i, np.mean(img[*midpoint]) > 250)
 
-        return [{"contour": contours[i],
-                 "area": cv2.contourArea(contours[i]) - children_areas[i],
-                 "center_pt": uncovered_center_pts[i]} for i in range(0,len(contours)) if uncovered_center_pts[i]]
+        return [{"contour": contours[i], "area": cv2.contourArea(contours[i]) - children_areas[i]} for i in range(0,len(contours)) if is_uncovered[i]]
                         
 def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, threshvalue : int) -> pygame.mask.Mask:
         difference = cv2.absdiff(current_image, reference_blur)
