@@ -13,7 +13,7 @@ class MainVocabSprite(GenVocabSprite):
     @property
     def vocabSelf(self): return self.vocabMain
     @property
-    def _get_color(self): return (0,0,255)
+    def _get_color(self): return (0,255,0)
     @property
     def options(self): return self._vocab.options
 

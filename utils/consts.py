@@ -45,4 +45,4 @@ VOCAB_PATH = {
     GAME_MODES.ZHtoEN: 'public/chinese_to_english.json'
 }
 FONT_PATH = 'public/fonts/DFT_K90.ttf'
-FONT_SIZE= 30
+FONT_SIZE= 40
