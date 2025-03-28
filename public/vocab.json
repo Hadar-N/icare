@@ -1,0 +1,2047 @@
+[
+    {
+        "word": "boy",
+        "level": "beginner",
+        "category": "People"
+    },
+    {
+        "word": "friend",
+        "level": "beginner",
+        "category": "People"
+    },
+    {
+        "word": "girl",
+        "level": "beginner",
+        "category": "People"
+    },
+    {
+        "word": "teacher",
+        "level": "beginner",
+        "category": "People"
+    },
+    {
+        "word": "brother",
+        "level": "beginner",
+        "category": "Family"
+    },
+    {
+        "word": "dad",
+        "level": "beginner",
+        "category": "Family"
+    },
+    {
+        "word": "father",
+        "level": "beginner",
+        "category": "Family"
+    },
+    {
+        "word": "mom",
+        "level": "beginner",
+        "category": "Family"
+    },
+    {
+        "word": "mother",
+        "level": "beginner",
+        "category": "Family"
+    },
+    {
+        "word": "sister",
+        "level": "beginner",
+        "category": "Family"
+    },
+    {
+        "word": "apple",
+        "level": "beginner",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "banana",
+        "level": "beginner",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "cake",
+        "level": "beginner",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "egg",
+        "level": "beginner",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "milk",
+        "level": "beginner",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "bag",
+        "level": "beginner",
+        "category": "School"
+    },
+    {
+        "word": "ball",
+        "level": "beginner",
+        "category": "School"
+    },
+    {
+        "word": "book",
+        "level": "beginner",
+        "category": "School"
+    },
+    {
+        "word": "box",
+        "level": "beginner",
+        "category": "School"
+    },
+    {
+        "word": "class",
+        "level": "beginner",
+        "category": "School"
+    },
+    {
+        "word": "bird",
+        "level": "beginner",
+        "category": "Animals"
+    },
+    {
+        "word": "cat",
+        "level": "beginner",
+        "category": "Animals"
+    },
+    {
+        "word": "cow",
+        "level": "beginner",
+        "category": "Animals"
+    },
+    {
+        "word": "dog",
+        "level": "beginner",
+        "category": "Animals"
+    },
+    {
+        "word": "fish",
+        "level": "beginner",
+        "category": "Animals"
+    },
+    {
+        "word": "pig",
+        "level": "beginner",
+        "category": "Animals"
+    },
+    {
+        "word": "home",
+        "level": "beginner",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "school",
+        "level": "beginner",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "zoo",
+        "level": "beginner",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "one",
+        "level": "beginner",
+        "category": "Numbers"
+    },
+    {
+        "word": "two",
+        "level": "beginner",
+        "category": "Numbers"
+    },
+    {
+        "word": "three",
+        "level": "beginner",
+        "category": "Numbers"
+    },
+    {
+        "word": "four",
+        "level": "beginner",
+        "category": "Numbers"
+    },
+    {
+        "word": "five",
+        "level": "beginner",
+        "category": "Numbers"
+    },
+    {
+        "word": "good",
+        "level": "beginner",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "happy",
+        "level": "beginner",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "hat",
+        "level": "beginner",
+        "category": "Clothing"
+    },
+    {
+        "word": "Taipei",
+        "level": "beginner",
+        "category": "Place/Country Names"
+    },
+    {
+        "word": "Taiwan",
+        "level": "beginner",
+        "category": "Place/Country Names"
+    },
+    {
+        "word": "English",
+        "level": "beginner",
+        "category": "Subjects"
+    },
+    {
+        "word": "he",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "it",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "I",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "my",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "she",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "you",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "your",
+        "level": "beginner",
+        "category": "Pronouns"
+    },
+    {
+        "word": "what",
+        "level": "beginner",
+        "category": "WH-words"
+    },
+    {
+        "word": "who",
+        "level": "beginner",
+        "category": "WH-words"
+    },
+    {
+        "word": "be",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "am",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "are",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "is",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "a",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "an",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "this",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "that",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "the",
+        "level": "beginner",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "go",
+        "level": "beginner",
+        "category": "Verbs"
+    },
+    {
+        "word": "look",
+        "level": "beginner",
+        "category": "Verbs"
+    },
+    {
+        "word": "name",
+        "level": "beginner",
+        "category": "Other Nouns"
+    },
+    {
+        "word": "no",
+        "level": "beginner",
+        "category": "Other Adverbs"
+    },
+    {
+        "word": "not",
+        "level": "beginner",
+        "category": "Other Adverbs"
+    },
+    {
+        "word": "yes",
+        "level": "beginner",
+        "category": "Other Adverbs"
+    },
+    {
+        "word": "doctor",
+        "level": "intermediate",
+        "category": "People"
+    },
+    {
+        "word": "kid",
+        "level": "intermediate",
+        "category": "People"
+    },
+    {
+        "word": "student",
+        "level": "intermediate",
+        "category": "People"
+    },
+    {
+        "word": "grandma",
+        "level": "intermediate",
+        "category": "Family"
+    },
+    {
+        "word": "grandpa",
+        "level": "intermediate",
+        "category": "Family"
+    },
+    {
+        "word": "rice",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "tea",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "water",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "juice",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "hamburger",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "ice cream",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "orange",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "pizza",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "breakfast",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "lunch",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "dinner",
+        "level": "intermediate",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "desk",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "door",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "marker",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "pen",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "pencil",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "table",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "chair",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "eraser",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "ruler",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "window",
+        "level": "intermediate",
+        "category": "School"
+    },
+    {
+        "word": "bear",
+        "level": "intermediate",
+        "category": "Animals"
+    },
+    {
+        "word": "monkey",
+        "level": "intermediate",
+        "category": "Animals"
+    },
+    {
+        "word": "lion",
+        "level": "intermediate",
+        "category": "Animals"
+    },
+    {
+        "word": "rabbit",
+        "level": "intermediate",
+        "category": "Animals"
+    },
+    {
+        "word": "tiger",
+        "level": "intermediate",
+        "category": "Animals"
+    },
+    {
+        "word": "park",
+        "level": "intermediate",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "store",
+        "level": "intermediate",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "here",
+        "level": "intermediate",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "there",
+        "level": "intermediate",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "six",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "seven",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "eight",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "nine",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "ten",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "eleven",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "twelve",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "many",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "much",
+        "level": "intermediate",
+        "category": "Numbers"
+    },
+    {
+        "word": "blue",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "color",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "green",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "red",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "yellow",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "black",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "brown",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "white",
+        "level": "intermediate",
+        "category": "Colors"
+    },
+    {
+        "word": "cup",
+        "level": "intermediate",
+        "category": "House"
+    },
+    {
+        "word": "fan",
+        "level": "intermediate",
+        "category": "House"
+    },
+    {
+        "word": "key",
+        "level": "intermediate",
+        "category": "House"
+    },
+    {
+        "word": "head",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "eye",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "node",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "ear",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "hand",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "arm",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "leg",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "foot",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "face",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "mouth",
+        "level": "intermediate",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "old",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "short",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "tall",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "big",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "long",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "small",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "thin",
+        "level": "intermediate",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "cold",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "cool",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "dry",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "hot",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "warm",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "wet",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "cloudy",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "rainy",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "sunny",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "weather",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "windy",
+        "level": "intermediate",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "Sunday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "Monday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "Tuesday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "Thursday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "Wednesday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "Friday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "Saturday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "day",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "evening",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "morning",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "night",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "now",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "time",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "today",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "tomorrow",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "week",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "year",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "yesterday",
+        "level": "intermediate",
+        "category": "Time"
+    },
+    {
+        "word": "bike",
+        "level": "intermediate",
+        "category": "Transportation"
+    },
+    {
+        "word": "bus",
+        "level": "intermediate",
+        "category": "Transportation"
+    },
+    {
+        "word": "car",
+        "level": "intermediate",
+        "category": "Transportation"
+    },
+    {
+        "word": "bad",
+        "level": "intermediate",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "fine",
+        "level": "intermediate",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "great",
+        "level": "intermediate",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "nice",
+        "level": "intermediate",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "OK",
+        "level": "intermediate",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "sad",
+        "level": "intermediate",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "cap",
+        "level": "intermediate",
+        "category": "Clothing"
+    },
+    {
+        "word": "jacket",
+        "level": "intermediate",
+        "category": "Clothing"
+    },
+    {
+        "word": "shoes",
+        "level": "intermediate",
+        "category": "Clothing"
+    },
+    {
+        "word": "Japan",
+        "level": "intermediate",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "UK",
+        "level": "intermediate",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "US",
+        "level": "intermediate",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "USA",
+        "level": "intermediate",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "game",
+        "level": "intermediate",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "hiking",
+        "level": "intermediate",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "art",
+        "level": "intermediate",
+        "category": "Subjects"
+    },
+    {
+        "word": "Chinese",
+        "level": "intermediate",
+        "category": "Subjects"
+    },
+    {
+        "word": "math",
+        "level": "intermediate",
+        "category": "Subjects"
+    },
+    {
+        "word": "music",
+        "level": "intermediate",
+        "category": "Subjects"
+    },
+    {
+        "word": "we",
+        "level": "intermediate",
+        "category": "Pronouns"
+    },
+    {
+        "word": "they",
+        "level": "intermediate",
+        "category": "Pronouns"
+    },
+    {
+        "word": "how",
+        "level": "intermediate",
+        "category": "WH-words"
+    },
+    {
+        "word": "where",
+        "level": "intermediate",
+        "category": "WH-words"
+    },
+    {
+        "word": "which",
+        "level": "intermediate",
+        "category": "WH-words"
+    },
+    {
+        "word": "can",
+        "level": "intermediate",
+        "category": "BE & Auxilliaries"
+    },
+    {
+        "word": "do",
+        "level": "intermediate",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "does",
+        "level": "intermediate",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "these",
+        "level": "intermediate",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "those",
+        "level": "intermediate",
+        "category": "Articles & Determiner"
+    },
+    {
+        "word": "cry",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "dance",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "jump",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "like",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "read",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "sing",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "want",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "close",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "come",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "cook",
+        "level": "intermediate",
+        "category": "People"
+    },
+    {
+        "word": "draw",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "listen",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "open",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "play",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "run",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "see",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "sleep",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "swim",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "walk",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "write",
+        "level": "intermediate",
+        "category": "Verbs"
+    },
+    {
+        "word": "at",
+        "level": "intermediate",
+        "category": "Prepositions"
+    },
+    {
+        "word": "in",
+        "level": "intermediate",
+        "category": "Prepositions"
+    },
+    {
+        "word": "on",
+        "level": "intermediate",
+        "category": "Prepositions"
+    },
+    {
+        "word": "under",
+        "level": "intermediate",
+        "category": "Prepositions"
+    },
+    {
+        "word": "kite",
+        "level": "intermediate",
+        "category": "Other Nouns"
+    },
+    {
+        "word": "yo-yo",
+        "level": "intermediate",
+        "category": "Conjugations"
+    },
+    {
+        "word": "o'clock",
+        "level": "intermediate",
+        "category": "Conjugations"
+    },
+    {
+        "word": "and",
+        "level": "intermediate",
+        "category": "Conjugations"
+    },
+    {
+        "word": "but",
+        "level": "intermediate",
+        "category": "Conjugations"
+    },
+    {
+        "word": "or",
+        "level": "intermediate",
+        "category": "Conjugations"
+    },
+    {
+        "word": "so",
+        "level": "intermediate",
+        "category": "Conjugations"
+    },
+    {
+        "word": "police officer",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "police station",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "post office",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "living room",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "baby",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "man",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "nurse",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "singer",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "child",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "mailman",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "woman",
+        "level": "advanced",
+        "category": "People"
+    },
+    {
+        "word": "aunt",
+        "level": "advanced",
+        "category": "Family"
+    },
+    {
+        "word": "daughter",
+        "level": "advanced",
+        "category": "Family"
+    },
+    {
+        "word": "son",
+        "level": "advanced",
+        "category": "Family"
+    },
+    {
+        "word": "uncle",
+        "level": "advanced",
+        "category": "Family"
+    },
+    {
+        "word": "mile",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "candy",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "pie",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "bread",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "coffee",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "cookies",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "food",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "fruit",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "noodles",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "sandwich",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "soup",
+        "level": "advanced",
+        "category": "Food & Drink"
+    },
+    {
+        "word": "card",
+        "level": "advanced",
+        "category": "School"
+    },
+    {
+        "word": "computer",
+        "level": "advanced",
+        "category": "School"
+    },
+    {
+        "word": "classroom",
+        "level": "advanced",
+        "category": "School"
+    },
+    {
+        "word": "clock",
+        "level": "advanced",
+        "category": "School"
+    },
+    {
+        "word": "page",
+        "level": "advanced",
+        "category": "School"
+    },
+    {
+        "word": "seat",
+        "level": "advanced",
+        "category": "School"
+    },
+    {
+        "word": "pid",
+        "level": "advanced",
+        "category": "Animals"
+    },
+    {
+        "word": "bee",
+        "level": "advanced",
+        "category": "Animals"
+    },
+    {
+        "word": "duck",
+        "level": "advanced",
+        "category": "Animals"
+    },
+    {
+        "word": "chicken",
+        "level": "advanced",
+        "category": "Animals"
+    },
+    {
+        "word": "elephant",
+        "level": "advanced",
+        "category": "Animals"
+    },
+    {
+        "word": "bookstore",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "shop",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "supermarket",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "gym",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "hospital",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "library",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "restaurant",
+        "level": "advanced",
+        "category": "Places & Locations"
+    },
+    {
+        "word": "thirteen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "fourteen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "fifteen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "sixteen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "seventeen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "eighteen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "nineteen",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "some",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "twenty",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "thirty",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "firty",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "fifty",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "sixty",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "seventy",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "eighty",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "ninety",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "hundred",
+        "level": "advanced",
+        "category": "Numbers"
+    },
+    {
+        "word": "pink",
+        "level": "advanced",
+        "category": "Colors"
+    },
+    {
+        "word": "gray",
+        "level": "advanced",
+        "category": "Colors"
+    },
+    {
+        "word": "grey",
+        "level": "advanced",
+        "category": "Colors"
+    },
+    {
+        "word": "orange",
+        "level": "advanced",
+        "category": "Colors"
+    },
+    {
+        "word": "purple",
+        "level": "advanced",
+        "category": "Colors"
+    },
+    {
+        "word": "bathroom",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "bed",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "bedroom",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "kitched",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "sofa",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "TV",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "cellphone",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "telephone",
+        "level": "advanced",
+        "category": "House"
+    },
+    {
+        "word": "keg",
+        "level": "advanced",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "nose",
+        "level": "advanced",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "hair",
+        "level": "advanced",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "back",
+        "level": "advanced",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "cody",
+        "level": "advanced",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "tooth",
+        "level": "advanced",
+        "category": "Parts of the Body"
+    },
+    {
+        "word": "busy",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "clean",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "cure",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "dirty",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "heavy",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "kind",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "sick",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "smart",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "strong",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "young",
+        "level": "advanced",
+        "category": "Descriptive Adjectives"
+    },
+    {
+        "word": "moon",
+        "level": "advanced",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "sky",
+        "level": "advanced",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "star",
+        "level": "advanced",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "sun",
+        "level": "advanced",
+        "category": "Weather & Nature"
+    },
+    {
+        "word": "fall",
+        "level": "advanced",
+        "category": "Time"
+    },
+    {
+        "word": "spring",
+        "level": "advanced",
+        "category": "Time"
+    },
+    {
+        "word": "summer",
+        "level": "advanced",
+        "category": "Time"
+    },
+    {
+        "word": "winter",
+        "level": "advanced",
+        "category": "Time"
+    },
+    {
+        "word": "MRT",
+        "level": "advanced",
+        "category": "Transportation"
+    },
+    {
+        "word": "plane",
+        "level": "advanced",
+        "category": "Transportation"
+    },
+    {
+        "word": "ship",
+        "level": "advanced",
+        "category": "Transportation"
+    },
+    {
+        "word": "taxi",
+        "level": "advanced",
+        "category": "Transportation"
+    },
+    {
+        "word": "train",
+        "level": "advanced",
+        "category": "Transportation"
+    },
+    {
+        "word": "mad",
+        "level": "advanced",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "angry",
+        "level": "advanced",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "excited",
+        "level": "advanced",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "hungry",
+        "level": "advanced",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "tired",
+        "level": "advanced",
+        "category": "Feelings & Emotions"
+    },
+    {
+        "word": "coat",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "dress",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "glasses",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "pants",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "shorts",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "skirt",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "socks",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "T-shirt",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "jeans",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "sweater",
+        "level": "advanced",
+        "category": "Clothing"
+    },
+    {
+        "word": "baseball",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "basketball",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "camping",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "jogging",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "sport",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "table",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "tennis",
+        "level": "advanced",
+        "category": "Sports and Hobbies"
+    },
+    {
+        "word": "computer",
+        "level": "advanced",
+        "category": "Subjects"
+    },
+    {
+        "word": "PE",
+        "level": "advanced",
+        "category": "Subjects"
+    },
+    {
+        "word": "science",
+        "level": "advanced",
+        "category": "Subjects"
+    },
+    {
+        "word": "her",
+        "level": "advanced",
+        "category": "Pronouns"
+    },
+    {
+        "word": "his",
+        "level": "advanced",
+        "category": "Pronouns"
+    },
+    {
+        "word": "our",
+        "level": "advanced",
+        "category": "Pronouns"
+    },
+    {
+        "word": "their",
+        "level": "advanced",
+        "category": "Pronouns"
+    },
+    {
+        "word": "mine",
+        "level": "advanced",
+        "category": "Pronouns"
+    },
+    {
+        "word": "when",
+        "level": "advanced",
+        "category": "WH-words"
+    },
+    {
+        "word": "whose",
+        "level": "advanced",
+        "category": "WH-words"
+    },
+    {
+        "word": "have",
+        "level": "advanced",
+        "category": "BE & Auxilliaries"
+    },
+    {
+        "word": "has",
+        "level": "advanced",
+        "category": "BE & Auxilliaries"
+    },
+    {
+        "word": "may",
+        "level": "advanced",
+        "category": "BE & Auxilliaries"
+    },
+    {
+        "word": "clean",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "cool",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "drink",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "drive",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "eat",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "feel",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "fly",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "get",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "give",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "live",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "ride",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "say",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "sit",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "stand",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "speak",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "study",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "take",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "talk",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "wash",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "watch",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "wear",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "work",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "hurry",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "put",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "share",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "spell",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "stop",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "thank",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "try",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "turn",
+        "level": "advanced",
+        "category": "Verbs"
+    },
+    {
+        "word": "by",
+        "level": "advanced",
+        "category": "Prepositions"
+    },
+    {
+        "word": "for",
+        "level": "advanced",
+        "category": "Prepositions"
+    },
+    {
+        "word": "from",
+        "level": "advanced",
+        "category": "Prepositions"
+    },
+    {
+        "word": "e-mail",
+        "level": "advanced",
+        "category": "Other Nouns"
+    },
+    {
+        "word": "flower",
+        "level": "advanced",
+        "category": "Other Nouns"
+    },
+    {
+        "word": "tree",
+        "level": "advanced",
+        "category": "Other Nouns"
+    },
+    {
+        "word": "dollar",
+        "level": "advanced",
+        "category": "Others"
+    },
+    {
+        "word": "early",
+        "level": "advanced",
+        "category": "Others"
+    },
+    {
+        "word": "late",
+        "level": "advanced",
+        "category": "Others"
+    },
+    {
+        "word": "loud",
+        "level": "advanced",
+        "category": "Others"
+    },
+    {
+        "word": "money",
+        "level": "advanced",
+        "category": "Others"
+    },
+    {
+        "word": "quiet",
+        "level": "advanced",
+        "category": "Others"
+    },
+    {
+        "word": "very",
+        "level": "advanced",
+        "category": "Others"
+    }
+]
