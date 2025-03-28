@@ -15,14 +15,14 @@ def write_controured_img(image: np.ndarray, coords: list[np.ndarray], threshvalu
         cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(threshvalue, threshvalue, threshvalue), thickness=3)
         cv2.imwrite(consts.CONTOUR_IMAGE_LOC, image)
 
-def check_pygame_pt_in_contour(cnt: np.ndarray, pt: tuple) -> bool:
-       return cv2.pointPolygonTest(cnt, (pt[1], pt[0]), False) < 0
+def is_pygame_pt_in_contour(cnt: np.ndarray, pt: tuple) -> bool:
+       return cv2.pointPolygonTest(cnt, (pt[1], pt[0]), False) >= 0
 
 def convert_contour_to_polygon(cnt: np.ndarray) -> list:
        return [[c[1], c[0]] for c in cnt.reshape(-1, 2)]
 
 def calc_contour_midpoint(cnt: np.ndarray) -> tuple:
-       M = cv2.moments(cnt) # TODO: what if midpoint not inside???
+       M = cv2.moments(cnt)
        return (int(M["m01"] / M["m00"]), int(M["m10"] / M["m00"]))
 
 def find_uncovered_contours(img: np.ndarray) -> list[dict]:
@@ -66,9 +66,8 @@ def set_transformation_matrix(global_data, ref = None) -> tuple[np.ndarray]:
     
         if not coordinates:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            threshval = find_threshval(image)
-            _, thresh = cv2.threshold(gray, threshval, consts.THRESHOLD_MAX, cv2.THRESH_BINARY)
-            contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+            thresholded = cv2.adaptiveThreshold(gray, consts.THRESHOLD_MAX, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
+            contours, _ = cv2.findContours(thresholded, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
             coordinates = find_board(contours, global_data.img_resize)
 
         ordered_points_in_board = sort_points([item[0] for item in coordinates])
@@ -89,19 +88,16 @@ def get_transformation_matrix_with_borders(orig_inp_coords: np.ndarray, out_coor
 
         return matrix, bordered_inp
 
-def set_compare_values(takePicture: callable, matrix: np.ndarray, matrix_bordered: np.ndarray, window_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
+def set_compare_values(takePicture: callable, matrix: np.ndarray, window_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
         new_img = takePicture()
         reference_blur = get_blurred_picture(new_img, matrix, window_size)
-        bordered_reference_blur = get_blurred_picture(new_img, matrix_bordered, window_size)
-        threshvalue_bordered = find_threshval(bordered_reference_blur)
+        threshvalue_bordered = find_threshval(reference_blur)
         logger.info(f'calculated threshvalue by border={threshvalue_bordered}')
 
         return reference_blur, threshvalue_bordered, new_img
 
-def find_threshval(empty_image: np.ndarray, multip: float = 1.) -> float:
-        step_a = np.mean(empty_image, axis=(0,1))
-        step_b = np.mean(step_a, axis=0)
-        return step_b * multip
+def find_threshval(empty_image: np.ndarray, multip: float = consts.THRESHOLD_MULTIP) -> float:
+        return np.mean(empty_image) + (np.std(empty_image) * multip)
 
 def find_board(conts: tuple, img_resize: tuple) -> np.ndarray:
         rects = []
@@ -109,19 +105,20 @@ def find_board(conts: tuple, img_resize: tuple) -> np.ndarray:
         fake_contour = np.array([[img_resize[0] - 1, 0], [0,0], [0, img_resize[1] - 1],
                                  [img_resize[0] - 1, img_resize[1] - 1]]).reshape((-1,1,2)).astype(np.int32)
         full_area = cv2.contourArea(fake_contour)
+        center_pt = (int(img_resize[0] / 2), int(img_resize[1] / 2))
         area_theshold = full_area/consts.MIN_FRAME_CONTENT_PARTITION
 
         for c in conts:
             epsilon = 0.02 * cv2.arcLength(c, True)
             approx = cv2.approxPolyDP(c, epsilon, True)
             area= cv2.contourArea(approx)
-            if len(approx) == 4 and area > area_theshold and area < full_area:
+            if len(approx) == 4 and area > area_theshold and area < full_area*.9:
                 rects.append({"cnt": approx, "area": area})
 
         match len(rects):
             case 0: return fake_contour
             case 1: return rects[0]["cnt"]
-            case _: return max(rects, key=lambda c: c["area"])["cnt"]
+            case _: return next((r for r in rects if is_pygame_pt_in_contour(r["cnt"], center_pt)), rects[0])["cnt"]
 
 def sort_points(points : list[float]) -> list[float]:
     points = np.array(points)

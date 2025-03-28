@@ -65,15 +65,14 @@ class GameEngine():
 
     def __setup_comparison_data(self, img):
         self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, img)
-        bordered_matrix, inp_coords_bordered = get_transformation_matrix_with_borders(self.__inp_coords, self.__out_coords, self.__global_data.img_resize)
         self.__logger.info(f'automatic contouring data: inp={asstr(self.__inp_coords)}; out={asstr(self.__out_coords)}; matrix={asstr(self.__matrix)}')
 
         self.__window.fill((0, 0, 0))
         pygame.display.update()
         time.sleep(1)
 
-        self.__reference_blur, self.__threshvalue, _ = set_compare_values(self.__takePicture, self.__matrix, bordered_matrix, self.__global_data.window_size, self.__logger)
-        write_controured_img(img, [self.__inp_coords, inp_coords_bordered], self.__threshvalue)
+        self.__reference_blur, self.__threshvalue, _ = set_compare_values(self.__takePicture, self.__matrix, self.__global_data.window_size, self.__logger)
+        write_controured_img(img, [self.__inp_coords], self.__threshvalue)
     
     def __setup_window(self):
         pygame.init()
@@ -113,9 +112,8 @@ class GameEngine():
             return
         
         self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, coordinates)
-        bordered_matrix, inp_coords_bordered = get_transformation_matrix_with_borders(self.__inp_coords, self.__out_coords, self.__global_data.img_resize)
-        self.__reference_blur, self.__threshvalue, img = set_compare_values(self.__takePicture, self.__matrix, bordered_matrix, self.__global_data.window_size, self.__logger)
-        write_controured_img(img, [self.__inp_coords, inp_coords_bordered], self.__threshvalue)
+        self.__reference_blur, self.__threshvalue, img = set_compare_values(self.__takePicture, self.__matrix, self.__global_data.window_size, self.__logger)
+        write_controured_img(img, [self.__inp_coords], self.__threshvalue)
 
     @change_actions_decorator
     def __flip_view(self):

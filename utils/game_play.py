@@ -7,7 +7,7 @@ from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS,
 from .event_bus import EventBus
 from .data_singleton import DataSingleton
 import utils.consts as consts
-from utils.helper_functions import init_vocab_options, randomize_vacant_location, isVarInEnum, check_pygame_pt_in_contour, convert_contour_to_polygon, calc_contour_midpoint
+from utils.helper_functions import init_vocab_options, randomize_vacant_location, isVarInEnum, is_pygame_pt_in_contour, convert_contour_to_polygon, calc_contour_midpoint
 from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
@@ -77,7 +77,7 @@ class GamePlay():
         
         destenation_contour = next((cnt for cnt in self._contours_info
                                     if cnt["area"] > self.MINIMUM_AREA_FOR_WORD_PRESENTATION
-                                    and check_pygame_pt_in_contour(cnt["contour"], main_vocab.sprite_midpoint)), None)
+                                    and not is_pygame_pt_in_contour(cnt["contour"], main_vocab.sprite_midpoint)), None)
         if not destenation_contour:
             self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()})
             self._logger.warning(f"not enough contours to present word! selected: {selected};")
