@@ -2,2046 +2,7895 @@
     {
         "word": "boy",
         "level": "beginner",
-        "category": "People"
+        "category": "People",
+        "meaning": "男孩",
+        "zh_options": [
+            "小孩",
+            "兒子",
+            "學生",
+            "青年",
+            "男人"
+        ],
+        "en_options": [
+            "child",
+            "son",
+            "student",
+            "teen",
+            "man"
+        ]
     },
     {
         "word": "friend",
         "level": "beginner",
-        "category": "People"
+        "category": "People",
+        "meaning": "朋友",
+        "zh_options": [
+            "車",
+            "學校",
+            "狗"
+        ],
+        "en_options": [
+            "boat",
+            "baby",
+            "bread"
+        ]
     },
     {
         "word": "girl",
         "level": "beginner",
-        "category": "People"
+        "category": "People",
+        "meaning": "女孩",
+        "zh_options": [
+            "男孩",
+            "背部",
+            "洗澡"
+        ],
+        "en_options": [
+            "cat",
+            "apple",
+            "bread"
+        ]
     },
     {
         "word": "teacher",
         "level": "beginner",
-        "category": "People"
+        "category": "People",
+        "meaning": "老師",
+        "en_options": [
+            "professor",
+            "educator",
+            "tutor",
+            "instructor",
+            "mentor"
+        ],
+        "zh_options": [
+            "教授",
+            "講師",
+            "指導者",
+            "研究員",
+            "教官"
+        ]
     },
     {
         "word": "brother",
         "level": "beginner",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "兄、弟",
+        "zh_options": [
+            "車",
+            "房子",
+            "男孩"
+        ],
+        "en_options": [
+            "boat",
+            "apple",
+            "bread"
+        ]
     },
     {
         "word": "dad",
         "level": "beginner",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "爸爸",
+        "en_options": [
+            "father",
+            "papa",
+            "daddy",
+            "old man",
+            "guardian"
+        ],
+        "zh_options": [
+            "父親",
+            "老爸",
+            "爹地",
+            "阿爸",
+            "爺爺"
+        ]
     },
     {
         "word": "father",
         "level": "beginner",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "父親",
+        "zh_options": [
+            "學校",
+            "嬰兒",
+            "盒子"
+        ],
+        "en_options": [
+            "ball",
+            "dog",
+            "bread"
+        ]
     },
     {
         "word": "mom",
         "level": "beginner",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "媽媽",
+        "en_options": [
+            "mother",
+            "mommy",
+            "mama",
+            "parent",
+            "nanny"
+        ],
+        "zh_options": [
+            "母親",
+            "老媽",
+            "媽咪",
+            "阿母",
+            "保母"
+        ]
     },
     {
         "word": "mother",
         "level": "beginner",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "母親",
+        "zh_options": [
+            "房子",
+            "球",
+            "貓"
+        ],
+        "en_options": [
+            "car",
+            "book",
+            "bread"
+        ]
     },
     {
         "word": "sister",
         "level": "beginner",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "姐、妹",
+        "zh_options": [
+            "男孩",
+            "背部",
+            "學校"
+        ],
+        "en_options": [
+            "bread",
+            "boat",
+            "box"
+        ]
     },
     {
         "word": "apple",
         "level": "beginner",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "蘋果",
+        "zh_options": [
+            "水果",
+            "紅色",
+            "果實",
+            "梨子",
+            "香蕉"
+        ],
+        "en_options": [
+            "fruit",
+            "red",
+            "food",
+            "banana",
+            "pear"
+        ]
     },
     {
         "word": "banana",
         "level": "beginner",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "香蕉",
+        "en_options": [
+            "plantain",
+            "fruit",
+            "melon",
+            "mango",
+            "papaya"
+        ],
+        "zh_options": [
+            "果實",
+            "木瓜",
+            "芒果",
+            "梨子",
+            "甘蔗"
+        ]
     },
     {
         "word": "cake",
         "level": "beginner",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "蛋糕",
+        "zh_options": [
+            "學校",
+            "車",
+            "狗"
+        ],
+        "en_options": [
+            "bread",
+            "cat",
+            "boy"
+        ]
     },
     {
         "word": "egg",
         "level": "beginner",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "蛋",
+        "zh_options": [
+            "貓",
+            "男孩",
+            "蘋果"
+        ],
+        "en_options": [
+            "apple",
+            "book",
+            "ball"
+        ]
     },
     {
         "word": "milk",
         "level": "beginner",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "牛奶",
+        "zh_options": [
+            "狗",
+            "球",
+            "蘋果"
+        ],
+        "en_options": [
+            "ball",
+            "boy",
+            "dog"
+        ]
     },
     {
         "word": "bag",
         "level": "beginner",
-        "category": "School"
+        "category": "School",
+        "meaning": "包",
+        "en_options": [
+            "backpack",
+            "purse",
+            "case",
+            "sack",
+            "pouch"
+        ],
+        "zh_options": [
+            "背包",
+            "皮包",
+            "袋子",
+            "手提包",
+            "書包"
+        ]
     },
     {
         "word": "ball",
         "level": "beginner",
-        "category": "School"
+        "category": "School",
+        "meaning": "球",
+        "zh_options": [
+            "足球",
+            "籃球",
+            "圓形",
+            "棒球",
+            "排球"
+        ],
+        "en_options": [
+            "sphere",
+            "soccer",
+            "basketball",
+            "volleyball",
+            "baseball"
+        ]
     },
     {
         "word": "book",
         "level": "beginner",
-        "category": "School"
+        "category": "School",
+        "meaning": "書",
+        "zh_options": [
+            "小說",
+            "閱讀",
+            "筆記本",
+            "課本",
+            "雜誌"
+        ],
+        "en_options": [
+            "novel",
+            "read",
+            "notebook",
+            "magazine",
+            "textbook"
+        ]
     },
     {
         "word": "box",
         "level": "beginner",
-        "category": "School"
+        "category": "School",
+        "meaning": "盒子",
+        "zh_options": [
+            "箱子",
+            "容器",
+            "收納",
+            "袋子",
+            "罐子"
+        ],
+        "en_options": [
+            "container",
+            "case",
+            "crate",
+            "bag",
+            "jar"
+        ]
     },
     {
         "word": "class",
         "level": "beginner",
-        "category": "School"
+        "category": "School",
+        "meaning": "班級",
+        "en_options": [
+            "lesson",
+            "course",
+            "group",
+            "session",
+            "seminar"
+        ],
+        "zh_options": [
+            "課堂",
+            "課程",
+            "小組",
+            "討論會",
+            "班別"
+        ]
     },
     {
         "word": "bird",
         "level": "beginner",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "鳥",
+        "zh_options": [
+            "洗澡",
+            "狗",
+            "房子"
+        ],
+        "en_options": [
+            "dog",
+            "cat",
+            "book"
+        ]
     },
     {
         "word": "cat",
         "level": "beginner",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "貓",
+        "zh_options": [
+            "動物",
+            "寵物",
+            "小貓",
+            "老虎",
+            "獅子"
+        ],
+        "en_options": [
+            "pet",
+            "animal",
+            "kitten",
+            "tiger",
+            "lion"
+        ]
     },
     {
         "word": "cow",
         "level": "beginner",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "乳牛",
+        "zh_options": [
+            "球",
+            "學校",
+            "蘋果"
+        ],
+        "en_options": [
+            "car",
+            "box",
+            "dog"
+        ]
     },
     {
         "word": "dog",
         "level": "beginner",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "狗",
+        "zh_options": [
+            "寵物",
+            "動物",
+            "小狗",
+            "狼",
+            "牧羊犬"
+        ],
+        "en_options": [
+            "pet",
+            "animal",
+            "puppy",
+            "wolf",
+            "shepherd"
+        ]
     },
     {
         "word": "fish",
         "level": "beginner",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "魚",
+        "zh_options": [
+            "男孩",
+            "洗澡",
+            "麵包"
+        ],
+        "en_options": [
+            "baby",
+            "bath",
+            "cat"
+        ]
     },
     {
         "word": "pig",
         "level": "beginner",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "豬",
+        "zh_options": [
+            "男孩",
+            "蘋果",
+            "盒子"
+        ],
+        "en_options": [
+            "apple",
+            "baby",
+            "ball"
+        ]
     },
     {
         "word": "home",
         "level": "beginner",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "家",
+        "zh_options": [
+            "盒子",
+            "麵包",
+            "洗澡"
+        ],
+        "en_options": [
+            "boat",
+            "bread",
+            "box"
+        ]
     },
     {
         "word": "school",
         "level": "beginner",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "學校",
+        "zh_options": [
+            "教育",
+            "學生",
+            "教室",
+            "老師",
+            "課堂"
+        ],
+        "en_options": [
+            "education",
+            "student",
+            "classroom",
+            "teacher",
+            "lesson"
+        ]
     },
     {
         "word": "zoo",
         "level": "beginner",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "動物園",
+        "en_options": [
+            "safari",
+            "park",
+            "reserve",
+            "sanctuary",
+            "farm"
+        ],
+        "zh_options": [
+            "公園",
+            "野生動物園",
+            "牧場",
+            "牲畜園",
+            "鳥園"
+        ]
     },
     {
         "word": "one",
         "level": "beginner",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "一",
+        "en_options": [
+            "first",
+            "single",
+            "lone",
+            "unity",
+            "singular"
+        ],
+        "zh_options": [
+            "第一",
+            "單獨",
+            "唯一",
+            "獨立",
+            "主要"
+        ]
     },
     {
         "word": "two",
         "level": "beginner",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "二",
+        "en_options": [
+            "double",
+            "pair",
+            "couple",
+            "twin",
+            "second"
+        ],
+        "zh_options": [
+            "雙",
+            "兩個",
+            "成對",
+            "次要",
+            "兩倍"
+        ]
     },
     {
         "word": "three",
         "level": "beginner",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "三",
+        "en_options": [
+            "trio",
+            "triple",
+            "thrice",
+            "third",
+            "treble"
+        ],
+        "zh_options": [
+            "三個",
+            "三重",
+            "第三",
+            "三次",
+            "三倍"
+        ]
     },
     {
         "word": "four",
         "level": "beginner",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "四",
+        "en_options": [
+            "quartet",
+            "quadruple",
+            "forth",
+            "square",
+            "quadrangle"
+        ],
+        "zh_options": [
+            "四個",
+            "四重",
+            "第四",
+            "四倍",
+            "四邊形"
+        ]
     },
     {
         "word": "five",
         "level": "beginner",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "五",
+        "en_options": [
+            "quintet",
+            "pentagon",
+            "fifth",
+            "handful",
+            "fiver"
+        ],
+        "zh_options": [
+            "五個",
+            "五邊形",
+            "第五",
+            "五次",
+            "五倍"
+        ]
     },
     {
         "word": "good",
         "level": "beginner",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "好",
+        "en_options": [
+            "nice",
+            "great",
+            "excellent",
+            "fine",
+            "positive"
+        ],
+        "zh_options": [
+            "優秀",
+            "很棒",
+            "佳",
+            "樂觀",
+            "美好"
+        ]
     },
     {
         "word": "happy",
         "level": "beginner",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "快樂",
+        "en_options": [
+            "joyful",
+            "cheerful",
+            "delighted",
+            "content",
+            "pleased"
+        ],
+        "zh_options": [
+            "高興",
+            "愉快",
+            "滿足",
+            "開心",
+            "幸福"
+        ]
     },
     {
         "word": "hat",
         "level": "beginner",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "帽子",
+        "en_options": [
+            "cap",
+            "helmet",
+            "beanie",
+            "visor",
+            "hood"
+        ],
+        "zh_options": [
+            "頭盔",
+            "遮陽帽",
+            "帽沿",
+            "冬帽",
+            "兜帽"
+        ]
     },
     {
         "word": "Taipei",
         "level": "beginner",
-        "category": "Place/Country Names"
+        "category": "Place/Country Names",
+        "meaning": "台北",
+        "en_options": [
+            "city",
+            "capital",
+            "Taiwan",
+            "metropolis",
+            "urban"
+        ],
+        "zh_options": [
+            "城市",
+            "首都",
+            "臺灣",
+            "都市",
+            "市區"
+        ]
     },
     {
         "word": "Taiwan",
         "level": "beginner",
-        "category": "Place/Country Names"
+        "category": "Place/Country Names",
+        "meaning": "台灣",
+        "en_options": [
+            "island",
+            "country",
+            "nation",
+            "republic",
+            "state"
+        ],
+        "zh_options": [
+            "島嶼",
+            "國家",
+            "共和國",
+            "省份",
+            "地區"
+        ]
     },
     {
         "word": "English",
         "level": "beginner",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "英語",
+        "en_options": [
+            "language",
+            "grammar",
+            "words",
+            "vocabulary",
+            "dialect"
+        ],
+        "zh_options": [
+            "語言",
+            "文法",
+            "詞彙",
+            "方言",
+            "讀寫"
+        ]
     },
     {
         "word": "he",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "他",
+        "en_options": [
+            "him",
+            "his",
+            "himself",
+            "male",
+            "person"
+        ],
+        "zh_options": [
+            "他的",
+            "自己",
+            "男人",
+            "人物",
+            "這位"
+        ]
     },
     {
         "word": "it",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "它",
+        "en_options": [
+            "this",
+            "that",
+            "object",
+            "thing",
+            "entity"
+        ],
+        "zh_options": [
+            "這個",
+            "那個",
+            "物品",
+            "事物",
+            "事件"
+        ]
     },
     {
         "word": "I",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "我",
+        "en_options": [
+            "me",
+            "myself",
+            "mine",
+            "self",
+            "individual"
+        ],
+        "zh_options": [
+            "自己",
+            "個人",
+            "我的",
+            "本人",
+            "自我"
+        ]
     },
     {
         "word": "my",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "我的",
+        "en_options": [
+            "mine",
+            "belonging",
+            "own",
+            "possession",
+            "personal"
+        ],
+        "zh_options": [
+            "物品",
+            "擁有",
+            "個人",
+            "財產",
+            "自己的"
+        ]
     },
     {
         "word": "she",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "她",
+        "en_options": [
+            "her",
+            "herself",
+            "lady",
+            "woman",
+            "girl"
+        ],
+        "zh_options": [
+            "女性",
+            "女孩",
+            "女士",
+            "自己",
+            "她的"
+        ]
     },
     {
         "word": "you",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "你",
+        "en_options": [
+            "yourself",
+            "person",
+            "individual",
+            "them",
+            "we"
+        ],
+        "zh_options": [
+            "你自己",
+            "人",
+            "個體",
+            "他們",
+            "我們"
+        ]
     },
     {
         "word": "your",
         "level": "beginner",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "你的",
+        "en_options": [
+            "yours",
+            "belonging",
+            "own",
+            "property",
+            "personal"
+        ],
+        "zh_options": [
+            "你的東西",
+            "物品",
+            "屬於你的",
+            "自己的",
+            "私人的"
+        ]
     },
     {
         "word": "what",
         "level": "beginner",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "什麼",
+        "en_options": [
+            "which",
+            "why",
+            "how",
+            "that",
+            "thing"
+        ],
+        "zh_options": [
+            "哪個",
+            "為什麼",
+            "怎麼",
+            "這個",
+            "東西"
+        ]
     },
     {
         "word": "who",
         "level": "beginner",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "誰",
+        "en_options": [
+            "whom",
+            "whose",
+            "person",
+            "individual",
+            "name"
+        ],
+        "zh_options": [
+            "什麼人",
+            "個體",
+            "名字",
+            "他是誰",
+            "哪位"
+        ]
     },
     {
         "word": "be",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "是",
+        "en_options": [
+            "exist",
+            "become",
+            "happen",
+            "occur",
+            "stay"
+        ],
+        "zh_options": [
+            "存在",
+            "變成",
+            "發生",
+            "出現",
+            "停留"
+        ]
     },
     {
         "word": "am",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "是",
+        "en_options": [
+            "exist",
+            "belong",
+            "remain",
+            "stay",
+            "act"
+        ],
+        "zh_options": [
+            "存在",
+            "屬於",
+            "留下",
+            "停止",
+            "扮演"
+        ]
     },
     {
         "word": "are",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "是",
+        "en_options": [
+            "exist",
+            "happen",
+            "belong",
+            "remain",
+            "include"
+        ],
+        "zh_options": [
+            "存在",
+            "事件",
+            "屬於",
+            "保持",
+            "涵蓋"
+        ]
     },
     {
         "word": "is",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "是",
+        "en_options": [
+            "exist",
+            "remain",
+            "be",
+            "occur",
+            "seem"
+        ],
+        "zh_options": [
+            "存在",
+            "保持",
+            "發生",
+            "似乎",
+            "表現"
+        ]
     },
     {
         "word": "a",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "一個",
+        "en_options": [
+            "one",
+            "any",
+            "an",
+            "some",
+            "single"
+        ],
+        "zh_options": [
+            "任何",
+            "單一",
+            "某個",
+            "一種",
+            "其中一個"
+        ]
     },
     {
         "word": "an",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "一個",
+        "en_options": [
+            "one",
+            "any",
+            "a",
+            "singular",
+            "article"
+        ],
+        "zh_options": [
+            "任何",
+            "一",
+            "單數",
+            "文章",
+            "一種"
+        ]
     },
     {
         "word": "this",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "這個",
+        "en_options": [
+            "that",
+            "it",
+            "here",
+            "object",
+            "thing"
+        ],
+        "zh_options": [
+            "那個",
+            "物品",
+            "東西",
+            "事物",
+            "這兒"
+        ]
     },
     {
         "word": "that",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "那個",
+        "en_options": [
+            "this",
+            "it",
+            "those",
+            "object",
+            "one"
+        ],
+        "zh_options": [
+            "這個",
+            "它",
+            "物件",
+            "那些",
+            "單個"
+        ]
     },
     {
         "word": "the",
         "level": "beginner",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "這個",
+        "en_options": [
+            "that",
+            "this",
+            "those",
+            "these",
+            "such"
+        ],
+        "zh_options": [
+            "那個",
+            "這些",
+            "這類",
+            "那些",
+            "如此"
+        ]
     },
     {
         "word": "go",
         "level": "beginner",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "去",
+        "en_options": [
+            "leave",
+            "move",
+            "travel",
+            "proceed",
+            "walk"
+        ],
+        "zh_options": [
+            "離開",
+            "旅行",
+            "移動",
+            "進行",
+            "走路"
+        ]
     },
     {
         "word": "look",
         "level": "beginner",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "看",
+        "en_options": [
+            "see",
+            "view",
+            "watch",
+            "observe",
+            "stare"
+        ],
+        "zh_options": [
+            "觀看",
+            "察看",
+            "盯著",
+            "觀察",
+            "瞧"
+        ]
     },
     {
         "word": "name",
         "level": "beginner",
-        "category": "Other Nouns"
+        "category": "Other Nouns",
+        "meaning": "姓名",
+        "zh_options": [
+            "洗澡",
+            "船",
+            "學校"
+        ],
+        "en_options": [
+            "bread",
+            "cat",
+            "car"
+        ]
     },
     {
         "word": "no",
         "level": "beginner",
-        "category": "Other Adverbs"
+        "category": "Other Adverbs",
+        "meaning": "不",
+        "en_options": [
+            "not",
+            "never",
+            "nope",
+            "none",
+            "nothing"
+        ],
+        "zh_options": [
+            "不是",
+            "沒有",
+            "不行",
+            "否定",
+            "無"
+        ]
     },
     {
         "word": "not",
         "level": "beginner",
-        "category": "Other Adverbs"
+        "category": "Other Adverbs",
+        "meaning": "不是",
+        "en_options": [
+            "no",
+            "never",
+            "none",
+            "nothing",
+            "don’t"
+        ],
+        "zh_options": [
+            "不是",
+            "沒有",
+            "絕不",
+            "不要",
+            "否認"
+        ]
     },
     {
         "word": "yes",
         "level": "beginner",
-        "category": "Other Adverbs"
+        "category": "Other Adverbs",
+        "meaning": "是的",
+        "en_options": [
+            "yeah",
+            "affirmative",
+            "correct",
+            "okay",
+            "sure"
+        ],
+        "zh_options": [
+            "對",
+            "沒錯",
+            "確定",
+            "好的",
+            "一定"
+        ]
     },
     {
         "word": "doctor",
         "level": "intermediate",
-        "category": "People"
+        "category": "People",
+        "meaning": "醫生",
+        "en_options": [
+            "physician",
+            "surgeon",
+            "medic",
+            "specialist",
+            "nurse"
+        ],
+        "zh_options": [
+            "內科醫生",
+            "外科醫生",
+            "醫務人員",
+            "專家",
+            "護士"
+        ]
     },
     {
         "word": "kid",
         "level": "intermediate",
-        "category": "People"
+        "category": "People",
+        "meaning": "小孩",
+        "en_options": [
+            "child",
+            "youth",
+            "youngster",
+            "minor",
+            "baby"
+        ],
+        "zh_options": [
+            "兒童",
+            "青少年",
+            "幼童",
+            "未成年",
+            "嬰兒"
+        ]
     },
     {
         "word": "student",
         "level": "intermediate",
-        "category": "People"
+        "category": "People",
+        "meaning": "學生",
+        "zh_options": [
+            "球",
+            "房子",
+            "貓"
+        ],
+        "en_options": [
+            "ball",
+            "bread",
+            "school"
+        ]
     },
     {
         "word": "grandma",
         "level": "intermediate",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "奶奶",
+        "en_options": [
+            "grandmother",
+            "granny",
+            "nana",
+            "old lady",
+            "elder"
+        ],
+        "zh_options": [
+            "祖母",
+            "老太太",
+            "婆婆",
+            "奶奶",
+            "外婆"
+        ]
     },
     {
         "word": "grandpa",
         "level": "intermediate",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "爺爺",
+        "en_options": [
+            "grandfather",
+            "granddad",
+            "old man",
+            "elder",
+            "pops"
+        ],
+        "zh_options": [
+            "祖父",
+            "老爺爺",
+            "老頭",
+            "公公",
+            "爹爹"
+        ]
     },
     {
         "word": "rice",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "米飯",
+        "en_options": [
+            "grain",
+            "cereal",
+            "wheat",
+            "pasta",
+            "food"
+        ],
+        "zh_options": [
+            "穀物",
+            "小麥",
+            "澱粉",
+            "白飯",
+            "粮食"
+        ]
     },
     {
         "word": "tea",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "茶",
+        "en_options": [
+            "drink",
+            "coffee",
+            "beverage",
+            "infusion",
+            "herbal"
+        ],
+        "zh_options": [
+            "飲料",
+            "咖啡",
+            "涼茶",
+            "花草茶",
+            "泡茶"
+        ]
     },
     {
         "word": "water",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "水",
+        "zh_options": [
+            "洗澡",
+            "球",
+            "貓"
+        ],
+        "en_options": [
+            "baby",
+            "boat",
+            "bath"
+        ]
     },
     {
         "word": "juice",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "果汁",
+        "en_options": [
+            "beverage",
+            "nectar",
+            "smoothie",
+            "drink",
+            "soda"
+        ],
+        "zh_options": [
+            "飲料",
+            "果液",
+            "冷飲",
+            "汽水",
+            "果醬"
+        ]
     },
     {
         "word": "hamburger",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "漢堡",
+        "en_options": [
+            "sandwich",
+            "hot dog",
+            "burger",
+            "cheeseburger",
+            "sub"
+        ],
+        "zh_options": [
+            "三明治",
+            "熱狗",
+            "牛肉堡",
+            "起司堡",
+            "潛艇堡"
+        ]
     },
     {
         "word": "ice cream",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "冰淇淋",
+        "en_options": [
+            "sorbet",
+            "frozen yogurt",
+            "gelato",
+            "milkshake",
+            "popsicle"
+        ],
+        "zh_options": [
+            "雪酪",
+            "冰沙",
+            "霜淇淋",
+            "奶昔",
+            "冰棒"
+        ]
     },
     {
         "word": "orange",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "橙子",
+        "en_options": [
+            "tangerine",
+            "mandarin",
+            "grapefruit",
+            "peach",
+            "apricot"
+        ],
+        "zh_options": [
+            "橘子", "柚子", "桃子", "杏子", "柑橘"
+        ]
     },
     {
         "word": "pizza",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "披薩",
+        "en_options": [
+            "flatbread",
+            "pie",
+            "calzone",
+            "focaccia",
+            "sandwich"
+        ],
+        "zh_options": [
+            "薄餅",
+            "餡餅",
+            "卡爾佐內",
+            "佛卡夏",
+            "三明治"
+        ]
     },
     {
         "word": "breakfast",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "早餐",
+        "en_options": [
+            "brunch",
+            "lunch",
+            "dinner",
+            "snack",
+            "meal"
+        ],
+        "zh_options": [
+            "早午餐",
+            "午餐",
+            "晚餐",
+            "點心",
+            "餐點"
+        ]
     },
     {
         "word": "lunch",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "午餐",
+        "en_options": [
+            "breakfast",
+            "brunch",
+            "dinner",
+            "meal",
+            "snack"
+        ],
+        "zh_options": [
+            "早餐",
+            "早午餐",
+            "晚餐",
+            "餐點",
+            "點心"
+        ]
     },
     {
         "word": "dinner",
         "level": "intermediate",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "晚餐",
+        "en_options": [
+            "supper",
+            "lunch",
+            "breakfast",
+            "meal",
+            "feast"
+        ],
+        "zh_options": [
+            "宵夜",
+            "午餐",
+            "早餐",
+            "餐點",
+            "宴會"
+        ]
     },
     {
         "word": "desk",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "書桌",
+        "en_options": [
+            "table",
+            "chair",
+            "counter",
+            "bench",
+            "podium"
+        ],
+        "zh_options": [
+            "桌子",
+            "椅子",
+            "櫃台",
+            "長凳",
+            "講台"
+        ]
     },
     {
         "word": "door",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "門",
+        "zh_options": [
+            "車",
+            "男孩",
+            "船"
+        ],
+        "en_options": [
+            "school",
+            "house",
+            "bread"
+        ]
     },
     {
         "word": "marker",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "麥克筆",
+        "en_options": [
+            "pen",
+            "highlighter",
+            "crayon",
+            "brush",
+            "pencil"
+        ],
+        "zh_options": [
+            "筆",
+            "螢光筆",
+            "蠟筆",
+            "畫筆",
+            "鉛筆"
+        ]
     },
     {
         "word": "pen",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "原子筆",
+        "en_options": [
+            "marker",
+            "pencil",
+            "stylus",
+            "quill",
+            "fountain pen"
+        ],
+        "zh_options": [
+            "麥克筆",
+            "鉛筆",
+            "觸控筆",
+            "羽毛筆",
+            "鋼筆"
+        ]
     },
     {
         "word": "pencil",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "鉛筆",
+        "en_options": [
+            "pen",
+            "marker",
+            "crayon",
+            "stylus",
+            "chalk"
+        ],
+        "zh_options": [
+            "原子筆",
+            "麥克筆",
+            "蠟筆",
+            "觸控筆",
+            "粉筆"
+        ]
     },
     {
         "word": "table",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "桌子",
+        "zh_options": [
+            "書桌",
+            "台子",
+            "檯子",
+            "木板",
+            "家具"
+        ],
+        "en_options": [
+            "desk",
+            "flat",
+            "seat",
+            "wood",
+            "top"
+        ]
     },
     {
         "word": "chair",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "椅子",
+        "zh_options": [
+            "嬰兒",
+            "房子",
+            "狗"
+        ],
+        "en_options": [
+            "boat",
+            "dog",
+            "car"
+        ]
     },
     {
         "word": "eraser",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "橡皮擦",
+        "en_options": [
+            "sponge",
+            "cloth",
+            "duster",
+            "whiteboard eraser",
+            "wiper"
+        ],
+        "zh_options": [
+            "海綿",
+            "布",
+            "板擦",
+            "白板擦",
+            "擦拭布"
+        ]
     },
     {
         "word": "ruler",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "尺",
+        "en_options": [
+            "tape measure",
+            "yardstick",
+            "compass",
+            "straightedge",
+            "square"
+        ],
+        "zh_options": [
+            "捲尺",
+            "碼尺",
+            "圓規",
+            "直尺",
+            "三角尺"
+        ]
     },
     {
         "word": "window",
         "level": "intermediate",
-        "category": "School"
+        "category": "School",
+        "meaning": "窗戶",
+        "zh_options": [
+            "房子",
+            "盒子",
+            "車"
+        ],
+        "en_options": [
+            "ball",
+            "school",
+            "boy"
+        ]
     },
     {
         "word": "bear",
         "level": "intermediate",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "熊",
+        "zh_options": [
+            "球",
+            "嬰兒",
+            "貓"
+        ],
+        "en_options": [
+            "boat",
+            "car",
+            "ball"
+        ]
     },
     {
         "word": "monkey",
         "level": "intermediate",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "猴子",
+        "en_options": [
+            "ape",
+            "chimpanzee",
+            "gorilla",
+            "baboon",
+            "lemur"
+        ],
+        "zh_options": [
+            "猿",
+            "黑猩猩",
+            "大猩猩",
+            "狒狒",
+            "狐猴"
+        ]
     },
     {
         "word": "lion",
         "level": "intermediate",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "獅子",
+        "en_options": [
+            "tiger",
+            "cheetah",
+            "panther",
+            "jaguar",
+            "leopard"
+        ],
+        "zh_options": [
+            "老虎",
+            "獵豹",
+            "美洲豹",
+            "豹",
+            "黑豹"
+        ]
     },
     {
         "word": "rabbit",
         "level": "intermediate",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "兔子",
+        "zh_options": [
+            "背部",
+            "船",
+            "貓"
+        ],
+        "en_options": [
+            "book",
+            "cat",
+            "apple"
+        ]
     },
     {
         "word": "tiger",
         "level": "intermediate",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "老虎",
+        "en_options": [
+            "lion",
+            "leopard",
+            "jaguar",
+            "panther",
+            "cheetah"
+        ],
+        "zh_options": [
+            "獅子",
+            "豹",
+            "美洲豹",
+            "黑豹",
+            "獵豹"
+        ]
     },
     {
         "word": "park",
         "level": "intermediate",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "公園",
+        "en_options": [
+            "garden",
+            "playground",
+            "field",
+            "stadium",
+            "plaza"
+        ],
+        "zh_options": [
+            "花園",
+            "遊樂場",
+            "操場",
+            "體育場",
+            "廣場"
+        ]
     },
     {
         "word": "store",
         "level": "intermediate",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "商店",
+        "en_options": [
+            "shop",
+            "market",
+            "mall",
+            "boutique",
+            "supermarket"
+        ],
+        "zh_options": [
+            "商場",
+            "市場",
+            "賣場",
+            "精品店",
+            "超市"
+        ]
     },
     {
         "word": "here",
         "level": "intermediate",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "這裡",
+        "en_options": [
+            "there",
+            "this",
+            "near",
+            "present",
+            "nearby"
+        ],
+        "zh_options": [
+            "那裡",
+            "這個",
+            "附近",
+            "現在",
+            "周圍"
+        ]
     },
     {
         "word": "there",
         "level": "intermediate",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "那裡",
+        "en_options": [
+            "here",
+            "where",
+            "somewhere",
+            "anywhere",
+            "everywhere"
+        ],
+        "zh_options": [
+            "這裡",
+            "哪裡",
+            "某處",
+            "任何地方",
+            "到處"
+        ]
     },
     {
         "word": "six",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "六",
+        "en_options": [
+            "seven",
+            "five",
+            "sixty",
+            "sixteen",
+            "sixteenth"
+        ],
+        "zh_options": [
+            "七",
+            "五",
+            "六十",
+            "十六",
+            "第六"
+        ]
     },
     {
         "word": "seven",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "七",
+        "en_options": [
+            "six",
+            "eight",
+            "seventy",
+            "seventeen",
+            "seventh"
+        ],
+        "zh_options": [
+            "六",
+            "八",
+            "七十",
+            "十七",
+            "第七"
+        ]
     },
     {
         "word": "eight",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "八",
+        "en_options": [
+            "seven",
+            "nine",
+            "eighty",
+            "eighteen",
+            "eighth"
+        ],
+        "zh_options": [
+            "七",
+            "九",
+            "八十",
+            "十八",
+            "第八"
+        ]
     },
     {
         "word": "nine",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "九",
+        "en_options": [
+            "eight",
+            "ten",
+            "ninety",
+            "nineteen",
+            "ninth"
+        ],
+        "zh_options": [
+            "八",
+            "十",
+            "九十",
+            "十九",
+            "第九"
+        ]
     },
     {
         "word": "ten",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十",
+        "en_options": [
+            "nine",
+            "eleven",
+            "hundred",
+            "twenty",
+            "tenth"
+        ],
+        "zh_options": [
+            "九",
+            "十一",
+            "一百",
+            "二十",
+            "第十"
+        ]
     },
     {
         "word": "eleven",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十一",
+        "en_options": [
+            "ten",
+            "twelve",
+            "hundred",
+            "twenty",
+            "eleventh"
+        ],
+        "zh_options": [
+            "十",
+            "十二",
+            "一百",
+            "二十",
+            "第十一"
+        ]
     },
     {
         "word": "twelve",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十二",
+        "en_options": [
+            "eleven",
+            "thirteen",
+            "hundred",
+            "twenty",
+            "twelfth"
+        ],
+        "zh_options": [
+            "十一",
+            "十三",
+            "一百",
+            "二十",
+            "第十二"
+        ]
     },
     {
         "word": "many",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "許多",
+        "en_options": [
+            "much",
+            "several",
+            "numerous",
+            "plenty",
+            "countless"
+        ],
+        "zh_options": [
+            "很多",
+            "一些",
+            "眾多",
+            "大量",
+            "無數"
+        ]
     },
     {
         "word": "much",
         "level": "intermediate",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "很多",
+        "en_options": [
+            "many",
+            "some",
+            "few",
+            "little",
+            "plenty"
+        ],
+        "zh_options": [
+            "許多",
+            "一些",
+            "少許",
+            "一點",
+            "大量"
+        ]
     },
     {
         "word": "blue",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "藍色",
+        "en_options": [
+            "green",
+            "cyan",
+            "navy",
+            "indigo",
+            "teal"
+        ],
+        "zh_options": [
+            "綠色",
+            "青色",
+            "深藍",
+            "靛藍",
+            "藍綠"
+        ]
     },
     {
         "word": "color",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "顏色",
+        "en_options": [
+            "shade",
+            "hue",
+            "pigment",
+            "tone",
+            "tint"
+        ],
+        "zh_options": [
+            "色調",
+            "色彩",
+            "顏料",
+            "色度",
+            "色澤"
+        ]
     },
     {
         "word": "green",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "綠色",
+        "en_options": [
+            "blue",
+            "yellow",
+            "cyan",
+            "olive",
+            "lime"
+        ],
+        "zh_options": [
+            "藍色",
+            "黃色",
+            "青色",
+            "橄欖綠",
+            "萊姆綠"
+        ]
     },
     {
         "word": "red",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "紅色",
+        "en_options": [
+            "orange",
+            "pink",
+            "maroon",
+            "scarlet",
+            "burgundy"
+        ],
+        "zh_options": [
+            "橙色",
+            "粉紅色",
+            "深紅",
+            "猩紅",
+            "酒紅"
+        ]
     },
     {
         "word": "yellow",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "黃色",
+        "en_options": [
+            "orange",
+            "gold",
+            "mustard",
+            "tan",
+            "lemon"
+        ],
+        "zh_options": [
+            "橙色",
+            "金色",
+            "芥末黃",
+            "棕褐色",
+            "檸檬黃"
+        ]
     },
     {
         "word": "black",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "黑色",
+        "en_options": [
+            "gray",
+            "dark",
+            "charcoal",
+            "ebony",
+            "jet"
+        ],
+        "zh_options": [
+            "灰色",
+            "深色",
+            "木炭色",
+            "烏黑",
+            "墨黑"
+        ]
     },
     {
         "word": "brown",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "棕色",
+        "en_options": [
+            "tan",
+            "beige",
+            "chestnut",
+            "chocolate",
+            "coffee"
+        ],
+        "zh_options": [
+            "褐色",
+            "米色",
+            "栗色",
+            "巧克力色",
+            "咖啡色"
+        ]
     },
     {
         "word": "white",
         "level": "intermediate",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "白色",
+        "en_options": [
+            "gray",
+            "cream",
+            "ivory",
+            "beige",
+            "silver"
+        ],
+        "zh_options": [
+            "灰色",
+            "奶油色",
+            "象牙白",
+            "淺褐色",
+            "銀色"
+        ]
     },
     {
         "word": "cup",
         "level": "intermediate",
-        "category": "House"
+        "category": "House",
+        "meaning": "杯子",
+        "en_options": [
+            "mug",
+            "glass",
+            "bottle",
+            "container",
+            "bowl"
+        ],
+        "zh_options": [
+            "馬克杯",
+            "玻璃杯",
+            "瓶子",
+            "容器",
+            "碗"
+        ]
     },
     {
         "word": "fan",
         "level": "intermediate",
-        "category": "House"
+        "category": "House",
+        "meaning": "風扇",
+        "en_options": [
+            "blower",
+            "air conditioner",
+            "heater",
+            "ventilator",
+            "cooler"
+        ],
+        "zh_options": [
+            "吹風機",
+            "冷氣機",
+            "暖氣機",
+            "通風機",
+            "冷卻器"
+        ]
     },
     {
         "word": "key",
         "level": "intermediate",
-        "category": "House"
+        "category": "House",
+        "meaning": "鑰匙",
+        "en_options": [
+            "lock",
+            "passcode",
+            "button",
+            "access",
+            "token"
+        ],
+        "zh_options": [
+            "鎖",
+            "密碼",
+            "按鈕",
+            "存取權限",
+            "令牌"
+        ]
     },
     {
         "word": "head",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "頭",
+        "zh_options": [
+            "學校",
+            "嬰兒",
+            "貓"
+        ],
+        "en_options": [
+            "cat",
+            "book",
+            "house"
+        ]
     },
     {
         "word": "eye",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "眼睛",
+        "zh_options": [
+            "蘋果",
+            "洗澡",
+            "書"
+        ],
+        "en_options": [
+            "book",
+            "baby",
+            "house"
+        ]
     },
     {
         "word": "node",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "節點",
+        "en_options": [
+            "joint",
+            "link",
+            "hub",
+            "connection",
+            "network"
+        ],
+        "zh_options": [
+            "關節",
+            "鏈接",
+            "集線器",
+            "連結",
+            "網絡"
+        ]
     },
     {
         "word": "ear",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "耳朵",
+        "en_options": [
+            "nose",
+            "mouth",
+            "eye",
+            "face",
+            "cheek"
+        ],
+        "zh_options": [
+            "鼻子",
+            "嘴巴",
+            "眼睛",
+            "臉",
+            "臉頰"
+        ]
     },
     {
         "word": "hand",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "手",
+        "zh_options": [
+            "男孩",
+            "車",
+            "學校"
+        ],
+        "en_options": [
+            "boy",
+            "house",
+            "car"
+        ]
     },
     {
         "word": "arm",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "手臂",
+        "en_options": [
+            "hand",
+            "leg",
+            "elbow",
+            "shoulder",
+            "forearm"
+        ],
+        "zh_options": [
+            "手",
+            "腿",
+            "手肘",
+            "肩膀",
+            "前臂"
+        ]
     },
     {
         "word": "leg",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "腿",
+        "zh_options": [
+            "船",
+            "房子",
+            "麵包"
+        ],
+        "en_options": [
+            "bread",
+            "ball",
+            "back"
+        ]
     },
     {
         "word": "foot",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "腳",
+        "zh_options": [
+            "球",
+            "學校",
+            "車"
+        ],
+        "en_options": [
+            "book",
+            "baby",
+            "house"
+        ]
     },
     {
         "word": "face",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "臉",
+        "en_options": [
+            "head",
+            "neck",
+            "cheek",
+            "chin",
+            "forehead"
+        ],
+        "zh_options": [
+            "頭",
+            "脖子",
+            "臉頰",
+            "下巴",
+            "額頭"
+        ]
     },
     {
         "word": "mouth",
         "level": "intermediate",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "嘴巴",
+        "en_options": [
+            "nose",
+            "ear",
+            "eye",
+            "tongue",
+            "lips"
+        ],
+        "zh_options": [
+            "鼻子",
+            "耳朵",
+            "眼睛",
+            "舌頭",
+            "嘴唇"
+        ]
     },
     {
         "word": "old",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "老",
+        "en_options": [
+            "elderly",
+            "ancient",
+            "aged",
+            "senior",
+            "outdated"
+        ],
+        "zh_options": [
+            "年長",
+            "古老",
+            "年老",
+            "資深",
+            "過時"
+        ]
     },
     {
         "word": "short",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "短",
+        "en_options": [
+            "small",
+            "tiny",
+            "brief",
+            "quick",
+            "limited"
+        ],
+        "zh_options": [
+            "小",
+            "微小",
+            "簡短",
+            "快速",
+            "受限"
+        ]
     },
     {
         "word": "tall",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "高",
+        "en_options": [
+            "big",
+            "large",
+            "towering",
+            "elevated",
+            "lengthy"
+        ],
+        "zh_options": [
+            "大",
+            "巨大",
+            "高聳",
+            "升高",
+            "長"
+        ]
     },
     {
         "word": "big",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "大",
+        "en_options": [
+            "large",
+            "huge",
+            "massive",
+            "enormous",
+            "gigantic"
+        ],
+        "zh_options": [
+            "巨大",
+            "廣大",
+            "龐大",
+            "巨無霸",
+            "宏偉"
+        ]
     },
     {
         "word": "long",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "長",
+        "en_options": [
+            "tall",
+            "extended",
+            "lengthy",
+            "far",
+            "stretched"
+        ],
+        "zh_options": [
+            "高",
+            "寬",
+            "遙遠",
+            "進步",
+            "儘量"
+        ]
     },
     {
         "word": "small",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "小",
+        "en_options": [
+            "tiny",
+            "little",
+            "minor",
+            "slight",
+            "compact"
+        ],
+        "zh_options": [
+            "微小",
+            "短小",
+            "細小",
+            "獨特",
+            "輕微"
+        ]
     },
     {
         "word": "thin",
         "level": "intermediate",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "瘦",
+        "en_options": [
+            "slim",
+            "lean",
+            "slender",
+            "fine",
+            "narrow"
+        ],
+        "zh_options": [
+            "纖細",
+            "單薄",
+            "瘦弱",
+            "狹窄",
+            "細長"
+        ]
     },
     {
         "word": "cold",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "冷",
+        "en_options": [
+            "chilly",
+            "freezing",
+            "cool",
+            "icy",
+            "frigid"
+        ],
+        "zh_options": [
+            "寒冷",
+            "冰凍",
+            "涼爽",
+            "寒氣",
+            "冷酷"
+        ]
     },
     {
         "word": "cool",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "涼快",
+        "en_options": [
+            "cold", "fresh", "chilly", "calm", "collected"
+        ],
+        "zh_options": [
+            "冰涼", "涼爽", "平靜", "乾爽", "舒適"
+        ]
     },
     {
         "word": "dry",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "乾燥",
+        "en_options": [
+            "arid",
+            "dehydrated",
+            "parched",
+            "withered",
+            "barren"
+        ],
+        "zh_options": [
+            "乾涸",
+            "無水",
+            "乾枯",
+            "枯燥",
+            "乾旱"
+        ]
     },
     {
         "word": "hot",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "熱",
+        "en_options": [
+            "warm",
+            "boiling",
+            "steaming",
+            "burning",
+            "heated"
+        ],
+        "zh_options": [
+            "溫暖",
+            "灼熱",
+            "熱烈",
+            "炎熱",
+            "滾燙"
+        ]
     },
     {
         "word": "warm",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "溫暖",
+        "en_options": [
+            "hot",
+            "cozy",
+            "mild",
+            "lukewarm",
+            "gentle"
+        ],
+        "zh_options": [
+            "炎熱",
+            "和煦",
+            "溫和",
+            "暖洋洋",
+            "熱情"
+        ]
     },
     {
         "word": "wet",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "濕",
+        "en_options": [
+            "damp",
+            "soaked",
+            "humid",
+            "moist",
+            "drenched"
+        ],
+        "zh_options": [
+            "潮濕",
+            "水潤",
+            "溼透",
+            "滲水",
+            "浸泡"
+        ]
     },
     {
         "word": "cloudy",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "多雲",
+        "en_options": [
+            "overcast",
+            "foggy",
+            "hazy",
+            "dark",
+            "gloomy"
+        ],
+        "zh_options": [
+            "陰天",
+            "霧濛",
+            "昏暗",
+            "霧氣",
+            "陰沉"
+        ]
     },
     {
         "word": "rainy",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "下雨",
+        "en_options": [
+            "wet",
+            "drizzling",
+            "stormy",
+            "misty",
+            "pouring"
+        ],
+        "zh_options": [
+            "陰雨",
+            "濕潤",
+            "豪雨",
+            "小雨",
+            "大雨"
+        ]
     },
     {
         "word": "sunny",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "晴朗",
+        "en_options": [
+            "bright",
+            "clear",
+            "warm",
+            "radiant",
+            "daylight"
+        ],
+        "zh_options": [
+            "陽光",
+            "天晴",
+            "艷陽",
+            "燦爛",
+            "明亮"
+        ]
     },
     {
         "word": "weather",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "天氣",
+        "en_options": [
+            "climate",
+            "temperature",
+            "season",
+            "atmosphere",
+            "air"
+        ],
+        "zh_options": [
+            "氣候",
+            "風雨",
+            "氣象",
+            "季節",
+            "溫度"
+        ]
     },
     {
         "word": "windy",
         "level": "intermediate",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "有風",
+        "en_options": [
+            "breezy",
+            "stormy",
+            "blustery",
+            "drafty",
+            "gusty"
+        ],
+        "zh_options": [
+            "狂風",
+            "強風",
+            "微風",
+            "暴風",
+            "颳風"
+        ]
     },
     {
         "word": "Sunday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期日",
+        "en_options": [
+            "Monday",
+            "Tuesday",
+            "holiday",
+            "weekend",
+            "rest day"
+        ],
+        "zh_options": [
+            "星期一",
+            "假日",
+            "週末",
+            "安息",
+            "休息"
+        ]
     },
     {
         "word": "Monday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期一",
+        "en_options": [
+            "Tuesday",
+            "weekday",
+            "workday",
+            "start",
+            "morning"
+        ],
+        "zh_options": [
+            "星期二",
+            "上班日",
+            "首日",
+            "開始",
+            "早晨"
+        ]
     },
     {
         "word": "Tuesday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期二",
+        "en_options": [
+            "Monday",
+            "Wednesday",
+            "midweek",
+            "second day",
+            "early week"
+        ],
+        "zh_options": [
+            "星期一",
+            "星期三",
+            "工作日",
+            "上半週",
+            "週二"
+        ]
     },
     {
         "word": "Thursday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期四",
+        "en_options": [
+            "Wednesday",
+            "Friday",
+            "late week",
+            "fourth day",
+            "school day"
+        ],
+        "zh_options": [
+            "星期三",
+            "星期五",
+            "週四",
+            "靠近週末",
+            "週中"
+        ]
     },
     {
         "word": "Wednesday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期三",
+        "en_options": [
+            "midweek",
+            "hump day",
+            "third day",
+            "workday",
+            "school day"
+        ],
+        "zh_options": [
+            "週中",
+            "週三",
+            "平日",
+            "勞動日",
+            "學日"
+        ]
     },
     {
         "word": "Friday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期五",
+        "en_options": [
+            "Thursday",
+            "Saturday",
+            "weekend",
+            "workday",
+            "fun day"
+        ],
+        "zh_options": [
+            "星期四",
+            "星期六",
+            "週五",
+            "週末前",
+            "歡樂日"
+        ]
     },
     {
         "word": "Saturday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "星期六",
+        "en_options": [
+            "Sunday",
+            "weekend",
+            "holiday",
+            "free day",
+            "leisure"
+        ],
+        "zh_options": [
+            "週日",
+            "休假日",
+            "放鬆日",
+            "週末",
+            "自由日"
+        ]
     },
     {
         "word": "day",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "日子",
+        "zh_options": [
+            "洗澡",
+            "嬰兒",
+            "貓"
+        ],
+        "en_options": [
+            "school",
+            "cat",
+            "car"
+        ]
     },
     {
         "word": "evening",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "晚上",
+        "en_options": [
+            "night",
+            "dusk",
+            "sunset",
+            "twilight",
+            "late day"
+        ],
+        "zh_options": [
+            "夜晚",
+            "黃昏",
+            "傍晚",
+            "夜間",
+            "夜幕"
+        ]
     },
     {
         "word": "morning",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "早晨",
+        "zh_options": [
+            "男孩",
+            "貓",
+            "麵包"
+        ],
+        "en_options": [
+            "bath",
+            "house",
+            "book"
+        ]
     },
     {
         "word": "night",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "夜晚",
+        "zh_options": [
+            "學校",
+            "房子",
+            "男孩"
+        ],
+        "en_options": [
+            "bread",
+            "school",
+            "apple"
+        ]
     },
     {
         "word": "now",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "現在",
+        "en_options": [
+            "currently",
+            "instantly",
+            "today",
+            "present",
+            "moment"
+        ],
+        "zh_options": [
+            "當下",
+            "此刻",
+            "目前",
+            "這時",
+            "剛才"
+        ]
     },
     {
         "word": "time",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "時間",
+        "zh_options": [
+            "船",
+            "男孩",
+            "球"
+        ],
+        "en_options": [
+            "boat",
+            "apple",
+            "cat"
+        ]
     },
     {
         "word": "today",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "今天",
+        "en_options": [
+            "present",
+            "now",
+            "current",
+            "this day",
+            "contemporary"
+        ],
+        "zh_options": [
+            "當日",
+            "目前",
+            "此時",
+            "這天",
+            "今晨"
+        ]
     },
     {
         "word": "tomorrow",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "明天",
+        "en_options": [
+            "next day",
+            "future",
+            "later",
+            "soon",
+            "upcoming"
+        ],
+        "zh_options": [
+            "來日",
+            "將來",
+            "近日",
+            "未來",
+            "翌日"
+        ]
     },
     {
         "word": "week",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "週",
+        "en_options": [
+            "days",
+            "period",
+            "cycle",
+            "seven days",
+            "schedule"
+        ],
+        "zh_options": [
+            "一週",
+            "時期",
+            "週期",
+            "七天",
+            "計劃"
+        ]
     },
     {
         "word": "year",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "年",
+        "en_options": [
+            "twelve months",
+            "calendar",
+            "period",
+            "term",
+            "cycle"
+        ],
+        "zh_options": [
+            "週期",
+            "年度",
+            "日曆",
+            "季度",
+            "時代"
+        ]
     },
     {
         "word": "yesterday",
         "level": "intermediate",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "昨天",
+        "en_options": [
+            "day before today",
+            "previous day",
+            "last day",
+            "past day",
+            "prior day"
+        ],
+        "zh_options": [
+            "前天",
+            "上一天",
+            "過去",
+            "先前",
+            "昔日"
+        ]
     },
     {
         "word": "bike",
         "level": "intermediate",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "自行車",
+        "en_options": [
+            "bicycle",
+            "cycle",
+            "scooter",
+            "vehicle",
+            "transport"
+        ],
+        "zh_options": [
+            "腳踏車",
+            "公共車",
+            "騎車",
+            "通行",
+            "電單車"
+        ]
     },
     {
         "word": "bus",
         "level": "intermediate",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "公共汽車",
+        "en_options": [
+            "coach",
+            "shuttle",
+            "tram",
+            "subway",
+            "transport"
+        ],
+        "zh_options": [
+            "交通",
+            "大型",
+            "通勤",
+            "現代",
+            "大巴"
+        ]
     },
     {
         "word": "car",
         "level": "intermediate",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "車",
+        "zh_options": [
+            "汽車",
+            "交通",
+            "公車",
+            "計程車",
+            "火車"
+        ],
+        "en_options": [
+            "automobile",
+            "vehicle",
+            "transport",
+            "bus",
+            "taxi"
+        ]
     },
     {
         "word": "bad",
         "level": "intermediate",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "壞",
+        "en_options": [
+            "terrible",
+            "poor",
+            "awful",
+            "wrong",
+            "negative"
+        ],
+        "zh_options": [
+            "不良",
+            "嚴重",
+            "缺陷",
+            "失落",
+            "病態"
+        ]
     },
     {
         "word": "fine",
         "level": "intermediate",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "好的",
+        "en_options": [
+            "good",
+            "excellent",
+            "great",
+            "okay",
+            "satisfactory"
+        ],
+        "zh_options": [
+            "出色",
+            "美好",
+            "優秀",
+            "令人滿意",
+            "順利"
+        ]
     },
     {
         "word": "great",
         "level": "intermediate",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "棒",
+        "en_options": [
+            "excellent",
+            "wonderful",
+            "amazing",
+            "grand",
+            "superb"
+        ],
+        "zh_options": [
+            "優秀",
+            "了不起",
+            "出色",
+            "非凡",
+            "壯觀"
+        ]
     },
     {
         "word": "nice",
         "level": "intermediate",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "不錯",
+        "en_options": [
+            "pleasant",
+            "kind",
+            "friendly",
+            "good",
+            "lovely"
+        ],
+        "zh_options": [
+            "友善",
+            "和藹",
+            "美好",
+            "舒適",
+            "愉快"
+        ]
     },
     {
         "word": "OK",
         "level": "intermediate",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "好的",
+        "en_options": [
+            "fine",
+            "acceptable",
+            "good",
+            "correct",
+            "permitted"
+        ],
+        "zh_options": [
+            "合適",
+            "可以",
+            "出色",
+            "允許",
+            "接受"
+        ]
     },
     {
         "word": "sad",
         "level": "intermediate",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "傷心",
+        "en_options": [
+            "unhappy",
+            "sorrowful",
+            "down",
+            "blue",
+            "depressed"
+        ],
+        "zh_options": [
+            "悲傷",
+            "難過",
+            "悲哀",
+            "憂鬱",
+            "哀愁"
+        ]
     },
     {
         "word": "cap",
         "level": "intermediate",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "帽子",
+        "en_options": [
+            "hat",
+            "headwear",
+            "baseball cap",
+            "beanie",
+            "helmet"
+        ],
+        "zh_options": [
+            "頭巾",
+            "帽頂",
+            "遮陽帽",
+            "冬帽",
+            "頭盔"
+        ]
     },
     {
         "word": "jacket",
         "level": "intermediate",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "夾克",
+        "en_options": [
+            "coat",
+            "outerwear",
+            "blazer",
+            "windbreaker",
+            "hoodie"
+        ],
+        "zh_options": [
+            "外套",
+            "上衣",
+            "防風衣",
+            "大衣",
+            "風衣"
+        ]
     },
     {
         "word": "shoes",
         "level": "intermediate",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "鞋子",
+        "en_options": [
+            "footwear",
+            "sneakers",
+            "boots",
+            "sandals",
+            "loafers"
+        ],
+        "zh_options": [
+            "運動鞋",
+            "涼鞋",
+            "皮鞋",
+            "高跟鞋",
+            "拖鞋"
+        ]
     },
     {
         "word": "Japan",
         "level": "intermediate",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "日本",
+        "en_options": [
+            "country",
+            "nation",
+            "island",
+            "Tokyo",
+            "Nippon"
+        ],
+        "zh_options": [
+            "日本國",
+            "東京",
+            "東瀛",
+            "和國",
+            "日出之國"
+        ]
     },
     {
         "word": "UK",
         "level": "intermediate",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "英國",
+        "en_options": [
+            "United Kingdom",
+            "Britain",
+            "England",
+            "Great Britain",
+            "London"
+        ],
+        "zh_options": [
+            "不列顛",
+            "英倫",
+            "大不列顛",
+            "英格蘭",
+            "連合王國"
+        ]
     },
     {
         "word": "US",
         "level": "intermediate",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "美國",
+        "en_options": [
+            "United States",
+            "America",
+            "USA",
+            "North America",
+            "Washington"
+        ],
+        "zh_options": [
+            "合眾國",
+            "美利堅",
+            "北美",
+            "美洲",
+            "華府"
+        ]
     },
     {
         "word": "USA",
         "level": "intermediate",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "美國",
+        "en_options": [
+            "US",
+            "United States",
+            "America",
+            "The States",
+            "Land of the Free"
+        ],
+        "zh_options": [
+            "美利堅合眾國",
+            "北美",
+            "美洲",
+            "美國本土",
+            "華盛頓"
+        ]
     },
     {
         "word": "game",
         "level": "intermediate",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "遊戲",
+        "zh_options": [
+            "狗",
+            "書",
+            "麵包"
+        ],
+        "en_options": [
+            "book",
+            "dog",
+            "apple"
+        ]
     },
     {
         "word": "hiking",
         "level": "intermediate",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "健行",
+        "en_options": [
+            "trekking",
+            "climbing",
+            "walking",
+            "mountaineering",
+            "outing"
+        ],
+        "zh_options": [
+            "爬山",
+            "遠足",
+            "步行",
+            "野外",
+            "戶外活動"
+        ]
     },
     {
         "word": "art",
         "level": "intermediate",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "藝術",
+        "en_options": [
+            "painting",
+            "sculpture",
+            "music",
+            "creativity",
+            "talent"
+        ],
+        "zh_options": [
+            "繪畫",
+            "水墨",
+            "金屬",
+            "視覺",
+            "模型"
+        ]
     },
     {
         "word": "Chinese",
         "level": "intermediate",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "中文",
+        "en_options": [
+            "Mandarin",
+            "Cantonese",
+            "language",
+            "Han language",
+            "dialect"
+        ],
+        "zh_options": [
+            "漢語",
+            "普通話",
+            "廣東話",
+            "國語",
+            "方言"
+        ]
     },
     {
         "word": "math",
         "level": "intermediate",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "數學",
+        "en_options": [
+            "mathematics",
+            "arithmetic",
+            "algebra",
+            "geometry",
+            "calculus"
+        ],
+        "zh_options": [
+            "算術",
+            "代數",
+            "幾何",
+            "微積分",
+            "數理"
+        ]
     },
     {
         "word": "music",
         "level": "intermediate",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "音樂",
+        "en_options": [
+            "melody",
+            "tune",
+            "sound",
+            "harmony",
+            "song"
+        ],
+        "zh_options": [
+            "音符",
+            "演奏",
+            "課程",
+            "出音",
+            "樂器"
+        ]
     },
     {
         "word": "we",
         "level": "intermediate",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "我們",
+        "en_options": [
+            "us",
+            "our group",
+            "everybody",
+            "team",
+            "people"
+        ],
+        "zh_options": [
+            "咱們",
+            "俺們",
+            "大家",
+            "本人",
+            "夥伴"
+        ]
     },
     {
         "word": "they",
         "level": "intermediate",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "他們",
+        "en_options": [
+            "them",
+            "those people",
+            "others",
+            "group",
+            "folks"
+        ],
+        "zh_options": [
+            "她們",
+            "它們",
+            "這些人",
+            "群體",
+            "他族"
+        ]
     },
     {
         "word": "how",
         "level": "intermediate",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "怎麼",
+        "en_options": [
+            "in what way",
+            "by what means",
+            "method",
+            "manner",
+            "approach"
+        ],
+        "zh_options": [
+            "如何",
+            "何種方式",
+            "哪種辦法",
+            "何以",
+            "怎樣"
+        ]
     },
     {
         "word": "where",
         "level": "intermediate",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "在哪裡",
+        "en_options": [
+            "place",
+            "location",
+            "direction",
+            "area",
+            "point"
+        ],
+        "zh_options": [
+            "地點",
+            "位置",
+            "環境",
+            "區域",
+            "方向"
+        ]
     },
     {
         "word": "which",
         "level": "intermediate",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "哪個",
+        "en_options": [
+            "what",
+            "that one",
+            "this one",
+            "selection",
+            "choice"
+        ],
+        "zh_options": [
+            "何者",
+            "哪些",
+            "這個",
+            "那個",
+            "挑選"
+        ]
     },
     {
         "word": "can",
         "level": "intermediate",
-        "category": "BE & Auxilliaries"
+        "category": "BE & Auxilliaries",
+        "meaning": "可以",
+        "en_options": [
+            "able to",
+            "possible",
+            "permitted",
+            "allowed",
+            "capable"
+        ],
+        "zh_options": [
+            "能夠",
+            "有可能",
+            "允許",
+            "容許",
+            "可行"
+        ]
     },
     {
         "word": "do",
         "level": "intermediate",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "做",
+        "en_options": [
+            "perform",
+            "act",
+            "accomplish",
+            "execute",
+            "carry out"
+        ],
+        "zh_options": [
+            "執行",
+            "進行",
+            "完成",
+            "行動",
+            "處理"
+        ]
     },
     {
         "word": "does",
         "level": "intermediate",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "做",
+        "en_options": [
+            "performs",
+            "acts",
+            "accomplishes",
+            "executes",
+            "carries out"
+        ],
+        "zh_options": [
+            "執行",
+            "進行",
+            "完成",
+            "行動",
+            "處理"
+        ]
     },
     {
         "word": "these",
         "level": "intermediate",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "這些",
+        "en_options": [
+            "those",
+            "these ones",
+            "this group",
+            "selection",
+            "set"
+        ],
+        "zh_options": [
+            "這群",
+            "這個",
+            "這類",
+            "這堆",
+            "這些個"
+        ]
     },
     {
         "word": "those",
         "level": "intermediate",
-        "category": "Articles & Determiner"
+        "category": "Articles & Determiner",
+        "meaning": "那些",
+        "en_options": [
+            "them",
+            "those ones",
+            "that group",
+            "selection",
+            "set"
+        ],
+        "zh_options": [
+            "那群",
+            "那個",
+            "那類",
+            "那堆",
+            "那些個"
+        ]
     },
     {
         "word": "cry",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "哭泣",
+        "en_options": [
+            "sob",
+            "weep",
+            "shout",
+            "wail",
+            "tear"
+        ],
+        "zh_options": [
+            "喊叫",
+            "吶喊",
+            "流淚",
+            "嘆息",
+            "啜泣"
+        ]
     },
     {
         "word": "dance",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "跳舞",
+        "en_options": [
+            "twirl",
+            "sway",
+            "move",
+            "spin",
+            "groove"
+        ],
+        "zh_options": [
+            "擺動",
+            "旋轉",
+            "搖擺",
+            "律動",
+            "舞蹈表演"
+        ]
     },
     {
         "word": "jump",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "跳躍",
+        "en_options": [
+            "hop",
+            "leap",
+            "bounce",
+            "spring",
+            "skip"
+        ],
+        "zh_options": [
+            "彈跳",
+            "蹦跳",
+            "跨越",
+            "躍起",
+            "竄升"
+        ]
     },
     {
         "word": "like",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "喜歡",
+        "en_options": [
+            "enjoy",
+            "prefer",
+            "appreciate",
+            "favor",
+            "admire"
+        ],
+        "zh_options": [
+            "愛好",
+            "欣賞",
+            "偏愛",
+            "中意",
+            "贊同"
+        ]
     },
     {
         "word": "read",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "閱讀",
+        "en_options": [
+            "scan",
+            "study",
+            "browse",
+            "review",
+            "recite"
+        ],
+        "zh_options": [
+            "看書",
+            "讀懂",
+            "瀏覽",
+            "研讀",
+            "檢閱"
+        ]
     },
     {
         "word": "sing",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "唱歌",
+        "en_options": [
+            "hum",
+            "chant",
+            "perform",
+            "vocalize",
+            "croon"
+        ],
+        "zh_options": [
+            "哼唱",
+            "吟誦",
+            "演唱",
+            "詠唱",
+            "歌唱表演"
+        ]
     },
     {
         "word": "want",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "想要",
+        "en_options": [
+            "desire",
+            "need",
+            "wish",
+            "crave",
+            "require"
+        ],
+        "zh_options": [
+            "渴望",
+            "需要",
+            "希望",
+            "追求",
+            "要求"
+        ]
     },
     {
         "word": "close",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "關閉",
+        "en_options": [
+            "shut",
+            "seal",
+            "fold",
+            "end",
+            "lock"
+        ],
+        "zh_options": [
+            "合上",
+            "封閉",
+            "結束",
+            "鎖上",
+            "閉合"
+        ]
     },
     {
         "word": "come",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "來",
+        "en_options": [
+            "arrive",
+            "approach",
+            "enter",
+            "reach",
+            "advance"
+        ],
+        "zh_options": [
+            "到達",
+            "進入",
+            "接近",
+            "過來",
+            "移動"
+        ]
     },
     {
         "word": "cook",
         "level": "intermediate",
-        "category": "People"
+        "category": "People",
+        "meaning": "廚師",
+        "en_options": [
+            "chef",
+            "baker",
+            "server",
+            "caterer",
+            "homemaker"
+        ],
+        "zh_options": [
+            "主廚",
+            "烹飪師",
+            "廚子",
+            "炊事員",
+            "烤麵包師"
+        ]
     },
     {
         "word": "draw",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "繪畫",
+        "en_options": [
+            "sketch",
+            "illustrate",
+            "pull",
+            "draft",
+            "trace"
+        ],
+        "zh_options": [
+            "畫圖",
+            "素描",
+            "描繪",
+            "拉",
+            "起草"
+        ]
     },
     {
         "word": "listen",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "聆聽",
+        "en_options": [
+            "hear",
+            "observe",
+            "attend",
+            "tune in",
+            "heed"
+        ],
+        "zh_options": [
+            "傾聽",
+            "聽到",
+            "注意",
+            "留心",
+            "關注"
+        ]
     },
     {
         "word": "open",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "打開",
+        "en_options": [
+            "unlock",
+            "unfold",
+            "reveal",
+            "expose",
+            "start"
+        ],
+        "zh_options": [
+            "開啟",
+            "展開",
+            "揭露",
+            "解鎖",
+            "啟動"
+        ]
     },
     {
         "word": "play",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "玩耍",
+        "en_options": [
+            "perform",
+            "compete",
+            "act",
+            "operate",
+            "frolic"
+        ],
+        "zh_options": [
+            "遊戲",
+            "演奏",
+            "表演",
+            "娛樂",
+            "嬉戲"
+        ]
     },
     {
         "word": "run",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "跑步",
+        "en_options": [
+            "jog",
+            "dash",
+            "race",
+            "sprint",
+            "operate"
+        ],
+        "zh_options": [
+            "奔跑",
+            "趕快",
+            "逃跑",
+            "經營",
+            "運行"
+        ]
     },
     {
         "word": "see",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "看見",
+        "en_options": [
+            "notice",
+            "view",
+            "observe",
+            "witness",
+            "spot"
+        ],
+        "zh_options": [
+            "觀看",
+            "發現",
+            "目睹",
+            "察覺",
+            "瞧見"
+        ]
     },
     {
         "word": "sleep",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "睡覺",
+        "en_options": [
+            "rest",
+            "nap",
+            "doze",
+            "slumber",
+            "hibernate"
+        ],
+        "zh_options": [
+            "休息",
+            "小睡",
+            "打盹",
+            "入睡",
+            "就寢"
+        ]
     },
     {
         "word": "swim",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "游泳",
+        "en_options": [
+            "float",
+            "paddle",
+            "dive",
+            "bathe",
+            "wade"
+        ],
+        "zh_options": [
+            "漂浮",
+            "浮游",
+            "潛水",
+            "戲水",
+            "漫遊"
+        ]
     },
     {
         "word": "walk",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "步行",
+        "en_options": [
+            "stroll",
+            "hike",
+            "stride",
+            "march",
+            "wander"
+        ],
+        "zh_options": [
+            "散步",
+            "漫步",
+            "行走",
+            "踱步",
+            "遊走"
+        ]
     },
     {
         "word": "write",
         "level": "intermediate",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "書寫",
+        "en_options": [
+            "type",
+            "record",
+            "compose",
+            "note",
+            "draft"
+        ],
+        "zh_options": [
+            "寫作",
+            "記錄",
+            "編寫",
+            "撰寫",
+            "創作"
+        ]
     },
     {
         "word": "at",
         "level": "intermediate",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "在",
+        "en_options": [
+            "by",
+            "near",
+            "to",
+            "with",
+            "around"
+        ],
+        "zh_options": [
+            "於",
+            "向",
+            "靠",
+            "朝",
+            "時"
+        ]
     },
     {
         "word": "in",
         "level": "intermediate",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "在...裡",
+        "en_options": [
+            "inside",
+            "within",
+            "during",
+            "into",
+            "among"
+        ],
+        "zh_options": [
+            "於",
+            "內",
+            "中",
+            "進入",
+            "裡面"
+        ]
     },
     {
         "word": "on",
         "level": "intermediate",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "在...上",
+        "en_options": [
+            "upon",
+            "over",
+            "about",
+            "atop",
+            "regarding"
+        ],
+        "zh_options": [
+            "關於",
+            "附著",
+            "上面",
+            "開啟",
+            "進行中"
+        ]
     },
     {
         "word": "under",
         "level": "intermediate",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "在...下",
+        "en_options": [
+            "below",
+            "beneath",
+            "underneath",
+            "less than",
+            "during"
+        ],
+        "zh_options": [
+            "底下",
+            "之下",
+            "低於",
+            "受",
+            "小於"
+        ]
     },
     {
         "word": "kite",
         "level": "intermediate",
-        "category": "Other Nouns"
+        "category": "Other Nouns",
+        "meaning": "風箏",
+        "en_options": [
+            "glider",
+            "toy",
+            "hawk",
+            "flyer",
+            "sail"
+        ],
+        "zh_options": [
+            "紙鳶",
+            "滑翔機",
+            "玩具",
+            "鷹",
+            "飛行物"
+        ]
     },
     {
         "word": "yo-yo",
         "level": "intermediate",
-        "category": "Conjugations"
+        "category": "Other Nouns",
+        "meaning": "溜溜球",
+        "en_options": [
+            "toy",
+            "spinner",
+            "disk"
+        ],
+        "zh_options": [
+            "搖搖",
+            "轉轉球",
+            "悠悠球",
+            "轉盤",
+            "擺錘"
+        ]
     },
     {
         "word": "o'clock",
         "level": "intermediate",
-        "category": "Conjugations"
+        "category": "Other Nouns",
+        "meaning": "點鐘",
+        "en_options": [
+            "hour",
+            "time",
+            "sharp",
+            "precise",
+            "moment"
+        ],
+        "zh_options": [
+            "時刻",
+            "整點",
+            "鐘頭",
+            "時間",
+            "鐘點"
+        ]
     },
     {
         "word": "and",
         "level": "intermediate",
-        "category": "Conjugations"
+        "category": "Conjugations",
+        "meaning": "和",
+        "en_options": [
+            "plus",
+            "with",
+            "also",
+            "including",
+            "alongside"
+        ],
+        "zh_options": [
+            "並且",
+            "與",
+            "加上",
+            "以及",
+            "而且"
+        ]
     },
     {
         "word": "but",
         "level": "intermediate",
-        "category": "Conjugations"
+        "category": "Conjugations",
+        "meaning": "但是",
+        "en_options": [
+            "however",
+            "yet",
+            "although",
+            "except",
+            "still"
+        ],
+        "zh_options": [
+            "可是",
+            "不過",
+            "然而",
+            "只是",
+            "除了"
+        ]
     },
     {
         "word": "or",
         "level": "intermediate",
-        "category": "Conjugations"
+        "category": "Conjugations",
+        "meaning": "或者",
+        "en_options": [
+            "either",
+            "otherwise",
+            "versus",
+            "alternatively",
+            "nor"
+        ],
+        "zh_options": [
+            "或",
+            "還是",
+            "抑或",
+            "要不",
+            "否則"
+        ]
     },
     {
         "word": "so",
         "level": "intermediate",
-        "category": "Conjugations"
+        "category": "Conjugations",
+        "meaning": "所以",
+        "en_options": [
+            "thus",
+            "therefore",
+            "very",
+            "accordingly",
+            "then"
+        ],
+        "zh_options": [
+            "因此",
+            "如此",
+            "這樣",
+            "那麼",
+            "非常"
+        ]
     },
     {
         "word": "police officer",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "警察",
+        "en_options": [
+            "guard",
+            "trooper",
+            "detective",
+            "security",
+            "patrol"
+        ],
+        "zh_options": [
+            "巡警",
+            "警官",
+            "警員",
+            "執法人員",
+            "公安"
+        ]
     },
     {
         "word": "police station",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "警察局",
+        "en_options": [
+            "precinct",
+            "headquarters",
+            "security office",
+            "post",
+            "base"
+        ],
+        "zh_options": [
+            "派出所",
+            "警局",
+            "公安局",
+            "分局",
+            "執法中心"
+        ]
     },
     {
         "word": "post office",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "郵局",
+        "en_options": [
+            "mail center",
+            "courier service",
+            "shipping office",
+            "postal service",
+            "delivery center"
+        ],
+        "zh_options": [
+            "郵政局",
+            "信局",
+            "郵政中心",
+            "郵件中心",
+            "寄信處"
+        ]
     },
     {
         "word": "living room",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "客廳",
+        "en_options": [
+            "den",
+            "parlor",
+            "lounge",
+            "sitting room",
+            "family room"
+        ],
+        "zh_options": [
+            "起居室",
+            "會客室",
+            "廳堂",
+            "休息室",
+            "家庭室"
+        ]
     },
     {
         "word": "baby",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "嬰兒",
+        "zh_options": [
+            "小孩",
+            "新生兒",
+            "幼兒",
+            "寶寶",
+            "兒童"
+        ],
+        "en_options": [
+            "infant",
+            "child",
+            "toddler",
+            "newborn",
+            "kid"
+        ]
     },
     {
         "word": "man",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "男人",
+        "zh_options": [
+            "球",
+            "洗澡",
+            "盒子"
+        ],
+        "en_options": [
+            "back",
+            "book",
+            "school"
+        ]
     },
     {
         "word": "nurse",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "護士",
+        "en_options": [
+            "caregiver",
+            "aide",
+            "attendant",
+            "medic",
+            "assistant"
+        ],
+        "zh_options": [
+            "護理師",
+            "看護",
+            "保健員",
+            "醫護人員",
+            "照顧者"
+        ]
     },
     {
         "word": "singer",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "歌手",
+        "en_options": [
+            "vocalist",
+            "performer",
+            "musician",
+            "entertainer",
+            "artist"
+        ],
+        "zh_options": [
+            "歌唱家",
+            "演唱者",
+            "歌者",
+            "藝人",
+            "音樂人"
+        ]
     },
     {
         "word": "child",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "孩子",
+        "zh_options": [
+            "背部",
+            "盒子",
+            "車"
+        ],
+        "en_options": [
+            "house",
+            "school",
+            "ball"
+        ]
     },
     {
         "word": "mailman",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "郵差",
+        "en_options": [
+            "courier",
+            "carrier",
+            "deliverer",
+            "postman",
+            "messenger"
+        ],
+        "zh_options": [
+            "送信員",
+            "郵遞員",
+            "投遞員",
+            "快遞員",
+            "信使"
+        ]
     },
     {
         "word": "woman",
         "level": "advanced",
-        "category": "People"
+        "category": "People",
+        "meaning": "女人",
+        "en_options": [
+            "female",
+            "lady",
+            "girl",
+            "wife",
+            "madam"
+        ],
+        "zh_options": [
+            "女子",
+            "婦女",
+            "女性",
+            "太太",
+            "小姐"
+        ]
     },
     {
         "word": "aunt",
         "level": "advanced",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "阿姨/姑姑",
+        "en_options": [
+            "relative",
+            "godmother",
+            "family friend",
+            "nanny",
+            "neighbor"
+        ],
+        "zh_options": [
+            "姨媽",
+            "嬸嬸",
+            "姑媽",
+            "舅媽",
+            "伯母"
+        ]
     },
     {
         "word": "daughter",
         "level": "advanced",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "女兒",
+        "en_options": [
+            "child",
+            "girl",
+            "offspring",
+            "descendent",
+            "youth"
+        ],
+        "zh_options": [
+            "千金",
+            "閨女",
+            "孩子",
+            "後代",
+            "子女"
+        ]
     },
     {
         "word": "son",
         "level": "advanced",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "兒子",
+        "en_options": [
+            "child",
+            "boy",
+            "heir",
+            "offspring",
+            "youth"
+        ],
+        "zh_options": [
+            "孩子",
+            "男孩",
+            "後嗣",
+            "後代",
+            "公子"
+        ]
     },
     {
         "word": "uncle",
         "level": "advanced",
-        "category": "Family"
+        "category": "Family",
+        "meaning": "叔叔/舅舅",
+        "en_options": [
+            "relative",
+            "godfather",
+            "brother-in-law",
+            "family friend",
+            "mentor"
+        ],
+        "zh_options": [
+            "伯伯",
+            "姑父",
+            "姨父",
+            "姊夫",
+            "岳父"
+        ]
     },
     {
         "word": "mile",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "英里",
+        "en_options": [
+            "distance",
+            "kilometer",
+            "measurement",
+            "length",
+            "stretch"
+        ],
+        "zh_options": [
+            "哩",
+            "公里",
+            "里程",
+            "距離",
+            "長度"
+        ]
     },
     {
         "word": "candy",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "糖果",
+        "en_options": [
+            "sweet",
+            "treat",
+            "dessert",
+            "confection",
+            "chocolate"
+        ],
+        "zh_options": [
+            "糖",
+            "甜點",
+            "零食",
+            "點心",
+            "巧克力"
+        ]
     },
     {
         "word": "pie",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "派",
+        "en_options": [
+            "tart",
+            "pastry",
+            "cake",
+            "dessert",
+            "dish"
+        ],
+        "zh_options": [
+            "餅",
+            "蛋糕",
+            "糕點",
+            "塔",
+            "甜點"
+        ]
     },
     {
         "word": "bread",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "麵包",
+        "zh_options": [
+            "早餐",
+            "烘焙",
+            "吐司",
+            "糕點",
+            "三明治"
+        ],
+        "en_options": [
+            "toast",
+            "bakery",
+            "food",
+            "pastry",
+            "sandwich"
+        ]
     },
     {
         "word": "coffee",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "咖啡",
+        "en_options": [
+            "brew",
+            "java",
+            "espresso",
+            "beverage",
+            "drink"
+        ],
+        "zh_options": [
+            "黑咖啡",
+            "美式",
+            "拿鐵",
+            "濃縮咖啡",
+            "飲料"
+        ]
     },
     {
         "word": "cookies",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "餅乾",
+        "en_options": [
+            "biscuits",
+            "treats",
+            "crackers",
+            "sweets",
+            "wafers"
+        ],
+        "zh_options": [
+            "曲奇",
+            "小餅",
+            "小點",
+            "甜餅",
+            "脆餅"
+        ]
     },
     {
         "word": "food",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "食物",
+        "en_options": [
+            "meal",
+            "nutrition",
+            "sustenance",
+            "provisions",
+            "groceries"
+        ],
+        "zh_options": [
+            "餐點",
+            "飲食",
+            "糧食",
+            "菜餚",
+            "營養"
+        ]
     },
     {
         "word": "fruit",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "水果",
+        "en_options": [
+            "produce",
+            "crop",
+            "harvest",
+            "berry",
+            "plant"
+        ],
+        "zh_options": [
+            "鮮果",
+            "果品",
+            "果實",
+            "鮮果品",
+            "蔬果"
+        ]
     },
     {
         "word": "noodles",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "麵條",
+        "en_options": [
+            "pasta",
+            "strands",
+            "strings",
+            "dough",
+            "spaghetti"
+        ],
+        "zh_options": [
+            "麵",
+            "麵食",
+            "粉條",
+            "拉麵",
+            "意麵"
+        ]
     },
     {
         "word": "sandwich",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "三明治",
+        "en_options": [
+            "sub",
+            "wrap",
+            "burger",
+            "panini",
+            "snack"
+        ],
+        "zh_options": [
+            "夾餅",
+            "漢堡",
+            "麵包卷",
+            "三文治",
+            "捲餅"
+        ]
     },
     {
         "word": "soup",
         "level": "advanced",
-        "category": "Food & Drink"
+        "category": "Food & Drink",
+        "meaning": "湯",
+        "en_options": [
+            "broth",
+            "stew",
+            "chowder",
+            "liquid",
+            "consommé"
+        ],
+        "zh_options": [
+            "羹",
+            "湯品",
+            "濃湯",
+            "清湯",
+            "燉菜"
+        ]
     },
     {
         "word": "card",
         "level": "advanced",
-        "category": "School"
+        "category": "School",
+        "meaning": "卡片",
+        "en_options": [
+            "note",
+            "badge",
+            "pass",
+            "tag",
+            "folder"
+        ],
+        "zh_options": [
+            "紙牌",
+            "卡",
+            "名片",
+            "信用卡",
+            "賀卡"
+        ]
     },
     {
         "word": "computer",
         "level": "advanced",
-        "category": "School"
+        "category": "School",
+        "meaning": "電腦",
+        "en_options": [
+            "screen",
+            "type",
+            "game",
+            "math",
+            "work"
+        ],
+        "zh_options": [
+            "計算機",
+            "桌機",
+            "螢幕",
+            "鍵盤",
+            "設備"
+        ]
     },
     {
         "word": "classroom",
         "level": "advanced",
-        "category": "School"
+        "category": "School",
+        "meaning": "教室",
+        "en_options": [
+            "hall",
+            "lab",
+            "studio",
+            "space",
+            "auditorium"
+        ],
+        "zh_options": [
+            "課堂",
+            "班級",
+            "講堂",
+            "學室",
+            "教學室"
+        ]
     },
     {
         "word": "clock",
         "level": "advanced",
-        "category": "School"
+        "category": "School",
+        "meaning": "時鐘",
+        "en_options": [
+            "watch",
+            "timer",
+            "timepiece",
+            "alarm",
+            "dial"
+        ],
+        "zh_options": [
+            "鐘",
+            "計時器",
+            "座鐘",
+            "鬧鐘",
+            "掛鐘"
+        ]
     },
     {
         "word": "page",
         "level": "advanced",
-        "category": "School"
+        "category": "School",
+        "meaning": "頁",
+        "en_options": [
+            "sheet",
+            "leaf",
+            "side",
+            "screen",
+            "section"
+        ],
+        "zh_options": [
+            "頁面",
+            "書頁",
+            "紙張",
+            "葉",
+            "章節"
+        ]
     },
     {
         "word": "seat",
         "level": "advanced",
-        "category": "School"
+        "category": "School",
+        "meaning": "座位",
+        "en_options": [
+            "chair",
+            "bench",
+            "spot",
+            "place",
+            "position"
+        ],
+        "zh_options": [
+            "椅子",
+            "坐位",
+            "席位",
+            "座",
+            "位子"
+        ]
     },
     {
         "word": "pid",
         "level": "advanced",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "豬",
+        "en_options": [
+            "hog",
+            "swine",
+            "boar",
+            "sow",
+            "pork"
+        ],
+        "zh_options": [
+            "豬隻",
+            "家豬",
+            "豚",
+            "母豬",
+            "野豬"
+        ]
     },
     {
         "word": "bee",
         "level": "advanced",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "蜜蜂",
+        "en_options": [
+            "wasp",
+            "insect",
+            "hornet",
+            "bug",
+            "bumblebee"
+        ],
+        "zh_options": [
+            "蜂",
+            "黃蜂",
+            "昆蟲",
+            "大黃蜂",
+            "土蜂"
+        ]
     },
     {
         "word": "duck",
         "level": "advanced",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "鴨",
+        "zh_options": [
+            "男孩",
+            "球",
+            "麵包"
+        ],
+        "en_options": [
+            "boat",
+            "baby",
+            "dog"
+        ]
     },
     {
         "word": "chicken",
         "level": "advanced",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "雞",
+        "zh_options": [
+            "麵包",
+            "房子",
+            "嬰兒"
+        ],
+        "en_options": [
+            "bath",
+            "dog",
+            "ball"
+        ]
     },
     {
         "word": "elephant",
         "level": "advanced",
-        "category": "Animals"
+        "category": "Animals",
+        "meaning": "大象",
+        "en_options": [
+            "mammal",
+            "beast",
+            "trunk",
+            "tusker",
+            "pachyderm"
+        ],
+        "zh_options": [
+            "象",
+            "大象",
+            "巨獸",
+            "象牙獸",
+            "長鼻獸"
+        ]
     },
     {
         "word": "bookstore",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "書店",
+        "en_options": [
+            "library",
+            "shop",
+            "stall",
+            "store",
+            "retailer"
+        ],
+        "zh_options": [
+            "書局",
+            "書舖",
+            "圖書館",
+            "文具店",
+            "賣場"
+        ]
     },
     {
         "word": "shop",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "商店",
+        "en_options": [
+            "store",
+            "mart",
+            "outlet",
+            "boutique",
+            "market"
+        ],
+        "zh_options": [
+            "店舖",
+            "店",
+            "商舖",
+            "賣場",
+            "零售店"
+        ]
     },
     {
         "word": "supermarket",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "超級市場",
+        "en_options": [
+            "grocer",
+            "store",
+            "mart",
+            "hypermarket",
+            "shop"
+        ],
+        "zh_options": [
+            "超市",
+            "大賣場",
+            "量販店",
+            "雜貨店",
+            "商場"
+        ]
     },
     {
         "word": "gym",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "健身房",
+        "en_options": [
+            "facility",
+            "center",
+            "club",
+            "studio",
+            "arena"
+        ],
+        "zh_options": [
+            "體育館",
+            "運動中心",
+            "健身中心",
+            "鍛鍊室",
+            "運動室"
+        ]
     },
     {
         "word": "hospital",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "醫院",
+        "en_options": [
+            "clinic",
+            "facility",
+            "center",
+            "ward",
+            "institution"
+        ],
+        "zh_options": [
+            "醫療中心",
+            "醫館",
+            "診所",
+            "病院",
+            "保健站"
+        ]
     },
     {
         "word": "library",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "圖書館",
+        "en_options": [
+            "archive",
+            "collection",
+            "bookstore",
+            "resource center",
+            "repository"
+        ],
+        "zh_options": [
+            "書館",
+            "文庫",
+            "書庫",
+            "資料館",
+            "閱覽室"
+        ]
     },
     {
         "word": "restaurant",
         "level": "advanced",
-        "category": "Places & Locations"
+        "category": "Places & Locations",
+        "meaning": "餐廳",
+        "en_options": [
+            "diner",
+            "eatery",
+            "café",
+            "bistro",
+            "establishment"
+        ],
+        "zh_options": [
+            "飯店",
+            "餐館",
+            "酒樓",
+            "食堂",
+            "館子"
+        ]
     },
     {
         "word": "thirteen",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十三",
+        "en_options": [
+            "dozen",
+            "twelve",
+            "fourteen",
+            "thirty",
+            "ten"
+        ],
+        "zh_options": [
+            "十四",
+            "十二",
+            "三十",
+            "四十",
+            "十五"
+        ]
     },
     {
         "word": "fourteen",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十四",
+        "en_options": [
+            "dozen",
+            "fourty",
+            "twelve",
+            "double seven",
+            "ten"
+        ],
+        "zh_options": [
+            "十二",
+            "十五",
+            "四十",
+            "第十四",
+            "十三"
+        ]
     },
     {
         "word": "fifteen",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十五",
+        "en_options": [
+            "nineteen",
+            "seventy",
+            "forty",
+            "eleven",
+            "ninety"
+        ],
+        "zh_options": [
+            "百",
+            "十九",
+            "九十",
+            "七十",
+            "四十"
+        ]
     },
     {
         "word": "sixteen",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十六",
+        "en_options": [
+            "ninety",
+            "nineteen",
+            "fifteen",
+            "twelve",
+            "eleven"
+        ],
+        "zh_options": [
+            "百",
+            "九十",
+            "十四",
+            "十九",
+            "十八"
+        ]
     },
     {
         "word": "seventeen",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十七",
+        "en_options": [
+            "forty",
+            "eleven",
+            "dosen",
+            "fourteen",
+            "thirteen"
+        ],
+        "zh_options": [
+            "十五",
+            "十九",
+            "六十",
+            "七十",
+            "四十"
+        ]
     },
     {
         "word": "eighteen",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十八",
+        "en_options": [
+            "nineteen",
+            "twenty",
+            "ninety",
+            "thirty",
+            "seventy"
+        ],
+        "zh_options": [
+            "十四",
+            "十六",
+            "九十",
+            "四十",
+            "十二"
+        ]
     },
     {
         "word": "nineteen",
         "level": "advanced",
-        "category": "Numbers"
-    },
-    {
-        "word": "some",
-        "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "十九",
+        "en_options": [
+            "seventeen",
+            "fourteen",
+            "eighty",
+            "fifteen",
+            "thirteen"
+        ],
+        "zh_options": [
+            "三十",
+            "十六",
+            "四十",
+            "十七",
+            "十二"
+        ]
     },
     {
         "word": "twenty",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "二十",
+        "en_options": [
+            "seventeen",
+            "seventy",
+            "dosen",
+            "nineteen",
+            "sixty"
+        ],
+        "zh_options": [
+            "百",
+            "十二",
+            "十五",
+            "十六",
+            "十七"
+        ]
     },
     {
         "word": "thirty",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "三十",
+        "en_options": [
+            "eleven",
+            "seventeen",
+            "ninety",
+            "thirteen",
+            "fifty"
+        ],
+        "zh_options": [
+            "七十",
+            "八十",
+            "十九",
+            "五十",
+            "十四"
+        ]
     },
     {
-        "word": "firty",
+        "word": "forty",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "四十",
+        "en_options": [
+            "seventy",
+            "eighteen",
+            "eighty",
+            "nineteen",
+            "hundred"
+        ],
+        "zh_options": [
+            "三十",
+            "十四",
+            "五十",
+            "百",
+            "七十"
+        ]
     },
     {
         "word": "fifty",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "五十",
+        "en_options": [
+            "thirty",
+            "hundred",
+            "twenty",
+            "dosen",
+            "fourteen"
+        ],
+        "zh_options": [
+            "三十",
+            "十五",
+            "十七",
+            "十九",
+            "十六"
+        ]
     },
     {
         "word": "sixty",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "六十",
+        "en_options": [
+            "eleven",
+            "thirty",
+            "eighty",
+            "twelve",
+            "seventeen"
+        ],
+        "zh_options": [
+            "十四",
+            "三十",
+            "二十",
+            "八十",
+            "十五"
+        ]
     },
     {
         "word": "seventy",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "七十",
+        "en_options": [
+            "twelve",
+            "fifty",
+            "eighteen",
+            "forty",
+            "ninety"
+        ],
+        "zh_options": [
+            "二十",
+            "百",
+            "五十",
+            "十五",
+            "十六"
+        ]
     },
     {
         "word": "eighty",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "八十",
+        "en_options": [
+            "thirty",
+            "eighteen",
+            "sixty",
+            "forty",
+            "hundred"
+        ],
+        "zh_options": [
+            "十五",
+            "十二",
+            "五十",
+            "十四",
+            "十八"
+        ]
     },
     {
         "word": "ninety",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "九十",
+        "en_options": [
+            "forty",
+            "dosen",
+            "sixty",
+            "nineteen",
+            "fifteen"
+        ],
+        "zh_options": [
+            "十五",
+            "十七",
+            "二十",
+            "七十",
+            "十三"
+        ]
     },
     {
         "word": "hundred",
         "level": "advanced",
-        "category": "Numbers"
+        "category": "Numbers",
+        "meaning": "百",
+        "en_options": [
+            "dosen",
+            "fifteen",
+            "fourteen",
+            "sixteen",
+            "twenty"
+        ],
+        "zh_options": [
+            "八十",
+            "九十",
+            "四十",
+            "十二",
+            "十五"
+        ]
+    },
+    {
+        "word": "some",
+        "level": "advanced",
+        "category": "Numbers",
+        "meaning": "一些",
+        "en_options": [
+            "few",
+            "many",
+            "several",
+            "little",
+            "part"
+        ],
+        "zh_options": [
+            "幾個",
+            "許多",
+            "好幾個",
+            "一點",
+            "部分"
+        ]
     },
     {
         "word": "pink",
         "level": "advanced",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "粉紅色",
+        "en_options": [
+            "red",
+            "purple",
+            "light",
+            "rose",
+            "blush"
+        ],
+        "zh_options": [
+            "紅色",
+            "淺紅",
+            "桃色",
+            "玫瑰色",
+            "淺粉"
+        ]
     },
     {
         "word": "gray",
         "level": "advanced",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "灰色",
+        "en_options": [
+            "dull",
+            "dark",
+            "silver",
+            "cloudy",
+            "stone"
+        ],
+        "zh_options": [
+            "暗色",
+            "銀色",
+            "鐵色",
+            "灰白",
+            "淺黑"
+        ]
     },
     {
         "word": "grey",
         "level": "advanced",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "灰色",
+        "en_options": [
+            "dull",
+            "dark",
+            "silver",
+            "cloudy",
+            "stone"
+        ],
+        "zh_options": [
+            "暗色",
+            "銀色",
+            "鐵色",
+            "灰白",
+            "淺黑"
+        ]
     },
     {
         "word": "orange",
         "level": "advanced",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "橙色",
+        "en_options": ["fruit", "peach", "brown", "red", "yellow"],
+        "zh_options": ["橘色", "黃色", "橘子色", "紅色", "褐色"]
     },
     {
         "word": "purple",
         "level": "advanced",
-        "category": "Colors"
+        "category": "Colors",
+        "meaning": "紫色",
+        "en_options": [
+            "pink",
+            "blue",
+            "dark",
+            "grape",
+            "plum"
+        ],
+        "zh_options": [
+            "粉紅色",
+            "深藍",
+            "葡萄色",
+            "暗紅",
+            "藍紅色"
+        ]
     },
     {
         "word": "bathroom",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "浴室",
+        "en_options": [
+            "toilet",
+            "sink",
+            "shower",
+            "room",
+            "tub"
+        ],
+        "zh_options": [
+            "廁所",
+            "洗手間",
+            "淋浴間",
+            "盥洗室",
+            "衛生間"
+        ]
     },
     {
         "word": "bed",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "床",
+        "zh_options": [
+            "背部",
+            "房子",
+            "書"
+        ],
+        "en_options": [
+            "bath",
+            "boat",
+            "box"
+        ]
     },
     {
         "word": "bedroom",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "臥室",
+        "en_options": [
+            "room",
+            "bed",
+            "sleep",
+            "rest",
+            "nap"
+        ],
+        "zh_options": [
+            "睡房",
+            "房間",
+            "寢室",
+            "睡覺房",
+            "休息室"
+        ]
     },
     {
         "word": "kitched",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "廚房",
+        "en_options": [
+            "room",
+            "food",
+            "cook",
+            "stove",
+            "oven"
+        ],
+        "zh_options": [
+            "灶房",
+            "煮食房",
+            "煮飯房",
+            "炊房",
+            "做飯房"
+        ]
     },
     {
         "word": "sofa",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "沙發",
+        "en_options": [
+            "chair",
+            "seat",
+            "couch",
+            "bench",
+            "bed"
+        ],
+        "zh_options": [
+            "長椅",
+            "靠椅",
+            "座椅",
+            "大椅子",
+            "軟椅"
+        ]
     },
     {
         "word": "TV",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "電視",
+        "en_options": [
+            "screen",
+            "box",
+            "show",
+            "movie",
+            "tube"
+        ],
+        "zh_options": [
+            "電視機",
+            "螢幕",
+            "顯示器",
+            "視訊",
+            "銀幕"
+        ]
     },
     {
         "word": "cellphone",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "手機",
+        "en_options": [
+            "phone",
+            "mobile",
+            "call",
+            "text",
+            "talk"
+        ],
+        "zh_options": [
+            "電話",
+            "移動電話",
+            "通訊器",
+            "行動電話",
+            "智能機"
+        ]
     },
     {
         "word": "telephone",
         "level": "advanced",
-        "category": "House"
+        "category": "House",
+        "meaning": "電話",
+        "en_options": [
+            "phone",
+            "call",
+            "talk",
+            "ring",
+            "line"
+        ],
+        "zh_options": [
+            "話機",
+            "通話器",
+            "撥號機",
+            "座機",
+            "有線電話"
+        ]
     },
     {
         "word": "keg",
         "level": "advanced",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "腿",
+        "en_options": [
+            "leg",
+            "limb",
+            "foot",
+            "knee",
+            "thigh"
+        ],
+        "zh_options": [
+            "腳",
+            "小腿",
+            "大腿",
+            "足",
+            "膝蓋"
+        ]
     },
     {
         "word": "nose",
         "level": "advanced",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "鼻子",
+        "en_options": [
+            "face",
+            "smell",
+            "sniff",
+            "hole",
+            "nostrils"
+        ],
+        "zh_options": [
+            "臉",
+            "鼻孔",
+            "鼻頭",
+            "鼻樑",
+            "嗅覺"
+        ]
     },
     {
         "word": "hair",
         "level": "advanced",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "頭髮",
+        "en_options": [
+            "fur",
+            "style",
+            "cut",
+            "strand",
+            "curl"
+        ],
+        "zh_options": [
+            "毛髮",
+            "鬃毛",
+            "髮型",
+            "頭",
+            "毛"
+        ]
     },
     {
         "word": "back",
         "level": "advanced",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "背部",
+        "zh_options": [
+            "身體",
+            "脊椎",
+            "後面",
+            "肩膀",
+            "腰部"
+        ],
+        "en_options": [
+            "spine",
+            "rear",
+            "behind",
+            "shoulder",
+            "waist"
+        ]
     },
     {
         "word": "cody",
         "level": "advanced",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "身體",
+        "en_options": [
+            "form",
+            "self",
+            "shape",
+            "chest",
+            "skin"
+        ],
+        "zh_options": [
+            "體",
+            "軀體",
+            "人體",
+            "體型",
+            "軀幹"
+        ]
     },
     {
         "word": "tooth",
         "level": "advanced",
-        "category": "Parts of the Body"
+        "category": "Parts of the Body",
+        "meaning": "牙齒",
+        "en_options": [
+            "bite",
+            "mouth",
+            "jaw",
+            "fang",
+            "gum"
+        ],
+        "zh_options": [
+            "牙",
+            "齒",
+            "口",
+            "牙床",
+            "口腔"
+        ]
     },
     {
         "word": "busy",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "忙碌",
+        "en_options": [
+            "fast",
+            "work",
+            "quick",
+            "full",
+            "rush"
+        ],
+        "zh_options": [
+            "快",
+            "不閒",
+            "趕時間",
+            "滿",
+            "做事"
+        ]
     },
     {
         "word": "clean",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "乾淨",
+        "en_options": [
+            "neat", "wash", "pure", "tidy", "fresh"
+        ],
+        "zh_options": [
+            "整潔", "洗好", "明淨", "清新", "不髒"
+        ]
     },
     {
         "word": "cure",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "可愛",
+        "en_options": [
+            "sweet",
+            "nice",
+            "pretty",
+            "small",
+            "good"
+        ],
+        "zh_options": [
+            "甜美",
+            "迷人",
+            "美麗",
+            "好看",
+            "俏皮"
+        ]
     },
     {
         "word": "dirty",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "髒",
+        "en_options": [
+            "mess",
+            "mud",
+            "soil",
+            "dust",
+            "stain"
+        ],
+        "zh_options": [
+            "不乾淨",
+            "骯髒",
+            "泥濘",
+            "灰塵",
+            "污漬"
+        ]
     },
     {
         "word": "heavy",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "重",
+        "en_options": [
+            "big",
+            "large",
+            "hard",
+            "thick",
+            "solid"
+        ],
+        "zh_options": [
+            "大",
+            "厚",
+            "沉",
+            "笨重",
+            "壯碩"
+        ]
     },
     {
         "word": "kind",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "善良",
+        "en_options": [
+            "nice",
+            "good",
+            "sweet",
+            "warm",
+            "soft"
+        ],
+        "zh_options": [
+            "好心",
+            "友善",
+            "親切",
+            "溫暖",
+            "好人"
+        ]
     },
     {
         "word": "sick",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "生病",
+        "en_options": [
+            "ill",
+            "hurt",
+            "bad",
+            "weak",
+            "poor"
+        ],
+        "zh_options": [
+            "不舒服",
+            "不好",
+            "痛",
+            "虛弱",
+            "難受"
+        ]
     },
     {
         "word": "smart",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "聰明",
+        "en_options": [
+            "wise",
+            "good",
+            "quick",
+            "fast",
+            "sharp"
+        ],
+        "zh_options": [
+            "有智慧",
+            "伶俐",
+            "靈敏",
+            "高明",
+            "機智"
+        ]
     },
     {
         "word": "strong",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "強壯",
+        "en_options": [
+            "big",
+            "tough",
+            "hard",
+            "firm",
+            "power"
+        ],
+        "zh_options": [
+            "有力",
+            "強大",
+            "硬",
+            "壯",
+            "健壯"
+        ]
     },
     {
         "word": "young",
         "level": "advanced",
-        "category": "Descriptive Adjectives"
+        "category": "Descriptive Adjectives",
+        "meaning": "年輕",
+        "en_options": [
+            "new",
+            "small",
+            "fresh",
+            "early",
+            "child"
+        ],
+        "zh_options": [
+            "小",
+            "年少",
+            "新",
+            "未老",
+            "幼小"
+        ]
     },
     {
         "word": "moon",
         "level": "advanced",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "月亮",
+        "en_options": [
+            "night",
+            "star",
+            "sky",
+            "light",
+            "sun"
+        ],
+        "zh_options": [
+            "夜",
+            "星",
+            "天空",
+            "月光",
+            "太陽"
+        ]
     },
     {
         "word": "sky",
         "level": "advanced",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "天空",
+        "en_options": [
+            "blue",
+            "cloud",
+            "air",
+            "high",
+            "sun"
+        ],
+        "zh_options": [
+            "藍天",
+            "雲",
+            "天",
+            "高空",
+            "空氣"
+        ]
     },
     {
         "word": "star",
         "level": "advanced",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "星星",
+        "zh_options": [
+            "船",
+            "男孩",
+            "車"
+        ],
+        "en_options": [
+            "house",
+            "bath",
+            "car"
+        ]
     },
     {
         "word": "sun",
         "level": "advanced",
-        "category": "Weather & Nature"
+        "category": "Weather & Nature",
+        "meaning": "太陽",
+        "zh_options": [
+            "男孩",
+            "麵包",
+            "嬰兒"
+        ],
+        "en_options": [
+            "back",
+            "box",
+            "car"
+        ]
     },
     {
         "word": "fall",
         "level": "advanced",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "秋天",
+        "en_options": [
+            "drop",
+            "down",
+            "trip",
+            "time",
+            "slip"
+        ],
+        "zh_options": [
+            "下降",
+            "跌",
+            "降落",
+            "絆倒",
+            "滑落"
+        ]
     },
     {
         "word": "spring",
         "level": "advanced",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "春天",
+        "en_options": [
+            "jump",
+            "hop",
+            "coil",
+            "time",
+            "water"
+        ],
+        "zh_options": [
+            "跳躍",
+            "跳",
+            "彈簧",
+            "水源",
+            "泉水"
+        ]
     },
     {
         "word": "summer",
         "level": "advanced",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "夏天",
+        "en_options": [
+            "hot",
+            "warm",
+            "sun",
+            "time",
+            "break"
+        ],
+        "zh_options": [
+            "熱",
+            "暑假",
+            "炎熱",
+            "暖",
+            "烈日"
+        ]
     },
     {
         "word": "winter",
         "level": "advanced",
-        "category": "Time"
+        "category": "Time",
+        "meaning": "冬天",
+        "en_options": [
+            "cold",
+            "snow",
+            "ice",
+            "time",
+            "chill"
+        ],
+        "zh_options": [
+            "冷",
+            "雪",
+            "冰",
+            "寒冷",
+            "寒冬"
+        ]
     },
     {
         "word": "MRT",
         "level": "advanced",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "捷運",
+        "en_options": [
+            "train",
+            "bus",
+            "rail",
+            "ride",
+            "metro"
+        ],
+        "zh_options": [
+            "地鐵",
+            "電車",
+            "快車",
+            "鐵路",
+            "公車"
+        ]
     },
     {
         "word": "plane",
         "level": "advanced",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "飛機",
+        "en_options": [
+            "air",
+            "fly",
+            "jet",
+            "wing",
+            "bird"
+        ],
+        "zh_options": [
+            "航機",
+            "客機",
+            "空中",
+            "航空",
+            "噴射機"
+        ]
     },
     {
         "word": "ship",
         "level": "advanced",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "船",
+        "en_options": [
+            "boat",
+            "sail",
+            "sea",
+            "float",
+            "craft"
+        ],
+        "zh_options": [
+            "輪船",
+            "航船",
+            "大船",
+            "小船",
+            "艦艇"
+        ]
     },
     {
         "word": "taxi",
         "level": "advanced",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "計程車",
+        "en_options": [
+            "cab",
+            "car",
+            "ride",
+            "auto",
+            "drive"
+        ],
+        "zh_options": [
+            "的士",
+            "小黃",
+            "出租車",
+            "車",
+            "汽車"
+        ]
     },
     {
         "word": "train",
         "level": "advanced",
-        "category": "Transportation"
+        "category": "Transportation",
+        "meaning": "火車",
+        "en_options": [
+            "ride",
+            "rail",
+            "car",
+            "track",
+            "line"
+        ],
+        "zh_options": [
+            "鐵路",
+            "列車",
+            "軌道",
+            "電車",
+            "運輸車"
+        ]
     },
     {
         "word": "mad",
         "level": "advanced",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "生氣",
+        "en_options": [
+            "mean",
+            "upset",
+            "wild",
+            "bad",
+            "cross"
+        ],
+        "zh_options": [
+            "怒",
+            "火大",
+            "不開心",
+            "惱怒",
+            "氣憤"
+        ]
     },
     {
         "word": "angry",
         "level": "advanced",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "憤怒",
+        "en_options": [
+            "mad",
+            "upset",
+            "cross",
+            "mean",
+            "red"
+        ],
+        "zh_options": [
+            "生氣",
+            "火大",
+            "不悅",
+            "惱怒",
+            "氣惱"
+        ]
     },
     {
         "word": "excited",
         "level": "advanced",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "興奮",
+        "en_options": [
+            "happy",
+            "wild",
+            "glad",
+            "eager",
+            "jump"
+        ],
+        "zh_options": [
+            "高興",
+            "開心",
+            "激動",
+            "熱情",
+            "雀躍"
+        ]
     },
     {
         "word": "hungry",
         "level": "advanced",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "飢餓",
+        "en_options": [
+            "want",
+            "need",
+            "empty",
+            "food",
+            "ask"
+        ],
+        "zh_options": [
+            "餓",
+            "想吃",
+            "空腹",
+            "需要食物",
+            "渴望"
+        ]
     },
     {
         "word": "tired",
         "level": "advanced",
-        "category": "Feelings & Emotions"
+        "category": "Feelings & Emotions",
+        "meaning": "疲倦",
+        "en_options": [
+            "weak",
+            "rest",
+            "slow",
+            "lazy",
+            "bored"
+        ],
+        "zh_options": [
+            "累",
+            "乏力",
+            "困",
+            "睏",
+            "疲乏"
+        ]
     },
     {
         "word": "coat",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "外套",
+        "zh_options": [
+            "嬰兒",
+            "男孩",
+            "洗澡"
+        ],
+        "en_options": [
+            "baby",
+            "book",
+            "bath"
+        ]
     },
     {
         "word": "dress",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "洋裝",
+        "en_options": [
+            "wear",
+            "girl",
+            "skirt",
+            "party",
+            "nice"
+        ],
+        "zh_options": [
+            "衣服",
+            "裙子",
+            "連衣裙",
+            "禮服",
+            "服裝"
+        ]
     },
     {
         "word": "glasses",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "眼鏡",
+        "en_options": [
+            "look",
+            "eyes",
+            "see",
+            "face",
+            "lens"
+        ],
+        "zh_options": [
+            "鏡子",
+            "視鏡",
+            "鏡片",
+            "老花鏡",
+            "太陽眼鏡"
+        ]
     },
     {
         "word": "pants",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "褲子",
+        "en_options": [
+            "wear",
+            "legs",
+            "jeans",
+            "long",
+            "seat"
+        ],
+        "zh_options": [
+            "長褲",
+            "短褲",
+            "牛仔褲",
+            "衣服",
+            "西裝褲"
+        ]
     },
     {
         "word": "shorts",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "短褲",
+        "en_options": [
+            "pants",
+            "swim",
+            "small",
+            "sport",
+            "warm"
+        ],
+        "zh_options": [
+            "短衣",
+            "熱褲",
+            "褲子",
+            "運動褲",
+            "牛仔短褲"
+        ]
     },
     {
         "word": "skirt",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "裙子",
+        "en_options": [
+            "girl",
+            "dress",
+            "wear",
+            "long",
+            "short"
+        ],
+        "zh_options": [
+            "女裝",
+            "短裙",
+            "長裙",
+            "百褶裙",
+            "連衣裙"
+        ]
     },
     {
         "word": "socks",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "襪子",
+        "en_options": [
+            "feet",
+            "wear",
+            "shoe",
+            "foot",
+            "warm"
+        ],
+        "zh_options": [
+            "長襪",
+            "短襪",
+            "棉襪",
+            "腳套",
+            "鞋子"
+        ]
     },
     {
         "word": "T-shirt",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "T恤",
+        "en_options": [
+            "top",
+            "wear",
+            "shirt",
+            "tee",
+            "cool"
+        ],
+        "zh_options": [
+            "短袖",
+            "上衣",
+            "衫",
+            "衣服",
+            "汗衫"
+        ]
     },
     {
         "word": "jeans",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "牛仔褲",
+        "en_options": [
+            "pants",
+            "blue",
+            "wear",
+            "leg",
+            "long"
+        ],
+        "zh_options": [
+            "褲子",
+            "長褲",
+            "藍褲",
+            "休閒褲",
+            "工作褲"
+        ]
     },
     {
         "word": "sweater",
         "level": "advanced",
-        "category": "Clothing"
+        "category": "Clothing",
+        "meaning": "毛衣",
+        "en_options": [
+            "warm",
+            "coat",
+            "wool",
+            "wear",
+            "cold"
+        ],
+        "zh_options": [
+            "外套",
+            "衣服",
+            "線衣",
+            "針織衫",
+            "保暖衣"
+        ]
     },
     {
         "word": "baseball",
         "level": "advanced",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "棒球",
+        "en_options": [
+            "game",
+            "bat",
+            "ball",
+            "hit",
+            "catch"
+        ],
+        "zh_options": [
+            "球",
+            "球賽",
+            "投球",
+            "打球",
+            "運動"
+        ]
     },
     {
         "word": "basketball",
         "level": "advanced",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "籃球",
+        "en_options": [
+            "game",
+            "ball",
+            "hoop",
+            "throw",
+            "court"
+        ],
+        "zh_options": [
+            "球",
+            "球賽",
+            "投籃",
+            "運動",
+            "場地"
+        ]
     },
     {
         "word": "camping",
         "level": "advanced",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "露營",
+        "en_options": [
+            "tent",
+            "outdoor",
+            "trip",
+            "sleep",
+            "fire"
+        ],
+        "zh_options": [
+            "帳篷",
+            "戶外",
+            "旅行",
+            "野外",
+            "活動"
+        ]
     },
     {
         "word": "jogging",
         "level": "advanced",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "慢跑",
+        "en_options": [
+            "run",
+            "walk",
+            "move",
+            "race",
+            "fast"
+        ],
+        "zh_options": [
+            "跑步",
+            "走路",
+            "健身",
+            "運動",
+            "散步"
+        ]
     },
     {
         "word": "sport",
         "level": "advanced",
-        "category": "Sports and Hobbies"
-    },
-    {
-        "word": "table",
-        "level": "advanced",
-        "category": "Sports and Hobbies"
+        "category": "Sports and Hobbies",
+        "meaning": "運動",
+        "en_options": [
+            "game",
+            "play",
+            "team",
+            "fun",
+            "race"
+        ],
+        "zh_options": [
+            "競技",
+            "遊戲",
+            "體育",
+            "鍛煉",
+            "比賽"
+        ]
     },
     {
         "word": "tennis",
         "level": "advanced",
-        "category": "Sports and Hobbies"
-    },
-    {
-        "word": "computer",
-        "level": "advanced",
-        "category": "Subjects"
+        "category": "Sports and Hobbies",
+        "meaning": "網球",
+        "en_options": [
+            "ball",
+            "net",
+            "game",
+            "hit",
+            "sport"
+        ],
+        "zh_options": [
+            "羽毛球",
+            "球拍",
+            "運動",
+            "比賽",
+            "場地"
+        ]
     },
     {
         "word": "PE",
         "level": "advanced",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "體育",
+        "en_options": [
+            "gym",
+            "run",
+            "sport",
+            "class",
+            "game"
+        ],
+        "zh_options": [
+            "運動",
+            "課",
+            "遊戲",
+            "跑步",
+            "體操"
+        ]
     },
     {
         "word": "science",
         "level": "advanced",
-        "category": "Subjects"
+        "category": "Subjects",
+        "meaning": "科學",
+        "en_options": [
+            "lab",
+            "test",
+            "learn",
+            "study",
+            "class"
+        ],
+        "zh_options": [
+            "實驗",
+            "研究",
+            "自然",
+            "物理",
+            "化學"
+        ]
     },
     {
         "word": "her",
         "level": "advanced",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "她的",
+        "en_options": [
+            "she",
+            "girl",
+            "woman",
+            "lady",
+            "own"
+        ],
+        "zh_options": [
+            "她",
+            "那位",
+            "這位",
+            "女孩",
+            "女人"
+        ]
     },
     {
         "word": "his",
         "level": "advanced",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "他的",
+        "en_options": [
+            "he",
+            "boy",
+            "man",
+            "own",
+            "that"
+        ],
+        "zh_options": [
+            "他",
+            "那位",
+            "這位",
+            "男孩",
+            "男人"
+        ]
     },
     {
         "word": "our",
         "level": "advanced",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "我們的",
+        "en_options": [
+            "we",
+            "us",
+            "team",
+            "group",
+            "all"
+        ],
+        "zh_options": [
+            "我們",
+            "大家",
+            "全部",
+            "集體",
+            "這些"
+        ]
     },
     {
         "word": "their",
         "level": "advanced",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "他們的",
+        "en_options": [
+            "they",
+            "them",
+            "those",
+            "group",
+            "all"
+        ],
+        "zh_options": [
+            "他們",
+            "那些",
+            "這些",
+            "大家",
+            "別人"
+        ]
     },
     {
         "word": "mine",
         "level": "advanced",
-        "category": "Pronouns"
+        "category": "Pronouns",
+        "meaning": "我的",
+        "en_options": [
+            "my",
+            "me",
+            "own",
+            "self",
+            "this"
+        ],
+        "zh_options": [
+            "我",
+            "自己",
+            "本人",
+            "這個",
+            "屬於"
+        ]
     },
     {
         "word": "when",
         "level": "advanced",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "什麼時候",
+        "en_options": ["time", "how", "day", "now", "then"],
+        "zh_options": ["何時", "時間", "幾點", "哪天", "何日"]
     },
     {
         "word": "whose",
         "level": "advanced",
-        "category": "WH-words"
+        "category": "WH-words",
+        "meaning": "誰的",
+        "en_options": ["who", "which", "what", "where", "owner"],
+        "zh_options": ["誰", "哪個", "屬於", "何人", "是誰"]
     },
     {
         "word": "have",
         "level": "advanced",
-        "category": "BE & Auxilliaries"
+        "category": "BE & Auxilliaries",
+        "meaning": "有",
+        "en_options": [
+            "own",
+            "got",
+            "keep",
+            "hold",
+            "take"
+        ],
+        "zh_options": [
+            "擁有",
+            "得到",
+            "持有",
+            "保有",
+            "獲得"
+        ]
     },
     {
         "word": "has",
         "level": "advanced",
-        "category": "BE & Auxilliaries"
+        "category": "BE & Auxilliaries",
+        "meaning": "有",
+        "en_options": [
+            "own",
+            "got",
+            "keep",
+            "hold",
+            "own"
+        ],
+        "zh_options": [
+            "擁有",
+            "得到",
+            "持有",
+            "保有",
+            "獲得"
+        ]
     },
     {
         "word": "may",
         "level": "advanced",
-        "category": "BE & Auxilliaries"
+        "category": "BE & Auxilliaries",
+        "meaning": "可能",
+        "en_options": [
+            "can",
+            "will",
+            "might",
+            "if",
+            "ask"
+        ],
+        "zh_options": [
+            "也許",
+            "或許",
+            "能夠",
+            "願意",
+            "准許"
+        ]
     },
     {
         "word": "clean",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "清潔",
+        "en_options": [
+            "wash",
+            "wipe",
+            "neat",
+            "tidy",
+            "dust"
+        ],
+        "zh_options": [
+            "洗",
+            "擦",
+            "整理",
+            "掃",
+            "拭"
+        ]
     },
     {
         "word": "cool",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "使涼爽",
+        "en_options": [
+            "fun",
+            "cold",
+            "nice",
+            "chill",
+            "great"
+        ],
+        "zh_options": [
+            "冷卻",
+            "變涼",
+            "降溫",
+            "冰",
+            "涼"
+        ]
     },
     {
         "word": "drink",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "喝",
+        "en_options": [
+            "sip",
+            "cup",
+            "water",
+            "juice",
+            "milk"
+        ],
+        "zh_options": [
+            "飲",
+            "喝水",
+            "吸",
+            "吞",
+            "渴"
+        ]
     },
     {
         "word": "drive",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "開車",
+        "en_options": [
+            "car",
+            "ride",
+            "move",
+            "steer",
+            "road"
+        ],
+        "zh_options": [
+            "駕駛",
+            "行駛",
+            "乘車",
+            "操控",
+            "運送"
+        ]
     },
     {
         "word": "eat",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "吃",
+        "en_options": [
+            "food",
+            "meal",
+            "bite",
+            "lunch",
+            "taste"
+        ],
+        "zh_options": [
+            "用餐",
+            "進食",
+            "咬",
+            "嚼",
+            "啃"
+        ]
     },
     {
         "word": "feel",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "感覺",
+        "en_options": [
+            "touch",
+            "hurt",
+            "hand",
+            "skin",
+            "soft"
+        ],
+        "zh_options": [
+            "摸",
+            "觸摸",
+            "碰",
+            "感受",
+            "摸索"
+        ]
     },
     {
         "word": "fly",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "飛",
+        "en_options": [
+            "bird",
+            "air",
+            "wing",
+            "jump",
+            "high"
+        ],
+        "zh_options": [
+            "飛翔",
+            "飛行",
+            "飄",
+            "跳躍",
+            "升空"
+        ]
     },
     {
         "word": "get",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "獲得",
+        "en_options": [
+            "take",
+            "find",
+            "grab",
+            "have",
+            "buy"
+        ],
+        "zh_options": [
+            "拿",
+            "得到",
+            "接收",
+            "取",
+            "收到"
+        ]
     },
     {
         "word": "give",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "給予",
+        "en_options": [
+            "hand",
+            "pass",
+            "share",
+            "send",
+            "take"
+        ],
+        "zh_options": [
+            "給",
+            "送",
+            "提供",
+            "遞",
+            "發"
+        ]
     },
     {
         "word": "live",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "生活",
+        "en_options": [
+            "stay",
+            "home",
+            "be",
+            "life",
+            "here"
+        ],
+        "zh_options": [
+            "住",
+            "居住",
+            "存在",
+            "過日子",
+            "居留"
+        ]
     },
     {
         "word": "ride",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "騎",
+        "en_options": [
+            "bike",
+            "sit",
+            "car",
+            "move",
+            "bus"
+        ],
+        "zh_options": [
+            "乘坐",
+            "駕駛",
+            "搭乘",
+            "騎車",
+            "乘車"
+        ]
     },
     {
         "word": "say",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "說",
+        "en_options": [
+            "tell",
+            "talk",
+            "word",
+            "speak",
+            "call"
+        ],
+        "zh_options": [
+            "講",
+            "述說",
+            "表達",
+            "發言",
+            "告訴"
+        ]
     },
     {
         "word": "sit",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "坐",
+        "en_options": [
+            "down",
+            "chair",
+            "seat",
+            "rest",
+            "stay"
+        ],
+        "zh_options": [
+            "坐下",
+            "歇息",
+            "就座",
+            "入座",
+            "著席"
+        ]
     },
     {
         "word": "stand",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "站立",
+        "en_options": [
+            "up",
+            "tall",
+            "wait",
+            "stop",
+            "foot"
+        ],
+        "zh_options": [
+            "站",
+            "起立",
+            "直立",
+            "佇立",
+            "停留"
+        ]
     },
     {
         "word": "speak",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "說話",
+        "en_options": [
+            "talk",
+            "tell",
+            "word",
+            "say",
+            "ask"
+        ],
+        "zh_options": [
+            "講話",
+            "談話",
+            "發言",
+            "交談",
+            "言談"
+        ]
     },
     {
         "word": "study",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "學習",
+        "en_options": [
+            "read",
+            "learn",
+            "book",
+            "work",
+            "test"
+        ],
+        "zh_options": [
+            "讀書",
+            "研究",
+            "溫習",
+            "複習",
+            "念書"
+        ]
     },
     {
         "word": "take",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "拿",
+        "en_options": [
+            "grab",
+            "hold",
+            "pick",
+            "get",
+            "move"
+        ],
+        "zh_options": [
+            "取",
+            "帶走",
+            "攜帶",
+            "抓",
+            "抱"
+        ]
     },
     {
         "word": "talk",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "談話",
+        "en_options": [
+            "speak",
+            "say",
+            "chat",
+            "word",
+            "tell"
+        ],
+        "zh_options": [
+            "說話",
+            "交談",
+            "講述",
+            "聊天",
+            "交流"
+        ]
     },
     {
         "word": "wash",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "洗",
+        "en_options": [
+            "clean",
+            "soap",
+            "water",
+            "wet",
+            "sink"
+        ],
+        "zh_options": [
+            "清洗",
+            "沖洗",
+            "擦洗",
+            "漂洗",
+            "刷"
+        ]
     },
     {
         "word": "watch",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "手錶",
+        "zh_options": [
+            "學校",
+            "盒子",
+            "洗澡"
+        ],
+        "en_options": [
+            "school",
+            "bath",
+            "cat"
+        ]
     },
     {
         "word": "wear",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "穿戴",
+        "en_options": [
+            "put",
+            "dress",
+            "use",
+            "have",
+            "try"
+        ],
+        "zh_options": [
+            "穿",
+            "戴",
+            "著裝",
+            "披",
+            "配戴"
+        ]
     },
     {
         "word": "work",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "工作",
+        "en_options": [
+            "job",
+            "busy",
+            "make",
+            "help",
+            "play"
+        ],
+        "zh_options": [
+            "做事",
+            "工作處",
+            "忙碌",
+            "勞動",
+            "上班"
+        ]
     },
     {
         "word": "hurry",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "趕緊",
+        "en_options": [
+            "fast",
+            "rush",
+            "run",
+            "quick",
+            "late"
+        ],
+        "zh_options": [
+            "趕快",
+            "急忙",
+            "匆忙",
+            "快速",
+            "催促"
+        ]
     },
     {
         "word": "put",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "放置",
+        "en_options": [
+            "set",
+            "lay",
+            "keep",
+            "move",
+            "drop"
+        ],
+        "zh_options": [
+            "放",
+            "擺",
+            "置",
+            "投入",
+            "安排"
+        ]
     },
     {
         "word": "share",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "分享",
+        "en_options": [
+            "give",
+            "use",
+            "half",
+            "tell",
+            "pass"
+        ],
+        "zh_options": [
+            "共用",
+            "共享",
+            "分配",
+            "分給",
+            "共有"
+        ]
     },
     {
         "word": "spell",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "拼寫",
+        "en_options": [
+            "word",
+            "name",
+            "write",
+            "abc",
+            "say"
+        ],
+        "zh_options": [
+            "拼",
+            "拼字",
+            "拼音",
+            "拼讀",
+            "拼法"
+        ]
     },
     {
         "word": "stop",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "停止",
+        "en_options": [
+            "wait",
+            "end",
+            "no",
+            "stay",
+            "hold"
+        ],
+        "zh_options": [
+            "停",
+            "止住",
+            "不動",
+            "休止",
+            "結束"
+        ]
     },
     {
         "word": "thank",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "感謝",
+        "en_options": [
+            "nice",
+            "help",
+            "glad",
+            "good",
+            "like"
+        ],
+        "zh_options": [
+            "謝謝",
+            "致謝",
+            "感激",
+            "謝意",
+            "欣賞"
+        ]
     },
     {
         "word": "try",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "嘗試",
+        "en_options": [
+            "test",
+            "do",
+            "work",
+            "hope",
+            "see"
+        ],
+        "zh_options": [
+            "試",
+            "試著",
+            "努力",
+            "試圖",
+            "測試"
+        ]
     },
     {
         "word": "turn",
         "level": "advanced",
-        "category": "Verbs"
+        "category": "Verbs",
+        "meaning": "轉動",
+        "en_options": [
+            "spin",
+            "move",
+            "roll",
+            "go",
+            "side"
+        ],
+        "zh_options": [
+            "轉",
+            "旋轉",
+            "扭",
+            "旋",
+            "翻"
+        ]
     },
     {
         "word": "by",
         "level": "advanced",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "靠近",
+        "en_options": [
+            "near",
+            "next",
+            "with",
+            "from",
+            "side"
+        ],
+        "zh_options": [
+            "旁邊",
+            "經過",
+            "經由",
+            "通過",
+            "邊上"
+        ]
     },
     {
         "word": "for",
         "level": "advanced",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "為了",
+        "en_options": [
+            "to",
+            "with",
+            "give",
+            "use",
+            "make"
+        ],
+        "zh_options": [
+            "給",
+            "替",
+            "用於",
+            "因為",
+            "向"
+        ]
     },
     {
         "word": "from",
         "level": "advanced",
-        "category": "Prepositions"
+        "category": "Prepositions",
+        "meaning": "從",
+        "en_options": [
+            "out",
+            "by",
+            "away",
+            "off",
+            "to"
+        ],
+        "zh_options": [
+            "自",
+            "由",
+            "出於",
+            "來自",
+            "源於"
+        ]
     },
     {
         "word": "e-mail",
         "level": "advanced",
-        "category": "Other Nouns"
+        "category": "Other Nouns",
+        "meaning": "電子郵件",
+        "en_options": ["send", "note", "net", "text"],
+        "zh_options": ["信件", "發送", "訊息", "通信"]
     },
     {
         "word": "flower",
         "level": "advanced",
-        "category": "Other Nouns"
+        "category": "Other Nouns",
+        "meaning": "花",
+        "zh_options": [
+            "貓",
+            "麵包",
+            "盒子"
+        ],
+        "en_options": [
+            "school",
+            "boat",
+            "apple"
+        ]
     },
     {
         "word": "tree",
         "level": "advanced",
-        "category": "Other Nouns"
+        "category": "Other Nouns",
+        "meaning": "樹",
+        "zh_options": [
+            "麵包",
+            "狗",
+            "貓"
+        ],
+        "en_options": [
+            "school",
+            "dog",
+            "ball"
+        ]
     },
     {
         "word": "dollar",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "美元",
+        "en_options": [
+            "money",
+            "coin",
+            "cash",
+            "pay",
+            "buy"
+        ],
+        "zh_options": [
+            "錢",
+            "元",
+            "幣",
+            "鈔票",
+            "貨幣"
+        ]
     },
     {
         "word": "early",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "早",
+        "en_options": [
+            "soon",
+            "fast",
+            "time",
+            "day",
+            "quick"
+        ],
+        "zh_options": [
+            "提前",
+            "早上",
+            "初期",
+            "開始",
+            "早期"
+        ]
     },
     {
         "word": "late",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "晚",
+        "en_options": [
+            "slow",
+            "time",
+            "dark",
+            "past",
+            "long"
+        ],
+        "zh_options": [
+            "遲到",
+            "延遲",
+            "夜晚",
+            "晚上",
+            "後來"
+        ]
     },
     {
         "word": "loud",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "大聲",
+        "en_options": [
+            "noise",
+            "shout",
+            "big",
+            "hear",
+            "bang"
+        ],
+        "zh_options": [
+            "吵",
+            "喧鬧",
+            "響亮",
+            "嘈雜",
+            "高聲"
+        ]
     },
     {
         "word": "money",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "錢",
+        "zh_options": [
+            "狗",
+            "船",
+            "貓"
+        ],
+        "en_options": [
+            "back",
+            "baby",
+            "bath"
+        ]
     },
     {
         "word": "quiet",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "安靜",
+        "en_options": [
+            "soft",
+            "hush",
+            "low",
+            "calm",
+            "ssh"
+        ],
+        "zh_options": [
+            "寧靜",
+            "平靜",
+            "輕聲",
+            "無聲",
+            "沉默"
+        ]
     },
     {
         "word": "very",
         "level": "advanced",
-        "category": "Others"
+        "category": "Others",
+        "meaning": "非常",
+        "en_options": [
+            "much",
+            "so",
+            "big",
+            "good",
+            "real"
+        ],
+        "zh_options": [
+            "很",
+            "十分",
+            "特別",
+            "格外",
+            "極"
+        ]
     }
 ]
