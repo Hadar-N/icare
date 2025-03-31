@@ -18,7 +18,7 @@ class OptionVocabSprite(GenVocabSprite):
     @property
     def vocabSelf(self): return self.vocabTranslation
     @property
-    def _get_color(self): return (255,0,0)
+    def _get_color(self): return (255,0,255)
     
     def test_match(self):
         if self.vocabTranslation == self.twin.vocabTranslation:

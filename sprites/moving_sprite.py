@@ -50,7 +50,9 @@ class MovingSprite(pygame.sprite.Sprite):
         return res
 
     def on_collision(self, area_collision: int) -> None:
-        if area_collision: self.flip_direction()
+        if area_collision and area_collision >= self.__prev_coverage:
+            self.flip_direction()
+        self.__prev_coverage = area_collision or 0
         return None
     
     def flip_direction(self):
