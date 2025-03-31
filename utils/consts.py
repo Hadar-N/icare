@@ -22,6 +22,7 @@ MAX_VOCAB_ACTIVE = 1
 # image proc. consts
 BLUR_SIZE = (21, 21)
 THRESHOLD_MAX = 255
+THRESHOLD_MULTIP = 2
 MIN_FRAME_CONTENT_PARTITION = 12
 KERNEL = np.ones((11, 11), np.uint8)
 BORDER_SIZE = 30
@@ -40,9 +41,6 @@ SPRITE_MAX_OPACITY = 200
 MAX_PLACEMENT_ATTAMPTS = 5
 SPRITE_ANGLE_MAX_DIFF = 20
 MIN_DISTANCE_TO_TWIN = 4 #times the twin size
-VOCAB_PATH = {
-    GAME_MODES.ENtoZH: 'public/english_to_chinese.json',
-    GAME_MODES.ZHtoEN: 'public/chinese_to_english.json'
-}
+VOCAB_PATH = 'public/vocab.json'
 FONT_PATH = 'public/fonts/DFT_K90.ttf'
 FONT_SIZE= 40

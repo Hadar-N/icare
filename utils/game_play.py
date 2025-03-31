@@ -50,7 +50,7 @@ class GamePlay():
     def __init_game(self, level, mode):
         self.__level = level
         self.__mode = mode
-        self.__vocab_options = [VocabItem(**item) for item in init_vocab_options(self.__level, self.__mode)]
+        self.__vocab_options = init_vocab_options(self.__level, self.__mode)
         self.__vocab_sprites.empty()
         self.__status=GAME_STATUS.ACTIVE
 
