@@ -1,55 +1,77 @@
 # iCare
 
-**iCare** is a physical platform designed for teaching English vocabulary through an interactive sandpit interface. The interface is controlled by the [iCareControl](https://github.com/Hadar-N/icarecontrol) project, using MQTT protocol.
+**iCare** is a physical platform designed for teaching English vocabulary through an interactive sandpit interface. The interface is controlled by the [iCareControl](https://github.com/Hadar-N/icarecontrol) interface, utilizing the [iCareComm](https://github.com/Hadar-N/icare-comm) private package for communication.
 
 The project is developed under the supervision of National Tsing Hua University.
 
 ## Resources
 
 The project incorporates the following external resources, located in the "public" folder:
-- *vocab.json*- contains the relevant English vocabulary and their Chinese translations, extracted from the article [兒童英文單字學習方法推薦：讓孩子輕鬆記 100 個基礎英文單字
-](https://tw.amazingtalker.com/blog/zh-tw/zh-eng/69460/) on the AmazingTalker teaching platform.
-- *Taipei Sans TC (台北黑體)*- A Chinese font downloaded from [翰字鑄造 JT Foundry's website](https://sites.google.com/view/jtfoundry/zh-tw), licensed under the [SIL Open Font License, Version 1.1](https://openfontlicense.org/)
+- *vocab.json*- contains the relevant English vocabulary divided into levels and categories based on the 【臺北市國民小學英語聽說評量手冊】 handbook. All translations and option lists were created using ChatGPT and Claude AI tools, later verified and updated by the creator.
 
 ## Hardware
 
 The project is designed to run on a RaspberryPi4, connected to the following components:
 - Speakers for audio output
-- Pi NoIR Camera V2 to detect the changes in the interface
+- PiCamera to track interface changes
 - Projector to display the data/vocabulary
 
-The setup includes a rack with a non-clear acrylic board serving as a base layer, above which lies a sand cover. The sand acts as the interface for the user. The projector displays the information onto the acrylic board beneath the sand, so the content is revealed through sand manipulation. All listed components are housed below the rack.
+The setup includes a rack/desk with a non-clear acrylic board serving as a base layer, above which lies a sand cover. The sand acts as the interface for the user. The projector displays the information onto the acrylic board beneath the sand, so the content is revealed through sand manipulation. All listed components are installed beneath the base board.
 
 For testing purposes, the project is also compatible with PCs using a standard webcam.
 
-## Software
+## Software Structure
 
-The program makes use of 2 main libraries:
-- *OpenCV* - used for the image processing, analyzing the covered areas.
-- *pygame* - runs the game itself.
-- *paho-mqtt* - responsible for managing the connection with the iCareControl remote. 
+```bash
+├───public
+│   └───vocab.json             # Vocabulary data
+├───sprites
+│   └───__init__.py            # Exports sprite classes
+├───utils                      
+│   ├───data_singleton.py      # Stores persistent game state information
+│   ├───event_bus.py           # Handles message communication via MQTT
+│   ├───game_engine.py         # Manages game setup and event handling
+│   └───game_play.py           # Controls game flow
+└───main.py                    # Entry point for the game
+```
 
-The game is first run in the *main.py* file, which includes the game's setup and gameloop.
+- `main.py`- The entry point for running the game
+- `game_engine.py`- Defines the `GameEngine` class, which sets up the game and manages event handling
+- `game_play.py`- Implements the `GamePlay` class, handling gameplay logic, manages vocabulary and controls sprite interactions
+
+**Sprite Module**
+
+Exports 2 main sprites:
+1. `MainVocabSprite` - Represents a main vocabulary word. Linked to a GamePlay's vocabulary instance and updates it
+2. `OptionVocabSprite` - represents an option for a main word. Implements an`test_match` method to check the status of English-to-Chinese vocab collision
+Both sprites extend `GenVocabSprite`, which itself extends `MovingSprite`, and are linked through a `twin` property, allowing mutual communication and control
+
+## Software Requirements
+
+The program makes use of the following libraries:
+- *python-dotenv* - loads environment variables from a .env file, which acts as the project’s configuration file
+- *OpenCV* - used for the image processing, analyzing the covered areas
+- *pygame* - runs the game itself
+- *[iCareComm](https://github.com/Hadar-N/icare-comm)* - a private package storing required constants, structures and responsible for managing the MQTT client 
 
 ## Required Config
 
-The programs uses a .env file specific to the environment and acts as a config file, required for a smooth run of the program.
+The programs requires a .env file to store environment-specific settings. This file serves as a configuration file, listing essential parameters for game setup.
 
-The relevant information expected in the file:
+The information expected in the file:
 
 ```bash
-# used for running the code using SSH for choosing the relevant display.
-# ENV can be pi or pc
-ENV=pi
-DISPLAY=00
+ENV=pi                          # ENV can be pi or pc
+DISPLAY=00                      # used for running the code using SSH and choosing the relevant display.
 PROJECTOR_RESOLUTION=848x480
+FLIP=0
 
 # MQTT connection information
 HOST=XXX
 PORT=XXX
 USERNAME=XXX
 PASSWORD=XXX
-``` 
+```
 
 ## License
 
