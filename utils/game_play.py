@@ -1,6 +1,8 @@
 import pygame
 from logging import Logger
 from random import sample
+import time
+
 from mqtt_shared import Topics
 from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS, VocabItem
 
@@ -29,6 +31,7 @@ class GamePlay():
         self.__setup_mask(True)
         self.__status = GAME_STATUS.HALTED
         self.MINIMUM_AREA_FOR_WORD_PRESENTATION = (self._global_data.window_size[0]*self._global_data.window_size[1])/consts.MIN_FRAME_CONTENT_PARTITION
+        self.__last_match = None
 
         self._eventbus.subscribe(Topics.word_select(), lambda x: self.__add_ZH_draw_vocab(x))
 
@@ -50,11 +53,16 @@ class GamePlay():
     def __init_game(self, level, mode):
         self.__level = level
         self.__mode = mode
+        self.__last_match = None
         self.__vocab_options = init_vocab_options(self.__level, self.__mode)
         self.__vocab_sprites.empty()
         self.__status=GAME_STATUS.ACTIVE
 
     def __add_EN_vocab(self):
+        if self.__last_match:
+            if time.time() < self.__last_match + consts.WAIT_AFTER_MATCH: return
+            else: self.__last_match = None
+        
         if len(self.__vocab_sprites.sprites()) < consts.MAX_VOCAB_ACTIVE:
             relevant_cnt = next((cnt for cnt in self._contours_info if cnt["area"] > self.MINIMUM_AREA_FOR_WORD_PRESENTATION), None)
             if relevant_cnt:
@@ -103,6 +111,7 @@ class GamePlay():
             if collides:
                 self._logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}')
                 sp.test_match()
+                self.__last_match = time.time()
                 next_word= next((i.word for i in self.__vocab_options if not i.is_solved), None)
                 if not next_word:
                     self.__finish_game()
