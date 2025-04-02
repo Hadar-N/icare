@@ -106,7 +106,7 @@ class GamePlay():
             sp.on_collision(overlap_area)
 
     def __vocab_matching(self): 
-        for sp in [sp for sp in self.__vocab_sprites.sprites() if isinstance(sp, OptionVocabSprite)]:
+        for sp in [sp for sp in self.__vocab_sprites.sprites() if isinstance(sp, OptionVocabSprite) and not sp.is_deleting]:
             collides = pygame.sprite.collide_mask(sp, sp.twin)
             if collides:
                 self._logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}')

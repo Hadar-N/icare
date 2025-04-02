@@ -79,15 +79,6 @@ def set_transformation_matrix(global_data, ref = None) -> tuple[np.ndarray]:
 
         return inp_coords, out_coords, matrix
 
-def get_transformation_matrix_with_borders(orig_inp_coords: np.ndarray, out_coords: np.ndarray, img_resize:tuple[int]) -> np.ndarray:
-        middlepoint = orig_inp_coords.sum(axis=0)/4 # since we know the shape to be rectangle-like, we can assume the middlepoint to have 2 points on each side
-        bordered_inp = np.float32(list(map(lambda i: np.array([max(i[0] - consts.BORDER_SIZE, 0.) if i[0] < middlepoint[0] else min(i[0] + consts.BORDER_SIZE, img_resize[0]),
-                                                                max(i[1] - consts.BORDER_SIZE, 0.) if i[1] < middlepoint[1] else min(i[1] + consts.BORDER_SIZE, img_resize[1])])
-                                                                , orig_inp_coords)))
-        matrix = cv2.getPerspectiveTransform(bordered_inp, out_coords)
-
-        return matrix, bordered_inp
-
 def set_compare_values(takePicture: callable, matrix: np.ndarray, window_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
         new_img = takePicture()
         reference_blur = get_blurred_picture(new_img, matrix, window_size)

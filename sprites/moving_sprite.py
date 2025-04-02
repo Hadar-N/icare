@@ -15,15 +15,17 @@ class MovingSprite(pygame.sprite.Sprite):
 
         self._floatlocation = (0.,0.)
 
-        self.__appearing = 0.0
+        self.image.set_alpha(0)
+        self.__alpha_change_direction = 1
+
         self.__deleting = False
         self.__flip_times = [time.time()]
+        self.__prev_coverage = 0
 
         self.__direction = None
         self.__rng = np.random.default_rng() # scale for random() = [-4,4]
 
         self.__randomize_direction()
-        self.__set_alpha()
     
     @property
     def is_out_of_bounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
@@ -55,37 +57,49 @@ class MovingSprite(pygame.sprite.Sprite):
         self.__prev_coverage = area_collision or 0
         return None
     
+    def __test_collision_frequency(self):
+        curr = time.time()
+        last_item = self.__flip_times.pop()
+        if curr - last_item < CHANGE_FREQ_MIN:
+            if len(self.__flip_times) > SPRITE_STUCK_THRESH: self.remove_self(REMOVAL_REASON.COVERED)
+            else: self.__flip_times.extend((last_item, curr))
+        else: self.__flip_times = [curr]
+
     def flip_direction(self):
         if self.__deleting:
             return
 
         self.__direction = self.__direction.rotate(180)
+        self.__test_collision_frequency()
 
-        last_item = self.__flip_times.pop()
-        curr = time.time()
-        if curr - last_item < 1: [self.remove_self(True) if len(self.__flip_times) > SPRITE_STUCK_THRESH else self.__flip_times.extend((last_item, curr))]
-        else:
-            self.__flip_times = [curr]
-        
-    def remove_self(self, is_collision = False):
+    def remove_self(self, removal_reason: REMOVAL_REASON):
         self.__deleting=True
-        if is_collision: self.__direction = pygame.math.Vector2(0,0)
+        self.__alpha_change_direction = -1
+        self.__direction = pygame.math.Vector2(0,0)
     
-    def __set_alpha(self):
-        self.image.set_alpha(self.__appearing*SPRITE_MAX_OPACITY)
-        if (self.__deleting):
-            self.__appearing -=SPRITE_APPEAR_SPEED
-            if self.__appearing <= 0.0:
+    def __update_alpha(self):
+        if self.__alpha_change_direction != 0:
+            curr_alpha = self.image.get_alpha()
+            new_val = curr_alpha + self.__alpha_change_direction*SPRITE_APPEAR_SPEED
+            print("__update_alpha", curr_alpha, new_val, self.__deleting)
+            if new_val >= SPRITE_MAX_OPACITY:
+                new_val = SPRITE_MAX_OPACITY
+                self.__alpha_change_direction = 0
+            elif new_val <= 0:
+                new_val = 0
+                self.__alpha_change_direction = 0
+
+            self.image.set_alpha(new_val)
+
+            if self.__deleting and new_val == 0:
                 if hasattr(self, "on_deleting"): self.on_deleting()
-                self.__deleting = False
                 self.kill()
-        elif (self.__appearing < 1.0): self.__appearing = 1.0 if self.__appearing+SPRITE_APPEAR_SPEED > 1.0 else self.__appearing+SPRITE_APPEAR_SPEED
 
     def update(self):
         self._floatlocation = [self._floatlocation[i]+self.__direction[i] for i in range(0,2)]
         self.rect.x, self.rect.y = self._floatlocation
 
-        self.__set_alpha()
+        self.__update_alpha()
         self.__randomize_direction()
 
     def set_location(self, coordinates):

@@ -1,13 +1,6 @@
-import pygame
-from random import randint, uniform
-import math
-import numpy as np
-import time
-
 from game_shared import MQTT_DATA_ACTIONS
 from mqtt_shared import Topics
 
-from utils import DataSingleton
 from utils.consts import *
 from .gen_vocab_sprite import GenVocabSprite
 
@@ -28,5 +21,5 @@ class OptionVocabSprite(GenVocabSprite):
             self.twin.turn_option_off(self.vocabTranslation)
             self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.STATUS, "word": self.twin.as_dict()})
             self.twin = None
-            self.kill()
+            self.remove_self(REMOVAL_REASON.MATCH_FAIL)
             

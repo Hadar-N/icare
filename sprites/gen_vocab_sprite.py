@@ -3,8 +3,6 @@ from .moving_sprite import MovingSprite
 from game_shared import VocabItem
 from utils import DataSingleton, EventBus
 from utils.consts import *
-import time
-from random import randint, uniform
 
 class GenVocabSprite(MovingSprite):
     def __init__(self, vocab: VocabItem, eventbus: EventBus):
@@ -13,15 +11,12 @@ class GenVocabSprite(MovingSprite):
         self._vocab = vocab
         self._color = self._get_color
         
-        image = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)
-
-        super().__init__(image)
+        super().__init__(self.spin_word())
 
         self.mask = pygame.mask.from_surface(self.image)
         pygame.mask.Mask.invert(self.mask)
         self.area = self.mask.count()
 
-        self.spin_word()
         self._twin = None
         self._eventbus = eventbus
 
@@ -56,11 +51,16 @@ class GenVocabSprite(MovingSprite):
     def match_success(self):
         if self._twin: 
             self._twin._vocab.is_solved = True
-            self._twin.kill()
+            self._twin.remove_self(REMOVAL_REASON.MATCH_SUCCESS)
         self._vocab.is_solved = True
-        self.kill()
+        self.remove_self(REMOVAL_REASON.MATCH_SUCCESS)
     
     def spin_word(self):
-        self.image = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)
-        self.image = pygame.transform.flip(self.image, not self._global_data.is_spin, self._global_data.is_spin)
+        res = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)
+        res = pygame.transform.flip(res, not self._global_data.is_spin, self._global_data.is_spin)
+        if hasattr(self, "image"):
+            print(hasattr(self, "image"), self.image)
+            self.image = res
+        return res
+
 
