@@ -34,7 +34,6 @@ class HIRAR_LOCATIONS (Enum):
     PARENT = 3
 
 # text/movement consts
-SPRITE_APPEAR_SPEED = 25
 SPRITE_STUCK_THRESH = 6
 CHANGE_FREQ_MIN = 0.5
 
@@ -50,3 +49,8 @@ MAX_PLACEMENT_ATTAMPTS = 5
 VOCAB_PATH = 'public/vocab.json'
 FONT_PATH = 'public/fonts/DFT_K90.ttf'
 FONT_SIZE= 40
+
+# animator consts
+SPRITE_APPEAR_SPEED = 50
+BLINK_AMOUNT = 3
+BLINK_TIME = 5

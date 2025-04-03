@@ -1,9 +1,10 @@
 import pygame
-from game_shared import VocabItem
-from utils import DataSingleton, EventBus
+from utils import DataSingleton
 from utils.consts import *
 import time
 from random import randint, uniform
+
+from .removal_animator import FadeOutAnimator, BlinkAnimator
 
 class MovingSprite(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -16,16 +17,17 @@ class MovingSprite(pygame.sprite.Sprite):
         self._floatlocation = (0.,0.)
 
         self.image.set_alpha(0)
-        self.__alpha_change_direction = 1
-
+        self.__appearing = True
         self.__deleting = False
+        self.__removal_animator = None
+
         self.__flip_times = [time.time()]
         self.__prev_coverage = 0
 
         self.__direction = None
         self.__rng = np.random.default_rng() # scale for random() = [-4,4]
-
         self.__randomize_direction()
+
     
     @property
     def is_out_of_bounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
@@ -73,27 +75,25 @@ class MovingSprite(pygame.sprite.Sprite):
         self.__test_collision_frequency()
 
     def remove_self(self, removal_reason: REMOVAL_REASON):
-        self.__deleting=True
-        self.__alpha_change_direction = -1
+        self.__deleting = True
+        if hasattr(self, "on_deleting"): self.on_deleting()
         self.__direction = pygame.math.Vector2(0,0)
+        match removal_reason.value:
+            case REMOVAL_REASON.COVERED.value:
+                self.__removal_animator = FadeOutAnimator(self)
+            case REMOVAL_REASON.MATCH_FAIL.value:
+                self.__removal_animator = BlinkAnimator(self)
+            case _:
+                self.kill()
     
     def __update_alpha(self):
-        if self.__alpha_change_direction != 0:
+        if (self.__appearing and not self.__deleting):
             curr_alpha = self.image.get_alpha()
-            new_val = curr_alpha + self.__alpha_change_direction*SPRITE_APPEAR_SPEED
-            print("__update_alpha", curr_alpha, new_val, self.__deleting)
+            new_val = curr_alpha + SPRITE_APPEAR_SPEED
             if new_val >= SPRITE_MAX_OPACITY:
                 new_val = SPRITE_MAX_OPACITY
-                self.__alpha_change_direction = 0
-            elif new_val <= 0:
-                new_val = 0
-                self.__alpha_change_direction = 0
-
+                self.__appearing = False
             self.image.set_alpha(new_val)
-
-            if self.__deleting and new_val == 0:
-                if hasattr(self, "on_deleting"): self.on_deleting()
-                self.kill()
 
     def update(self):
         self._floatlocation = [self._floatlocation[i]+self.__direction[i] for i in range(0,2)]
@@ -101,6 +101,11 @@ class MovingSprite(pygame.sprite.Sprite):
 
         self.__update_alpha()
         self.__randomize_direction()
+
+        if (self.__deleting and self.__removal_animator):
+            self.__removal_animator.update()
+            if (self.__removal_animator.is_completed):
+                self.kill()
 
     def set_location(self, coordinates):
         self._floatlocation = coordinates
