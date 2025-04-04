@@ -17,6 +17,7 @@ class DataSingleton:
         self._espeak_engine = None
         self._env = None
         self._is_spin = None
+        self._window = None
         self._initialized = True
 
     @property
@@ -72,3 +73,11 @@ class DataSingleton:
     @is_spin.setter
     def is_spin(self, is_spin):
         self._is_spin = bool(int(is_spin))
+
+    @property
+    def window(self):
+        return self._window
+
+    @window.setter
+    def window(self, window):
+        self._window = window

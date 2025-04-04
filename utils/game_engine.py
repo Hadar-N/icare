@@ -45,6 +45,7 @@ class GameEngine():
         initial_img = self.__takePicture()
     
         self.__window = self.__setup_window()
+        self.__global_data.window = self.__window
         self.__setup_comparison_data(initial_img)
         self.__eventbus.subscribe(Topics.CONTROL, self.__handle_control_command)
         # self.__eventbus.subscribe(Topics.DATA, self.__add_time_to_payload)

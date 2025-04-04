@@ -4,7 +4,7 @@ from utils.consts import *
 import time
 from random import randint, uniform
 
-from .removal_animator import FadeOutAnimator, BlinkAnimator
+from .removal_animator import FadeOutAnimator, BlinkAnimator, FireworksAnimator
 
 class MovingSprite(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -83,6 +83,8 @@ class MovingSprite(pygame.sprite.Sprite):
                 self.__removal_animator = FadeOutAnimator(self)
             case REMOVAL_REASON.MATCH_FAIL.value:
                 self.__removal_animator = BlinkAnimator(self)
+            case REMOVAL_REASON.MATCH_SUCCESS.value:
+                self.__removal_animator = FireworksAnimator(self)
             case _:
                 self.kill()
     
