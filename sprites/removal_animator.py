@@ -90,5 +90,6 @@ class FireworksAnimator(RemovalAnimator):
         self.__particles.update()
         self.__particles.draw(self.__global_data.window)
         self._sprite.image.set_alpha(self._sprite.image.get_alpha() - SPRITE_APPEAR_SPEED)
+        self._sprite.twin.image.set_alpha(self._sprite.image.get_alpha() - SPRITE_APPEAR_SPEED)
         if len(self.__particles.sprites()) == 0:
             self._is_completed = True

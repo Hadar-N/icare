@@ -48,7 +48,6 @@ class GameEngine():
         self.__global_data.window = self.__window
         self.__setup_comparison_data(initial_img)
         self.__eventbus.subscribe(Topics.CONTROL, self.__handle_control_command)
-        # self.__eventbus.subscribe(Topics.DATA, self.__add_time_to_payload)
         self.__global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
         # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
         self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)

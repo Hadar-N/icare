@@ -72,6 +72,8 @@ class GamePlay():
                     ENvocab = MainVocabSprite(word, self._eventbus)
                     ENvocab.set_location(calc_contour_midpoint(relevant_cnt["contour"]))
                     self.__vocab_sprites.add(ENvocab)
+                else:
+                    self.__finish_game()
 
     def __add_ZH_draw_vocab(self, data: dict):
         word = data["word"] if isinstance(data, dict) else data.word
@@ -112,9 +114,6 @@ class GamePlay():
                 self._logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}')
                 sp.test_match()
                 self.__last_match = time.time()
-                next_word= next((i.word for i in self.__vocab_options if not i.is_solved), None)
-                if not next_word:
-                    self.__finish_game()
 
     def __finish_game(self):
         self._logger.info("game finished!")
