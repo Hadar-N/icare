@@ -54,8 +54,10 @@ class MovingSprite(pygame.sprite.Sprite):
         return res
 
     def on_collision(self, area_collision: int) -> None:
-        if area_collision and area_collision >= self.__prev_coverage:
+        if area_collision and area_collision > self.__prev_coverage:
             self.flip_direction()
+        if area_collision > self.rect.height * self.rect.width * SPRITE_MAX_COVERED:
+            self.remove_self(REMOVAL_REASON.COVERED)
         self.__prev_coverage = area_collision or 0
         return None
     
@@ -72,7 +74,7 @@ class MovingSprite(pygame.sprite.Sprite):
             return
 
         self.__direction = self.__direction.rotate(180)
-        self.__test_collision_frequency()
+        # self.__test_collision_frequency()
 
     def remove_self(self, removal_reason: REMOVAL_REASON):
         self.__deleting = True
@@ -109,6 +111,7 @@ class MovingSprite(pygame.sprite.Sprite):
             if (self.__removal_animator.is_completed):
                 self.kill()
 
-    def set_location(self, coordinates):
-        self._floatlocation = coordinates
+    def set_location(self, coordinates: tuple):
+        temp_x, temp_y = coordinates
+        self._floatlocation = (temp_x - (self.rect.width / 2), temp_y - (self.rect.height / 2))
         self.rect.x, self.rect.y = self._floatlocation
