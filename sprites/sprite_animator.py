@@ -4,7 +4,7 @@ import random
 from utils.consts import *  
 from utils.data_singleton import DataSingleton
 
-class RemovalAnimator:
+class SpriteAnimator:
     def __init__(self, sprite):
         self._sprite = sprite
         self._is_completed = False
@@ -13,9 +13,21 @@ class RemovalAnimator:
     def is_completed(self): return self._is_completed
 
     def update(self):
-        raise NotImplementedError("method 'update' not implemented on RemovalAnimator!", self)
+        raise NotImplementedError("method 'update' not implemented on SpriteAnimator!", self)
     
-class FadeOutAnimator(RemovalAnimator):
+class FadeInAnimator(SpriteAnimator):
+    def __init__(self, sprite):
+        super().__init__(sprite)
+
+    def update(self):
+        curr_alpha = self._sprite.image.get_alpha()
+        new_alpha = curr_alpha+SPRITE_APPEAR_SPEED
+        if new_alpha > SPRITE_MAX_OPACITY:
+            new_alpha = SPRITE_MAX_OPACITY
+            self._is_completed = True
+        self._sprite.image.set_alpha(new_alpha)
+
+class FadeOutAnimator(SpriteAnimator):
     def __init__(self, sprite):
         super().__init__(sprite)
 
@@ -27,7 +39,7 @@ class FadeOutAnimator(RemovalAnimator):
             self._is_completed = True
         self._sprite.image.set_alpha(new_alpha)
 
-class BlinkAnimator(RemovalAnimator):
+class BlinkAnimator(SpriteAnimator):
     def __init__(self,sprite):
         super().__init__(sprite)
         self.__time_counter = 0
@@ -71,7 +83,7 @@ class FireworksParticle(pygame.sprite.Sprite):
         if curr_alpha < 10 or self.rect.y > self.__win_height:
             self.kill()
 
-class FireworksAnimator(RemovalAnimator):
+class FireworksAnimator(SpriteAnimator):
     def __init__(self, sprite):
         super().__init__(sprite)
         self.__particles = pygame.sprite.Group()

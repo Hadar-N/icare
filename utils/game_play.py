@@ -9,7 +9,7 @@ from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS,
 from .event_bus import EventBus
 from .data_singleton import DataSingleton
 import utils.consts as consts
-from utils.helper_functions import init_vocab_options, randomize_vacant_location, isVarInEnum, is_pygame_pt_in_contour, convert_contour_to_polygon, calc_contour_midpoint
+from utils.helper_functions import init_vocab_options, is_pygame_pt_in_contour, calc_contour_midpoint
 from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
@@ -122,7 +122,7 @@ class GamePlay():
         return self.__status
 
     def start_game(self, payload = None):
-        if(len(self.__vocab_sprites.sprites())):
+        if len(self.__get_unsolved_vocab()):
             self.__status=GAME_STATUS.ACTIVE
             self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
         else:

@@ -4,7 +4,7 @@ from utils.consts import *
 import time
 from random import randint, uniform
 
-from .removal_animator import FadeOutAnimator, BlinkAnimator, FireworksAnimator
+from .sprite_animator import FadeInAnimator, FadeOutAnimator, BlinkAnimator, FireworksAnimator
 
 class MovingSprite(pygame.sprite.Sprite):
     def __init__(self, img):
@@ -17,9 +17,8 @@ class MovingSprite(pygame.sprite.Sprite):
         self._floatlocation = (0.,0.)
 
         self.image.set_alpha(0)
-        self.__appearing = True
         self.__deleting = False
-        self.__removal_animator = None
+        self.__sprite_animator = FadeInAnimator(self)
 
         self.__flip_times = [time.time()]
         self.__prev_coverage = 0
@@ -82,34 +81,26 @@ class MovingSprite(pygame.sprite.Sprite):
         self.__direction = pygame.math.Vector2(0,0)
         match removal_reason.value:
             case REMOVAL_REASON.COVERED.value:
-                self.__removal_animator = FadeOutAnimator(self)
+                self.__sprite_animator = FadeOutAnimator(self)
             case REMOVAL_REASON.MATCH_FAIL.value:
-                self.__removal_animator = BlinkAnimator(self)
+                self.__sprite_animator = BlinkAnimator(self)
             case REMOVAL_REASON.MATCH_SUCCESS.value:
-                self.__removal_animator = FireworksAnimator(self)
+                self.__sprite_animator  = FireworksAnimator(self)
             case _:
                 self.kill()
     
-    def __update_alpha(self):
-        if (self.__appearing and not self.__deleting):
-            curr_alpha = self.image.get_alpha()
-            new_val = curr_alpha + SPRITE_APPEAR_SPEED
-            if new_val >= SPRITE_MAX_OPACITY:
-                new_val = SPRITE_MAX_OPACITY
-                self.__appearing = False
-            self.image.set_alpha(new_val)
-
     def update(self):
         self._floatlocation = [self._floatlocation[i]+self.__direction[i] for i in range(0,2)]
         self.rect.x, self.rect.y = self._floatlocation
 
-        self.__update_alpha()
         self.__randomize_direction()
 
-        if (self.__deleting and self.__removal_animator):
-            self.__removal_animator.update()
-            if (self.__removal_animator.is_completed):
-                self.kill()
+        if self.__sprite_animator:
+            self.__sprite_animator.update()
+            if self.__sprite_animator.is_completed:
+                self.__sprite_animator = None
+                if self.__deleting:
+                    self.kill()
 
     def set_location(self, coordinates: tuple):
         temp_x, temp_y = coordinates

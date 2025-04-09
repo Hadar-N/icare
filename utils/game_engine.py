@@ -6,7 +6,7 @@ import json
 import numpy as np
 from logging import Logger
 
-from mqtt_shared import ControlCommandBody, Topics
+from mqtt_shared import Topics
 from game_shared import MQTT_COMMANDS, GAME_STATUS
 
 import utils.consts as consts
@@ -52,10 +52,6 @@ class GameEngine():
         # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
         self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)
     
-    def __add_time_to_payload(self, payload):
-        for x in payload:
-            x["time"]=self.__counter / consts.CLOCK
-
     def __get_image_for_game(self, is_initial = False):
         if (self.__counter%consts.NEW_IMAGE_INTERVALS == 0 or is_initial):
             image = get_blurred_picture(self.__takePicture(), self.__matrix, self.__global_data.window_size)
