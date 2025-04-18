@@ -2,9 +2,9 @@ import pygame
 from math import dist
 
 from utils import DataSingleton
+from utils.consts import BOUNDARY_RADIUS
 
 global_data = DataSingleton()
-BOUNDARY_RADIUS = 10
 
 class BtnItem():
     def __init__(self, txt, item_no, font, callback):

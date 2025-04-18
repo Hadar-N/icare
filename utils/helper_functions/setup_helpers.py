@@ -1,15 +1,18 @@
-from screeninfo import get_monitors, Monitor
 import os
+import sys
+import json
+import re
+import time
 import cv2
 import numpy as np
-import re
 from logging import Logger
 from enum import Enum
+from screeninfo import get_monitors, Monitor
 
-from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, CAMERA_RES
+from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, CAMERA_RES, CAMERA_SETUP_ATTEMPTS
 
-temp_re = re.compile("(?<=\=)\d+\.\d+")
-diskspace_re = re.compile("[\d.]+(?=%)")
+temp_re = re.compile(r"(?<=\=)\d+\.\d+")
+diskspace_re = re.compile(r"[\d.]+(?=%)")
 
 def isVarInEnum(var: str, enum: Enum, is_value: bool = False) -> bool:
     return var and var in [i.value if is_value else i.name for i in enum]
@@ -35,6 +38,16 @@ def followup_temp (logger: Logger, counter: int) -> bool:
             logger.critical(f'temp: {temp} ==> program exited')
             return True
     return False
+
+def get_terminal_params():
+    args = sys.argv
+    if len(args):
+        str = " ".join(args[1:])
+        params = json.loads(str)
+        coords = np.array(params['coords'])
+        win_size = tuple(params['win_size'])
+        return coords, win_size
+    return None, None
 
 def get_monitor_information(proj_res: str, logger: Logger) -> tuple[Monitor, bool]:
     try:
@@ -77,6 +90,21 @@ def screen_setup(img_size: tuple, proj_res: str, logger: Logger) -> tuple[tuple,
 
     window_size = (int(window_width), int(window_height))
     return (window_size, isfullscreen)
+
+def setCameraFunctionAttempt(envval: str, img_resize: tuple[int], logger: Logger = None) -> tuple[callable]:
+    for i in range (0, CAMERA_SETUP_ATTEMPTS):
+        try:
+            takePicture, removeCamera = setCameraFunction(envval, img_resize)
+
+            image = takePicture()
+            if image is not None and image.size > 0:
+                if logger: logger.info(f'camera initialization succeeded at attempt {i}')
+                return takePicture, removeCamera
+        except Exception as e:
+            if logger: logger.info(f"Camera initialization attempt {i} failed at: {e}")
+        time.sleep(2)
+    if logger: logger.error(f"Camera initialization failed at attempts")
+    raise Exception("Camera initialization failed")
 
 def setCameraFunction(envval: str, img_resize: tuple[int]) -> tuple[callable]:
     takePicture = removeCamera = incResize = None

@@ -5,7 +5,7 @@ import numpy as np
 from logging import Logger
 
 import utils.consts as consts
-from .setup_helpers import asstr
+from .setup_helpers import asstr, get_terminal_params
 
 def get_blurred_picture(image: np.ndarray, matrix: np.ndarray, window_size: tuple[int]) -> np.ndarray:
         reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (window_size[1], window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
@@ -60,8 +60,13 @@ def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, threshval
         mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
         return pygame.mask.from_threshold(mask_img_rgb, (0,0,0), threshold=(1,1,1)), contours_information
 
-def set_transformation_matrix(global_data, ref) -> tuple[np.ndarray]:
+def set_transformation_matrix(global_data, ref: np.ndarray = None) -> tuple[np.ndarray]:
         coordinates = ref
+
+        if not coordinates:
+                relative_coords, in_win_size = get_terminal_params()
+                relative_x, relative_y = [in_win_size[i] / global_data.img_resize[i] for i in range (0,len(in_win_size))]
+                coordinates = (relative_coords.astype(np.float32) / [relative_x, relative_y]).astype(int)
 
         ordered_points_in_board = sort_points([item[0] for item in coordinates])
         

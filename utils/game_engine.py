@@ -60,7 +60,7 @@ class GameEngine():
         return None
 
     def __setup_comparison_data(self, img):
-        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, img)
+        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data)
         self.__logger.info(f'automatic contouring data: inp={asstr(self.__inp_coords)}; out={asstr(self.__out_coords)}; matrix={asstr(self.__matrix)}')
 
         self.__window.fill((0, 0, 0))

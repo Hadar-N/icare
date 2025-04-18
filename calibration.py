@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 import numpy as np
 from dotenv import load_dotenv
 
@@ -16,7 +17,9 @@ global_data.img_resize = tuple([int(i / 2) for i in CAMERA_RES])
 global_data.window_size = global_data.img_resize
 
 def next_stage(coords):
-    print("next_stage", np.array(coords).reshape(-1, 1, 2), global_data.window_size)
+    command_name = 'python' if global_data.env == "pi" else 'py'
+    params = json.dumps({'"coords"': np.array(coords).reshape(-1, 1, 2).tolist(), '"win_size"':global_data.window_size})
+    os.execvp(command_name, [command_name, "main.py", params])
 
 callibration_win = CalibrationEngine(next_stage)
 

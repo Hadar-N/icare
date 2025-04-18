@@ -2,7 +2,7 @@ import pygame
 
 from utils import DataSingleton
 from utils.consts import FONT_PATH, FONT_SIZE, CLOCK
-from utils.helper_functions import setCameraFunction
+from utils.helper_functions import setCameraFunctionAttempt
 from utils_callibration.helper_funcs import detect_board_auto
 from utils_callibration.helper_classes import Boundary, BtnItem
 
@@ -16,7 +16,7 @@ class CalibrationEngine():
 
         self.__nextstage = nextstage
 
-        self.__take_picture, self.__remove_camera = setCameraFunction(global_data.env, global_data.img_resize[::-1])
+        self.__take_picture, self.__remove_camera = setCameraFunctionAttempt(global_data.env, global_data.img_resize[::-1])
         self.__image = self.__take_picture()
         self.__boundaries = pygame.sprite.Group()
 
@@ -45,8 +45,8 @@ class CalibrationEngine():
 
     def __save_and_launch_game(self):
         if len(self.__boundaries.sprites()) == 4:
-            self.__nextstage([b.center_point for b in self.__boundaries.sprites()])
             self.__running = False
+            self.__nextstage([b.center_point for b in self.__boundaries.sprites()])
         else: print("invalid points- should be 4 items!")
 
     def __gameloop_content(self):

@@ -1,15 +1,15 @@
 import os
-import pygame
 import datetime
 import logging
 from dotenv import load_dotenv
+import pygame
 
 from mqtt_shared import MQTTInitialData, ConnectionManager, Topics
 from game_shared import DEVICE_TYPE
 
 from utils import DataSingleton, EventBus, GameEngine
 import utils.consts as consts
-from utils.helper_functions import setCameraFunction, get_img_resize_information
+from utils.helper_functions import setCameraFunctionAttempt, get_img_resize_information
 
 load_dotenv(verbose=True, override=True)
 
@@ -26,7 +26,7 @@ global_data.env = os.getenv("ENV")
 global_data.is_spin = os.getenv("SPIN")
 global_data.img_resize = get_img_resize_information()
 
-takePicture, removeCamera = setCameraFunction(global_data.env, global_data.img_resize)
+takePicture, removeCamera = setCameraFunctionAttempt(global_data.env, global_data.img_resize, logger)
 
 eventbus = EventBus()
 gameengine = GameEngine(logger, eventbus, takePicture)
