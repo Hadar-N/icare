@@ -1,3 +1,5 @@
+from .consts import DISPLAY_RESIZE_WIRDS
+
 class DataSingleton:
     _instance = None
 
@@ -12,6 +14,7 @@ class DataSingleton:
             return
 
         self._screen_size = None
+        self._full_display_size = None
         self._img_resize = None
         self._vocab_font = None
         self._espeak_engine = None
@@ -27,9 +30,13 @@ class DataSingleton:
     @window_size.setter
     def window_size(self, size):
         if isinstance(size, tuple) and len(size) == 2:
-            self._screen_size = size
+            self._full_display_size = size
+            self._screen_size = (DISPLAY_RESIZE_WIRDS, int(size[1] / (size[0] / DISPLAY_RESIZE_WIRDS)))
         else:
             raise ValueError("Screen size must be a tuple of two integers")
+        
+    @property
+    def full_display_size(self): return self._full_display_size
         
     @property
     def img_resize(self):
@@ -77,7 +84,7 @@ class DataSingleton:
     @property
     def window(self):
         return self._window
-
+    
     @window.setter
     def window(self, window):
         self._window = window

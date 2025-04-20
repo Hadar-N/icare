@@ -39,11 +39,12 @@ def followup_temp (logger: Logger, counter: int) -> bool:
             return True
     return False
 
-def get_terminal_params():
+def get_terminal_params(logger: Logger) -> tuple[np.array, tuple]:
     args = sys.argv
     if len(args):
-        str = " ".join(args[1:])
-        params = json.loads(str)
+        str_params = " ".join(args[1:])
+        logger.info(f'received params: {str_params} of type {type(str_params)}')
+        params = json.loads(str_params)
         coords = np.array(params['coords'])
         win_size = tuple(params['win_size'])
         return coords, win_size

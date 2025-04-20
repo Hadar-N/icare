@@ -5,10 +5,11 @@ import numpy as np
 from logging import Logger
 
 import utils.consts as consts
+from utils.data_singleton import DataSingleton
 from .setup_helpers import asstr, get_terminal_params
 
-def get_blurred_picture(image: np.ndarray, matrix: np.ndarray, window_size: tuple[int]) -> np.ndarray:
-        reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (window_size[1], window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
+def get_blurred_picture(image: np.ndarray, matrix: np.ndarray, win_size: tuple[int]) -> np.ndarray:
+        reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (win_size[1], win_size[0]) ,flags=cv2.INTER_LINEAR), 0)
         return cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
 def write_controured_img(image: np.ndarray, coords: list[np.ndarray], threshvalue : int) -> None:
@@ -60,11 +61,11 @@ def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, threshval
         mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
         return pygame.mask.from_threshold(mask_img_rgb, (0,0,0), threshold=(1,1,1)), contours_information
 
-def set_transformation_matrix(global_data, ref: np.ndarray = None) -> tuple[np.ndarray]:
+def set_transformation_matrix(global_data: DataSingleton, ref: np.ndarray, logger : Logger) -> tuple[np.ndarray]:
         coordinates = ref
 
         if not coordinates:
-                relative_coords, in_win_size = get_terminal_params()
+                relative_coords, in_win_size = get_terminal_params(logger)
                 relative_x, relative_y = [in_win_size[i] / global_data.img_resize[i] for i in range (0,len(in_win_size))]
                 coordinates = (relative_coords.astype(np.float32) / [relative_x, relative_y]).astype(int)
 
@@ -77,9 +78,9 @@ def set_transformation_matrix(global_data, ref: np.ndarray = None) -> tuple[np.n
 
         return inp_coords, out_coords, matrix
 
-def set_compare_values(takePicture: callable, matrix: np.ndarray, window_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
+def set_compare_values(takePicture: callable, matrix: np.ndarray, win_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
         new_img = takePicture()
-        reference_blur = get_blurred_picture(new_img, matrix, window_size)
+        reference_blur = get_blurred_picture(new_img, matrix, win_size)
         threshvalue_bordered = find_threshval(reference_blur)
         logger.info(f'calculated threshvalue by border={threshvalue_bordered}')
 

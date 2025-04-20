@@ -16,9 +16,12 @@ global_data.env = os.getenv("ENV", 'pi')
 global_data.img_resize = tuple([int(i / 2) for i in CAMERA_RES])
 global_data.window_size = global_data.img_resize
 
+def opencv_to_pygame_coords(coord: tuple[int])-> tuple[int]:
+    return (coord[1], coord[0])
+
 def next_stage(coords):
     command_name = 'python' if global_data.env == "pi" else 'py'
-    params = json.dumps({'"coords"': np.array(coords).reshape(-1, 1, 2).tolist(), '"win_size"':global_data.window_size})
+    params = json.dumps({'coords': np.array([opencv_to_pygame_coords(c) for c in coords]).reshape(-1, 1, 2).tolist(), 'win_size':opencv_to_pygame_coords(global_data.window_size)})
     os.execvp(command_name, [command_name, "main.py", params])
 
 callibration_win = CalibrationEngine(next_stage)

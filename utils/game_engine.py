@@ -44,13 +44,13 @@ class GameEngine():
         
         initial_img = self.__takePicture()
     
-        self.__window = self.__setup_window()
-        self.__global_data.window = self.__window
+        self.__displayed_surface = self.__setup_window()
+        
         self.__setup_comparison_data(initial_img)
         self.__eventbus.subscribe(Topics.CONTROL, self.__handle_control_command)
         self.__global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
         # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
-        self.gameplay = GamePlay(self.__window, self.__logger, self.__eventbus, self.__get_image_for_game)
+        self.gameplay = GamePlay(self.__logger, self.__eventbus, self.__get_image_for_game)
     
     def __get_image_for_game(self, is_initial = False):
         if (self.__counter%consts.NEW_IMAGE_INTERVALS == 0 or is_initial):
@@ -60,10 +60,10 @@ class GameEngine():
         return None
 
     def __setup_comparison_data(self, img):
-        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data)
+        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, None, self.__logger)
         self.__logger.info(f'automatic contouring data: inp={asstr(self.__inp_coords)}; out={asstr(self.__out_coords)}; matrix={asstr(self.__matrix)}')
 
-        self.__window.fill((0, 0, 0))
+        self.__global_data.window.fill((0, 0, 0))
         pygame.display.update()
         time.sleep(1)
 
@@ -77,9 +77,11 @@ class GameEngine():
 
         window_size, isfullscreen = screen_setup(self.__global_data.img_resize, os.getenv('PROJECTOR_RESOLUTION') if os.environ["DISPLAY"] == ":0" else None, self.__logger)
         self.__global_data.window_size = window_size
-        window = pygame.display.set_mode(self.__global_data.window_size, pygame.FULLSCREEN if isfullscreen else 0)
 
-        self.__logger.info(f"image information: img_resize = {asstr(self.__global_data.img_resize)}; window_size = {asstr(self.__global_data.window_size)}")
+        self.__global_data.window = pygame.Surface(self.__global_data.window_size)
+        window = pygame.display.set_mode(self.__global_data.full_display_size, pygame.FULLSCREEN if isfullscreen else 0)
+
+        self.__logger.info(f"image information: img_resize = {asstr(self.__global_data.img_resize)}; window_size = {asstr(self.__global_data.window_size)}; full_size_display = {self.__global_data.full_display_size}")
 
         return window
     
@@ -107,7 +109,7 @@ class GameEngine():
             print('invalid coordinates!', type(coordinates), coordinates)
             return
         
-        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, coordinates)
+        self.__inp_coords, self.__out_coords, self.__matrix = set_transformation_matrix(self.__global_data, coordinates, self.__logger)
         self.__reference_blur, self.__threshvalue, img = set_compare_values(self.__takePicture, self.__matrix, self.__global_data.window_size, self.__logger)
         write_controured_img(img, [self.__inp_coords], self.__threshvalue)
 
@@ -127,9 +129,9 @@ class GameEngine():
 
     def engine_loop(self):
         while self.__running:
-            self.__window.fill((0,0,0))
-
+            self.__global_data.window.fill((0,0,0))
             self.gameplay.game_loop()
+            self.__displayed_surface.blit(pygame.transform.scale(self.__global_data.window, self.__global_data.full_display_size), (0,0))
 
             pygame.display.update()
             self.__clock.tick(consts.CLOCK)
