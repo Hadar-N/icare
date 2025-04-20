@@ -8,7 +8,7 @@ global_data = DataSingleton()
 
 class BtnItem():
     def __init__(self, txt, item_no, font, callback):
-        self.__rect = pygame.Rect(global_data.window_size[0]/2 - 50, global_data.window_size[1]/2 + item_no*50, 100, 50)
+        self.__rect = pygame.Rect(global_data.full_display_size[0]/2 - 50, global_data.full_display_size[1]/2 + item_no*50, 100, 50)
         self.__color = (200,200,200)
         self.__content = txt
         self.__text_obj = font.render(txt, True, (0,0,0))
@@ -32,7 +32,7 @@ class Boundary(pygame.sprite.Sprite):
     def __init__(self, pos):
         super().__init__()
         self.__center_point = pos
-        self.image = pygame.Surface(global_data.window_size, flags=pygame.SRCALPHA)
+        self.image = pygame.Surface(global_data.full_display_size, flags=pygame.SRCALPHA)
         pygame.draw.circle(self.image, (255,0,0), pos, BOUNDARY_RADIUS)
         self.rect = self.image.get_rect()
 

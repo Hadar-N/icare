@@ -1,7 +1,10 @@
 import pygame
+import time
+import re
+import json
 
 from utils import DataSingleton
-from utils.consts import FONT_PATH, FONT_SIZE, CLOCK
+from utils.consts import FONT_PATH, FONT_SIZE, CLOCK, LOGFILE
 from utils.helper_functions import setCameraFunctionAttempt
 from utils_callibration.helper_funcs import detect_board_auto
 from utils_callibration.helper_classes import Boundary, BtnItem
@@ -27,21 +30,36 @@ class CalibrationEngine():
 
     def __create_btn_rects(self):
         btns_texts = {
+            "detect": self.__initial_callibration,
+            "history": self.__get_last_coords,
             "refresh": self.__refresh_action,
             "submit": self.__save_and_launch_game
         }
         return [BtnItem(text, i, self.__font, callback) for i, (text, callback) in enumerate(btns_texts.items())]
 
-    def __refresh_action(self):
-        self.__image = self.__take_picture()
+    def __get_last_coords(self):
         self.__boundaries.empty()
+        with open(LOGFILE, 'r') as file:
+            for line in file:
+                line = line.strip()
+                if "received params:" in line:
+                    last_match = line
+        last_match_content = json.loads('{' + re.split(r"[{}]", last_match)[1] + '}')
+        for i in last_match_content["coords"]:
+            self.__boundaries.add(Boundary(i[0][::-1]))
+
+
+    def __refresh_action(self):
+        self.__boundaries.empty()
+        self.__image = self.__take_picture()
 
     def __initial_callibration(self):
+        self.__boundaries.empty()
         coords = detect_board_auto(self.__image)
-        is_full_display = [0,0] in coords and [i - 1 for i in global_data.window_size] in coords
+        is_full_display = [0,0] in coords and [i - 1 for i in global_data.full_display_size] in coords
         if len(coords) and not is_full_display:
             for i in coords:
-                self.__boundaries.add(Boundary(i[0]))
+                self.__boundaries.add(Boundary(i[0][::-1]))
 
     def __save_and_launch_game(self):
         if len(self.__boundaries.sprites()) == 4:
@@ -73,8 +91,6 @@ class CalibrationEngine():
                     else: self.__boundaries.add(Boundary(pos))
 
     def engine_loop(self):
-        self.__initial_callibration()
-
         while self.__running:
             self.__gameloop_content()
             self.__game_events()
