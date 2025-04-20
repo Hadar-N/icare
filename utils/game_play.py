@@ -13,11 +13,10 @@ from utils.helper_functions import init_vocab_options, is_pygame_pt_in_contour, 
 from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
-    def __init__(self, window: pygame.Surface, logger: Logger, eventbus: EventBus, getMask: callable):
+    def __init__(self, logger: Logger, eventbus: EventBus, getMask: callable):
 
         self._global_data = DataSingleton()
         self._logger = logger
-        self._window = window
 
         self._getmask = getMask
         self._eventbus = eventbus
@@ -156,7 +155,7 @@ class GamePlay():
         # for ct in self._contours_info:
         #     pygame.draw.polygon(self._window, (100, 100, 100), convert_contour_to_polygon(ct["contour"]), 5)
         self.__vocab_sprites.update()
-        self.__vocab_sprites.draw(self._window)
+        self.__vocab_sprites.draw(self._global_data.window)
 
     def game_loop(self):
         if self.__status == GAME_STATUS.ACTIVE:

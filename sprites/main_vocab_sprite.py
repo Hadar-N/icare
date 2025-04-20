@@ -1,5 +1,3 @@
-from random import sample, randint
-
 from game_shared import MQTT_DATA_ACTIONS
 from mqtt_shared import Topics
 from .gen_vocab_sprite import GenVocabSprite
