@@ -12,6 +12,20 @@ import utils.consts as consts
 from utils.helper_functions import init_vocab_options, is_pygame_pt_in_contour, calc_contour_midpoint
 from sprites import MainVocabSprite, OptionVocabSprite
 
+class DelayedAction ():
+    def __init__(self, callback: callable, params: list = None, timer: int = consts.WAIT_AFTER_MATCH):
+        self.__is_done = False
+        self.__counter = timer
+        self.__callback = callback
+        self.__params = params if params and isinstance(params, list) else []
+    @property
+    def is_done(self): return self.__is_done
+    def countdown (self):
+        self.__counter-=1
+        if self.__counter == 0:
+            self.__callback(*self.__params)
+            self.__is_done = True
+
 class GamePlay():
     def __init__(self, eventbus: EventBus, getMask: callable):
 
@@ -23,12 +37,14 @@ class GamePlay():
 
         self.__vocab_sprites = pygame.sprite.Group()
         self.__level = self.__mode = None
+        self.__new_word_stage = True
 
         self._contours_info = []
         self._mask = None
         self.__setup_mask(True)
         self.__status = GAME_STATUS.HALTED
-        self.__last_match = None
+
+        self.__delayed_actions = []
 
         self._eventbus.subscribe(Topics.word_select(), lambda x: self.__add_ZH_draw_vocab(x))
 
@@ -50,20 +66,18 @@ class GamePlay():
             self._mask, self._contours_info = temp
             if old_contours_amount != len(self._contours_info):
                 self._eventbus.publish(Topics.CONTOURS, {"contours": len(self._contours_info)})
+                if len(self._contours_info)==0 and len(self.__vocab_sprites.sprites()) == 0:
+                    self.__new_word_stage = True
 
     def __init_game(self, level, mode):
         self.__level = level
         self.__mode = mode
-        self.__last_match = None
+        self.__new_word_stage = True
         self.__remove_all_vocab()
         self.__vocab_options = init_vocab_options(self.__level, self.__mode)
         self.__status=GAME_STATUS.ACTIVE
 
     def __add_EN_vocab(self):
-        if self.__last_match:
-            if time.time() < self.__last_match + consts.WAIT_AFTER_MATCH: return
-            else: self.__last_match = None
-        
         if len(self.__vocab_sprites.sprites()) < consts.MAX_VOCAB_ACTIVE:
             relevant_cnt = self._contours_info[0] if len(self._contours_info) else None
             if relevant_cnt:
@@ -73,8 +87,7 @@ class GamePlay():
                     ENvocab = MainVocabSprite(word, self._eventbus)
                     ENvocab.set_location(calc_contour_midpoint(relevant_cnt["contour"]))
                     self.__vocab_sprites.add(ENvocab)
-                else:
-                    self.__finish_game()
+                    self.__new_word_stage = False
 
     def __add_ZH_draw_vocab(self, data: dict):
         word = data["word"] if isinstance(data, dict) else data.word
@@ -114,7 +127,9 @@ class GamePlay():
             if collides:
                 self._global_data.logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}')
                 sp.test_match()
-                self.__last_match = time.time()
+                unsolved = self.__get_unsolved_vocab()
+                if not unsolved:
+                    self.__delayed_actions.append(DelayedAction(self.__finish_game))
 
     def __finish_game(self):
         self._global_data.logger.info("game finished!")
@@ -155,7 +170,8 @@ class GamePlay():
         self.__vocab_matching()
         self.__check_collision()
 
-        self.__add_EN_vocab()
+        if self.__new_word_stage:
+            self.__add_EN_vocab()
 
     def __render_stage(self):
         # for ct in self._contours_info:
@@ -163,7 +179,17 @@ class GamePlay():
         self.__vocab_sprites.update()
         self.__vocab_sprites.draw(self._global_data.window)
 
+    def __handle_delayed(self):
+        indexes_to_del = []
+        for (i, ac) in enumerate(self.__delayed_actions):
+            ac.countdown()
+            if ac.is_done:
+                indexes_to_del.append(i)
+        [self.__delayed_actions.pop(i) for i in indexes_to_del[::-1]]
+
     def game_loop(self):
         if self.__status == GAME_STATUS.ACTIVE:
             self.__logic_stage()
             self.__render_stage()
+            self.__handle_delayed()
+            

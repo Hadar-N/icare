@@ -3,6 +3,7 @@ import datetime
 import logging
 from dotenv import load_dotenv
 import pygame
+from functools import partial
 
 from mqtt_shared import MQTTInitialData, ConnectionManager, Topics
 from game_shared import DEVICE_TYPE
@@ -37,11 +38,14 @@ def on_message(*args, **kwargs):
     eventbus.publish(kwargs["topic"], kwargs["data"])
 conn = ConnectionManager.initialize(init_data, DEVICE_TYPE.GAME, logger, on_message)
 
-def publish_word_state(msg):
-    conn.publish_message(Topics.word_state(msg["word"]["word"]), msg)
-eventbus.subscribe(Topics.word_state(), publish_word_state)
-eventbus.subscribe(Topics.STATE, lambda msg: conn.publish_message(Topics.STATE, msg))
+def publish_to_relevant_topic(general_topic:str, msg:dict):
+    specific_topic = Topics.get_relevant_topicname(general_topic, False, msg["word"]["word"] if msg and "word" in msg else None)
+    conn.publish_message(specific_topic, msg)
 
+relevant_publish_topics = Topics.topics_per_role(DEVICE_TYPE.CONTROL)
+for topic in relevant_publish_topics:
+    eventbus.subscribe(topic, partial(publish_to_relevant_topic, topic))
+                       
 gameengine.engine_loop()
 
 logger.info("program exited")

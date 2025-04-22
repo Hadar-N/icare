@@ -1,8 +1,6 @@
 from enum import Enum
 import numpy as np
 
-from game_shared import GAME_MODES
-
 # setup consts
 LOGFILE= "running.log"
 CLEAN_EDGES = 25
@@ -44,7 +42,7 @@ SPRITE_MIN_SPEED = 1
 SPRITE_MAX_COVERED = .1
 SPRITE_ANGLE_MAX_DIFF = 20
 SPRITE_MAX_OPACITY = 250
-WAIT_AFTER_MATCH = 0
+WAIT_AFTER_MATCH = 30
 
 MIN_DISTANCE_TO_TWIN = 4
 MAX_PLACEMENT_ATTAMPTS = 5
