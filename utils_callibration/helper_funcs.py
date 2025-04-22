@@ -15,20 +15,20 @@ def detect_board_auto(image) -> np.ndarray:
 
     return coordinates
 
-def find_board(conts: tuple, img_resize: tuple) -> np.ndarray:
+def find_board(conts: tuple) -> np.ndarray:
     rects = []
 
-    fake_contour = np.array([[img_resize[0] - 1, 0], [0,0], [0, img_resize[1] - 1],
-                             [img_resize[0] - 1, img_resize[1] - 1]]).reshape((-1,1,2)).astype(np.int32)
+    fake_contour = np.array([[global_data.img_resize[0] - 1, 0], [0,0], [0, global_data.img_resize[1] - 1],
+                             [global_data.img_resize[0] - 1, global_data.img_resize[1] - 1]]).reshape((-1,1,2)).astype(np.int32)
     full_area = cv2.contourArea(fake_contour)
-    center_pt = (int(img_resize[0] / 2), int(img_resize[1] / 2))
-    area_theshold = full_area/MIN_FRAME_CONTENT_PARTITION
+    center_pt = (int(global_data.img_resize[0] / 2), int(global_data.img_resize[1] / 2))
+    global_data.threshsize = full_area/MIN_FRAME_CONTENT_PARTITION
 
     for c in conts:
             epsilon = 0.02 * cv2.arcLength(c, True)
             approx = cv2.approxPolyDP(c, epsilon, True)
             area= cv2.contourArea(approx)
-            if len(approx) == 4 and area > area_theshold and area < full_area*.9:
+            if len(approx) == 4 and area > global_data.threshsize and area < full_area*.9:
                 rects.append({"cnt": approx, "area": area})
 
     match len(rects):

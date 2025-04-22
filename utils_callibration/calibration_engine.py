@@ -19,7 +19,7 @@ class CalibrationEngine():
 
         self.__nextstage = nextstage
 
-        self.__take_picture, self.__remove_camera = setCameraFunctionAttempt(global_data.env, global_data.img_resize[::-1])
+        self.__take_picture, self.__remove_camera = setCameraFunctionAttempt(global_data.img_resize[::-1])
         self.__image = self.__take_picture()
         self.__boundaries = pygame.sprite.Group()
 

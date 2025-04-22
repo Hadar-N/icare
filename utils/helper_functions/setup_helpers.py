@@ -10,6 +10,9 @@ from enum import Enum
 from screeninfo import get_monitors, Monitor
 
 from utils.consts import IMAGE_RESIZE_WIDTH, DEFAULT_WINDOW_WIDTH, CAMERA_RES, CAMERA_SETUP_ATTEMPTS
+from utils.data_singleton import DataSingleton
+
+global_data = DataSingleton()
 
 temp_re = re.compile(r"(?<=\=)\d+\.\d+")
 diskspace_re = re.compile(r"[\d.]+(?=%)")
@@ -25,32 +28,32 @@ def get_pi_temp () -> float:
     match = float(re.search(temp_re, t)[0])
     return match
 
-def followup_temp (logger: Logger, counter: int) -> bool:
+def followup_temp (counter: int) -> bool:
     if (counter%100 == 0):
         temp = get_pi_temp()
         if (temp < 57):
-            logger.debug(f'temp: {temp}')
+            global_data.logger.debug(f'temp: {temp}')
         elif (temp < 65):
-            logger.info(f'temp: {temp}')
+            global_data.logger.info(f'temp: {temp}')
         elif (temp < 77):
-            logger.warning(f'temp: {temp}')
+            global_data.logger.warning(f'temp: {temp}')
         else:
-            logger.critical(f'temp: {temp} ==> program exited')
+            global_data.logger.critical(f'temp: {temp} ==> program exited')
             return True
     return False
 
-def get_terminal_params(logger: Logger) -> tuple[np.array, tuple]:
+def get_terminal_params() -> tuple[np.array, tuple]:
     args = sys.argv
     if len(args):
         str_params = " ".join(args[1:])
-        logger.info(f'received params: {str_params} of type {type(str_params)}')
+        global_data.logger.info(f'received params: {str_params} of type {type(str_params)}')
         params = json.loads(str_params)
         coords = np.array(params['coords'])
         win_size = tuple(params['win_size'])
         return coords, win_size
     return None, None
 
-def get_monitor_information(proj_res: str, logger: Logger) -> tuple[Monitor, bool]:
+def get_monitor_information(proj_res: str) -> tuple[Monitor, bool]:
     try:
         monitors = get_monitors()
         monitor = monitors[0]
@@ -60,7 +63,7 @@ def get_monitor_information(proj_res: str, logger: Logger) -> tuple[Monitor, boo
             monitor = next((m for m in monitors if max(m.width,m.height) == max(map(int,proj_res.split('x'))) and min(m.width,m.height) == min(map(int,proj_res.split('x')))), monitors[1])
         return (monitor, is_main)
     except:
-        logger.warning("no monitor found!")
+        global_data.logger.warning("no monitor found!")
         return (None, None)
 
 def get_img_resize_information() -> tuple[int]:
@@ -70,15 +73,15 @@ def get_img_resize_information() -> tuple[int]:
     img_size = (int(img_w_resized), int(img_h_resized))
     return img_size
 
-def screen_setup(img_size: tuple, proj_res: str, logger: Logger) -> tuple[tuple, bool]:
+def screen_setup(proj_res: str) -> tuple[tuple, bool]:
     window_width = DEFAULT_WINDOW_WIDTH
-    window_height = window_width*(img_size[1]/img_size[0])
+    window_height = window_width*(global_data.img_resize[1]/global_data.img_resize[0])
     isfullscreen= True
 
     if proj_res is None:
         isfullscreen = False
     else:
-        blah = get_monitor_information(proj_res, logger)
+        blah = get_monitor_information(proj_res)
         monitor, is_main = blah
         if monitor:
             window_width = monitor.width
@@ -92,24 +95,25 @@ def screen_setup(img_size: tuple, proj_res: str, logger: Logger) -> tuple[tuple,
     window_size = (int(window_width), int(window_height))
     return (window_size, isfullscreen)
 
-def setCameraFunctionAttempt(envval: str, img_resize: tuple[int], logger: Logger = None) -> tuple[callable]:
+def setCameraFunctionAttempt(img_size: tuple[int] = None) -> tuple[callable]:
+    if not img_size: img_size = global_data.img_resize
     for i in range (0, CAMERA_SETUP_ATTEMPTS):
         try:
-            takePicture, removeCamera = setCameraFunction(envval, img_resize)
+            takePicture, removeCamera = _setCameraFunction(img_size)
 
             image = takePicture()
             if image is not None and image.size > 0:
-                if logger: logger.info(f'camera initialization succeeded at attempt {i}')
+                if global_data.logger: global_data.logger.info(f'camera initialization succeeded at attempt {i}')
                 return takePicture, removeCamera
         except Exception as e:
-            if logger: logger.info(f"Camera initialization attempt {i} failed at: {e}")
+            if global_data.logger: global_data.logger.info(f"Camera initialization attempt {i} failed at: {e}")
         time.sleep(2)
-    if logger: logger.error(f"Camera initialization failed at attempts")
+    if global_data.logger: global_data.logger.error(f"Camera initialization failed at attempts")
     raise Exception("Camera initialization failed")
 
-def setCameraFunction(envval: str, img_resize: tuple[int]) -> tuple[callable]:
+def _setCameraFunction(img_size: tuple[int] = global_data.img_resize) -> tuple[callable]:
     takePicture = removeCamera = incResize = None
-    if envval == "pi":
+    if global_data.env == "pi":
         from picamera2 import Picamera2
         camera = Picamera2()
 
@@ -122,7 +126,7 @@ def setCameraFunction(envval: str, img_resize: tuple[int]) -> tuple[callable]:
         camera.start()
         takePicture = lambda: camera.capture_array()
         removeCamera = lambda: camera.stop()
-    elif envval == "pc":
+    elif global_data.env == "pc":
         camera = cv2.VideoCapture(0)
         # ret,image = camera.read()
         # if not ret:
@@ -136,6 +140,6 @@ def setCameraFunction(envval: str, img_resize: tuple[int]) -> tuple[callable]:
     else:
         raise Exception(".env value incorrect")
     
-    incResize = lambda: cv2.resize(takePicture(), img_resize)
+    incResize = lambda: cv2.resize(takePicture(), img_size)
 
     return incResize, removeCamera

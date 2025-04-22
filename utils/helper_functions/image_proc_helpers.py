@@ -8,12 +8,14 @@ import utils.consts as consts
 from utils.data_singleton import DataSingleton
 from .setup_helpers import asstr, get_terminal_params
 
-def get_blurred_picture(image: np.ndarray, matrix: np.ndarray, win_size: tuple[int]) -> np.ndarray:
-        reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (win_size[1], win_size[0]) ,flags=cv2.INTER_LINEAR), 0)
+global_data = DataSingleton()
+
+def get_blurred_picture(image: np.ndarray, matrix: np.ndarray) -> np.ndarray:
+        reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
         return cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
-def write_controured_img(image: np.ndarray, coords: list[np.ndarray], threshvalue : int) -> None:
-        cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(threshvalue, threshvalue, threshvalue), thickness=3)
+def write_controured_img(image: np.ndarray, coords: list[np.ndarray]) -> None:
+        cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(global_data.threshvalue, global_data.threshvalue, global_data.threshvalue), thickness=3)
         cv2.imwrite(consts.CONTOUR_IMAGE_LOC, image)
 
 def is_pygame_pt_in_contour(cnt: np.ndarray, pt: tuple) -> bool:
@@ -49,23 +51,25 @@ def find_uncovered_contours(img: np.ndarray) -> list[dict]:
                         midpoint = calc_contour_midpoint(contours[i])
                         apply_to_all_levels(i, np.mean(img[*midpoint]) > 250)
 
-        return [{"contour": contours[i], "area": cv2.contourArea(contours[i]) - children_areas[i]} for i in range(0,len(contours)) if is_uncovered[i]]
+        return [c for c in 
+                [{"contour": contours[i], "area": cv2.contourArea(contours[i]) - children_areas[i]} for i in range(0,len(contours)) if is_uncovered[i]]
+                if c["area"] > global_data.threshsize]
                         
-def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, threshvalue : int) -> pygame.mask.Mask:
+def create_mask(current_image: np.ndarray, reference_blur: np.ndarray) -> pygame.mask.Mask:
         difference = cv2.absdiff(current_image, reference_blur)
         gray_image = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
-        _, thresholded = cv2.threshold(gray_image, threshvalue, consts.THRESHOLD_MAX, cv2.THRESH_BINARY_INV)
+        _, thresholded = cv2.threshold(gray_image, global_data.threshvalue, consts.THRESHOLD_MAX, cv2.THRESH_BINARY_INV)
         closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, consts.KERNEL)
         mask_img=cv2.bitwise_not(closed)
         contours_information = find_uncovered_contours(mask_img)
         mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
         return pygame.mask.from_threshold(mask_img_rgb, (0,0,0), threshold=(1,1,1)), contours_information
 
-def set_transformation_matrix(global_data: DataSingleton, ref: np.ndarray, logger : Logger) -> tuple[np.ndarray]:
+def set_transformation_matrix(ref: np.ndarray) -> tuple[np.ndarray]:
         coordinates = ref
 
         if not coordinates:
-                relative_coords, in_win_size = get_terminal_params(logger)
+                relative_coords, in_win_size = get_terminal_params()
                 relative_x, relative_y = [in_win_size[i] / global_data.img_resize[i] for i in range (0,len(in_win_size))]
                 coordinates = (relative_coords.astype(np.float32) / [relative_x, relative_y]).astype(int)
 
@@ -73,18 +77,19 @@ def set_transformation_matrix(global_data: DataSingleton, ref: np.ndarray, logge
         
         inp_coords =  np.float32(ordered_points_in_board)
         out_coords =  np.float32([[0,0], [0, global_data.window_size[0] - 1], [global_data.window_size[1] - 1, global_data.window_size[0] - 1], [global_data.window_size[1] - 1, 0]])
+        global_data.threshsize = cv2.contourArea(out_coords)/consts.MIN_FRAME_CONTENT_PARTITION
 
         matrix = cv2.getPerspectiveTransform(inp_coords, out_coords)
 
         return inp_coords, out_coords, matrix
 
-def set_compare_values(takePicture: callable, matrix: np.ndarray, win_size: tuple[int], logger: Logger) -> tuple[np.ndarray, float, np.ndarray]:
+def set_compare_values(takePicture: callable, matrix: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
         new_img = takePicture()
-        reference_blur = get_blurred_picture(new_img, matrix, win_size)
-        threshvalue_bordered = find_threshval(reference_blur)
-        logger.info(f'calculated threshvalue by border={threshvalue_bordered}')
+        reference_blur = get_blurred_picture(new_img, matrix)
+        global_data.threshvalue = find_threshval(reference_blur)
+        global_data.logger.info(f'calculated threshvalue by border={global_data.threshvalue} with threshsize={global_data.threshsize}')
 
-        return reference_blur, threshvalue_bordered, new_img
+        return reference_blur, new_img
 
 def find_threshval(empty_image: np.ndarray, multip: float = consts.THRESHOLD_MULTIP) -> float:
         return np.mean(empty_image) + (np.std(empty_image) * multip)

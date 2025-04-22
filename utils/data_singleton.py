@@ -13,14 +13,21 @@ class DataSingleton:
         if self._initialized:
             return
 
+        self._env = None
+        self._is_spin = None
+
         self._screen_size = None
         self._full_display_size = None
         self._img_resize = None
+
+        self._threshvalue = None
+        self._threshsize = None
+
         self._vocab_font = None
         self._espeak_engine = None
-        self._env = None
-        self._is_spin = None
         self._window = None
+        self._logger = None
+
         self._initialized = True
 
     @property
@@ -88,3 +95,27 @@ class DataSingleton:
     @window.setter
     def window(self, window):
         self._window = window
+
+    @property
+    def logger(self):
+        return self._logger
+    
+    @logger.setter
+    def logger(self, logger):
+        self._logger = logger
+
+    @property
+    def threshvalue(self):
+        return self._threshvalue
+    
+    @threshvalue.setter
+    def threshvalue(self, threshvalue):
+        self._threshvalue = threshvalue
+
+    @property
+    def threshsize(self):
+        return self._threshsize
+    
+    @threshsize.setter
+    def threshsize(self, threshsize):
+        self._threshsize = threshsize

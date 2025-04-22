@@ -1,8 +1,10 @@
+.env
 *.log
+
 **/__pycache__/*
 tests/*
 venv/*
-.env
+.vscode/*
 
 public/fonts/DFT_K90.ttf
 public/fonts/DFT_K91.ttf

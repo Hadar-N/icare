@@ -22,14 +22,15 @@ logger.setLevel(logging.INFO)
 logger.info(f'--------------start datetime: {datetime.datetime.now()}')
 
 global_data = DataSingleton()
+global_data.logger = logger
 global_data.env = os.getenv("ENV")
 global_data.is_spin = os.getenv("SPIN")
 global_data.img_resize = get_img_resize_information()
 
-takePicture, removeCamera = setCameraFunctionAttempt(global_data.env, global_data.img_resize, logger)
+takePicture, removeCamera = setCameraFunctionAttempt()
 
 eventbus = EventBus()
-gameengine = GameEngine(logger, eventbus, takePicture)
+gameengine = GameEngine(eventbus, takePicture)
 
 init_data = MQTTInitialData( host = os.getenv("HOST"), port = os.getenv("PORT"), username = os.getenv("USERNAME"), password = os.getenv("PASSWORD"))
 def on_message(*args, **kwargs):

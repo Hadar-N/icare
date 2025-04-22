@@ -13,10 +13,9 @@ from utils.helper_functions import init_vocab_options, is_pygame_pt_in_contour, 
 from sprites import MainVocabSprite, OptionVocabSprite
 
 class GamePlay():
-    def __init__(self, logger: Logger, eventbus: EventBus, getMask: callable):
+    def __init__(self, eventbus: EventBus, getMask: callable):
 
         self._global_data = DataSingleton()
-        self._logger = logger
 
         self._getmask = getMask
         self._eventbus = eventbus
@@ -29,7 +28,6 @@ class GamePlay():
         self._mask = None
         self.__setup_mask(True)
         self.__status = GAME_STATUS.HALTED
-        self.MINIMUM_AREA_FOR_WORD_PRESENTATION = (self._global_data.window_size[0]*self._global_data.window_size[1])/consts.MIN_FRAME_CONTENT_PARTITION
         self.__last_match = None
 
         self._eventbus.subscribe(Topics.word_select(), lambda x: self.__add_ZH_draw_vocab(x))
@@ -47,14 +45,18 @@ class GamePlay():
 
     def __setup_mask(self, is_override = False):
         temp = self._getmask(is_override or not self._mask or not len(self._contours_info))
-        if temp: self._mask, self._contours_info = temp
+        if temp:
+            old_contours_amount = len(self._contours_info)
+            self._mask, self._contours_info = temp
+            if old_contours_amount != len(self._contours_info):
+                self._eventbus.publish(Topics.CONTOURS, {"contours": len(self._contours_info)})
 
     def __init_game(self, level, mode):
         self.__level = level
         self.__mode = mode
         self.__last_match = None
+        self.__remove_all_vocab()
         self.__vocab_options = init_vocab_options(self.__level, self.__mode)
-        self.__vocab_sprites.empty()
         self.__status=GAME_STATUS.ACTIVE
 
     def __add_EN_vocab(self):
@@ -63,7 +65,7 @@ class GamePlay():
             else: self.__last_match = None
         
         if len(self.__vocab_sprites.sprites()) < consts.MAX_VOCAB_ACTIVE:
-            relevant_cnt = next((cnt for cnt in self._contours_info if cnt["area"] > self.MINIMUM_AREA_FOR_WORD_PRESENTATION), None)
+            relevant_cnt = self._contours_info[0] if len(self._contours_info) else None
             if relevant_cnt:
                 unsolved = self.__get_unsolved_vocab()
                 if (unsolved):
@@ -80,16 +82,15 @@ class GamePlay():
         main_vocab = next((sp for sp in self.__vocab_sprites.sprites() if isinstance(sp, MainVocabSprite) and sp.vocabMain == word), None)
 
         if not main_vocab:
-            self._logger.error(f"selected word not currently presented! word:{word}; selected: {selected}")
+            self._global_data.logger.error(f"selected word not currently presented! word:{word}; selected: {selected}")
             # self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()}) # publish remove instead???
             return
         
         destenation_contour = next((cnt for cnt in self._contours_info
-                                    if cnt["area"] > self.MINIMUM_AREA_FOR_WORD_PRESENTATION
-                                    and not is_pygame_pt_in_contour(cnt["contour"], main_vocab.sprite_midpoint)), None)
+                                    if not is_pygame_pt_in_contour(cnt["contour"], main_vocab.sprite_midpoint)), None)
         if not destenation_contour:
             self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()})
-            self._logger.warning(f"not enough contours to present word! selected: {selected};")
+            self._global_data.logger.warning(f"not enough contours to present word! selected: {selected};")
             return
         
         temp = OptionVocabSprite(VocabItem(word= word, meaning= selected), self._eventbus)
@@ -99,23 +100,24 @@ class GamePlay():
 
     def __check_collision(self):
         for sp in self.__vocab_sprites.sprites():
-            if sp.is_out_of_bounds:
-                sp.on_collision(sp.area)
-                continue
-            
-            overlap_area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
-            sp.on_collision(overlap_area)
+            if not sp.is_deleting:
+                if sp.is_out_of_bounds:
+                    sp.on_collision(sp.area)
+                    continue
+                
+                overlap_area = self._mask.overlap_area(sp.mask, (sp.rect.x, sp.rect.y))
+                sp.on_collision(overlap_area)
 
     def __vocab_matching(self): 
         for sp in [sp for sp in self.__vocab_sprites.sprites() if isinstance(sp, OptionVocabSprite) and not sp.is_deleting]:
             collides = pygame.sprite.collide_mask(sp, sp.twin)
             if collides:
-                self._logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}')
+                self._global_data.logger.info(f'testing word: {sp.vocabTranslation}/{sp.vocabMain}')
                 sp.test_match()
                 self.__last_match = time.time()
 
     def __finish_game(self):
-        self._logger.info("game finished!")
+        self._global_data.logger.info("game finished!")
         self.__status=GAME_STATUS.DONE
         self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.DONE})
         return self.__status
@@ -129,17 +131,21 @@ class GamePlay():
                 self.__init_game(payload['level'].value, payload['mode'].value)
                 self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.ACTIVE})
             else:
-                self._logger.error(f'invalid start_game payload: {payload}')
+                self._global_data.logger.error(f'invalid start_game payload: {payload}')
 
     def pause_game(self):
         self.__status=GAME_STATUS.HALTED
         self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.HALTED})
 
     def stop_game(self):
-        self.__vocab_sprites.empty()
+        self.__remove_all_vocab()
         self.__status=GAME_STATUS.STOPPED
         self._eventbus.publish(Topics.STATE, {"state": GAME_STATUS.STOPPED})
     
+    def __remove_all_vocab(self):
+        self.__vocab_sprites.empty()
+        self.__vocab_options = []
+
     def spin_words(self) -> None:
         [sp.spin_word() for sp in self.__vocab_sprites.sprites()]
 
