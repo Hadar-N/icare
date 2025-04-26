@@ -11,7 +11,7 @@ def detect_board_auto(image) -> np.ndarray:
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     thresholded = cv2.adaptiveThreshold(gray, THRESHOLD_MAX, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY,11,2)
     contours, _ = cv2.findContours(thresholded, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    coordinates = find_board(contours, global_data.img_resize)
+    coordinates = find_board(contours)
 
     return coordinates
 

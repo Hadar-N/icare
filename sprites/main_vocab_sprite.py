@@ -23,4 +23,4 @@ class MainVocabSprite(GenVocabSprite):
         if self._eventbus: self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.NEW, "word": self.as_dict()})
     
     def on_deleting(self) -> None:
-        if self._eventbus: self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.REMOVE, "word": self.as_dict()})
+        if self._eventbus and not self._vocab.is_solved: self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.REMOVE, "word": self.as_dict()})

@@ -15,8 +15,8 @@ class OptionVocabSprite(GenVocabSprite):
     
     def test_match(self):
         if self.vocabTranslation == self.twin.vocabTranslation:
-            self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.MATCHED, "word": self.as_dict()})
             self.match_success()
+            self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.MATCHED, "word": self.as_dict()})
         else:
             self.twin.turn_option_off(self.vocabTranslation)
             self._eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.STATUS, "word": self.twin.as_dict()})

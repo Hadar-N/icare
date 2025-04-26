@@ -1,10 +1,6 @@
 import os
-import cv2
 import pygame
 import time
-import json
-import numpy as np
-from logging import Logger
 
 from mqtt_shared import Topics
 from game_shared import MQTT_COMMANDS, GAME_STATUS
@@ -37,18 +33,16 @@ class GameEngine():
         self.__counter = 0
         self.__eventbus = eventbus
         self.__takePicture = takePicture
-        self.__matrix = self.__reference_blur = self.__inp_coords = self.__out_coords = None
         self.__global_data = DataSingleton()
+        self.__matrix = self.__reference_blur = self.__inp_coords = self.__out_coords = None
+
         self.__clock = pygame.time.Clock()
-        
-        initial_img = self.__takePicture()
-    
         self.__displayed_surface = self.__setup_window()
         
-        self.__setup_comparison_data(initial_img)
+        self.__setup_comparison_data(self.__takePicture())
         self.__eventbus.subscribe(Topics.CONTROL, self.__handle_control_command)
         self.__global_data.vocab_font = pygame.font.Font(consts.FONT_PATH, consts.FONT_SIZE)
-        # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self._global_data.env == "pi" else pyttsx3.init()
+        # self.__global_data.espeak_engine = pyttsx3.init(driverName='espeak') if self.__global_data.env == "pi" else pyttsx3.init()
         self.gameplay = GamePlay(self.__eventbus, self.__get_image_for_game)
     
     def __get_image_for_game(self, is_initial = False):
