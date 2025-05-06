@@ -22,11 +22,11 @@ class MovingSprite(pygame.sprite.Sprite):
 
         self.__flip_times = [time.time()]
         self.__prev_coverage = 0
+        self.__coverage_unchanged_frames = 0
 
         self.__direction = None
         self.__rng = np.random.default_rng() # scale for random() = [-4,4]
         self.__randomize_direction()
-
     
     @property
     def is_out_of_bounds(self): return any([self._floatlocation[i] < 0 or self._floatlocation[i] + self.rect[2+i] > self._global_data.window_size[i] for i in range(0,2)])
@@ -55,11 +55,19 @@ class MovingSprite(pygame.sprite.Sprite):
     def on_collision(self, area_collision: int) -> None:
         if area_collision and area_collision > self.__prev_coverage:
             self.flip_direction()
-        if area_collision > self.rect.height * self.rect.width * SPRITE_MAX_COVERED:
-            self.remove_self(REMOVAL_REASON.COVERED)
+        self.__test_coverage_movement(area_collision)
         self.__prev_coverage = area_collision or 0
         return None
     
+    def __test_coverage_movement(self, area_collision):
+        if area_collision > self.rect.height * self.rect.width * SPRITE_MAX_COVERED:
+            if self.__prev_coverage * (1-SPRITE_MAX_COVERED) < self.__prev_coverage / area_collision <self.__prev_coverage * (1+SPRITE_MAX_COVERED):
+                self.__coverage_unchanged_frames+=1
+            if self.__coverage_unchanged_frames > SPRITE_COVERED_FRAMES_BEFORE_DEL:
+                self.remove_self(REMOVAL_REASON.COVERED)
+        else:
+            self.__coverage_unchanged_frames = 0
+
     def __test_collision_frequency(self):
         curr = time.time()
         last_item = self.__flip_times.pop()
