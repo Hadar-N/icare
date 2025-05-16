@@ -83,7 +83,7 @@ class GamePlay():
 
     def __add_EN_vocab(self):
         if len(self.__vocab_sprites.sprites()) < consts.MAX_VOCAB_ACTIVE:
-            relevant_cnt = self.__add_ZH_draw_vocab()
+            relevant_cnt = self.__find_empty_contour()
             if relevant_cnt:
                 unsolved = self.__get_unsolved_vocab()
                 if (unsolved):

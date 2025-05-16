@@ -47,8 +47,10 @@ class GameEngine():
     
     def __get_image_for_game(self, is_initial = False):
         if (self.__counter%consts.NEW_IMAGE_INTERVALS == 0 or is_initial):
-            image = get_blurred_picture(self.__takePicture(), self.__matrix)
-            mask, contours_info = create_mask(image, self.__reference_blur)
+            # is_save = self.__counter%(consts.NEW_IMAGE_INTERVALS*20) == 0
+            is_save = False
+            image = get_blurred_picture(self.__takePicture(), self.__matrix, is_save)
+            mask, contours_info = create_mask(image, self.__reference_blur, is_save)
             return mask, contours_info
         return None
 
