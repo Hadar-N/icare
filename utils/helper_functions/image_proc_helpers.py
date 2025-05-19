@@ -2,6 +2,7 @@ import cv2
 import pygame
 import math
 import numpy as np
+import time
 from logging import Logger
 
 import utils.consts as consts
@@ -10,13 +11,20 @@ from .setup_helpers import asstr, get_terminal_params
 
 global_data = DataSingleton()
 
-def get_blurred_picture(image: np.ndarray, matrix: np.ndarray) -> np.ndarray:
+def get_save_path(stage:str):
+       return f"tests/extra-board-pics/img_{int(time.time())}_{stage}.jpg"
+
+def get_blurred_picture(image: np.ndarray, matrix: np.ndarray, is_save:bool = False) -> np.ndarray:
         reference_image = cv2.flip(cv2.warpPerspective(image, matrix, (global_data.window_size[1], global_data.window_size[0]) ,flags=cv2.INTER_LINEAR), 0)
+        if is_save:
+               write_controured_img(image,[],get_save_path("a_initial"))
+               write_controured_img(reference_image,[],get_save_path("b_focused"))
         return cv2.GaussianBlur(reference_image, consts.BLUR_SIZE, 0)
 
-def write_controured_img(image: np.ndarray, coords: list[np.ndarray]) -> None:
-        cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(global_data.threshvalue, global_data.threshvalue, global_data.threshvalue), thickness=3)
-        cv2.imwrite(consts.CONTOUR_IMAGE_LOC, image)
+def write_controured_img(image: np.ndarray, coords: list[np.ndarray], path:str = consts.CONTOUR_IMAGE_LOC) -> None:
+        if len(coords):
+                cv2.polylines(image, [x.astype(np.int32) for x in coords], isClosed=True, color=(global_data.threshvalue, global_data.threshvalue, global_data.threshvalue), thickness=3)
+        cv2.imwrite(path, image)
 
 def is_pygame_pt_in_contour(cnt: np.ndarray, pt: tuple) -> bool:
        return cv2.pointPolygonTest(cnt, (pt[1], pt[0]), False) >= 0
@@ -55,13 +63,22 @@ def find_uncovered_contours(img: np.ndarray) -> list[dict]:
                 [{"contour": contours[i], "area": cv2.contourArea(contours[i]) - children_areas[i]} for i in range(0,len(contours)) if is_uncovered[i]]
                 if c["area"] > global_data.threshsize]
                         
-def create_mask(current_image: np.ndarray, reference_blur: np.ndarray) -> pygame.mask.Mask:
+def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, is_save:bool= False) -> pygame.mask.Mask:
         difference = cv2.absdiff(current_image, reference_blur)
         gray_image = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
         _, thresholded = cv2.threshold(gray_image, global_data.threshvalue, consts.THRESHOLD_MAX, cv2.THRESH_BINARY_INV)
         closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, consts.KERNEL)
         mask_img=cv2.bitwise_not(closed)
         contours_information = find_uncovered_contours(mask_img)
+        if is_save:
+               write_controured_img(current_image,[],get_save_path("c_blurred"))
+               write_controured_img(difference,[],get_save_path("d_diffed"))
+               write_controured_img(gray_image,[],get_save_path("e_grayed"))
+               write_controured_img(thresholded,[],get_save_path("f_thresholded"))
+               write_controured_img(closed,[],get_save_path("g_closed"))
+               write_controured_img(mask_img,[],get_save_path("h_inverted"))
+               if len(contours_information): write_controured_img(mask_img,contours_information[0]["contour"],get_save_path("i_contoured"))
+        
         mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
         return pygame.mask.from_threshold(mask_img_rgb, (0,0,0), threshold=(1,1,1)), contours_information
 

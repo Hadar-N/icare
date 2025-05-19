@@ -77,9 +77,13 @@ class GamePlay():
         self.__vocab_options = init_vocab_options(self.__level, self.__mode)
         self.__status=GAME_STATUS.ACTIVE
 
+    def __find_empty_contour(self):
+        return next((cnt for cnt in self.__contours_info if
+            all([not is_pygame_pt_in_contour(cnt["contour"], s.sprite_midpoint) for s in self.__vocab_sprites.sprites()])), None)
+
     def __add_EN_vocab(self):
         if len(self.__vocab_sprites.sprites()) < consts.MAX_VOCAB_ACTIVE:
-            relevant_cnt = self.__contours_info[0] if len(self.__contours_info) else None
+            relevant_cnt = self.__find_empty_contour()
             if relevant_cnt:
                 unsolved = self.__get_unsolved_vocab()
                 if (unsolved):
@@ -99,8 +103,7 @@ class GamePlay():
             # self.__eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()}) # publish remove instead???
             return
         
-        destenation_contour = next((cnt for cnt in self.__contours_info
-                                    if not is_pygame_pt_in_contour(cnt["contour"], main_vocab.sprite_midpoint)), None)
+        destenation_contour = self.__find_empty_contour()
         if not destenation_contour:
             self.__eventbus.publish(Topics.word_state(), {"type": MQTT_DATA_ACTIONS.SELECT_FAIL, "word": main_vocab.as_dict()})
             self.__global_data.logger.warning(f"not enough contours to present word! selected: {selected};")
