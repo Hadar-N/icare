@@ -34,7 +34,8 @@ def convert_contour_to_polygon(cnt: np.ndarray) -> list:
 
 def calc_contour_midpoint(cnt: np.ndarray) -> tuple:
        M = cv2.moments(cnt)
-       return (int(M["m01"] / M["m00"]), int(M["m10"] / M["m00"]))
+       m00 = max(M["m00"], 1)
+       return (int(M["m01"] / m00), int(M["m10"] / m00))
 
 def find_uncovered_contours(img: np.ndarray) -> list[dict]:
         contours, hirar = cv2.findContours(img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
@@ -66,17 +67,15 @@ def find_uncovered_contours(img: np.ndarray) -> list[dict]:
 def create_mask(current_image: np.ndarray, reference_blur: np.ndarray, is_save:bool= False) -> pygame.mask.Mask:
         difference = cv2.absdiff(current_image, reference_blur)
         gray_image = cv2.cvtColor(difference, cv2.COLOR_BGR2GRAY)
-        _, thresholded = cv2.threshold(gray_image, global_data.threshvalue, consts.THRESHOLD_MAX, cv2.THRESH_BINARY_INV)
-        closed = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, consts.KERNEL)
-        mask_img=cv2.bitwise_not(closed)
+        _, thresholded = cv2.threshold(gray_image, global_data.threshvalue, consts.THRESHOLD_MAX, cv2.THRESH_BINARY)
+        mask_img = cv2.morphologyEx(thresholded, cv2.MORPH_CLOSE, consts.KERNEL)
         contours_information = find_uncovered_contours(mask_img)
         if is_save:
                write_controured_img(current_image,[],get_save_path("c_blurred"))
                write_controured_img(difference,[],get_save_path("d_diffed"))
                write_controured_img(gray_image,[],get_save_path("e_grayed"))
                write_controured_img(thresholded,[],get_save_path("f_thresholded"))
-               write_controured_img(closed,[],get_save_path("g_closed"))
-               write_controured_img(mask_img,[],get_save_path("h_inverted"))
+               write_controured_img(mask_img,[],get_save_path("g_closed"))
                if len(contours_information): write_controured_img(mask_img,contours_information[0]["contour"],get_save_path("i_contoured"))
         
         mask_img_rgb = pygame.surfarray.make_surface(cv2.cvtColor(mask_img, cv2.COLOR_GRAY2RGB))
@@ -104,12 +103,12 @@ def set_compare_values(takePicture: callable, matrix: np.ndarray) -> tuple[np.nd
         new_img = takePicture()
         reference_blur = get_blurred_picture(new_img, matrix)
         global_data.threshvalue = find_threshval(reference_blur)
-        global_data.logger.info(f'calculated threshvalue by border={global_data.threshvalue} with threshsize={global_data.threshsize}')
+        global_data.logger.info(f'calculated threshvalue={global_data.threshvalue} with threshsize={global_data.threshsize}')
 
         return reference_blur, new_img
 
 def find_threshval(empty_image: np.ndarray, multip: float = consts.THRESHOLD_MULTIP) -> float:
-        return np.mean(empty_image) + (np.std(empty_image) * multip)
+        return max(consts.THRESHOLD_MIN, np.mean(empty_image) + (np.std(empty_image) * multip))
 
 def sort_points(points : list[float]) -> list[float]:
     points = np.array(points)

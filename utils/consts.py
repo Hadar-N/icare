@@ -13,7 +13,7 @@ CAMERA_RES = (1640, 1232)
 CONTOUR_IMAGE_LOC="tests/image_with_contours.jpg"
 
 # game constants
-VOCAB_AMOUNT = 5
+VOCAB_AMOUNT = 3
 MAX_VOCAB_ACTIVE = 1
 class REMOVAL_REASON (Enum):
     MATCH_SUCCESS = 0
@@ -24,6 +24,7 @@ class REMOVAL_REASON (Enum):
 # image proc. consts
 BLUR_SIZE = (21, 21)
 THRESHOLD_MAX = 255
+THRESHOLD_MIN = 50
 THRESHOLD_MULTIP = 1.7
 MIN_FRAME_CONTENT_PARTITION = 15
 KERNEL = np.ones((11, 11), np.uint8)
