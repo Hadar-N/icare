@@ -61,7 +61,7 @@ class MovingSprite(pygame.sprite.Sprite):
     
     def __test_coverage_movement(self, area_collision):
         if area_collision > self.rect.height * self.rect.width * SPRITE_MAX_COVERED:
-            if self.__prev_coverage * (1-SPRITE_MAX_COVERED) < self.__prev_coverage / area_collision <self.__prev_coverage * (1+SPRITE_MAX_COVERED):
+            if self.__prev_coverage * (1-SPRITE_MAX_COVERED) <= area_collision:
                 self.__coverage_unchanged_frames+=1
             if self.__coverage_unchanged_frames > SPRITE_COVERED_FRAMES_BEFORE_DEL:
                 self.remove_self(REMOVAL_REASON.COVERED)
