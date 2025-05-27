@@ -75,25 +75,26 @@ class FireworksParticle(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.__dx
         self.rect.y += self.__dy
-        self.__dy+=SPRITE_MIN_SPEED
+        self.__dy+=FIREWORK_SPEED
 
         curr_alpha = self.image.get_alpha()
-        self.image.set_alpha(curr_alpha - SPRITE_APPEAR_SPEED)
+        self.image.set_alpha(curr_alpha - FIREWORK_DISAPPEAR_SPEED)
 
         if curr_alpha < 10 or self.rect.y > self.__win_height:
             self.kill()
 
 class FireworksAnimator(SpriteAnimator):
-    def __init__(self, sprite):
+    def __init__(self, sprite, center = None):
         super().__init__(sprite)
         self.__particles = pygame.sprite.Group()
+        self.__center = center if center else self._sprite.sprite_midpoint
         self.__global_data = DataSingleton()
 
         for i in range(FIREWORKS_PARTICLE_AMOUNT):
             direction = random.random() * math.pi * 2
             velocity = random.random() * SPRITE_MAX_SPEED
             self.__particles.add(FireworksParticle(
-                self._sprite._get_color, self._sprite.sprite_midpoint,
+                self._sprite._get_color, self.__center,
                 (math.cos(direction) * velocity, math.sin(direction) * velocity),
                 self.__global_data.window_size[1]
             ))

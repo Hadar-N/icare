@@ -83,6 +83,13 @@ class MovingSprite(pygame.sprite.Sprite):
         self.__direction = self.__direction.rotate(180)
         # self.__test_collision_frequency()
 
+    def __get_twin_collision_center(self):
+        left  = max( self.rect.left,  self.twin.rect.left )
+        right = min( self.rect.right, self.twin.rect.right )
+        top   = max( self.rect.top,   self.twin.rect.top )
+        bottom= min( self.rect.bottom, self.twin.rect.bottom )
+        return (int((right+left)/2), int((top+bottom)/2))
+
     def remove_self(self, removal_reason: REMOVAL_REASON):
         self.__deleting = True
         if hasattr(self, "on_deleting"): self.on_deleting()
@@ -93,7 +100,7 @@ class MovingSprite(pygame.sprite.Sprite):
             case REMOVAL_REASON.MATCH_FAIL.value:
                 self.__sprite_animator = BlinkAnimator(self)
             case REMOVAL_REASON.MATCH_SUCCESS.value:
-                self.__sprite_animator  = FireworksAnimator(self)
+                self.__sprite_animator  = FireworksAnimator(self, center=self.__get_twin_collision_center())
             case _:
                 self.kill()
     
