@@ -60,9 +60,10 @@ class BlinkAnimator(SpriteAnimator):
             self._is_completed = True
 
 class FireworksParticle(pygame.sprite.Sprite):
-    def __init__(self, color, coords, dist, win_h):
+    def __init__(self, color, coords, dir, dist, win_h):
         super().__init__()
         self.__color = color
+        self.__dir = dir
         self.image = pygame.Surface((FIREWORKS_PARTICLE_SIZE*2, FIREWORKS_PARTICLE_SIZE*2))
         pygame.draw.circle(self.image, self.__color, (FIREWORKS_PARTICLE_SIZE, FIREWORKS_PARTICLE_SIZE), FIREWORKS_PARTICLE_SIZE)
         self.image.set_alpha(250)
@@ -75,7 +76,7 @@ class FireworksParticle(pygame.sprite.Sprite):
     def update(self):
         self.rect.x += self.__dx
         self.rect.y += self.__dy
-        self.__dy+=FIREWORK_SPEED
+        self.__dy+= self.__dir*FIREWORK_SPEED
 
         curr_alpha = self.image.get_alpha()
         self.image.set_alpha(curr_alpha - FIREWORK_DISAPPEAR_SPEED)
@@ -84,17 +85,20 @@ class FireworksParticle(pygame.sprite.Sprite):
             self.kill()
 
 class FireworksAnimator(SpriteAnimator):
-    def __init__(self, sprite, center = None):
+    def __init__(self, sprite):
         super().__init__(sprite)
         self.__particles = pygame.sprite.Group()
-        self.__center = center if center else self._sprite.sprite_midpoint
+        self.__center = self._sprite.get_twin_collision_center()
         self.__global_data = DataSingleton()
+        self.__particle_direction = -1 if self.__global_data.is_spin else 1
 
         for i in range(FIREWORKS_PARTICLE_AMOUNT):
             direction = random.random() * math.pi * 2
             velocity = random.random() * SPRITE_MAX_SPEED
             self.__particles.add(FireworksParticle(
-                self._sprite._get_color, self.__center,
+                self._sprite._get_color,
+                self.__center,
+                self.__particle_direction,
                 (math.cos(direction) * velocity, math.sin(direction) * velocity),
                 self.__global_data.window_size[1]
             ))

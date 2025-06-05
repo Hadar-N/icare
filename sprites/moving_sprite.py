@@ -61,7 +61,7 @@ class MovingSprite(pygame.sprite.Sprite):
     
     def __test_coverage_movement(self, area_collision):
         if area_collision > self.rect.height * self.rect.width * SPRITE_MAX_COVERED:
-            if self.__prev_coverage * (1-SPRITE_MAX_COVERED) <= area_collision:
+            if self.__prev_coverage * (1-SPRITE_MAX_COVERED) < area_collision:
                 self.__coverage_unchanged_frames+=1
             if self.__coverage_unchanged_frames > SPRITE_COVERED_FRAMES_BEFORE_DEL:
                 self.remove_self(REMOVAL_REASON.COVERED)
@@ -83,7 +83,7 @@ class MovingSprite(pygame.sprite.Sprite):
         self.__direction = self.__direction.rotate(180)
         # self.__test_collision_frequency()
 
-    def __get_twin_collision_center(self):
+    def get_twin_collision_center(self):
         left  = max( self.rect.left,  self.twin.rect.left )
         right = min( self.rect.right, self.twin.rect.right )
         top   = max( self.rect.top,   self.twin.rect.top )
@@ -100,7 +100,7 @@ class MovingSprite(pygame.sprite.Sprite):
             case REMOVAL_REASON.MATCH_FAIL.value:
                 self.__sprite_animator = BlinkAnimator(self)
             case REMOVAL_REASON.MATCH_SUCCESS.value:
-                self.__sprite_animator  = FireworksAnimator(self, center=self.__get_twin_collision_center())
+                self.__sprite_animator  = FireworksAnimator(self)
             case _:
                 self.kill()
     

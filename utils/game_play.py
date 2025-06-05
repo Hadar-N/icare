@@ -2,6 +2,7 @@ import pygame
 from logging import Logger
 from random import sample
 import time
+from collections import Counter
 
 from mqtt_shared import Topics
 from game_shared import MQTT_DATA_ACTIONS, GAME_MODES, GAME_STATUS, GAME_LEVELS, VocabItem
@@ -74,12 +75,15 @@ class GamePlay():
         self.__mode = mode
         self.__new_word_stage = True
         self.__remove_all_vocab()
+        self.__contours_info = []
         self.__vocab_options = init_vocab_options(self.__level, self.__mode)
         self.__status=GAME_STATUS.ACTIVE
 
+    def __empty_contours(self):
+        return [cnt for cnt in self.__contours_info if all([not is_pygame_pt_in_contour(cnt["contour"], s.sprite_midpoint) for s in self.__vocab_sprites.sprites()])]
+
     def __find_empty_contour(self):
-        return next((cnt for cnt in self.__contours_info if
-            all([not is_pygame_pt_in_contour(cnt["contour"], s.sprite_midpoint) for s in self.__vocab_sprites.sprites()])), None)
+        return next((cnt for cnt in self.__empty_contours()), None)
 
     def __add_EN_vocab(self):
         if len(self.__vocab_sprites.sprites()) < consts.MAX_VOCAB_ACTIVE:
@@ -88,7 +92,7 @@ class GamePlay():
                 unsolved = self.__get_unsolved_vocab()
                 if (unsolved):
                     word = sample(unsolved, 1)[0]
-                    ENvocab = MainVocabSprite(word, self.__eventbus)
+                    ENvocab = MainVocabSprite(word, self.__eventbus, self.__mode == GAME_MODES.ENtoSpelling)
                     ENvocab.set_location(calc_contour_midpoint(relevant_cnt["contour"]))
                     self.__vocab_sprites.add(ENvocab)
                     self.__new_word_stage = False

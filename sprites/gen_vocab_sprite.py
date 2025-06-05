@@ -1,14 +1,18 @@
+from io import BytesIO
 import pygame
+import cairosvg
+
 from .moving_sprite import MovingSprite
 from game_shared import VocabItem
 from utils import DataSingleton, EventBus
 from utils.consts import *
 
 class GenVocabSprite(MovingSprite):
-    def __init__(self, vocab: VocabItem, eventbus: EventBus):
+    def __init__(self, vocab: VocabItem, eventbus: EventBus, is_speaker = False):
         self._global_data = DataSingleton()
 
         self._vocab = vocab
+        self._is_speaker = is_speaker
         self._color = self._get_color
         
         super().__init__(self.spin_word())
@@ -55,9 +59,19 @@ class GenVocabSprite(MovingSprite):
         self._vocab.is_solved = True
         self.remove_self(REMOVAL_REASON.MATCH_SUCCESS)
     
-    def spin_word(self):
+    def __create_text(self):
         res = self._global_data.vocab_font.render(self.vocabSelf, True, self._color)
         res = pygame.transform.flip(res, not self._global_data.is_spin, self._global_data.is_spin)
+        return res
+    def __create_img(self):
+        with open(SPEAKER_PATH, 'r') as f:
+            svg_content = f.read()
+        svg_content = svg_content.replace('fill="#231F20"', f'fill="rgb({",".join([str(i) for i in self._get_color])})"')
+        png_data = cairosvg.svg2png(bytestring=svg_content.encode(),  output_width=FONT_SIZE*1.5, output_height=FONT_SIZE*1.2)
+        return pygame.image.load(BytesIO(png_data))
+
+    def spin_word(self):
+        res = self.__create_img() if self._is_speaker else self.__create_text()
         if hasattr(self, "image"):
             print(hasattr(self, "image"), self.image)
             self.image = res

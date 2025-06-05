@@ -3,8 +3,8 @@ from mqtt_shared import Topics
 from .gen_vocab_sprite import GenVocabSprite
 
 class MainVocabSprite(GenVocabSprite):
-    def __init__(self, vocab: dict, eventbus):
-        super().__init__(vocab, eventbus)
+    def __init__(self, vocab: dict, eventbus, is_speaker = False):
+        super().__init__(vocab, eventbus, is_speaker)
 
         self.on_appearing()
             

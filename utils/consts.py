@@ -13,7 +13,7 @@ CAMERA_RES = (1640, 1232)
 CONTOUR_IMAGE_LOC="tests/image_with_contours.jpg"
 
 # game constants
-VOCAB_AMOUNT = 3
+VOCAB_AMOUNT = 5
 MAX_VOCAB_ACTIVE = 1
 class REMOVAL_REASON (Enum):
     MATCH_SUCCESS = 0
@@ -50,6 +50,7 @@ MAX_PLACEMENT_ATTAMPTS = 5
 
 VOCAB_PATH = 'public/vocab.json'
 FONT_PATH = 'public/fonts/DFT_K90.ttf'
+SPEAKER_PATH = 'public/speaker.svg'
 FONT_SIZE= 40
 
 # animator consts

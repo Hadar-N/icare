@@ -8,11 +8,14 @@ import utils.consts as consts
 def vocab_to_vocab_dict(item: dict, mode: GAME_MODES) -> VocabItem:
         if mode == GAME_MODES.ENtoZH.value:
             item["similar"] = item["zh_options"]
-        else:
+        elif mode == GAME_MODES.ZHtoEN.value:
             temp_meaning = item["meaning"]
             item["meaning"] = item["word"]
             item["word"] = temp_meaning
             item["similar"] = item["en_options"]
+        elif mode == GAME_MODES.ENtoSpelling:
+            item["similar"] = item["spelling_options"]
+            item["meaning"] = item["word"]
 
         return VocabItem(**item)
 
